@@ -5,11 +5,21 @@ import { Button } from '@/components/ui/button'
 import { Target, TrendingUp, Heart, ArrowRight, Trophy, GraduationCap, Radio, MapPin, Smartphone } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Sobre Lucas Dierings',
-  description: 'Conheça Lucas Dierings — destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
+  title: 'Sobre Lucas Dierings | Engenheiro Agrônomo e Consultor',
+  description: 'Lucas Dierings - Engenheiro Agrônomo, MBA USP/ESALQ, destaque nacional CNA 2021, professor de MBA, host do NHCast New Holland, consultor SENAR/PR. Especialista em gestão, inovação e sucessão no agronegócio.',
+  keywords: [
+    'Lucas Dierings',
+    'Lucas Dierings agronômo',
+    'engenheiro agrônomo Londrina',
+    'consultor agronegócio',
+    'CNA Jovem 2021',
+    'MBA ESALQ',
+    'gestor rural',
+    'inovação agronegócio',
+  ],
   openGraph: {
-    title: 'Sobre Lucas Dierings | Fluxo Rural',
-    description: 'Destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
+    title: 'Sobre Lucas Dierings | Fluxo Rural Consultoria',
+    description: 'Engenheiro Agrônomo, MBA USP/ESALQ, destaque nacional CNA 2021. Consultor, professor e palestrante especializado em gestão e inovação no agronegócio.',
     images: [{ url: '/images/lucas-agronomo.jpg' }],
   },
 }

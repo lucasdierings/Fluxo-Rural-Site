@@ -39,10 +39,10 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/logo_fluxo_rural_branco.png"
-              alt="Fluxo Rural Consultoria"
-              width={160}
-              height={48}
+              src="/Fluxo Rural Logo colorida .svg"
+              alt="Fluxo Rural Consultoria - Logo"
+              width={140}
+              height={40}
               className="h-12 w-auto"
               priority
             />
