@@ -3,11 +3,20 @@ import Link from 'next/link'
 import { BarChart2, DollarSign, Users, Mic2, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Serviços',
-  description: 'Consultoria em gestão, gestão financeira rural, mentoria para sucessão familiar e palestras sobre agronegócio. Conheça os serviços da Fluxo Rural.',
+  title: 'Serviços de Consultoria em Agronegócio | Fluxo Rural',
+  description: 'Consultoria em gestão estratégica, gestão financeira rural, mentoria para sucessão familiar e palestras. Soluções práticas para propriedades e empresas do agronegócio brasileiro.',
+  keywords: [
+    'consultoria agronegócio',
+    'gestão financeira rural',
+    'mentoria sucessão familiar',
+    'palestras agronegócio',
+    'consultoria estratégica agro',
+    'gestão propriedade rural',
+    'consultoria inovação agronegócio',
+  ],
   openGraph: {
-    title: 'Serviços | Fluxo Rural Consultoria',
-    description: 'Soluções estratégicas para propriedades e empresas do agronegócio.',
+    title: 'Serviços | Fluxo Rural Consultoria - Consultoria Agronegócio',
+    description: 'Consultoria estratégica, gestão financeira, mentoria para sucessão e palestras em agronegócio. Transformando desafios em oportunidades.',
   },
 }
 

@@ -4,11 +4,18 @@ import { ContactForm } from '@/components/forms/ContactForm'
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
-  title: 'Contato',
-  description: 'Entre em contato com Lucas Dierings. Consultoria, mentoria e palestras para o agronegócio. Resposta em até 24 horas.',
+  title: 'Contato | Fale com Lucas Dierings - Fluxo Rural Consultoria',
+  description: 'Entre em contato com Lucas Dierings para consultoria, mentoria e palestras em agronegócio. Resposta garantida em até 24 horas úteis.',
+  keywords: [
+    'contato Lucas Dierings',
+    'consultoria agronegócio contato',
+    'mentoria agro',
+    'palestras agronegócio',
+    'fale conosco Fluxo Rural',
+  ],
   openGraph: {
-    title: 'Contato | Fluxo Rural Consultoria',
-    description: 'Fale com Lucas Dierings — resposta em até 24 horas.',
+    title: 'Fale Conosco | Fluxo Rural Consultoria',
+    description: 'Entre em contato com Lucas Dierings. Consultoria, mentoria e palestras para o agronegócio. Resposta em até 24 horas.',
   },
 }
 

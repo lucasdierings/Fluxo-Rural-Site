@@ -30,6 +30,10 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
+            <span className="inline-block text-dourado text-sm font-semibold mb-3 tracking-wide">
+              Lucas Dierings
+            </span>
+
             <span className="inline-block bg-verde-folha/90 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-6">
               Engenheiro Agrônomo | Consultor | Palestrante
             </span>

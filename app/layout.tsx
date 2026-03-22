@@ -24,16 +24,23 @@ export const metadata: Metadata = {
     default: 'Fluxo Rural Consultoria | Lucas Dierings',
     template: '%s | Fluxo Rural Consultoria',
   },
-  description: 'Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem. Consultoria, mentoria e palestras em gestão e inovação no agronegócio. Londrina, PR.',
+  description: 'Lucas Dierings - Consultoria estratégica, mentoria e palestras em gestão, inovação e sucessão no agronegócio. Engenheiro Agrônomo, MBA USP/ESALQ, vencedor CNA Jovem. Especializado em rentabilidade rural e transformação digital.',
   keywords: [
+    'consultoria agronegócio Brasil',
     'consultoria agronegócio Londrina',
-    'gestão financeira rural Paraná',
+    'gestão financeira rural',
     'mentoria sucessão familiar fazenda',
-    'palestra inteligência artificial agronegócio',
+    'palestra inovação agronegócio',
+    'palestra inteligência artificial agro',
+    'Lucas Dierings',
     'Lucas Dierings consultor',
     'Fluxo Rural Consultoria',
-    'engenheiro agrônomo consultor Londrina',
-    'rentabilidade safra soja',
+    'engenheiro agrônomo consultor',
+    'gestão propriedade rural',
+    'sucessão rural estratégia',
+    'rentabilidade safra',
+    'agronegócio consultoria estratégica',
+    'consultant agriculture Brazil',
   ],
   authors: [{ name: 'Lucas Dierings' }],
   creator: 'Fluxo Rural Consultoria',
@@ -96,6 +103,43 @@ const localBusinessJsonLd = {
   areaServed: { '@type': 'Country', name: 'Brasil' },
 }
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Fluxo Rural Consultoria',
+  alternateName: 'Fluxo Rural',
+  url: 'https://fluxorural.com.br',
+  logo: 'https://fluxorural.com.br/Fluxo Rural Logo colorida .svg',
+  description: 'Consultoria estratégica em gestão, inovação e sucessão no agronegócio brasileiro.',
+  founder: {
+    '@type': 'Person',
+    name: 'Lucas Dierings',
+    jobTitle: 'Engenheiro Agrônomo e Consultor Estratégico',
+  },
+  contact: {
+    '@type': 'ContactPoint',
+    contactType: 'Customer Service',
+    email: 'lucas@fluxorural.com.br',
+  },
+  sameAs: [
+    'https://linkedin.com/in/lucasdierings',
+    'https://www.instagram.com/lucasdierings.agro/',
+  ],
+}
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Consultoria, Mentoria e Palestras em Agronegócio',
+  description: 'Serviços especializados em gestão, inovação e sucessão para o setor agrícola.',
+  provider: {
+    '@type': 'Organization',
+    name: 'Fluxo Rural Consultoria',
+  },
+  areaServed: { '@type': 'Country', name: 'Brasil' },
+  availableLanguage: 'pt-BR',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -111,6 +155,14 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
         />
       </head>
       <body className="font-body text-carvao antialiased">
