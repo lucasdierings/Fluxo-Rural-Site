@@ -65,7 +65,7 @@ const personJsonLd = {
   image: 'https://fluxorural.com.br/images/lucas-hero.jpg',
   sameAs: [
     'https://linkedin.com/in/lucasdierings',
-    'https://instagram.com/lucasdierings',
+    'https://www.instagram.com/lucasdierings.agro/',
   ],
   worksFor: {
     '@type': 'Organization',

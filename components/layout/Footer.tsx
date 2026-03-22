@@ -35,7 +35,7 @@ export default function Footer() {
                 <Linkedin size={20} />
               </a>
               <a
-                href="https://instagram.com/lucasdierings"
+                href="https://www.instagram.com/lucasdierings.agro/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram de Lucas Dierings"
