@@ -23,7 +23,7 @@ const timeline = [
   {
     year: '2018–2025',
     title: 'Analista de Negócios → Diretor de Marketing e Vendas',
-    text: 'eProdutor — ERP para Gestão de Propriedades Rurais. Atuação em 24 estados brasileiros.',
+    text: 'Software de Gestão Rural — ERP para Propriedades Rurais. Atuação em 24 estados brasileiros.',
   },
   {
     year: '2021',
@@ -82,7 +82,7 @@ const credentials = [
   {
     icon: Smartphone,
     title: '7 anos em tecnologia rural',
-    subtitle: 'eProdutor — 24 estados brasileiros',
+    subtitle: 'Gestão financeira e agronômica — 24 estados',
   },
 ]
 
@@ -148,7 +148,7 @@ export default function SobrePage() {
                 Vencedor nacional do Programa CNA Jovem 2021, promovido pelo Sistema CNA/SENAR, foi selecionado entre 3.742 jovens de todo o Brasil pelo seu projeto de Gestão Familiar Rural com foco em informação e tecnologia.
               </p>
               <p>
-                Com passagem de 7 anos no eProdutor — software de gestão rural com atuação em 24 estados —, de analista à direção comercial, Lucas acumulou experiência única na intersecção entre tecnologia e gestão no campo.
+                Com 7 anos de experiência em software de gestão rural com atuação em 24 estados —, de analista à direção comercial, Lucas acumulou experiência única na intersecção entre tecnologia e gestão no campo.
               </p>
               <p>
                 Professor de MBA em Agronegócios na PUCPR e consultor do SENAR/PR, fundou a Fluxo Rural Consultoria com um propósito claro: levar gestão estratégica, clareza financeira e planejamento sucessório para propriedades e empresas rurais de todo o Brasil.

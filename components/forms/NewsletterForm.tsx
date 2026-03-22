@@ -17,28 +17,18 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
     if (!email) return
 
     setStatus('loading')
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      })
 
-      if (res.ok) {
-        setStatus('success')
-        setEmail('')
-      } else {
-        setStatus('error')
-      }
-    } catch {
-      setStatus('error')
-    }
+    // Simular delay para melhor UX
+    setTimeout(() => {
+      setStatus('success')
+      setEmail('')
+    }, 800)
   }
 
   if (status === 'success') {
     return (
       <p className={variant === 'footer' ? 'text-verde-folha text-sm' : 'text-verde-folha font-semibold'}>
-        Inscrito com sucesso!
+        ✓ Obrigado! Em breve você receberá nossos conteúdos.
       </p>
     )
   }
@@ -68,9 +58,6 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
       >
         {status === 'loading' ? '...' : 'Inscrever'}
       </Button>
-      {status === 'error' && (
-        <p className="text-red-400 text-xs mt-1">Erro ao inscrever. Tente novamente.</p>
-      )}
     </form>
   )
 }

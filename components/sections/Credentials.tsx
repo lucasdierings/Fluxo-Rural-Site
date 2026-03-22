@@ -27,7 +27,7 @@ const credentials = [
   {
     icon: Smartphone,
     title: '7 anos em tecnologia rural',
-    subtitle: 'eProdutor — 24 estados brasileiros',
+    subtitle: 'Gestão financeira e agronômica — 24 estados',
   },
 ]
 

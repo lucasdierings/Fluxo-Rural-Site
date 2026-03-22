@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Logo e tagline */}
           <div className="lg:col-span-1">
             <Image
-              src="/logo-fluxo-rural.png"
+              src="/logo_fluxo_rural_branco.png"
               alt="Fluxo Rural Consultoria"
               width={160}
               height={48}

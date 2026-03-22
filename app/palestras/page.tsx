@@ -30,8 +30,8 @@ export default function PalestrasPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[400px] max-h-[500px] flex items-end">
-        <Image src="/images/lucas-posse.jpg" alt="Lucas Dierings em evento formal" fill className="object-cover object-top" priority />
+      <section className="relative h-[50vh] min-h-[400px] max-h-[550px] flex items-end">
+        <Image src="/lucas-palestrante.JPG" alt="Lucas Dierings palestrando" fill className="object-cover object-[center_20%]" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10 pb-12">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Palestras e Workshops</h1>
