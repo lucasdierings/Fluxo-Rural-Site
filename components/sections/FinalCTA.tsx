@@ -14,15 +14,23 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
-            Pronto para transformar a gestão da sua propriedade?
+          <div className="mb-2">
+            <span className="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1 rounded-full">
+              Decisão que vale a pena
+            </span>
+          </div>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+            Está perdendo oportunidades de crescimento na sua propriedade?
           </h2>
-          <p className="text-white/85 text-lg mb-8 max-w-2xl mx-auto">
-            Vamos conversar sobre como levar mais organização, clareza financeira e inovação para o seu negócio no campo.
+          <p className="text-white/85 text-lg mb-2 max-w-2xl mx-auto">
+            Produtores rurais que trabalham com Lucas aumentam rentabilidade, organizam a sucessão e implementam inovações com segurança.
+          </p>
+          <p className="text-white/70 text-sm mb-8 max-w-2xl mx-auto">
+            Primeira conversa é gratuita. Resposta em até 24 horas.
           </p>
           <Button asChild size="lg" className="bg-white text-verde-escuro hover:bg-white/90 hover:scale-105">
             <Link href="/contato">
-              Fale com Lucas <ArrowRight className="ml-2" size={18} />
+              Agendar Conversa Estratégica <ArrowRight className="ml-2" size={18} />
             </Link>
           </Button>
         </motion.div>

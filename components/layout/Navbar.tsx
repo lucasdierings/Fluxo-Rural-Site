@@ -38,14 +38,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/logo_fluxo_rural_branco.png"
-              alt="Fluxo Rural Consultoria"
-              width={160}
-              height={48}
-              className="h-12 w-auto"
-              priority
-            />
+            <picture>
+              <source srcSet="/logo-optimized.webp" type="image/webp" />
+              <Image
+                src="/logo-optimized.png"
+                alt="Fluxo Rural Consultoria | Lucas Dierings"
+                width={160}
+                height={48}
+                className="h-12 w-auto"
+                priority
+              />
+            </picture>
           </Link>
 
           {/* Links desktop */}

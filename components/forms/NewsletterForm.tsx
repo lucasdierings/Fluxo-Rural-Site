@@ -28,7 +28,7 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
   if (status === 'success') {
     return (
       <p className={variant === 'footer' ? 'text-verde-folha text-sm' : 'text-verde-folha font-semibold'}>
-        ✓ Obrigado! Em breve você receberá nossos conteúdos.
+        ✓ Bem-vindo! Prepare-se para conteúdo estratégico sobre agronegócio.
       </p>
     )
   }
@@ -37,7 +37,7 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
     <form onSubmit={handleSubmit} className="flex gap-2">
       <Input
         type="email"
-        placeholder="Seu e-mail"
+        placeholder={variant === 'footer' ? 'seu@email.com' : 'seu@email.com — Conteúdo estratégico'}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -48,7 +48,7 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
             ? 'h-10'
             : ''
         }
-        aria-label="E-mail para newsletter"
+        aria-label="E-mail para receber conteúdo estratégico"
       />
       <Button
         type="submit"
@@ -56,7 +56,7 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
         disabled={status === 'loading'}
         className={variant === 'footer' ? 'h-10' : ''}
       >
-        {status === 'loading' ? '...' : 'Inscrever'}
+        {status === 'loading' ? '...' : 'Receber'}
       </Button>
     </form>
   )

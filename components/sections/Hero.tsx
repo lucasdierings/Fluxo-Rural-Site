@@ -11,14 +11,17 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Fundo */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/hero-bg.png"
-          alt="Fazenda ao entardecer vista aérea"
-          fill
-          className="object-cover"
-          priority
-          quality={85}
-        />
+        <picture>
+          <source srcSet="/images/hero-bg-opt.webp" type="image/webp" />
+          <Image
+            src="/images/hero-bg-opt.png"
+            alt="Fazenda ao entardecer vista aérea com plantação de soja"
+            fill
+            className="object-cover"
+            priority
+            quality={85}
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/70 to-navy/40" />
       </div>
 

@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import { Sprout, BarChart2, Mic2, DollarSign, Wheat, MapPin } from 'lucide-react'
 
 const items = [
-  { icon: Sprout, label: 'Eng. Agrônomo' },
-  { icon: BarChart2, label: 'Consultor' },
-  { icon: Mic2, label: 'Palestrante' },
+  { icon: Sprout, label: 'MBA USP/ESALQ' },
+  { icon: BarChart2, label: 'Consultor Estratégico' },
+  { icon: Mic2, label: 'Host NHCast' },
   { icon: DollarSign, label: 'Gestão Financeira' },
-  { icon: Wheat, label: 'Agronegócio' },
-  { icon: MapPin, label: 'Londrina, PR' },
+  { icon: Wheat, label: '7+ anos em Agro' },
+  { icon: MapPin, label: 'Londrina — Brasil' },
 ]
 
 export default function TrustBar() {

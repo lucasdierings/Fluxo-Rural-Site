@@ -71,29 +71,30 @@ export function ContactForm() {
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
         </div>
         <div>
-          <Label htmlFor="telefone">Telefone / WhatsApp *</Label>
+          <Label htmlFor="telefone">WhatsApp / Telefone *</Label>
           <Input id="telefone" {...register('telefone')} placeholder="(43) 99999-9999" className="mt-1.5" />
           {errors.telefone && <p className="text-red-500 text-sm mt-1">{errors.telefone.message}</p>}
         </div>
       </div>
 
       <div>
-        <Label htmlFor="empresa">Empresa / Propriedade Rural</Label>
-        <Input id="empresa" {...register('empresa')} placeholder="Nome da empresa ou propriedade" className="mt-1.5" />
+        <Label htmlFor="empresa">Propriedade / Empresa (ha ou membros da família)</Label>
+        <Input id="empresa" {...register('empresa')} placeholder="ex: Propriedade com 500ha de soja" className="mt-1.5" />
       </div>
 
       <div>
-        <Label htmlFor="tipo">Tipo de Interesse *</Label>
+        <Label htmlFor="tipo">Principal Interesse *</Label>
         <select
           id="tipo"
           {...register('tipo')}
           className="mt-1.5 flex h-11 w-full rounded-lg border border-input bg-background px-4 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
         >
-          <option value="">Selecione...</option>
-          <option value="Consultoria">Consultoria</option>
-          <option value="Gestão Financeira">Gestão Financeira</option>
-          <option value="Mentoria">Mentoria</option>
-          <option value="Palestra">Palestra</option>
+          <option value="">Selecione uma opção...</option>
+          <option value="Consultoria Estratégica">Consultoria Estratégica em Gestão</option>
+          <option value="Gestão Financeira">Gestão Financeira e Análise de Rentabilidade</option>
+          <option value="Sucessão Familiar">Mentoria para Sucessão Familiar</option>
+          <option value="Palestra">Palestra ou Workshop para equipe</option>
+          <option value="IA no Agro">Inteligência Artificial no Agronegócio</option>
           <option value="Outro">Outro</option>
         </select>
         {errors.tipo && <p className="text-red-500 text-sm mt-1">{errors.tipo.message}</p>}
@@ -135,10 +136,14 @@ export function ContactForm() {
         ) : (
           <>
             <Send className="mr-2" size={18} />
-            Enviar Mensagem
+            Enviar e Receber Resposta Rápida
           </>
         )}
       </Button>
+
+      <p className="text-center text-sm text-carvao/60 mt-3">
+        ⚡ Resposta em até 24 horas úteis | Sem spam, sem comprometimento
+      </p>
     </form>
   )
 }
