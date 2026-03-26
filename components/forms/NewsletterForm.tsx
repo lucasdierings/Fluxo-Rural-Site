@@ -4,31 +4,31 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+// ID do formulário Typeform de newsletter
+const NEWSLETTER_TYPEFORM_ID = 'mOomZZiC'
+
 interface NewsletterFormProps {
   variant?: 'default' | 'footer' | 'inline'
 }
 
 export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
-
-    setStatus('loading')
-
-    // Simular delay para melhor UX
-    setTimeout(() => {
-      setStatus('success')
-      setEmail('')
-    }, 800)
+    // Abre o Typeform em nova aba, passando o e-mail como parâmetro oculto
+    const url = `https://form.typeform.com/to/${NEWSLETTER_TYPEFORM_ID}?email=${encodeURIComponent(email)}`
+    window.open(url, '_blank', 'noopener,noreferrer')
+    setSubmitted(true)
+    setEmail('')
   }
 
-  if (status === 'success') {
+  if (submitted) {
     return (
       <p className={variant === 'footer' ? 'text-verde-folha text-sm' : 'text-verde-folha font-semibold'}>
-        ✓ Obrigado! Em breve você receberá nossos conteúdos.
+        ✓ Formulário aberto! Complete sua inscrição na nova aba.
       </p>
     )
   }
@@ -53,10 +53,9 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
       <Button
         type="submit"
         size="sm"
-        disabled={status === 'loading'}
         className={variant === 'footer' ? 'h-10' : ''}
       >
-        {status === 'loading' ? '...' : 'Inscrever'}
+        Inscrever
       </Button>
     </form>
   )
