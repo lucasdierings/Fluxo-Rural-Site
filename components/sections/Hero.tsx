@@ -30,9 +30,13 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block bg-verde-folha/90 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            <span className="inline-block bg-verde-folha/90 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-4">
               Engenheiro Agrônomo | Consultor | Palestrante
             </span>
+
+            <p className="text-dourado font-heading text-xl md:text-2xl font-semibold mb-3 tracking-wide">
+              Lucas Dierings
+            </p>
 
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
               Gestão, Inovação e Sucessão no Agronegócio

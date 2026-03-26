@@ -9,6 +9,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CheckCircle2, BarChart2, Sprout, Users, TrendingUp } from 'lucide-react'
 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX00ISH5d-s2aC8KBbIiwI8dbC5-y6YRrt2XHdK5o7t7FhqOuuKe_RY6er_bahFH9IdQ/exec'
+
 const schema = z.object({
   nome: z.string().min(2, 'Nome é obrigatório'),
   email: z.string().email('E-mail inválido'),
@@ -28,16 +30,35 @@ const benefits = [
 
 export default function NewsletterPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [submittedName, setSubmittedName] = useState('')
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
   })
 
   const onSubmit = async (data: FormData) => {
-    // Abre o Typeform em nova aba com nome e e-mail pré-preenchidos
-    const url = `https://form.typeform.com/to/mOomZZiC?nome=${encodeURIComponent(data.nome)}&email=${encodeURIComponent(data.email)}`
-    window.open(url, '_blank', 'noopener,noreferrer')
-    setStatus('success')
+    setStatus('loading')
+    setSubmittedName(data.nome.split(' ')[0])
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: data.nome,
+          email: data.email,
+          interesse: 'Newsletter',
+          fonte: 'newsletter',
+          telefone: '',
+          cidade: '',
+          estado: '',
+          detalhes: 'Inscrito via página de newsletter',
+        }),
+      })
+      setStatus('success')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -76,8 +97,10 @@ export default function NewsletterPage() {
             {status === 'success' ? (
               <div className="text-center py-8">
                 <CheckCircle2 className="mx-auto text-verde-folha mb-4" size={48} />
-                <h3 className="font-heading text-xl font-bold text-navy mb-2">Formulário aberto!</h3>
-                <p className="text-carvao/60">Complete sua inscrição na nova aba que foi aberta.</p>
+                <h3 className="font-heading text-xl font-bold text-navy mb-2">Inscrição confirmada!</h3>
+                <p className="text-carvao/60">
+                  Obrigado, {submittedName}! Você receberá o próximo conteúdo na sua caixa de entrada.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -94,12 +117,19 @@ export default function NewsletterPage() {
                 <div className="flex items-start gap-3">
                   <input type="checkbox" id="lgpd" {...register('lgpd')} className="mt-1 h-4 w-4" />
                   <Label htmlFor="lgpd" className="text-sm text-carvao/70 font-normal leading-relaxed">
-                    Li e concordo com a <a href="/politica-de-privacidade" className="text-navy underline" target="_blank">Política de Privacidade</a> *
+                    Li e concordo com a{' '}
+                    <a href="/politica-de-privacidade" className="text-navy underline" target="_blank">
+                      Política de Privacidade
+                    </a>{' '}
+                    *
                   </Label>
                 </div>
                 {errors.lgpd && <p className="text-red-500 text-sm">{errors.lgpd.message}</p>}
-                <Button type="submit" size="lg" className="w-full">
-                  Quero Receber
+                {status === 'error' && (
+                  <p className="text-red-500 text-sm">Erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.</p>
+                )}
+                <Button type="submit" size="lg" className="w-full" disabled={status === 'loading'}>
+                  {status === 'loading' ? 'Enviando...' : 'Quero Receber'}
                 </Button>
               </form>
             )}
