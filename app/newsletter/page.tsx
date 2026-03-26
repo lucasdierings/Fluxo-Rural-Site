@@ -34,18 +34,10 @@ export default function NewsletterPage() {
   })
 
   const onSubmit = async (data: FormData) => {
-    setStatus('loading')
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome: data.nome, email: data.email }),
-      })
-      if (res.ok) setStatus('success')
-      else setStatus('error')
-    } catch {
-      setStatus('error')
-    }
+    // Abre o Typeform em nova aba com nome e e-mail pré-preenchidos
+    const url = `https://form.typeform.com/to/mOomZZiC?nome=${encodeURIComponent(data.nome)}&email=${encodeURIComponent(data.email)}`
+    window.open(url, '_blank', 'noopener,noreferrer')
+    setStatus('success')
   }
 
   return (
@@ -84,8 +76,8 @@ export default function NewsletterPage() {
             {status === 'success' ? (
               <div className="text-center py-8">
                 <CheckCircle2 className="mx-auto text-verde-folha mb-4" size={48} />
-                <h3 className="font-heading text-xl font-bold text-navy mb-2">Inscrito com sucesso!</h3>
-                <p className="text-carvao/60">Fique de olho no seu e-mail toda sexta-feira.</p>
+                <h3 className="font-heading text-xl font-bold text-navy mb-2">Formulário aberto!</h3>
+                <p className="text-carvao/60">Complete sua inscrição na nova aba que foi aberta.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -106,9 +98,8 @@ export default function NewsletterPage() {
                   </Label>
                 </div>
                 {errors.lgpd && <p className="text-red-500 text-sm">{errors.lgpd.message}</p>}
-                {status === 'error' && <p className="text-red-500 text-sm">Erro ao inscrever. Tente novamente.</p>}
-                <Button type="submit" size="lg" className="w-full" disabled={status === 'loading'}>
-                  {status === 'loading' ? 'Inscrevendo...' : 'Quero Receber'}
+                <Button type="submit" size="lg" className="w-full">
+                  Quero Receber
                 </Button>
               </form>
             )}
