@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 // ↓ Preencher com a URL do Google Apps Script após o deploy
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX00ISH5d-s2aC8KBbIiwI8dbC5-y6YRrt2XHdK5o7t7FhqOuuKe_RY6er_bahFH9IdQ/exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
 
 const ESTADOS_BR = [
   'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA',

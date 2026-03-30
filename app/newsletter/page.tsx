@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CheckCircle2, BarChart2, Sprout, Users, TrendingUp } from 'lucide-react'
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX00ISH5d-s2aC8KBbIiwI8dbC5-y6YRrt2XHdK5o7t7FhqOuuKe_RY6er_bahFH9IdQ/exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
 
 const schema = z.object({
   nome: z.string().min(2, 'Nome é obrigatório'),
