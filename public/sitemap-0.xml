@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://fluxorural.com.br/palestras</loc><lastmod>2026-03-22T00:50:45.411Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/politica-de-privacidade</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/servicos/mentoria</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/servicos/palestras</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/blog</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/newsletter</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/servicos</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/servicos/consultoria</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/sobre</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/servicos/financeiro</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/contato</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/blog/5-indicadores-financeiros-produtor-rural</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/blog/inteligencia-artificial-no-campo-o-que-ja-e-realidade</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/blog/rentabilidade-safra-soja-como-calcular</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fluxorural.com.br/blog/sucessao-familiar-agronegocio-por-que-planejar-agora</loc><lastmod>2026-03-22T00:50:45.412Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br</loc><lastmod>2026-03-30T18:49:03.028Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/blog</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/blog/5-indicadores-financeiros-produtor-rural</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/blog/inteligencia-artificial-no-campo-o-que-ja-e-realidade</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/blog/rentabilidade-safra-soja-como-calcular</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/blog/sucessao-familiar-agronegocio-por-que-planejar-agora</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/contato</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/diagnostico</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/icon.png</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/newsletter</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/palestras</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/politica-de-privacidade</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/servicos</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/servicos/consultoria</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/servicos/financeiro</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/servicos/mentoria</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/servicos/palestras</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fluxorural.com.br/sobre</loc><lastmod>2026-03-30T18:49:03.029Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

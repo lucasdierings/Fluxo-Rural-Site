@@ -6,7 +6,7 @@ import { Linkedin, Instagram, MessageCircle } from 'lucide-react'
 import { NewsletterForm } from '@/components/forms/NewsletterForm'
 
 export default function Footer() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5543999999999'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5545991447004'
 
   return (
     <footer className="bg-navy text-white">
@@ -26,7 +26,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 mt-6">
               <a
-                href="https://linkedin.com/in/lucasdierings"
+                href="https://www.linkedin.com/in/lucas-dierings"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn de Lucas Dierings"
@@ -74,6 +74,7 @@ export default function Footer() {
               <li><Link href="/newsletter" className="hover:text-dourado transition-colors">Newsletter</Link></li>
               <li><Link href="/palestras" className="hover:text-dourado transition-colors">Palestras</Link></li>
               <li><Link href="/sobre" className="hover:text-dourado transition-colors">Sobre Lucas</Link></li>
+              <li><Link href="/diagnostico" className="hover:text-dourado transition-colors">Diagnostico Gratuito</Link></li>
             </ul>
           </div>
 

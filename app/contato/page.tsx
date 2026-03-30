@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 export default function ContatoPage() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5543999999999'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5545991447004'
   const whatsappMessage = encodeURIComponent(
     'Olá Lucas! Vim pelo site fluxorural.com.br e gostaria de saber mais sobre seus serviços.'
   )
@@ -76,7 +76,7 @@ export default function ContatoPage() {
               </a>
 
               <a
-                href="https://linkedin.com/in/lucasdierings"
+                href="https://www.linkedin.com/in/lucas-dierings"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 bg-navy text-white font-semibold py-4 rounded-xl hover:bg-navy/90 transition-colors w-full"

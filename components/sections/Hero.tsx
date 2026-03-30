@@ -8,7 +8,7 @@ import { ChevronDown } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden">
       {/* Fundo */}
       <div className="absolute inset-0">
         <Image
@@ -19,52 +19,59 @@ export default function Hero() {
           priority
           quality={85}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/70 to-navy/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/60 via-60% to-transparent" />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10 pt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 md:pt-24 pb-16 md:pb-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Texto */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center lg:text-left"
           >
-            <span className="inline-block bg-verde-folha/90 text-white text-sm font-medium px-4 py-1.5 rounded-full mb-4">
+            <motion.span
+              className="inline-block bg-verde-folha/90 text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-full mb-6 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               Engenheiro Agrônomo | Consultor | Palestrante
-            </span>
+            </motion.span>
 
-            <p className="text-dourado font-heading text-xl md:text-2xl font-semibold mb-3 tracking-wide">
-              Lucas Dierings
-            </p>
-
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6">
               Gestão, Inovação e Sucessão no Agronegócio
             </h1>
 
-            <p className="text-white/85 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
+            <p className="text-white/90 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
               Consultoria, Mentoria e Palestras para quem transforma o campo em resultado.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <Button asChild size="lg">
                 <Link href="/servicos">Conheça os Serviços</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/contato">Fale Comigo</Link>
+                <Link href="/diagnostico">Diagnostico Gratis</Link>
               </Button>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Foto */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="hidden lg:flex justify-center"
           >
-            <div className="relative w-80 h-80 xl:w-96 xl:h-96">
-              <div className="absolute inset-0 rounded-full border-4 border-dourado/60 shadow-2xl overflow-hidden">
+            <div className="relative w-72 h-72 xl:w-96 xl:h-96">
+              <div className="absolute inset-0 rounded-full border-4 border-dourado/60 shadow-apple-lg overflow-hidden transition-smooth hover:scale-105">
                 <Image
                   src="/images/lucas-hero.jpg"
                   alt="Lucas Dierings — Engenheiro Agrônomo e Consultor"
@@ -79,9 +86,14 @@ export default function Hero() {
       </div>
 
       {/* Seta de scroll */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <motion.div
+        className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.6 }}
+      >
         <ChevronDown className="text-white/60 animate-bounce-down" size={32} />
-      </div>
+      </motion.div>
     </section>
   )
 }

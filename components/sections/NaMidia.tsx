@@ -54,31 +54,27 @@ export default function NaMidia() {
           </motion.a>
 
           {/* NHCast */}
-          <motion.div
+          <motion.a
+            href="https://www.youtube.com/watch?v=Dt3m-VGw8zo&list=PLd-Myf-teNs_TrmvHpNkxS_BjpQl5BdCl"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="rounded-xl overflow-hidden group bg-white shadow-lg"
+            className="relative h-72 rounded-xl overflow-hidden group block"
           >
-            <div className="relative h-48 overflow-hidden">
+            <div className="absolute inset-0 bg-white flex items-center justify-center">
               <Image
-                src="/images/nh-cast-estudio.jpg"
-                alt="Lucas Dierings — Host do NHCast New Holland"
-                fill
-                className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                src="/images/nh-cast-logo-azul-fundo-branco.png"
+                alt="NHCast — New Holland Brasil"
+                width={240}
+                height={240}
+                className="object-contain group-hover:scale-110 transition-transform duration-500"
               />
             </div>
-            <div className="p-4 bg-white">
-              <div className="mb-3">
-                <Image
-                  src="/images/nh-cast-logo-azul-fundo-branco.png"
-                  alt="NH Cast"
-                  width={120}
-                  height={48}
-                  className="object-contain"
-                />
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 z-10">
               <span className="bg-dourado text-carvao text-xs font-semibold px-3 py-1 rounded-full">
                 Host
               </span>
@@ -89,15 +85,18 @@ export default function NaMidia() {
                 Podcast oficial da maior fabricante de máquinas agrícolas
               </p>
             </div>
-          </motion.div>
+          </motion.a>
 
           {/* Agrojovem Podcast */}
-          <motion.div
+          <motion.a
+            href="https://www.youtube.com/@agrojovempodcast"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="rounded-xl overflow-hidden group bg-white shadow-lg"
+            className="relative h-72 rounded-xl overflow-hidden group block"
           >
             <div className="relative h-48 overflow-hidden">
               <Image
@@ -142,7 +141,7 @@ export default function NaMidia() {
                 ↓ Mídia Kit
               </a>
             </div>
-          </motion.div>
+          </motion.a>
 
           {/* JCI */}
           <motion.div
@@ -153,7 +152,7 @@ export default function NaMidia() {
             className="relative h-72 rounded-xl overflow-hidden group"
           >
             <Image
-              src="/lucas-palestrante.JPG"
+              src="/images/Lucas discurso JCI.JPG"
               alt="Lucas Dierings — JCI"
               fill
               className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500"
@@ -166,7 +165,7 @@ export default function NaMidia() {
               <h3 className="font-heading text-white font-bold text-lg mt-2">
                 JCI — Junior Chamber International
               </h3>
-              <p className="text-white/70 text-sm">
+              <p className="text-white/70 text-sm leading-relaxed">
                 Membro da JCI, organização presente em mais de 120 países para desenvolvimento de jovens líderes.
               </p>
             </div>

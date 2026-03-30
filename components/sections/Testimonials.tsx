@@ -23,39 +23,40 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-navy py-20 lg:py-28">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="bg-navy py-24 md:py-32 lg:py-40">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-12 md:mb-16 lg:mb-20"
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-6">
             O que Dizem
           </h2>
-          <p className="text-white/60 text-lg">
+          <p className="text-white/70 text-base md:text-lg font-light">
             Feedback de clientes e parceiros
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white/5 border border-white/10 rounded-xl p-6"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
+              className="glass-card-dark rounded-3xl p-8 hover:bg-white/15 transition-smooth hover:scale-105 shadow-apple-sm"
             >
-              <Quote className="text-dourado mb-4" size={28} />
-              <p className="text-white/80 leading-relaxed mb-6 text-sm">
+              <Quote className="text-dourado mb-6" size={36} />
+              <p className="text-white/85 leading-relaxed mb-8 text-base md:text-lg font-light">
                 &ldquo;{t.text}&rdquo;
               </p>
               <div>
-                <p className="text-white font-semibold">{t.name}</p>
-                <p className="text-white/50 text-sm">{t.role}</p>
+                <p className="text-white font-semibold text-base">{t.name}</p>
+                <p className="text-white/60 text-sm font-light mt-1">{t.role}</p>
               </div>
             </motion.div>
           ))}
