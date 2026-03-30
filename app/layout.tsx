@@ -24,23 +24,35 @@ export const metadata: Metadata = {
     default: 'Lucas Dierings | Fluxo Rural Consultoria',
     template: '%s | Lucas Dierings — Fluxo Rural',
   },
-  description: 'Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem. Referência em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro. Consultoria, mentoria e palestras. Londrina, PR.',
+  description: 'Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem. Referência em gestão rural, inteligência artificial no agronegócio, inovação e sucessão familiar. Fundador da Fluxo Rural Consultoria. Host do NH Cast (New Holland) e Agro Jovem Podcast. Londrina, PR.',
   keywords: [
     'Lucas Dierings',
     'Lucas Dierings agrônomo',
     'Lucas Dierings consultor agronegócio',
     'Lucas Dierings palestrante',
+    'Fluxo Rural',
     'Fluxo Rural Consultoria',
+    'Gestão Rural',
+    'gestão rural',
+    'gestão financeira rural',
     'consultoria agronegócio Londrina',
     'gestão financeira rural Paraná',
     'gestão fazenda produtiva',
     'mentoria sucessão familiar fazenda',
+    'Inteligência Artificial no Agronegócio',
+    'inteligência artificial agronegócio',
+    'IA no agronegócio',
     'palestra inteligência artificial agronegócio',
     'inovação agronegócio Brasil',
     'sucessão familiar rural',
     'rentabilidade safra soja',
     'engenheiro agrônomo consultor Londrina',
+    'Agro Jovem Podcast',
+    'Agrojovem Podcast',
+    'NH CAST',
+    'NHCast',
     'NHCast New Holland podcast',
+    'NH Cast New Holland',
     'CNA Jovem destaque nacional',
     'MBA USP ESALQ agronegócio',
     'SENAR Paraná consultoria',
@@ -56,7 +68,7 @@ export const metadata: Metadata = {
     url: 'https://fluxorural.com.br',
     siteName: 'Fluxo Rural Consultoria — Lucas Dierings',
     title: 'Lucas Dierings | Consultoria, Mentoria e Palestras no Agronegócio',
-    description: 'Engenheiro Agrônomo e consultor estratégico. Referência em gestão, inovação e sucessão no agronegócio brasileiro. Conheça os serviços de Lucas Dierings.',
+    description: 'Engenheiro Agrônomo e consultor estratégico. Referência em gestão rural, inteligência artificial no agronegócio e sucessão familiar. Host do NH Cast e Agro Jovem Podcast. Conheça os serviços de Lucas Dierings.',
     images: [
       {
         url: '/og-image.png',
@@ -104,11 +116,12 @@ const personJsonLd = {
     'https://fluxorural.com.br',
   ],
   knowsAbout: [
+    'Gestão Rural',
     'Gestão financeira rural',
     'Agronegócio brasileiro',
     'Inovação no campo',
     'Sucessão familiar em propriedades rurais',
-    'Inteligência artificial no agronegócio',
+    'Inteligência Artificial no Agronegócio',
     'Gestão estratégica de fazendas',
     'Rentabilidade agrícola',
     'Liderança no agronegócio',
@@ -170,6 +183,42 @@ const localBusinessJsonLd = {
   ],
 }
 
+const nhCastPodcastJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'PodcastSeries',
+  name: 'NH Cast',
+  alternateName: ['NHCast', 'NH CAST', 'NHCast New Holland'],
+  description: 'Podcast oficial da New Holland Brasil sobre agronegócio, inovação e máquinas agrícolas. Apresentado por Lucas Dierings.',
+  url: 'https://fluxorural.com.br',
+  image: 'https://fluxorural.com.br/images/nh-cast-logo-azul-fundo-branco.png',
+  author: {
+    '@type': 'Person',
+    name: 'Lucas Dierings',
+    url: 'https://fluxorural.com.br',
+  },
+  productionCompany: {
+    '@type': 'Organization',
+    name: 'New Holland Brasil',
+  },
+  inLanguage: 'pt-BR',
+}
+
+const agrojovemPodcastJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'PodcastSeries',
+  name: 'Agro Jovem Podcast',
+  alternateName: ['Agrojovem Podcast', 'AgroJovem Podcast', 'Agro Jovem'],
+  description: 'Podcast sobre gestão rural, inovação, finanças e o futuro do agronegócio brasileiro. Apresentado por Lucas Dierings.',
+  url: 'https://www.youtube.com/@agrojovempodcast',
+  image: 'https://fluxorural.com.br/images/logo-agrojovem.png',
+  author: {
+    '@type': 'Person',
+    name: 'Lucas Dierings',
+    url: 'https://fluxorural.com.br',
+  },
+  inLanguage: 'pt-BR',
+}
+
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -206,6 +255,14 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(nhCastPodcastJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(agrojovemPodcastJsonLd) }}
         />
         <link rel="canonical" href="https://fluxorural.com.br" />
       </head>

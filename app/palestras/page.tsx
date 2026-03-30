@@ -6,10 +6,10 @@ import { FileText, Send, Sparkles, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Palestras e Workshops',
-  description: 'Palestras sobre gestão, finanças, sucessão familiar e IA no agronegócio. Contrate Lucas Dierings para seu evento.',
+  description: 'Palestras de Lucas Dierings sobre gestão rural, inteligência artificial no agronegócio, sucessão familiar e finanças rurais. Host do NH Cast e Agro Jovem Podcast. Contrate para seu evento.',
   openGraph: {
-    title: 'Palestras | Fluxo Rural Consultoria',
-    description: 'Conteúdo aplicado, linguagem do campo, resultados na prática.',
+    title: 'Palestras e Workshops | Lucas Dierings — Fluxo Rural',
+    description: 'Palestras sobre gestão rural, inteligência artificial no agronegócio, sucessão familiar e finanças. Conteúdo aplicado com linguagem do campo.',
   },
 }
 

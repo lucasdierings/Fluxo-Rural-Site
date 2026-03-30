@@ -6,10 +6,10 @@ import { Target, TrendingUp, Heart, ArrowRight, Trophy, GraduationCap, Radio, Ma
 
 export const metadata: Metadata = {
   title: 'Sobre Lucas Dierings',
-  description: 'Conheça Lucas Dierings — destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
+  description: 'Conheça Lucas Dierings — engenheiro agrônomo, referência em gestão rural e inteligência artificial no agronegócio. Destaque nacional CNA Jovem, host do NH Cast (New Holland) e Agro Jovem Podcast. Fundador da Fluxo Rural Consultoria.',
   openGraph: {
-    title: 'Sobre Lucas Dierings | Fluxo Rural',
-    description: 'Destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
+    title: 'Sobre Lucas Dierings | Fluxo Rural Consultoria',
+    description: 'Engenheiro agrônomo, referência em gestão rural e IA no agronegócio. Host do NH Cast e Agro Jovem Podcast. Destaque nacional CNA Jovem.',
     images: [{ url: '/images/lucas-agronomo.jpg' }],
   },
 }
