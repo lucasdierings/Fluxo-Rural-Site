@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react'
@@ -209,6 +209,18 @@ export function DiagnosticoForm() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(false)
+  const [utmParams, setUtmParams] = useState({ utm_source: '', utm_medium: '', utm_campaign: '' })
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      setUtmParams({
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+      })
+    }
+  }, [])
 
   const score = useMemo(() => calculateScore(form), [form])
   const qualLevel = useMemo(() => getQualLevel(score), [score])
@@ -251,9 +263,10 @@ export function DiagnosticoForm() {
         body: JSON.stringify({
           ...form,
           desafios: form.desafios.join(', '),
-          origem: 'diagnostico-gratis',
+          origem: utmParams.utm_source ? `ads-${utmParams.utm_source}` : 'diagnostico-gratis',
           score,
           qualificationLevel: qualLevel,
+          ...utmParams,
         }),
       })
 
