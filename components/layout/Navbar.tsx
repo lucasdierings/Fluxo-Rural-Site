@@ -60,7 +60,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Button asChild size="sm">
-              <Link href="/diagnostico">Diagnostico Gratis</Link>
+              <Link href="/diagnostico">Diagnóstico Grátis</Link>
             </Button>
           </div>
 
@@ -95,7 +95,7 @@ export default function Navbar() {
           ))}
           <Button asChild size="lg" className="mt-4 w-full max-w-xs">
             <Link href="/diagnostico" onClick={() => setIsOpen(false)}>
-              Diagnostico Gratis
+              Diagnóstico Grátis
             </Link>
           </Button>
         </div>

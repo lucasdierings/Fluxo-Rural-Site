@@ -23,7 +23,7 @@ export default function FinalCTA() {
           </p>
           <Button asChild size="lg" className="bg-white text-verde-escuro hover:bg-white/90 hover:shadow-apple-lg">
             <Link href="/diagnostico">
-              Agendar Diagnostico Gratis <ArrowRight className="ml-2" size={18} />
+              Agendar Diagnóstico Grátis <ArrowRight className="ml-2" size={18} />
             </Link>
           </Button>
         </motion.div>

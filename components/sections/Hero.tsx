@@ -58,7 +58,7 @@ export default function Hero() {
                 <Link href="/servicos">Conheça os Serviços</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/diagnostico">Diagnostico Gratis</Link>
+                <Link href="/diagnostico">Diagnóstico Grátis</Link>
               </Button>
             </motion.div>
           </motion.div>
