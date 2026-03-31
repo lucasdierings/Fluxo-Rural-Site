@@ -98,28 +98,40 @@
 9. **ContactForm grid fixo** — cidade/estado era `grid-cols-2` sem breakpoint. Corrigido para responsivo
 10. **Rotas duplicadas** — `/servicos/palestras` agora redireciona para `/palestras`
 
+**Correções adicionais (mesma sessão):**
+11. **Logo branca comprimida** — 5.8MB → 92KB (redimensionada 2048→480px, quantizada 128 cores)
+12. **Apple-touch-icon criado** — 180x180 a partir do icon.png existente
+13. **Newsletter nativa** — Removido Typeform, agora envia direto ao Google Apps Script sem sair do site
+14. **WhatsApp tooltip** — Tooltip "Fale pelo WhatsApp" ao hover no botão flutuante
+15. **Footer otimizado** — Logo com `sizes` e `loading="lazy"`
+16. **Blog posts** — Conteúdo MDX já existia (4 artigos completos), não era placeholder
+
 **Sugestões pendentes:**
-- [ ] Comprimir `logo_fluxo_rural_branco.png` (6MB → deve ser <100KB)
-- [ ] Verificar/adicionar favicon e apple-touch-icon
-- [ ] Publicar conteúdo real nos posts do blog (MDX ainda vazio)
-- [ ] Integrar newsletter direto (MailerLite) em vez de abrir Typeform
 - [ ] Adicionar OG images específicas por página de serviço
 - [ ] Adicionar breadcrumbs nas páginas internas
 - [ ] Substituir placeholder "Video Reel em Breve" na página de palestras
 - [ ] Depoimentos com nomes reais e fotos (credibilidade)
 - [ ] Google Search Console — verificar indexação
 - [ ] Campanha Google Ads com R$ 880
+- [ ] Mergear branch `claude/review-ux-ui-mobile-zBBVM` na main e deploy
 
 ---
+
+## Cloudflare Pages
+- **Conta:** Lucasdierings@live.com (ID: 20492d3a6b98bfc342338d4f2a567c1b)
+- **Deploy:** Cloudflare Pages (confirmado por `_headers` file)
+- **Nota:** MCP do Cloudflare não tem tools para listar/gerenciar Pages projects diretamente, apenas Workers/D1/KV/R2
+- **Headers configurados:** X-Frame-Options: DENY, X-Content-Type-Options: nosniff, Referrer-Policy: strict-origin-when-cross-origin
 
 ## Notas Importantes
 - Deploy é **static export** (`output: 'export'`) — sem server-side features (redirect(), API routes não funcionam em prod)
 - Formulários usam `mode: 'no-cors'` — não é possível ler resposta do servidor, então error handling é limitado
 - Imagens são `unoptimized: true` por causa do static export
-- Newsletter no footer abre Typeform em nova aba (não é ideal para UX)
-- Blog posts existem como dados hardcoded em `app/blog/page.tsx`, mas o conteúdo MDX real dos posts não foi criado ainda
+- Newsletter agora envia direto ao Google Apps Script (não abre mais Typeform)
+- Blog posts existem em `content/blog/` como MDX com conteúdo real (4 artigos)
+- Favicon já existia em `app/icon.png` (logo Fluxo Rural colorida)
 
 ---
 
-**Última atualização:** 31 de março de 2026 — Sessão 7
-**Status:** Revisão UX/UI/Mobile/SEO completa, pendente merge na main
+**Última atualização:** 31 de março de 2026 — Sessão 7 (continuação)
+**Status:** Todas as prioridades altas concluídas, pendente merge na main
