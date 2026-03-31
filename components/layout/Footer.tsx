@@ -26,7 +26,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 mt-6">
               <a
-                href="https://www.linkedin.com/in/lucas-dierings"
+                href="https://www.linkedin.com/in/lucasdierings"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn de Lucas Dierings"

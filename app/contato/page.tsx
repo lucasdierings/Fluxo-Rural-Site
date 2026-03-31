@@ -76,7 +76,7 @@ export default function ContatoPage() {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/lucas-dierings"
+                href="https://www.linkedin.com/in/lucasdierings"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 bg-navy text-white font-semibold py-4 rounded-xl hover:bg-navy/90 transition-colors w-full"

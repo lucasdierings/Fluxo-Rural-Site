@@ -207,7 +207,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        <link rel="canonical" href="https://fluxorural.com.br" />
+        <link rel="alternate" type="text/plain" href="https://fluxorural.com.br/llms.txt" title="LLMs.txt" />
       </head>
       <body className="font-body text-carvao antialiased">
         <Navbar />
