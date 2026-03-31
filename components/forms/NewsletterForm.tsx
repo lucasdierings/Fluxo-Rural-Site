@@ -4,8 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-// ID do formulário Typeform de newsletter
-const NEWSLETTER_TYPEFORM_ID = 'mOomZZiC'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
 
 interface NewsletterFormProps {
   variant?: 'default' | 'footer' | 'inline'
@@ -13,22 +12,40 @@ interface NewsletterFormProps {
 
 export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
   const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
-    // Abre o Typeform em nova aba, passando o e-mail como parâmetro oculto
-    const url = `https://form.typeform.com/to/${NEWSLETTER_TYPEFORM_ID}?email=${encodeURIComponent(email)}`
-    window.open(url, '_blank', 'noopener,noreferrer')
-    setSubmitted(true)
-    setEmail('')
+
+    setStatus('loading')
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: '',
+          email,
+          interesse: 'Newsletter',
+          fonte: 'newsletter',
+          telefone: '',
+          cidade: '',
+          estado: '',
+          detalhes: `Inscrito via ${variant === 'footer' ? 'footer' : variant === 'inline' ? 'artigo' : 'página'}`,
+        }),
+      })
+      setStatus('success')
+      setEmail('')
+    } catch {
+      setStatus('error')
+    }
   }
 
-  if (submitted) {
+  if (status === 'success') {
     return (
-      <p className={variant === 'footer' ? 'text-verde-folha text-sm' : 'text-verde-folha font-semibold'}>
-        ✓ Formulário aberto! Complete sua inscrição na nova aba.
+      <p className={variant === 'footer' ? 'text-verde-folha text-sm' : 'text-verde-folha font-semibold text-sm'}>
+        Inscrito com sucesso! Você receberá nosso conteúdo em breve.
       </p>
     )
   }
@@ -53,9 +70,10 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
       <Button
         type="submit"
         size="sm"
+        disabled={status === 'loading'}
         className={variant === 'footer' ? 'h-10' : ''}
       >
-        Inscrever
+        {status === 'loading' ? '...' : 'Inscrever'}
       </Button>
     </form>
   )

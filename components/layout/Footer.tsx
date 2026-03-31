@@ -20,6 +20,8 @@ export default function Footer() {
               width={160}
               height={48}
               className="h-12 w-auto mb-4"
+              sizes="160px"
+              loading="lazy"
             />
             <p className="text-white/70 text-sm leading-relaxed">
               Gestão, Inovação e Sucessão no Agronegócio. Consultoria, Mentoria e Palestras para quem transforma o campo em resultado.
