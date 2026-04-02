@@ -2,7 +2,8 @@ backend:
   name: github
   repo: lucasdierings/Fluxo-Rural-Site
   branch: main
-  base_url: https://decap-oauth.netlify.app
+  base_url: https://fluxorural.com.br
+  auth_endpoint: /api/auth
 
 publish_mode: editorial_workflow
 media_folder: public/images
