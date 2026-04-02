@@ -57,27 +57,86 @@ export default function BlogPostPage({ params }: Props) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fluxorural.com.br'
   const postUrl = `${siteUrl}/blog/${post.slug}`
 
+  const wordCount = post.content.split(/\s+/).length
+
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
+    description: post.excerpt,
     image: `${siteUrl}${post.coverImage}`,
     datePublished: post.date,
+    dateModified: post.date,
+    wordCount,
+    articleSection: post.category,
+    inLanguage: 'pt-BR',
+    isAccessibleForFree: true,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': postUrl,
+    },
     author: {
       '@type': 'Person',
       name: 'Lucas Dierings',
       url: siteUrl,
+      jobTitle: 'Engenheiro Agrônomo e Consultor Estratégico',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Fluxo Rural Consultoria',
       url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/logo-fluxo-rural.png`,
+      },
     },
   }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Início',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${siteUrl}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: postUrl,
+      },
+    ],
+  }
+
+  const faqJsonLd = post.faqs && post.faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: post.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  } : null
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      {faqJsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      )}
 
       {/* Hero do artigo */}
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
@@ -116,6 +175,24 @@ export default function BlogPostPage({ params }: Props) {
           <article className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-navy prose-a:text-navy prose-a:no-underline hover:prose-a:text-dourado">
             <MDXRemote source={post.content} />
           </article>
+
+          {/* FAQs */}
+          {post.faqs && post.faqs.length > 0 && (
+            <div className="my-12">
+              <h2 className="font-heading text-2xl font-bold text-navy mb-6">Perguntas Frequentes</h2>
+              <div className="space-y-4">
+                {post.faqs.map((faq, i) => (
+                  <details key={i} className="bg-off-white rounded-lg p-5 group">
+                    <summary className="font-heading font-semibold text-navy cursor-pointer list-none flex items-center justify-between">
+                      {faq.question}
+                      <span className="text-dourado ml-2 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p className="mt-3 text-carvao/70 leading-relaxed">{faq.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* CTA Newsletter inline */}
           <div className="my-12 bg-off-white rounded-xl p-8 text-center">
