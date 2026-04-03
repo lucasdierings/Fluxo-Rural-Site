@@ -32,6 +32,7 @@
 - **REQUER:** Variaveis de ambiente no Cloudflare Pages: `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET`
 - **REQUER:** GitHub OAuth App criada em github.com/settings/developers (Homepage URL + Callback URL = https://fluxorural.com.br)
 - `_routes.json` em public/ limita Functions apenas a `/api/*` (preserva static requests gratuitos)
+- **IMPORTANTE:** O script `decap-cms.js` DEVE ficar no `<body>`, NAO no `<head>`. No `<head>` causa erro `appendChild null` porque o DOM ainda nao existe
 - Schema: titulo, data, categoria, imagem, readingTime, excerpt, FAQs opcionais, conteudo markdown
 
 ### Posts MDX
@@ -89,8 +90,9 @@
 ---
 
 ## Pendencias
-- [ ] Criar GitHub OAuth App (github.com/settings/developers) e adicionar GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET no Cloudflare Pages
-- [ ] Merge branch atual para main e push
+- [x] Criar GitHub OAuth App e adicionar GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET no Cloudflare Pages — FEITO
+- [x] Merge branch atual para main e push — FEITO
+- [x] Decap CMS funcionando em producao (fluxorural.com.br/admin/) — FEITO
 - [ ] Aumentar logo Navbar (muito pequeno)
 - [ ] Investigar badge "3 Issues" (canto inferior esquerdo)
 - [ ] Configurar sequencia de email automatica (MailerLite)
@@ -99,4 +101,4 @@
 ---
 
 **Ultima atualizacao:** 02 de abril de 2026
-**Status:** Blog + Decap CMS implementado, OAuth pendente
+**Status:** Blog + Decap CMS + OAuth FUNCIONANDO em producao. Blog posts carregando. CMS pronto para uso.
