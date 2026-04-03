@@ -149,7 +149,7 @@ const localBusinessJsonLd = {
   },
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Londrina',
+    addressLocality: 'Curitiba',
     addressRegion: 'PR',
     addressCountry: 'BR',
   },

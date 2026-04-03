@@ -40,6 +40,10 @@ export default function Hero() {
               Engenheiro Agrônomo | Consultor | Palestrante
             </motion.span>
 
+            <p className="text-dourado font-heading text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+              Lucas Dierings
+            </p>
+
             <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6">
               Gestão, Inovação e Sucessão no Agronegócio
             </h1>

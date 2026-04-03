@@ -3,8 +3,10 @@
 ## Sobre Lucas Dierings
 - **Agronomo, consultor rural, podcast host (NHCast + AgroJovem Podcast)**
 - Especialista em: Gestao financeira, sucessao familiar, inovacao em agronegocio
-- Baseado em Londrina, Parana
-- Email: lucas@fluxorural.com.br
+- **Lucas pessoalmente:** Baseado em Londrina, Parana
+- **Empresa (Fluxo Rural Consultoria):** Sede em Curitiba, PR (documentos, contratos, termos de uso)
+- Email pessoal: lucas@fluxorural.com.br
+- Email empresa/contato: contato@fluxorural.com.br
 - WhatsApp: 5545991447004
 
 ---
@@ -86,6 +88,8 @@
 4. **Sempre fazer rebase no main** antes de merge — main pode ter commits de outras sessoes
 5. **async params (Next.js 15+)** — Em rotas dinamicas como [slug], `params` e uma Promise. SEMPRE usar `const { slug } = await params`. Sem isso, params.slug e undefined e a pagina gera 404 silencioso
 6. **Cloudflare Functions** — O diretorio `functions/` na raiz do projeto e detectado automaticamente pelo Cloudflare Pages. `_routes.json` em public/ controla quais rotas passam pelas Functions
+7. **Localizacao empresa vs pessoal** — Curitiba: footer, politica privacidade, contato, emails transacionais, JSON-LD negocio. Londrina: consultoria, diagnostico, TrustBar, SEO, llms.txt. Sobre: citar ambas
+8. **Pagina de contato** — Sidebar so mostra email (contato@fluxorural.com.br), localizacao (Curitiba) e tempo de resposta. Sem WhatsApp/LinkedIn (nao estimula lead a preencher formulario)
 
 ---
 
@@ -93,6 +97,10 @@
 - [x] Criar GitHub OAuth App e adicionar GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET no Cloudflare Pages — FEITO
 - [x] Merge branch atual para main e push — FEITO
 - [x] Decap CMS funcionando em producao (fluxorural.com.br/admin/) — FEITO
+- [x] Adicionar nome "Lucas Dierings" no hero da home — FEITO
+- [x] Corrigir secao Na Midia (NHCast bugado, cards irregulares) — FEITO
+- [x] Ajustar localizacao empresa (Curitiba) vs pessoal (Londrina) em todo o site — FEITO
+- [x] Pagina contato: remover WhatsApp/LinkedIn, email para contato@, localizacao Curitiba — FEITO
 - [ ] Aumentar logo Navbar (muito pequeno)
 - [ ] Investigar badge "3 Issues" (canto inferior esquerdo)
 - [ ] Configurar sequencia de email automatica (MailerLite)
@@ -101,4 +109,4 @@
 ---
 
 **Ultima atualizacao:** 02 de abril de 2026
-**Status:** Blog + Decap CMS + OAuth FUNCIONANDO em producao. Blog posts carregando. CMS pronto para uso.
+**Status:** Blog + Decap CMS + OAuth FUNCIONANDO em producao. Blog posts carregando. CMS pronto para uso. Home com nome Lucas Dierings, secao Na Midia corrigida, pagina contato otimizada para conversao.
