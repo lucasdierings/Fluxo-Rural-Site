@@ -25,14 +25,9 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          nome: '',
+          _tipo: 'newsletter',
           email,
-          interesse: 'Newsletter',
-          fonte: 'newsletter',
-          telefone: '',
-          cidade: '',
-          estado: '',
-          detalhes: `Inscrito via ${variant === 'footer' ? 'footer' : variant === 'inline' ? 'artigo' : 'página'}`,
+          fonte: variant === 'footer' ? 'footer' : variant === 'inline' ? 'artigo' : 'página',
         }),
       })
       setStatus('success')

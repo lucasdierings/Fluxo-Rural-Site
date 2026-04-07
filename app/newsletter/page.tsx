@@ -45,14 +45,10 @@ export default function NewsletterPage() {
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          _tipo: 'newsletter',
           nome: data.nome,
           email: data.email,
-          interesse: 'Newsletter',
-          fonte: 'newsletter',
-          telefone: '',
-          cidade: '',
-          estado: '',
-          detalhes: 'Inscrito via página de newsletter',
+          fonte: 'pagina-newsletter',
         }),
       })
       setStatus('success')

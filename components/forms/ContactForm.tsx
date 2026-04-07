@@ -53,7 +53,7 @@ export function ContactForm() {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, _tipo: 'contato' }),
       })
       setStatus('success')
     } catch {

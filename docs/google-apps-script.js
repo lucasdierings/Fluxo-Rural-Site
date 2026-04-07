@@ -1,155 +1,214 @@
 /**
- * Fluxo Rural — Google Apps Script para receber leads do Diagnóstico
+ * Fluxo Rural — Google Apps Script (v2) Multi-aba
+ *
+ * Detecta o tipo de lead pelo campo _tipo e grava na aba correta:
+ *   - "diagnostico" → aba "Diagnóstico"
+ *   - "contato"     → aba "Contato"
+ *   - "newsletter"  → aba "Newsletter"
  *
  * INSTRUÇÕES DE DEPLOY:
- * 1. Crie uma Google Sheet chamada "Fluxo Rural - Leads Diagnóstico"
- * 2. Abra Extensions > Apps Script
- * 3. Cole este código no editor
- * 4. Ajuste o EMAIL_NOTIFICACAO abaixo
- * 5. Deploy > New deployment > Web app
+ * 1. Abra a Google Sheet "Fluxo Rural - Leads Diagnóstico"
+ * 2. Extensions > Apps Script
+ * 3. SUBSTITUA todo o código pelo conteúdo deste arquivo
+ * 4. Ajuste o EMAIL_NOTIFICACAO abaixo se necessário
+ * 5. Deploy > Manage deployments > Editar (ou New deployment)
  *    - Execute as: Me
  *    - Who has access: Anyone
- * 6. Copie a URL gerada e atualize SCRIPT_URL no DiagnosticoForm.tsx
+ * 6. A URL do script NÃO muda se você editar o deployment existente
  *
- * COLUNAS DA PLANILHA (criadas automaticamente na primeira execução):
- * Timestamp | Nome | Email | WhatsApp | Estado | Atividade | Faturamento |
- * Hectares | Desafios | Gestão | Filhos | Situação Filhos | Conflito |
- * Dívidas | Investimento | Urgência | Consultor | Expectativa |
- * Origem | Score | Nível | UTM Source | UTM Medium | UTM Campaign
+ * IMPORTANTE: Se criar um NEW deployment, a URL muda e você precisa
+ * atualizar SCRIPT_URL em ContactForm.tsx, DiagnosticoForm.tsx,
+ * NewsletterForm.tsx e newsletter/page.tsx
  */
 
 // === CONFIGURAÇÃO ===
 const EMAIL_NOTIFICACAO = 'lucasdierings12@gmail.com'
-const NOME_PLANILHA = 'Leads' // Nome da aba (sheet tab)
 
 // === HANDLERS ===
 
 function doGet(e) {
   return ContentService
-    .createTextOutput(JSON.stringify({ status: 'Fluxo Rural API online' }))
+    .createTextOutput(JSON.stringify({ status: 'Fluxo Rural API v2 online' }))
     .setMimeType(ContentService.MimeType.JSON)
 }
 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents)
-    const sheet = getOrCreateSheet()
+    const tipo = data._tipo || detectarTipo(data)
 
-    // Adiciona a linha na planilha
-    const row = [
-      new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
-      data.nome || '',
-      data.email || '',
-      data.whatsapp || '',
-      data.estado || '',
-      data.atividade || '',
-      data.faturamento || '',
-      data.hectares || '',
-      data.desafios || '',
-      data.gestao || '',
-      data.filhos || '',
-      data.situacaoFilhos || '',
-      data.conflito || '',
-      data.dividas || '',
-      data.investimento || '',
-      data.urgencia || '',
-      data.consultor || '',
-      data.expectativa || '',
-      data.origem || 'direto',
-      data.score || 0,
-      data.qualificationLevel || '',
-      data.utm_source || '',
-      data.utm_medium || '',
-      data.utm_campaign || '',
-    ]
-
-    sheet.appendRow(row)
-
-    // Envia notificação por email
-    enviarNotificacao(data)
-
-    // Resposta
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        status: 'ok',
-        message: 'Lead recebido com sucesso',
-        score: data.score,
-        level: data.qualificationLevel
-      }))
-      .setMimeType(ContentService.MimeType.JSON)
-
+    switch (tipo) {
+      case 'diagnostico':
+        return gravarDiagnostico(data)
+      case 'contato':
+        return gravarContato(data)
+      case 'newsletter':
+        return gravarNewsletter(data)
+      default:
+        return gravarContato(data) // fallback
+    }
   } catch (error) {
     return ContentService
-      .createTextOutput(JSON.stringify({
-        status: 'error',
-        message: error.toString()
-      }))
+      .createTextOutput(JSON.stringify({ status: 'error', message: error.toString() }))
       .setMimeType(ContentService.MimeType.JSON)
   }
 }
 
+// Fallback para formulários antigos sem _tipo
+function detectarTipo(data) {
+  if (data.score !== undefined || data.qualificationLevel) return 'diagnostico'
+  if (data.fonte === 'newsletter' || data.interesse === 'Newsletter') return 'newsletter'
+  return 'contato'
+}
+
+// === DIAGNÓSTICO ===
+
+function gravarDiagnostico(data) {
+  const sheet = getOrCreateSheet('Diagnóstico', [
+    'Timestamp', 'Nome', 'Email', 'WhatsApp', 'Estado',
+    'Atividade', 'Faturamento', 'Hectares', 'Desafios',
+    'Gestão', 'Filhos', 'Situação Filhos', 'Conflito',
+    'Dívidas', 'Investimento', 'Urgência', 'Consultor',
+    'Expectativa', 'Origem', 'Score', 'Nível',
+    'UTM Source', 'UTM Medium', 'UTM Campaign',
+  ])
+
+  sheet.appendRow([
+    timestamp(),
+    data.nome || '',
+    data.email || '',
+    data.whatsapp || '',
+    data.estado || '',
+    data.atividade || '',
+    data.faturamento || '',
+    data.hectares || '',
+    data.desafios || '',
+    data.gestao || '',
+    data.filhos || '',
+    data.situacaoFilhos || '',
+    data.conflito || '',
+    data.dividas || '',
+    data.investimento || '',
+    data.urgencia || '',
+    data.consultor || '',
+    data.expectativa || '',
+    data.origem || 'direto',
+    data.score || 0,
+    data.qualificationLevel || '',
+    data.utm_source || '',
+    data.utm_medium || '',
+    data.utm_campaign || '',
+  ])
+
+  enviarNotificacaoDiagnostico(data)
+
+  return resposta('ok', 'Diagnóstico recebido')
+}
+
+// === CONTATO ===
+
+function gravarContato(data) {
+  const sheet = getOrCreateSheet('Contato', [
+    'Timestamp', 'Nome', 'Email', 'Telefone', 'Cidade', 'Estado', 'Interesse', 'Detalhes',
+  ])
+
+  sheet.appendRow([
+    timestamp(),
+    data.nome || '',
+    data.email || '',
+    data.telefone || '',
+    data.cidade || '',
+    data.estado || '',
+    data.interesse || '',
+    data.detalhes || '',
+  ])
+
+  enviarNotificacaoContato(data)
+
+  return resposta('ok', 'Contato recebido')
+}
+
+// === NEWSLETTER ===
+
+function gravarNewsletter(data) {
+  const sheet = getOrCreateSheet('Newsletter', [
+    'Timestamp', 'Nome', 'Email', 'Fonte',
+  ])
+
+  // Verificar duplicata de email
+  const emails = sheet.getRange(1, 3, sheet.getLastRow(), 1).getValues().flat()
+  if (emails.includes(data.email)) {
+    return resposta('ok', 'Email já cadastrado')
+  }
+
+  sheet.appendRow([
+    timestamp(),
+    data.nome || '',
+    data.email || '',
+    data.fonte || 'site',
+  ])
+
+  return resposta('ok', 'Newsletter inscrito')
+}
+
 // === FUNÇÕES AUXILIARES ===
 
-function getOrCreateSheet() {
+function timestamp() {
+  return new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
+}
+
+function resposta(status, message) {
+  return ContentService
+    .createTextOutput(JSON.stringify({ status, message }))
+    .setMimeType(ContentService.MimeType.JSON)
+}
+
+function getOrCreateSheet(nome, headers) {
   const ss = SpreadsheetApp.getActiveSpreadsheet()
-  let sheet = ss.getSheetByName(NOME_PLANILHA)
+  let sheet = ss.getSheetByName(nome)
 
   if (!sheet) {
-    sheet = ss.insertSheet(NOME_PLANILHA)
-    // Cria cabeçalhos
-    const headers = [
-      'Timestamp', 'Nome', 'Email', 'WhatsApp', 'Estado',
-      'Atividade', 'Faturamento', 'Hectares', 'Desafios',
-      'Gestão', 'Filhos', 'Situação Filhos', 'Conflito',
-      'Dívidas', 'Investimento', 'Urgência', 'Consultor',
-      'Expectativa', 'Origem', 'Score', 'Nível',
-      'UTM Source', 'UTM Medium', 'UTM Campaign'
-    ]
+    sheet = ss.insertSheet(nome)
     sheet.getRange(1, 1, 1, headers.length).setValues([headers])
 
-    // Formata cabeçalho
     const headerRange = sheet.getRange(1, 1, 1, headers.length)
     headerRange.setFontWeight('bold')
-    headerRange.setBackground('#1B3A4B') // navy
+    headerRange.setBackground('#1E4D7B')
     headerRange.setFontColor('#FFFFFF')
     sheet.setFrozenRows(1)
-
-    // Ajusta largura das colunas
-    sheet.setColumnWidth(1, 160) // Timestamp
-    sheet.setColumnWidth(2, 200) // Nome
-    sheet.setColumnWidth(3, 220) // Email
-    sheet.setColumnWidth(4, 150) // WhatsApp
   }
 
   return sheet
 }
 
-function enviarNotificacao(data) {
+// === NOTIFICAÇÕES ===
+
+function enviarNotificacaoDiagnostico(data) {
   const score = data.score || 0
   const level = data.qualificationLevel || 'não calculado'
   const primeiroNome = (data.nome || 'Lead').split(' ')[0]
 
-  // Emoji e cor baseado no nível
   const nivelInfo = {
-    verde: { emoji: '🟢', label: 'QUENTE', prioridade: 'ALTA' },
-    amarelo: { emoji: '🟡', label: 'MORNO', prioridade: 'MÉDIA' },
-    laranja: { emoji: '🟠', label: 'FRIO', prioridade: 'BAIXA' },
-    vermelho: { emoji: '🔴', label: 'MUITO FRIO', prioridade: 'BAIXA' },
+    verde:    { emoji: '🟢', label: 'QUENTE',     prioridade: 'ALTA' },
+    amarelo:  { emoji: '🟡', label: 'MORNO',      prioridade: 'MÉDIA' },
+    laranja:  { emoji: '🟠', label: 'FRIO',       prioridade: 'BAIXA' },
+    vermelho: { emoji: '🔴', label: 'MUITO FRIO',  prioridade: 'BAIXA' },
   }
 
   const info = nivelInfo[level] || { emoji: '⚪', label: level, prioridade: '?' }
 
-  const subject = `${info.emoji} Novo Lead Diagnóstico: ${primeiroNome} (${info.label} - Score ${score})`
-
-  const body = `
-Novo lead recebido via Diagnóstico Gratuito!
+  MailApp.sendEmail({
+    to: EMAIL_NOTIFICACAO,
+    subject: `${info.emoji} Novo Diagnóstico: ${primeiroNome} (${info.label} - Score ${score})`,
+    body: `
+Novo lead via Diagnóstico Gratuito!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${info.emoji} QUALIFICAÇÃO: ${info.label} (Score: ${score}/155)
 Prioridade de contato: ${info.prioridade}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📋 DADOS DO LEAD
+📋 DADOS
 Nome: ${data.nome}
 Email: ${data.email}
 WhatsApp: ${data.whatsapp}
@@ -171,33 +230,47 @@ Filhos/herdeiros: ${data.filhos}
 Situação: ${data.situacaoFilhos}
 Conflito familiar: ${data.conflito}
 
-⏰ URGÊNCIA & EXPECTATIVA
+⏰ URGÊNCIA
 Urgência: ${data.urgencia}
-Já trabalhou com consultor: ${data.consultor}
+Consultor anterior: ${data.consultor}
 Expectativa: ${data.expectativa}
 
 📌 TRACKING
 Origem: ${data.origem}
 UTM: ${data.utm_source || '-'} / ${data.utm_medium || '-'} / ${data.utm_campaign || '-'}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-Acesse a planilha completa de leads no Google Sheets.
-  `.trim()
-
-  MailApp.sendEmail({
-    to: EMAIL_NOTIFICACAO,
-    subject: subject,
-    body: body,
+    `.trim(),
   })
 }
 
-// === FUNÇÃO DE TESTE ===
-// Rode esta função manualmente para testar
-function testarScript() {
-  const mockEvent = {
+function enviarNotificacaoContato(data) {
+  const primeiroNome = (data.nome || 'Lead').split(' ')[0]
+
+  MailApp.sendEmail({
+    to: EMAIL_NOTIFICACAO,
+    subject: `📩 Novo Contato: ${primeiroNome} — ${data.interesse || 'Geral'}`,
+    body: `
+Novo contato recebido pelo site!
+
+Nome: ${data.nome}
+Email: ${data.email}
+Telefone: ${data.telefone}
+Cidade/UF: ${data.cidade}/${data.estado}
+Interesse: ${data.interesse}
+
+Detalhes:
+${data.detalhes || '(não informado)'}
+    `.trim(),
+  })
+}
+
+// === TESTES ===
+
+function testarDiagnostico() {
+  const result = doPost({
     postData: {
       contents: JSON.stringify({
-        nome: 'TESTE Manual',
+        _tipo: 'diagnostico',
+        nome: 'TESTE Diagnóstico',
         email: 'teste@fluxorural.com.br',
         whatsapp: '(43) 99999-0000',
         estado: 'PR',
@@ -217,10 +290,40 @@ function testarScript() {
         origem: 'teste-manual',
         score: 85,
         qualificationLevel: 'amarelo',
-      })
-    }
-  }
+      }),
+    },
+  })
+  Logger.log(result.getContent())
+}
 
-  const result = doPost(mockEvent)
+function testarContato() {
+  const result = doPost({
+    postData: {
+      contents: JSON.stringify({
+        _tipo: 'contato',
+        nome: 'TESTE Contato',
+        email: 'teste@fluxorural.com.br',
+        telefone: '(43) 99999-0000',
+        cidade: 'Londrina',
+        estado: 'PR',
+        interesse: 'Consultoria em Gestão Financeira',
+        detalhes: 'Quero saber mais sobre o serviço.',
+      }),
+    },
+  })
+  Logger.log(result.getContent())
+}
+
+function testarNewsletter() {
+  const result = doPost({
+    postData: {
+      contents: JSON.stringify({
+        _tipo: 'newsletter',
+        nome: 'TESTE Newsletter',
+        email: 'teste-news@fluxorural.com.br',
+        fonte: 'footer',
+      }),
+    },
+  })
   Logger.log(result.getContent())
 }

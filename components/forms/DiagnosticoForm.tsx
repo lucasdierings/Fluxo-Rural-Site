@@ -261,6 +261,7 @@ export function DiagnosticoForm() {
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          _tipo: 'diagnostico',
           ...form,
           desafios: form.desafios.join(', '),
           origem: utmParams.utm_source ? `ads-${utmParams.utm_source}` : 'diagnostico-gratis',
