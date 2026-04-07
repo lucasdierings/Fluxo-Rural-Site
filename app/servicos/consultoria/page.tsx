@@ -4,10 +4,16 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Search, FileText, Cog, TrendingUp, Check, ArrowRight } from 'lucide-react'
+import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Consultoria em Gestão e Inovação',
   description: 'Diagnóstico, planejamento estratégico e acompanhamento para propriedades e empresas do agronegócio. Consultoria com Lucas Dierings em Londrina, PR.',
+  openGraph: {
+    title: 'Consultoria em Gestão e Inovação | Fluxo Rural',
+    description: 'Diagnóstico, planejamento estratégico e acompanhamento para propriedades e empresas do agronegócio.',
+    images: [{ url: '/images/gestao-blog.png' }],
+  },
 }
 
 const phases = [
@@ -58,6 +64,7 @@ export default function ConsultoriaPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos' }, { label: 'Consultoria' }]} />
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
         <Image src="/images/gestao-blog.png" alt="Consultoria em gestão no agronegócio" fill className="object-cover" priority />

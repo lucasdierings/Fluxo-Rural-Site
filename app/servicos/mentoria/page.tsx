@@ -3,10 +3,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { MessageSquare, FileCheck, Handshake, ArrowRight, Quote } from 'lucide-react'
+import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Mentoria para Sucessão Familiar',
   description: 'Programa de mentoria para planejar e executar a transição geracional na propriedade rural com segurança e clareza.',
+  openGraph: {
+    title: 'Mentoria para Sucessão Familiar | Fluxo Rural',
+    description: 'Planeje a transição geracional com segurança. 70% das fazendas não sobrevivem à 2ª geração — mude essa estatística.',
+    images: [{ url: '/images/sucessao-blog.png' }],
+  },
 }
 
 const steps = [
@@ -23,6 +29,7 @@ const testimonials = [
 export default function MentoriaPage() {
   return (
     <>
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos' }, { label: 'Mentoria Sucessão' }]} />
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
         <Image src="/images/sucessao-blog.png" alt="Pai e filho na fazenda ao pôr do sol" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />

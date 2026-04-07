@@ -4,10 +4,16 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Check, ArrowRight } from 'lucide-react'
+import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Gestão Financeira Rural',
   description: 'Fluxo de caixa, custos operacionais e análise de rentabilidade de safra. Gestão financeira rural com Lucas Dierings — Fluxo Rural Consultoria.',
+  openGraph: {
+    title: 'Gestão Financeira Rural | Fluxo Rural',
+    description: 'Clareza financeira para decisões mais seguras no campo. Fluxo de caixa, custos e rentabilidade.',
+    images: [{ url: '/images/gestao-blog.png' }],
+  },
 }
 
 const includes = [
@@ -51,6 +57,7 @@ export default function FinanceiroPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos' }, { label: 'Gestão Financeira' }]} />
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
         <Image src="/images/gestao-blog.png" alt="Gestão financeira rural" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />

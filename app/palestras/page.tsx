@@ -31,23 +31,11 @@ export default function PalestrasPage() {
     <>
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[400px] max-h-[550px] flex items-end">
-        <Image src="/lucas-palestrante.JPG" alt="Lucas Dierings palestrando" fill className="object-cover object-[center_20%]" priority />
+        <Image src="/lucas-palestrante.jpg" alt="Lucas Dierings palestrando" fill className="object-cover object-[center_20%]" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10 pb-12">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Palestras e Workshops</h1>
           <p className="text-white/80 text-xl">Conteúdo aplicado, linguagem do campo, resultados na prática.</p>
-        </div>
-      </section>
-
-      {/* YouTube placeholder */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
-          <div className="bg-navy/5 rounded-2xl aspect-video flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-navy/50 text-lg font-medium">Video Reel em Breve</p>
-              <p className="text-navy/30 text-sm mt-2">Destaques das palestras e eventos</p>
-            </div>
-          </div>
         </div>
       </section>
 

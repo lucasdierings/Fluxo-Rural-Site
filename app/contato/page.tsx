@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Mail, MapPin, Clock, MessageCircle, Linkedin } from 'lucide-react'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { Button } from '@/components/ui/button'
+import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Contato',
@@ -20,7 +21,8 @@ export default function ContatoPage() {
 
   return (
     <>
-      <section className="pt-32 pb-20 bg-off-white">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contato' }]} />
+      <section className="pb-20 bg-off-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-14">
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy mb-4">

@@ -7,16 +7,19 @@ const testimonials = [
   {
     name: 'Carlos M.',
     role: 'Produtor Rural — Maringá, PR',
+    service: 'Gestão Financeira',
     text: 'A consultoria do Lucas transformou a gestão financeira da minha propriedade. Hoje tenho clareza total dos meus números e consigo planejar as safras com segurança.',
   },
   {
     name: 'Ana Paula R.',
     role: 'Gestora — Fazenda Santa Rita, MT',
+    service: 'Mentoria Sucessão',
     text: 'O processo de mentoria para sucessão familiar foi essencial para alinhar as expectativas da família e criar um plano concreto de transição. Recomendo demais.',
   },
   {
     name: 'Roberto S.',
     role: 'Diretor de Cooperativa — Cascavel, PR',
+    service: 'Palestra',
     text: 'A palestra sobre inovação no agro trouxe insights práticos que já estamos aplicando na cooperativa. Lucas tem uma didática excelente e domina o conteúdo.',
   },
 ]
@@ -50,7 +53,12 @@ export default function Testimonials() {
               transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
               className="glass-card-dark rounded-3xl p-8 hover:bg-white/15 transition-smooth hover:scale-105 shadow-apple-sm"
             >
-              <Quote className="text-dourado mb-6" size={36} />
+              <div className="flex items-center justify-between mb-6">
+                <Quote className="text-dourado" size={36} />
+                <span className="text-xs font-medium text-dourado/80 bg-dourado/10 px-3 py-1 rounded-full">
+                  {t.service}
+                </span>
+              </div>
               <p className="text-white/85 leading-relaxed mb-8 text-base md:text-lg font-light">
                 &ldquo;{t.text}&rdquo;
               </p>

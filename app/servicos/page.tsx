@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BarChart2, DollarSign, Users, Mic2, ArrowRight } from 'lucide-react'
+import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Serviços',
@@ -62,7 +63,8 @@ export default function ServicosPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="pt-32 pb-20 bg-off-white">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços' }]} />
+      <section className="pb-20 bg-off-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy mb-4">
