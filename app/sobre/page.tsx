@@ -54,7 +54,7 @@ const timeline = [
   {
     year: 'Atual',
     title: 'Fundador e Consultor Principal',
-    text: 'Fluxo Rural Consultoria — Londrina, PR',
+    text: 'Fluxo Rural Consultoria — Londrina e Curitiba, PR',
   },
 ]
 

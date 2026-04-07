@@ -4,6 +4,11 @@ import matter from 'gray-matter'
 
 const contentDirectory = path.join(process.cwd(), 'content/blog')
 
+export interface FAQ {
+  question: string
+  answer: string
+}
+
 export interface BlogPost {
   slug: string
   title: string
@@ -13,6 +18,7 @@ export interface BlogPost {
   readingTime: number
   excerpt: string
   content: string
+  faqs?: FAQ[]
 }
 
 export function getAllPosts(): BlogPost[] {
@@ -47,6 +53,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     readingTime: data.readingTime || 5,
     excerpt: data.excerpt || content.slice(0, 160).replace(/[#*\n]/g, '') + '...',
     content,
+    faqs: data.faqs || undefined,
   }
 }
 

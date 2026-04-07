@@ -22,7 +22,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/60 via-60% to-transparent" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-24 md:pt-24 pb-16 md:pb-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 md:pt-24 pb-16 md:pb-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Texto */}
           <motion.div
@@ -31,26 +31,6 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center lg:text-left"
           >
-            {/* Foto circular no mobile */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="lg:hidden flex justify-center mb-6"
-            >
-              <div className="relative w-32 h-32 sm:w-40 sm:h-40">
-                <div className="absolute inset-0 rounded-full border-3 border-dourado/60 shadow-apple-lg overflow-hidden">
-                  <Image
-                    src="/images/lucas-hero.jpg"
-                    alt="Lucas Dierings — Engenheiro Agrônomo e Consultor"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </div>
-            </motion.div>
-
             <motion.span
               className="inline-block bg-verde-folha/90 text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-full mb-6 backdrop-blur-sm"
               initial={{ opacity: 0, y: 20 }}
@@ -60,7 +40,11 @@ export default function Hero() {
               Engenheiro Agrônomo | Consultor | Palestrante
             </motion.span>
 
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1] mb-6">
+            <p className="text-dourado font-heading text-xl sm:text-2xl md:text-3xl font-bold mb-2">
+              Lucas Dierings
+            </p>
+
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6">
               Gestão, Inovação e Sucessão no Agronegócio
             </h1>
 
@@ -83,7 +67,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Foto desktop */}
+          {/* Foto */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

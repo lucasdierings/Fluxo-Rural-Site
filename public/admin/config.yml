@@ -1,0 +1,89 @@
+backend:
+  name: github
+  repo: lucasdierings/Fluxo-Rural-Site
+  branch: main
+  base_url: https://fluxorural.com.br
+  auth_endpoint: /api/auth
+
+publish_mode: editorial_workflow
+media_folder: public/images
+public_folder: /images
+
+locale: pt
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  - name: blog
+    label: Blog
+    folder: content/blog
+    create: true
+    extension: mdx
+    format: frontmatter
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    sortable_fields: [date, title]
+    fields:
+      - label: Título
+        name: title
+        widget: string
+        pattern: ['.{10,70}', 'Título deve ter entre 10 e 70 caracteres']
+
+      - label: Data de Publicação
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'DD/MM/YYYY'
+        time_format: false
+
+      - label: Categoria
+        name: category
+        widget: select
+        options:
+          - Finanças
+          - Sucessão Familiar
+          - IA no Agro
+          - Gestão
+          - Inovação
+          - Mercado
+
+      - label: Imagem de Capa
+        name: coverImage
+        widget: image
+        allow_multiple: false
+        media_folder: /public/images
+        public_folder: /images
+
+      - label: Tempo de Leitura (minutos)
+        name: readingTime
+        widget: number
+        default: 5
+        min: 1
+        max: 30
+
+      - label: Resumo (SEO)
+        name: excerpt
+        widget: text
+        pattern: ['.{50,160}', 'Resumo deve ter entre 50 e 160 caracteres para SEO']
+
+      - label: Perguntas Frequentes (FAQ)
+        name: faqs
+        widget: list
+        required: false
+        label_singular: Pergunta
+        summary: '{{fields.question}}'
+        fields:
+          - label: Pergunta
+            name: question
+            widget: string
+          - label: Resposta
+            name: answer
+            widget: text
+
+      - label: Conteúdo
+        name: body
+        widget: markdown

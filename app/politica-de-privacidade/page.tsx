@@ -15,7 +15,7 @@ export default function PoliticaPage() {
 
           <h2>1. Responsável pelo Tratamento</h2>
           <p>
-            Fluxo Rural Consultoria, CNPJ a definir, com sede em Londrina, Paraná — Brasil, representada por Lucas Dierings, é responsável pelo tratamento dos dados pessoais coletados neste site.
+            Fluxo Rural Consultoria, CNPJ a definir, com sede em Curitiba, Paraná — Brasil, representada por Lucas Dierings, é responsável pelo tratamento dos dados pessoais coletados neste site.
           </p>
 
           <h2>2. Dados Coletados</h2>
@@ -52,8 +52,8 @@ export default function PoliticaPage() {
 
           <h2>8. Contato</h2>
           <p>Para dúvidas sobre esta política, entre em contato:<br />
-            E-mail: lucas@fluxorural.com.br<br />
-            Localização: Londrina, PR — Brasil</p>
+            E-mail: contato@fluxorural.com.br<br />
+            Localização: Curitiba, PR — Brasil</p>
         </div>
       </div>
     </section>

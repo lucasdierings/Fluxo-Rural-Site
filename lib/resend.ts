@@ -33,7 +33,7 @@ export function buildContactEmailHtml(data: ContactEmailProps): string {
         </div>
       </div>
       <div style="background: #1E4D7B; padding: 20px; text-align: center;">
-        <p style="color: #FFFFFF; margin: 0; font-size: 12px;">Fluxo Rural Consultoria | Londrina, PR — Brasil</p>
+        <p style="color: #FFFFFF; margin: 0; font-size: 12px;">Fluxo Rural Consultoria | Curitiba, PR — Brasil</p>
       </div>
     </div>
   `
@@ -56,7 +56,7 @@ export function buildWelcomeEmailHtml(nome?: string): string {
         </p>
       </div>
       <div style="background: #1E4D7B; padding: 20px; text-align: center;">
-        <p style="color: #FFFFFF; margin: 0; font-size: 12px;">Fluxo Rural Consultoria | Londrina, PR — Brasil</p>
+        <p style="color: #FFFFFF; margin: 0; font-size: 12px;">Fluxo Rural Consultoria | Curitiba, PR — Brasil</p>
       </div>
     </div>
   `

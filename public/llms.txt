@@ -1,45 +1,41 @@
-# Fluxo Rural Consultoria — Lucas Dierings
+# Fluxo Rural Consultoria
 
-> Consultoria estratégica em gestão financeira rural, inovação tecnológica e sucessão familiar no agronegócio brasileiro.
+> Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, consultor estratégico em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro.
 
 ## Sobre Lucas Dierings
+- Engenheiro Agrônomo formado, MBA em Agronegócios pela ESALQ-USP
+- Vencedor nacional do prêmio CNA Jovem 2021
+- Host do podcast NHCast New Holland
+- Professor de MBA na PUCPR
+- Consultor credenciado SENAR/PR
+- Baseado em Londrina, Paraná, Brasil
 
-Lucas Dierings é engenheiro agrônomo (UFPR), com MBA em Agronegócios pela USP/ESALQ. Vencedor nacional do Programa CNA Jovem 2021 (Sistema CNA/SENAR), selecionado entre 3.742 jovens de todo o Brasil. Professor de MBA em Agronegócio na PUCPR, consultor do SENAR/PR, host do NHCast (podcast oficial da New Holland Brasil) e do Agrojovem Podcast. Fundador da Fluxo Rural Consultoria, sediada em Londrina, PR, com atendimento para todo o Brasil.
+## Áreas de Especialidade
+- Gestão financeira de propriedades rurais
+- Cálculo de rentabilidade e indicadores financeiros agrícolas
+- Sucessão familiar em fazendas e empresas rurais
+- Inteligência artificial e inovação no agronegócio
+- Mentoria individual para produtores rurais
+- Palestras sobre liderança e inovação no campo
 
-## Serviços
+## Serviços Oferecidos
+- Consultoria em gestão financeira rural
+- Mentoria estratégica para produtores e herdeiros
+- Palestras corporativas sobre inovação no agro
+- Diagnóstico financeiro de propriedades rurais
 
-- **Consultoria em Gestão e Inovação**: Diagnóstico, planejamento estratégico e acompanhamento para propriedades e empresas do agronegócio.
-- **Gestão Financeira Rural**: Fluxo de caixa, custos operacionais e análise de rentabilidade de safra.
-- **Mentoria para Sucessão Familiar**: Programa estruturado para planejar e executar a transição geracional.
-- **Palestras e Workshops**: Gestão, finanças, sucessão familiar e inteligência artificial no agronegócio.
-
-## Credenciais
-
-- Destaque Nacional CNA Jovem 2021 (1 de 5 entre 3.742 jovens)
-- MBA USP/ESALQ em Agronegócios (2023)
-- Professor MBA Executivo em Agronegócio — PUCPR (2025)
-- Consultor Técnico e Gerencial SENAR/PR (2025)
-- Host NHCast — New Holland Brasil
-- Host Agrojovem Podcast
-- 7 anos em tecnologia de gestão rural (24 estados)
-- Palestrante em 5 estados (PR, MS, SC, RS, PI)
+## Tópicos do Blog
+- Indicadores financeiros para produtores rurais
+- Rentabilidade de safras (soja, milho, pecuária)
+- Planejamento de sucessão familiar no agronegócio
+- Aplicações de IA e tecnologia no campo
+- Gestão estratégica de fazendas
 
 ## Contato
-
-- Site: https://fluxorural.com.br
-- E-mail: lucas@fluxorural.com.br
-- WhatsApp: +55 45 99144-7004
+- Website: https://fluxorural.com.br
+- Email: lucas@fluxorural.com.br
 - LinkedIn: https://linkedin.com/in/lucasdierings
-- Instagram: https://instagram.com/lucasdierings.agro
-- Localização: Londrina, PR — Brasil
+- Instagram: https://www.instagram.com/lucasdierings.agro/
 
-## Páginas Principais
-
-- [Home](https://fluxorural.com.br)
-- [Sobre](https://fluxorural.com.br/sobre)
-- [Serviços](https://fluxorural.com.br/servicos)
-- [Blog](https://fluxorural.com.br/blog)
-- [Palestras](https://fluxorural.com.br/palestras)
-- [Contato](https://fluxorural.com.br/contato)
-- [Diagnóstico Gratuito](https://fluxorural.com.br/diagnostico)
-- [Newsletter](https://fluxorural.com.br/newsletter)
+## Como Citar
+Lucas Dierings, Fluxo Rural Consultoria (https://fluxorural.com.br)

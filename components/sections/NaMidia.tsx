@@ -21,7 +21,7 @@ export default function NaMidia() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto items-stretch">
           {/* CNA Jovem */}
           <motion.a
             href="https://cnabrasil.org.br/noticias/cna-jovem-anuncia-vencedores-da-quarta-edicao"
@@ -30,9 +30,9 @@ export default function NaMidia() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-xl overflow-hidden group bg-white shadow-lg block"
+            className="rounded-xl overflow-hidden group bg-white shadow-lg block flex flex-col"
           >
-            <div className="relative h-48 overflow-hidden">
+            <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
                 src="/images/cna-jovem-senar.jpeg"
                 alt="Lucas Dierings — Destaque Nacional CNA Jovem 2021"
@@ -40,14 +40,14 @@ export default function NaMidia() {
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-white flex-1">
               <span className="bg-dourado text-carvao text-xs font-semibold px-3 py-1 rounded-full">
                 Destaque Nacional
               </span>
-              <h3 className="font-heading text-navy font-bold text-base mt-2 leading-snug">
+              <h3 className="font-heading text-navy font-bold text-lg mt-2">
                 CNA Jovem — Sistema CNA/SENAR
               </h3>
-              <p className="text-carvao/70 text-sm mt-1">
+              <p className="text-carvao/70 text-sm">
                 Um dos 5 vencedores nacionais entre 3.742 jovens do agronegócio em 2021
               </p>
             </div>
@@ -62,9 +62,9 @@ export default function NaMidia() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="rounded-xl overflow-hidden group bg-white shadow-lg block"
+            className="rounded-xl overflow-hidden group bg-white shadow-lg block flex flex-col"
           >
-            <div className="relative h-48 overflow-hidden bg-white flex items-center justify-center">
+            <div className="relative h-48 overflow-hidden flex-shrink-0 bg-white flex items-center justify-center p-6">
               <Image
                 src="/images/nh-cast-logo-azul-fundo-branco.png"
                 alt="NHCast — New Holland Brasil"
@@ -73,14 +73,14 @@ export default function NaMidia() {
                 className="object-contain group-hover:scale-110 transition-transform duration-500"
               />
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-white flex-1">
               <span className="bg-dourado text-carvao text-xs font-semibold px-3 py-1 rounded-full">
                 Host
               </span>
-              <h3 className="font-heading text-navy font-bold text-base mt-2 leading-snug">
+              <h3 className="font-heading text-navy font-bold text-lg mt-2">
                 NHCast — New Holland Brasil
               </h3>
-              <p className="text-carvao/70 text-sm mt-1">
+              <p className="text-carvao/70 text-sm">
                 Podcast oficial da maior fabricante de máquinas agrícolas
               </p>
             </div>
@@ -95,9 +95,9 @@ export default function NaMidia() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="rounded-xl overflow-hidden group bg-white shadow-lg block"
+            className="rounded-xl overflow-hidden group bg-white shadow-lg block flex flex-col"
           >
-            <div className="relative h-48 overflow-hidden">
+            <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
                 src="/images/lucas-podcast.jpg"
                 alt="Lucas Dierings no Agrojovem Podcast"
@@ -105,7 +105,7 @@ export default function NaMidia() {
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="p-4">
+            <div className="p-4 bg-white flex-1">
               <div className="mb-2">
                 <Image
                   src="/images/logo-agrojovem.png"
@@ -115,47 +115,46 @@ export default function NaMidia() {
                   className="object-contain"
                 />
               </div>
-              <span className="bg-verde-folha text-white text-xs font-semibold px-3 py-1 rounded-full">
-                Podcast
-              </span>
-              <h3 className="font-heading text-navy font-bold text-base mt-2 leading-snug">
+              <h3 className="font-heading text-navy font-bold text-lg">
                 Agrojovem Podcast
               </h3>
-              <p className="text-carvao/70 text-sm mt-1">
+              <p className="text-carvao/70 text-sm">
                 Compartilhando conhecimento com produtores de todo o Brasil
               </p>
             </div>
           </motion.a>
 
           {/* JCI */}
-          <motion.div
+          <motion.a
+            href="https://www.jci.cc/"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="relative rounded-xl overflow-hidden group"
+            className="rounded-xl overflow-hidden group bg-white shadow-lg block flex flex-col"
           >
-            <div className="relative h-full min-h-[320px]">
+            <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
-                src="/images/lucas-discurso-jci.jpg"
-                alt="Lucas Dierings — JCI Junior Chamber International"
+                src="/images/Lucas discurso JCI.JPG"
+                alt="Lucas Dierings — JCI"
                 fill
                 className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/90 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <span className="bg-navy text-white text-xs font-semibold px-3 py-1 rounded-full">
-                  Liderança
-                </span>
-                <h3 className="font-heading text-white font-bold text-base mt-2 leading-snug">
-                  JCI — Junior Chamber International
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed mt-1">
-                  Membro da JCI, organização presente em mais de 120 países para desenvolvimento de jovens líderes.
-                </p>
-              </div>
             </div>
-          </motion.div>
+            <div className="p-4 bg-white flex-1">
+              <span className="bg-navy text-white text-xs font-semibold px-3 py-1 rounded-full">
+                Liderança
+              </span>
+              <h3 className="font-heading text-navy font-bold text-lg mt-2">
+                JCI — Junior Chamber International
+              </h3>
+              <p className="text-carvao/70 text-sm">
+                Membro da JCI, organização presente em mais de 120 países para desenvolvimento de jovens líderes.
+              </p>
+            </div>
+          </motion.a>
         </div>
       </div>
     </section>

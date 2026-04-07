@@ -92,7 +92,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/50 text-sm">
-            &copy; 2026 Fluxo Rural Consultoria | Londrina, PR — Brasil
+            &copy; 2026 Fluxo Rural Consultoria | Curitiba, PR — Brasil
           </p>
           <Link
             href="/politica-de-privacidade"

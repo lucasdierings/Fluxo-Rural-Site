@@ -1,137 +1,112 @@
 # Fluxo Rural: Contexto do Projeto
 
 ## Sobre Lucas Dierings
-- Engenheiro Agrônomo (UFPR), MBA Agronegócios USP/ESALQ (2023)
-- Consultor estratégico, palestrante, professor MBA PUCPR (2025)
-- Consultor SENAR/PR (2025), host NHCast (New Holland) + Agrojovem Podcast
-- Destaque Nacional CNA Jovem 2021 (1 de 5 entre 3.742 jovens)
-- 7 anos em software de gestão rural (24 estados)
-- Baseado em Londrina, PR
-- Email: lucas@fluxorural.com.br
-- WhatsApp: +55 45 99144-7004
-- LinkedIn: linkedin.com/in/lucasdierings
-- Instagram: instagram.com/lucasdierings.agro
+- **Agronomo, consultor rural, podcast host (NHCast + AgroJovem Podcast)**
+- Especialista em: Gestao financeira, sucessao familiar, inovacao em agronegocio
+- **Lucas pessoalmente:** Baseado em Londrina, Parana
+- **Empresa (Fluxo Rural Consultoria):** Sede em Curitiba, PR (documentos, contratos, termos de uso)
+- Email pessoal: lucas@fluxorural.com.br
+- Email empresa/contato: contato@fluxorural.com.br
+- WhatsApp: 5545991447004
 
 ---
 
-## Stack Técnica
-- **Framework:** Next.js 16.2.1 (App Router, static export)
-- **Linguagem:** TypeScript 5.7.2
-- **Styling:** Tailwind CSS 3.4.17 + Radix UI + Framer Motion 11.15
-- **Fontes:** Plus Jakarta Sans (headings) + Inter (body)
-- **Forms:** React Hook Form + Zod + Google Apps Script (no-cors)
-- **Email:** Resend (API) + Typeform (newsletter footer)
-- **Blog:** MDX (next-mdx-remote) — conteúdo ainda não publicado
-- **Analytics:** Google Analytics 4 (@next/third-parties)
-- **SEO:** next-sitemap, JSON-LD (Person, ProfessionalService, WebSite, FAQPage, Article)
-- **Deployment:** Cloudflare Pages (static export)
-- **Repo:** github.com/lucasdierings/fluxo-rural-site (privado)
+## Projeto Atual: Site Fluxo Rural
+**Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn/ui, MDX
+**Deployment:** Cloudflare Pages (static export com `output: 'export'` + `trailingSlash: true`)
+**Email:** Resend + MailerLite (newsletter)
+**Repo:** github.com/lucasdierings/Fluxo-Rural-Site (privado)
 
 ### Brand Colors
-| Nome | Hex | Uso |
-|------|-----|-----|
-| Navy | `#1E4D7B` | Primary, headers, navbar |
-| Verde Folha | `#7AB648` | CTAs, badges, destaque |
-| Dourado | `#E8B84B` | Acentos, ícones, hover |
-| Verde Escuro | `#1B4332` | Seções escuras |
-| Off-White | `#F8F6F1` | Backgrounds claros |
-| Carvão | `#1C1C1C` | Texto body |
+- Primary Blue (navy): `#1E4D7B`
+- Leaf Green (verde-folha): `#7AB648`
+- Gold Yellow (dourado): `#E8B84B`
+- Dark Green: `#1B4332`
 
 ---
 
-## Estrutura de Páginas
-| Rota | Descrição |
-|------|-----------|
-| `/` | Homepage (Hero + TrustBar + Services + Credentials + ContentCTA + Blog + NaMidia + Testimonials + FinalCTA) |
-| `/sobre` | Biografia, timeline, credenciais, valores, mídia |
-| `/servicos` | Grid de 4 serviços |
-| `/servicos/consultoria` | Consultoria em Gestão — fases, resultados, FAQ |
-| `/servicos/financeiro` | Gestão Financeira Rural — inclui, FAQ |
-| `/servicos/mentoria` | Mentoria Sucessão Familiar — passos, depoimentos |
-| `/servicos/palestras` | Redirect para /palestras |
-| `/palestras` | Palestras — temas, podcast, como contratar |
-| `/blog` | Listagem com busca e filtro por categoria |
-| `/blog/[slug]` | Post individual (MDX) |
-| `/contato` | Formulário + sidebar (email, WhatsApp, LinkedIn) |
-| `/diagnostico` | Formulário 2-step com scoring inteligente |
-| `/newsletter` | Inscrição com nome + email + LGPD |
-| `/politica-de-privacidade` | Política LGPD |
+## Arquitetura do Blog
+
+### CMS: Decap CMS (Git-based)
+- Editor visual em `/admin` (public/admin/index.html + config.yml)
+- Commits direto no GitHub, Cloudflare rebuilda automaticamente
+- **OAuth:** Cloudflare Functions em `functions/api/auth.js` + `functions/api/callback.js`
+- **REQUER:** Variaveis de ambiente no Cloudflare Pages: `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET`
+- **REQUER:** GitHub OAuth App criada em github.com/settings/developers (Homepage URL + Callback URL = https://fluxorural.com.br)
+- `_routes.json` em public/ limita Functions apenas a `/api/*` (preserva static requests gratuitos)
+- **IMPORTANTE:** O script `decap-cms.js` DEVE ficar no `<body>`, NAO no `<head>`. No `<head>` causa erro `appendChild null` porque o DOM ainda nao existe
+- Schema: titulo, data, categoria, imagem, readingTime, excerpt, FAQs opcionais, conteudo markdown
+
+### Posts MDX
+- Diretorio: `content/blog/`
+- Parsed por `lib/mdx.ts` (getAllPosts, getPostBySlug, getAllCategories)
+- Interface BlogPost: slug, title, date, category, coverImage, readingTime, excerpt, content, faqs?
+- Blog listing (`app/blog/page.tsx`) usa `getAllPosts()` dinamicamente (server component)
+- Filtro/busca client-side em `components/blog/BlogList.tsx`
+
+### SEO e Otimizacoes para IA
+- **JSON-LD global:** Person, ProfessionalService, WebSite (em `app/layout.tsx`)
+- **JSON-LD por artigo:** Article (completo), BreadcrumbList, FAQPage condicional (em `app/blog/[slug]/page.tsx`)
+- **llms.txt:** `public/llms.txt` para discoverability por LLMs
+- **robots.txt:** Permite GPTBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot-Extended, ChatGPT-User
+- **Sitemap:** next-sitemap (postbuild), exclui /api/* e /admin
+- **FAQ Schema:** Campo opcional `faqs` no frontmatter MDX, gera FAQPage JSON-LD + acordeoes visuais
+
+### Cloudflare Pages
+- `trailingSlash: true` no next.config.js (OBRIGATORIO - sem isso da 404 nos posts)
+- `_headers` em public/ com security headers
+- Static export: `output: 'export'`, `images.unoptimized: true`
 
 ---
 
-## Formulários e Integrações
-- **ContactForm** → Google Apps Script (POST no-cors) → Google Sheets + email notificação
-- **DiagnosticoForm** → Google Apps Script (POST no-cors) → Sheets com score + UTM tracking
-- **NewsletterForm (footer/inline)** → Abre Typeform (mOomZZiC) em nova aba
-- **NewsletterPage** → Google Apps Script direto (nome + email + LGPD)
-- **SCRIPT_URL:** `https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec`
+## Diagnostico Inteligente (/diagnostico)
 
-### Sistema de Scoring do Diagnóstico (backend only)
-- Score: 0-150 pontos (NÃO mostrado ao usuário)
-- Qualificação: verde (100+) / amarelo (70-99) / laranja (40-69) / vermelho (<40)
-- Enviado para Google Sheets com UTM params
+### Status: CONCLUIDO (formulario + scoring)
+- Formulario 2-step: Identificacao (nome, email, whatsapp, estado) + Pre-diagnostico (17 campos)
+- Scoring 0-150 pontos (backend only, user nao ve)
+- Qualificacao: Verde/Amarelo/Laranja/Vermelho (enviado pro Google Sheets)
+- UTM tracking no formulario
+- Apps Script com notificacao por email
+
+### Integracao
+- Google Apps Script: recebe dados do formulario + scoring + UTM
+- Script URL configurada nos formularios (contato + diagnostico)
 
 ---
 
-## Histórico de Sessões
+## Formularios e APIs
+- `/api/contact` — formulario de contato (Resend)
+- `/api/newsletter` — newsletter (MailerLite + Resend welcome email)
+- Formulario de diagnostico envia direto pro Google Apps Script (client-side)
 
-### Sessão 1-6 (mar/2025) — Construção Inicial
-- Site completo criado: todas as páginas, componentes, formulários
-- Design system Apple-style com glassmorphism
-- Diagnóstico inteligente com scoring
-- Integração Google Apps Script
-- UTM tracking nos formulários
-- SEO completo com JSON-LD schemas
+---
 
-### Sessão 7 (31/mar/2026) — Revisão Completa UX/UI/Mobile/SEO
-**Branch:** `claude/review-ux-ui-mobile-zBBVM`
+## Decisoes Tecnicas Importantes
+1. **trailingSlash: true** — Sem isso, Cloudflare Pages retorna 404 em rotas dinamicas como /blog/[slug]
+2. **Blog listing dinamico** — `app/blog/page.tsx` e server component que chama `getAllPosts()`. NÃO usar array hardcoded
+3. **Static export** — Site e 100% estatico. Nao tem SSR. APIs (/api/*) nao funcionam em producao no Cloudflare Pages com static export
+4. **Sempre fazer rebase no main** antes de merge — main pode ter commits de outras sessoes
+5. **async params (Next.js 15+)** — Em rotas dinamicas como [slug], `params` e uma Promise. SEMPRE usar `const { slug } = await params`. Sem isso, params.slug e undefined e a pagina gera 404 silencioso
+6. **Cloudflare Functions** — O diretorio `functions/` na raiz do projeto e detectado automaticamente pelo Cloudflare Pages. `_routes.json` em public/ controla quais rotas passam pelas Functions
+7. **Localizacao empresa vs pessoal** — Curitiba: footer, politica privacidade, contato, emails transacionais, JSON-LD negocio. Londrina: consultoria, diagnostico, TrustBar, SEO, llms.txt. Sobre: citar ambas
+8. **Pagina de contato** — Sidebar so mostra email (contato@fluxorural.com.br), localizacao (Curitiba) e tempo de resposta. Sem WhatsApp/LinkedIn (nao estimula lead a preencher formulario)
 
-**Problemas encontrados e corrigidos:**
-1. **Hero sem foto no mobile** — Foto do Lucas ficava `hidden lg:flex`. Adicionada versão menor (128-160px) no mobile
-2. **NaMidia cards inconsistentes** — Agrojovem transbordava h-72, NHCast com cores erradas sob gradient. Todos uniformizados
-3. **Blog sem metadata SEO** — Page usava `'use client'`, impossível exportar metadata. Criado `app/blog/layout.tsx`
-4. **Canonical hardcoded** — Layout tinha canonical da home em TODAS as páginas. Removido
-5. **robots.txt sem crawlers IA** — Adicionados GPTBot, ClaudeBot, Google-Extended, PerplexityBot, etc.
-6. **llms.txt criado** — Arquivo estruturado para crawlers de IA
-7. **LinkedIn URL inconsistente** — Footer/contato usavam `lucas-dierings`, JSON-LD `lucasdierings`. Padronizado
-8. **Imagem com espaço** — `Lucas discurso JCI.JPG` → `lucas-discurso-jci.jpg`
-9. **ContactForm grid fixo** — cidade/estado era `grid-cols-2` sem breakpoint. Corrigido para responsivo
-10. **Rotas duplicadas** — `/servicos/palestras` agora redireciona para `/palestras`
+---
 
-**Correções adicionais (mesma sessão):**
-11. **Logo branca comprimida** — 5.8MB → 92KB (redimensionada 2048→480px, quantizada 128 cores)
-12. **Apple-touch-icon criado** — 180x180 a partir do icon.png existente
-13. **Newsletter nativa** — Removido Typeform, agora envia direto ao Google Apps Script sem sair do site
-14. **WhatsApp tooltip** — Tooltip "Fale pelo WhatsApp" ao hover no botão flutuante
-15. **Footer otimizado** — Logo com `sizes` e `loading="lazy"`
-16. **Blog posts** — Conteúdo MDX já existia (4 artigos completos), não era placeholder
-
-**Sugestões pendentes:**
-- [ ] Adicionar OG images específicas por página de serviço
-- [ ] Adicionar breadcrumbs nas páginas internas
-- [ ] Substituir placeholder "Video Reel em Breve" na página de palestras
-- [ ] Depoimentos com nomes reais e fotos (credibilidade)
-- [ ] Google Search Console — verificar indexação
+## Pendencias
+- [x] Criar GitHub OAuth App e adicionar GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET no Cloudflare Pages — FEITO
+- [x] Merge branch atual para main e push — FEITO
+- [x] Decap CMS funcionando em producao (fluxorural.com.br/admin/) — FEITO
+- [x] Adicionar nome "Lucas Dierings" no hero da home — FEITO
+- [x] Corrigir secao Na Midia (NHCast bugado, cards irregulares) — FEITO
+- [x] Ajustar localizacao empresa (Curitiba) vs pessoal (Londrina) em todo o site — FEITO
+- [x] Pagina contato: remover WhatsApp/LinkedIn, email para contato@, localizacao Curitiba — FEITO
+- [ ] Aumentar logo Navbar (muito pequeno)
+- [ ] Investigar badge "3 Issues" (canto inferior esquerdo)
+- [ ] Configurar sequencia de email automatica (MailerLite)
 - [ ] Campanha Google Ads com R$ 880
-- [ ] Mergear branch `claude/review-ux-ui-mobile-zBBVM` na main e deploy
 
 ---
 
-## Cloudflare Pages
-- **Conta:** Lucasdierings@live.com (ID: 20492d3a6b98bfc342338d4f2a567c1b)
-- **Deploy:** Cloudflare Pages (confirmado por `_headers` file)
-- **Nota:** MCP do Cloudflare não tem tools para listar/gerenciar Pages projects diretamente, apenas Workers/D1/KV/R2
-- **Headers configurados:** X-Frame-Options: DENY, X-Content-Type-Options: nosniff, Referrer-Policy: strict-origin-when-cross-origin
-
-## Notas Importantes
-- Deploy é **static export** (`output: 'export'`) — sem server-side features (redirect(), API routes não funcionam em prod)
-- Formulários usam `mode: 'no-cors'` — não é possível ler resposta do servidor, então error handling é limitado
-- Imagens são `unoptimized: true` por causa do static export
-- Newsletter agora envia direto ao Google Apps Script (não abre mais Typeform)
-- Blog posts existem em `content/blog/` como MDX com conteúdo real (4 artigos)
-- Favicon já existia em `app/icon.png` (logo Fluxo Rural colorida)
-
----
-
-**Última atualização:** 31 de março de 2026 — Sessão 7 (continuação)
-**Status:** Todas as prioridades altas concluídas, pendente merge na main
+**Ultima atualizacao:** 02 de abril de 2026
+**Status:** Blog + Decap CMS + OAuth FUNCIONANDO em producao. Blog posts carregando. CMS pronto para uso. Home com nome Lucas Dierings, secao Na Midia corrigida, pagina contato otimizada para conversao.
