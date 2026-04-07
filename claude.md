@@ -93,20 +93,35 @@
 
 ---
 
+## Sessao 7 abr/2026 — Revisao UX/UI/Mobile/SEO + Otimizacoes
+
+### Correcoes feitas e mergeadas na main:
+- [x] Logo branca comprimida: 5.8MB → 92KB (2048→480px, quantizada)
+- [x] lucas-palestrante.JPG comprimida: 5.5MB → 103KB
+- [x] nh-cast-new-holland.png comprimida: 7.6MB → 149KB
+- [x] Apple-touch-icon criado (180x180)
+- [x] Blog metadata via layout.tsx (antes nao tinha SEO)
+- [x] robots.txt com crawlers de IA (GPTBot, ClaudeBot, PerplexityBot, etc.)
+- [x] Breadcrumbs com JSON-LD em servicos, consultoria, financeiro, mentoria, contato
+- [x] OG images especificas por pagina de servico
+- [x] Newsletter envia direto ao Apps Script (sem abrir Typeform)
+- [x] WhatsApp flutuante com tooltip ao hover
+- [x] Depoimentos com badge de servico
+- [x] /servicos/palestras redireciona para /palestras
+- [x] Placeholder "Video Reel em Breve" removido
+- [x] ContactForm grid responsivo (cidade/estado)
+- [x] Imagem JCI renomeada (sem espacos)
+- [x] Footer logo com lazy loading e sizes
+
 ## Pendencias
-- [x] Criar GitHub OAuth App e adicionar GITHUB_CLIENT_ID + GITHUB_CLIENT_SECRET no Cloudflare Pages — FEITO
-- [x] Merge branch atual para main e push — FEITO
-- [x] Decap CMS funcionando em producao (fluxorural.com.br/admin/) — FEITO
-- [x] Adicionar nome "Lucas Dierings" no hero da home — FEITO
-- [x] Corrigir secao Na Midia (NHCast bugado, cards irregulares) — FEITO
-- [x] Ajustar localizacao empresa (Curitiba) vs pessoal (Londrina) em todo o site — FEITO
-- [x] Pagina contato: remover WhatsApp/LinkedIn, email para contato@, localizacao Curitiba — FEITO
 - [ ] Aumentar logo Navbar (muito pequeno)
 - [ ] Investigar badge "3 Issues" (canto inferior esquerdo)
 - [ ] Configurar sequencia de email automatica (MailerLite)
 - [ ] Campanha Google Ads com R$ 880
+- [ ] Google Search Console — verificar indexacao
+- [ ] Depoimentos com nomes reais e fotos (credibilidade)
 
 ---
 
-**Ultima atualizacao:** 02 de abril de 2026
-**Status:** Blog + Decap CMS + OAuth FUNCIONANDO em producao. Blog posts carregando. CMS pronto para uso. Home com nome Lucas Dierings, secao Na Midia corrigida, pagina contato otimizada para conversao.
+**Ultima atualizacao:** 07 de abril de 2026
+**Status:** Revisao completa UX/UI/Mobile/SEO mergeada na main. Todas as imagens otimizadas. Breadcrumbs, OG images, newsletter nativa, robots.txt para IA.
