@@ -1,0 +1,60 @@
+# Beweather B2K — Estação Meteorológica Agrícola
+
+## Resumo
+Beweather B2K é uma estação meteorológica profissional fabricada pela B2K Technology
+Solutions (grupo e-Aware Technologies) e distribuída no Brasil sob a marca Beweather.
+Projetada para o rigor do campo brasileiro, entrega dados locais em tempo real para
+o produtor rural decidir com precisão sobre pulverização, irrigação, plantio e colheita.
+
+## Produto
+- Nome: Beweather B2K
+- Categoria: Estação meteorológica agrícola profissional
+- Preço a partir de: R$ 9.900 (12x sem juros no cartão de crédito, ou PIX à vista com desconto; frete grátis para todo o Brasil)
+- Formas de pagamento: cartão em até 12x sem juros ou PIX à vista com desconto (não trabalhamos com boleto nem financiamento agro)
+- Garantia: 12 meses de fábrica contra defeitos de fabricação
+- Entrega: até 15 dias para qualquer região do Brasil
+- Instalação: feita pelo próprio produtor em cerca de 8 minutos, com tudo que é necessário já incluso na caixa
+- Mensalidade: zero — plataforma e aplicativo inclusos no preço
+
+## 12 sensores de precisão
+1. Temperatura do ar (-40 a 60°C)
+2. Umidade relativa do ar (1-99%)
+3. Precipitação pluviométrica (até 9.999 mm)
+4. Velocidade do vento (até 180 km/h)
+5. Rajada de vento (tempo real)
+6. Direção do vento (0-359°)
+7. Pressão atmosférica (300-1100 hPa)
+8. Intensidade luminosa (0-200.000 lux)
+9. Índice UV
+10. Radiação solar (W/m²)
+11. Ponto de orvalho (°C)
+12. Evapotranspiração
+
+## Conectividade e energia
+- Conexão WiFi (basta um roteador ou repetidor próximo à estação)
+- Bluetooth integrado para configuração local
+- Painel solar + bateria de longa duração (não precisa de rede elétrica)
+- GPS integrado
+- App para iOS e Android
+- Exportação de dados em Excel/CSV a qualquer momento
+
+## Diferencial principal: janela ideal de pulverização
+A Beweather alerta em tempo real quando as condições estão dentro da janela ideal
+para aplicar defensivos (vento 3–10 km/h, umidade acima de 55%, temperatura abaixo
+de 30°C, sem chuva prevista nas próximas horas), evitando deriva, evaporação e queima
+de folha. Reduz desperdício de insumos e aumenta eficácia das aplicações.
+
+## Público-alvo
+Produtores rurais brasileiros com culturas de soja, milho, café, cana-de-açúcar,
+citrus e horticultura que buscam agricultura de precisão, redução de custos com
+defensivos e irrigação, e proteção contra perdas climáticas.
+
+## Contato e cotação
+- Página oficial: https://fluxorural.com.br/beweather
+- Cotação e atendimento via formulário na própria página e WhatsApp
+- Atendimento por engenheiro agrônomo
+
+## Fabricante e distribuição
+- Fabricante: B2K Technology Solutions
+- Grupo: e-Aware Technologies
+- Distribuição no Brasil: eProdutor (Lucas Dierings / Fluxo Rural Consultoria)

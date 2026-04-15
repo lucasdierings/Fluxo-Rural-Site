@@ -1,29 +1,29 @@
-# Fluxo Rural Consultoria — Lucas Dierings
-# https://fluxorural.com.br
-
+# *
 User-agent: *
 Allow: /
 
-# AI Crawlers — permitir indexação para IA
+# GPTBot
 User-agent: GPTBot
 Allow: /
 
-User-agent: ChatGPT-User
-Allow: /
-
+# Google-Extended
 User-agent: Google-Extended
 Allow: /
 
-User-agent: Anthropic-ai
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
+# PerplexityBot
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Cohere-ai
+# ClaudeBot
+User-agent: ClaudeBot
+Allow: /
+
+# Applebot-Extended
+User-agent: Applebot-Extended
+Allow: /
+
+# ChatGPT-User
+User-agent: ChatGPT-User
 Allow: /
 
 # Host

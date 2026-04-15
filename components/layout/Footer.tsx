@@ -1,11 +1,14 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Linkedin, Instagram, MessageCircle } from 'lucide-react'
 import { NewsletterForm } from '@/components/forms/NewsletterForm'
 
 export default function Footer() {
+  const pathname = usePathname()
+  if (pathname?.startsWith('/beweather')) return null
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5545991447004'
 
   return (

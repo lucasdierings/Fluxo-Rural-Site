@@ -57,6 +57,14 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        beweather: {
+          primary: '#1F4D2B',
+          secondary: '#1E73BE',
+          accent: '#6BBF59',
+          amarelo: '#F5C518',
+          grafite: '#1A1F1C',
+          offwhite: '#FAFAF7',
+        },
       },
       fontFamily: {
         heading: ['var(--font-jakarta)', 'sans-serif'],
@@ -80,11 +88,16 @@ const config: Config = {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.1)' },
         },
+        pulseGlow: {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '.8', transform: 'scale(1.05)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         pulse: 'pulse 2s ease-in-out infinite',
+        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
     },
   },
