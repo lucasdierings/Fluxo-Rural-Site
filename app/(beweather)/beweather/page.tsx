@@ -39,10 +39,10 @@ export const metadata: Metadata = {
       '12 sensores, WiFi e painel solar. Clima da sua lavoura em tempo real no celular. R$ 9.900, 12x sem juros, frete grátis.',
     images: [
       {
-        url: `${SITE_URL}/beweather/hero-soja-goldenhour.jpg`,
+        url: `${SITE_URL}/beweather/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Estação Meteorológica Beweather B2K instalada em lavoura de soja ao amanhecer',
+        alt: 'Estação Meteorológica Beweather B2K em campo ao pôr do sol',
       },
     ],
   },
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: 'Beweather B2K — Estação Meteorológica Agrícola',
     description:
       '12 sensores + WiFi + painel solar. Dados da sua lavoura em tempo real. R$ 9.900, 12x sem juros.',
-    images: [`${SITE_URL}/beweather/hero-soja-goldenhour.jpg`],
+    images: [`${SITE_URL}/beweather/og-image.jpg`],
   },
   robots: {
     index: true,
