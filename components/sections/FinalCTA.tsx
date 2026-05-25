@@ -16,16 +16,23 @@ export default function FinalCTA() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-8">
-            Pronto para transformar a gestão da sua propriedade?
+            Pronto pro próximo passo?
           </h2>
           <p className="text-white/90 text-base md:text-lg lg:text-xl font-light mb-10 max-w-3xl mx-auto leading-relaxed">
-            Vamos conversar sobre como levar mais organização, clareza financeira e inovação para o seu negócio no campo.
+            Contrate uma palestra, marque um diagnóstico ou só puxe assunto. O que faz sentido pra você agora?
           </p>
-          <Button asChild size="lg" className="bg-white text-verde-escuro hover:bg-white/90 hover:shadow-apple-lg">
-            <Link href="/diagnostico">
-              Agendar Diagnóstico Grátis <ArrowRight className="ml-2" size={18} />
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button asChild size="lg" className="bg-white text-verde-escuro hover:bg-white/90 hover:shadow-apple-lg">
+              <Link href="/palestras">
+                Contratar palestra <ArrowRight className="ml-2" size={18} />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Link href="/diagnostico">
+                Diagnóstico grátis
+              </Link>
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>
