@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { MessageCircle } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 
 export default function FloatingWhatsApp() {
   const pathname = usePathname()
@@ -17,6 +18,7 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Fale conosco pelo WhatsApp"
+      onClick={() => trackEvent('whatsapp_click', { source: 'floating' })}
       className="group fixed bottom-6 right-6 z-50"
     >
       {/* Tooltip */}

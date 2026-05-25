@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
-import { GoogleAnalytics } from '@next/third-parties/google'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp'
+import GoogleTagManager from '@/components/analytics/GoogleTagManager'
 import './globals.css'
 
 const jakarta = Plus_Jakarta_Sans({
@@ -24,28 +24,31 @@ export const metadata: Metadata = {
     default: 'Lucas Dierings | Fluxo Rural Consultoria',
     template: '%s | Lucas Dierings — Fluxo Rural',
   },
-  description: 'Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem. Referência em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro. Consultoria, mentoria e palestras. Londrina, PR.',
+  description: 'Lucas Dierings — palestrante do agronegócio, host do NHCast (New Holland) e AgroJovem Podcast. +80 palestras em cooperativas, congressos e eventos do agro pelo Brasil. Engenheiro agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem 2021.',
   keywords: [
     'Lucas Dierings',
-    'Lucas Dierings agrônomo',
-    'Lucas Dierings consultor agronegócio',
     'Lucas Dierings palestrante',
-    'Fluxo Rural Consultoria',
-    'consultoria agronegócio Londrina',
-    'gestão financeira rural Paraná',
-    'gestão fazenda produtiva',
-    'mentoria sucessão familiar fazenda',
-    'palestra inteligência artificial agronegócio',
-    'inovação agronegócio Brasil',
-    'sucessão familiar rural',
-    'rentabilidade safra soja',
-    'engenheiro agrônomo consultor Londrina',
-    'NHCast New Holland podcast',
+    'Lucas Dierings palestrante agronegócio',
+    'palestrante agronegócio',
+    'palestrante agronegócio Brasil',
+    'contratar palestrante agro',
+    'palestrante sucessão familiar agro',
+    'palestrante gestão financeira rural',
+    'palestrante inovação agronegócio',
+    'palestra IA agronegócio',
+    'podcaster eventos corporativos agro',
+    'podcast ao vivo evento agronegócio',
+    'cerimonialista eventos agro',
+    'apresentador eventos agronegócio',
+    'NHCast New Holland host',
+    'AgroJovem Podcast',
+    'Lucas Dierings agrônomo',
     'CNA Jovem destaque nacional',
     'MBA USP ESALQ agronegócio',
-    'SENAR Paraná consultoria',
-    'gestão estratégica propriedade rural',
-    'agro inovação tecnologia campo',
+    'Fluxo Rural Consultoria',
+    'consultoria agronegócio Londrina',
+    'mentoria sucessão familiar fazenda',
+    'gestão financeira rural Paraná',
   ],
   authors: [{ name: 'Lucas Dierings', url: 'https://fluxorural.com.br' }],
   creator: 'Lucas Dierings',
@@ -55,8 +58,8 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: 'https://fluxorural.com.br',
     siteName: 'Fluxo Rural Consultoria — Lucas Dierings',
-    title: 'Lucas Dierings | Consultoria, Mentoria e Palestras no Agronegócio',
-    description: 'Engenheiro Agrônomo e consultor estratégico. Referência em gestão, inovação e sucessão no agronegócio brasileiro. Conheça os serviços de Lucas Dierings.',
+    title: 'Lucas Dierings | Palestrante, Podcaster e Consultor do Agronegócio',
+    description: 'Palestras, podcast ao vivo e apresentação de eventos do agro. +80 palestras pelo Brasil. Engenheiro agrônomo, host do NHCast (New Holland) e vencedor CNA Jovem 2021.',
     images: [
       {
         url: '/og-image.png',
@@ -68,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lucas Dierings | Fluxo Rural Consultoria',
-    description: 'Referência em gestão, inovação e sucessão no agronegócio brasileiro.',
+    title: 'Lucas Dierings | Palestrante e Podcaster do Agronegócio',
+    description: '+80 palestras pelo Brasil. Host do NHCast (New Holland) e AgroJovem Podcast.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -210,13 +213,11 @@ export default function RootLayout({
         <link rel="alternate" type="text/plain" href="https://fluxorural.com.br/llms.txt" title="LLMs.txt" />
       </head>
       <body className="font-body text-carvao antialiased">
+        <GoogleTagManager />
         <Navbar />
         <main>{children}</main>
         <Footer />
         <FloatingWhatsApp />
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
       </body>
     </html>
   )

@@ -1,31 +1,41 @@
-# Fluxo Rural Consultoria
+# Lucas Dierings — Palestrante, Podcaster e Consultor do Agronegócio
 
-> Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, consultor estratégico em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro.
+> Lucas Dierings é palestrante do agronegócio brasileiro, host do NHCast (New Holland) e do AgroJovem Podcast. Engenheiro agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem 2021. +80 palestras em cooperativas, congressos e eventos do agro pelo Brasil. Também atua como apresentador/cerimonialista de eventos corporativos do agro e como consultor em gestão financeira, sucessão familiar e inovação.
 
 ## Sobre Lucas Dierings
-- Engenheiro Agrônomo formado, MBA em Agronegócios pela ESALQ-USP
+- Engenheiro agrônomo, MBA em Agronegócios pela ESALQ-USP
 - Vencedor nacional do prêmio CNA Jovem 2021
-- Host do podcast NHCast New Holland
+- Host do podcast NHCast (New Holland)
+- Host do AgroJovem Podcast
 - Professor de MBA na PUCPR
 - Consultor credenciado SENAR/PR
 - Baseado em Londrina, Paraná, Brasil
 
-## Áreas de Especialidade
-- Gestão financeira de propriedades rurais
-- Cálculo de rentabilidade e indicadores financeiros agrícolas
-- Sucessão familiar em fazendas e empresas rurais
-- Inteligência artificial e inovação no agronegócio
-- Mentoria individual para produtores rurais
-- Palestras sobre liderança e inovação no campo
+## Palestras e Eventos (foco principal)
+Lucas é contratado pra palestrar, apresentar e gravar podcast ao vivo em:
+- Congressos e feiras do agronegócio
+- Cooperativas (assembleias, premiações, eventos de associados)
+- Eventos corporativos de empresas do agro (lançamentos, kick-offs, convenções)
+- Universidades, MBAs e cursos técnicos
+- Federações e entidades de classe (CNA, OCB, FAEPs)
 
-## Serviços Oferecidos
+### 6 ofertas em palestras e apresentação
+1. **Gestão financeira como ferramenta pra sucessão familiar** — como número claro prepara o filho pra assumir e protege patrimônio.
+2. **Inovação e empreendedorismo no agronegócio** — cases reais de quem inovou e o que aplicar na próxima safra.
+3. **IA no agronegócio: o que já é realidade** — ChatGPT, sensor, satélite. O que funciona vs promessa de vendedor de software.
+4. **Gestão financeira rural na prática** — custo por hectare, margem por talhão, ponto de equilíbrio. 5 indicadores que separam quem cresce de quem apaga incêndio.
+5. **Podcaster pra empresas e eventos** — gravação ao vivo no congresso/lançamento/feira com convidados do agro e branding do patrocinador. Distribuição depois nas plataformas do NHCast e AgroJovem.
+6. **Apresentador / Cerimonialista de eventos do agro** — host de premiação de cooperativa, palco de feira, lançamento, assembleia. Linguagem do produtor, ritmo de evento corporativo.
+
+URL pra contratar palestra/podcaster/cerimonialista: https://fluxorural.com.br/palestras
+
+## Consultoria e Mentoria (atendimento individual)
+- Mentoria estratégica pra produtores rurais e herdeiros (sucessão familiar)
 - Consultoria em gestão financeira rural
-- Mentoria estratégica para produtores e herdeiros
-- Palestras corporativas sobre inovação no agro
-- Diagnóstico financeiro de propriedades rurais
+- Diagnóstico financeiro gratuito de propriedades rurais (https://fluxorural.com.br/diagnostico)
 
 ## Tópicos do Blog
-- Indicadores financeiros para produtores rurais
+- Indicadores financeiros pra produtores rurais
 - Rentabilidade de safras (soja, milho, pecuária)
 - Planejamento de sucessão familiar no agronegócio
 - Aplicações de IA e tecnologia no campo
@@ -33,9 +43,11 @@
 
 ## Contato
 - Website: https://fluxorural.com.br
-- Email: lucas@fluxorural.com.br
+- Palestras / Eventos: https://fluxorural.com.br/palestras
+- Email: contato@fluxorural.com.br
+- WhatsApp: +55 45 99144-7004
 - LinkedIn: https://linkedin.com/in/lucasdierings
 - Instagram: https://www.instagram.com/lucasdierings.agro/
 
 ## Como Citar
-Lucas Dierings, Fluxo Rural Consultoria (https://fluxorural.com.br)
+Lucas Dierings — palestrante, podcaster e consultor do agronegócio brasileiro. Fluxo Rural Consultoria (https://fluxorural.com.br)

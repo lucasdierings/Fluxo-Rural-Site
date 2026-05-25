@@ -28,6 +28,7 @@ import {
 } from 'lucide-react'
 import { z } from 'zod'
 import { cn } from '@/lib/utils'
+import { trackEvent } from '@/lib/analytics'
 
 // TODO: trocar por WhatsApp oficial da Beweather quando definido.
 // Hoje usa o número do Lucas (compartilhado com Fluxo Rural).
@@ -166,7 +167,7 @@ function YouTubeFacade({ id, caption }: { id: string; caption: string }) {
       type="button"
       onClick={() => {
         setLoaded(true)
-        {/* TODO-PIXEL: fbq('trackCustom', 'VideoPlay', { id }) */}
+        trackEvent('video_play', { video_id: id, source: 'beweather' })
       }}
       aria-label={`Reproduzir: ${caption}`}
       className="relative w-full h-full group"
@@ -977,12 +978,12 @@ export default function BeweatherLanding() {
       </footer>
 
       {/* Floating WhatsApp */}
-      {/* TODO-PIXEL: fbq('track', 'Contact') */}
       <a
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar com a Beweather no WhatsApp (abre em nova aba)"
+        onClick={() => trackEvent('whatsapp_click', { source: 'beweather' })}
         className="fixed bottom-5 right-5 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl p-4 transition-transform hover:scale-105 motion-reduce:hover:scale-100 motion-reduce:transition-none min-h-[56px] min-w-[56px] flex items-center justify-center"
       >
         <MessageCircle className="w-6 h-6" />
@@ -1063,7 +1064,7 @@ function ProposalForm() {
           submitted_at: consentTimestamp,
         }).toString(),
       })
-      {/* TODO-PIXEL: fbq('track', 'Lead') + gtag('event', 'generate_lead') */}
+      trackEvent('form_submit', { form_name: 'beweather', ...utms })
       setStatus('success')
     } catch (err) {
       setStatus('error')

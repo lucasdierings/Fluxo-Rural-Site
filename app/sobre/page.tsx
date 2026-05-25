@@ -313,12 +313,20 @@ export default function SobrePage() {
       {/* CTA */}
       <section className="bg-verde-folha py-20 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-8">
-            Vamos trabalhar juntos?
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4">
+            Quer Lucas no seu próximo evento?
           </h2>
-          <Button asChild size="lg" className="bg-white text-verde-escuro hover:bg-white/90 hover:shadow-apple-lg">
-            <Link href="/contato">Fale com Lucas <ArrowRight className="ml-2" size={18} /></Link>
-          </Button>
+          <p className="text-white/85 text-base md:text-lg mb-8 max-w-2xl mx-auto">
+            Palestras, podcast ao vivo e apresentação de eventos do agro. Proposta em até 24h.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" className="bg-white text-verde-escuro hover:bg-white/90 hover:shadow-apple-lg">
+              <Link href="/palestras">Contratar palestra <ArrowRight className="ml-2" size={18} /></Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Link href="/contato">Outro contato</Link>
+            </Button>
+          </div>
         </div>
       </section>
     </>
