@@ -6,28 +6,28 @@ import { BarChart2, DollarSign, Users, Mic2, ArrowRight } from 'lucide-react'
 
 const services = [
   {
+    icon: Mic2,
+    title: 'Palestras e Podcast ao Vivo',
+    description: 'Palestras, podcast gravado ao vivo e apresentação em eventos do agro. Conteúdo que faz a plateia tirar foto do slide e levar pra fazenda.',
+    href: '/palestras',
+  },
+  {
+    icon: Users,
+    title: 'Mentoria pra Sucessão Familiar',
+    description: 'Programa estruturado pra transição geracional acontecer sem brigas, sem perda de patrimônio e com o filho preparado pra assumir.',
+    href: '/servicos/mentoria',
+  },
+  {
     icon: BarChart2,
     title: 'Consultoria em Gestão e Inovação',
-    description: 'Diagnóstico, planejamento estratégico e acompanhamento para propriedades e empresas do agronegócio.',
+    description: 'Diagnóstico, plano estratégico e acompanhamento contínuo pra propriedades e cooperativas que querem profissionalizar a gestão.',
     href: '/servicos/consultoria',
   },
   {
     icon: DollarSign,
     title: 'Gestão Financeira Rural',
-    description: 'Controle de fluxo de caixa, custos operacionais e análise de rentabilidade de safra para maximizar seus resultados.',
+    description: 'Fluxo de caixa, custo por hectare e margem por safra organizados — pra você decidir baseado em número, não em achismo.',
     href: '/servicos/financeiro',
-  },
-  {
-    icon: Users,
-    title: 'Mentoria para Sucessão Familiar',
-    description: 'Programa estruturado para planejar e executar a transição geracional com segurança e clareza.',
-    href: '/servicos/mentoria',
-  },
-  {
-    icon: Mic2,
-    title: 'Palestras e Workshops',
-    description: 'Conteúdo aplicado sobre gestão, finanças, sucessão familiar e inteligência artificial no agronegócio.',
-    href: '/servicos/palestras',
   },
 ]
 
@@ -46,7 +46,7 @@ export default function ServicesPreview() {
             Como Posso Ajudar
           </h2>
           <p className="text-white/80 text-base md:text-lg lg:text-xl font-light max-w-2xl mx-auto">
-            Soluções estratégicas para propriedades e empresas do agronegócio
+            Palco, mentoria e consultoria pra quem leva o agronegócio a sério
           </p>
         </motion.div>
 
