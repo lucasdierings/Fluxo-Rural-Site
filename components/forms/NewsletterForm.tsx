@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { trackEvent } from '@/lib/analytics'
 
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
 
@@ -19,6 +20,7 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
     if (!email) return
 
     setStatus('loading')
+    const fonte = variant === 'footer' ? 'footer' : variant === 'inline' ? 'artigo' : 'página'
     try {
       await fetch(SCRIPT_URL, {
         method: 'POST',
@@ -27,9 +29,10 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
         body: JSON.stringify({
           _tipo: 'newsletter',
           email,
-          fonte: variant === 'footer' ? 'footer' : variant === 'inline' ? 'artigo' : 'página',
+          fonte,
         }),
       })
+      trackEvent('newsletter_signup', { source: fonte })
       setStatus('success')
       setEmail('')
     } catch {

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { trackEvent, getUtmParams } from '@/lib/analytics'
 
 // ↓ Preencher com a URL do Google Apps Script após o deploy
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
@@ -47,13 +48,19 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('loading')
+    const utm = getUtmParams()
     try {
       // mode: 'no-cors' necessário para Google Apps Script via site estático
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, _tipo: 'contato' }),
+        body: JSON.stringify({ ...form, _tipo: 'contato', ...utm }),
+      })
+      trackEvent('form_submit', {
+        form_name: 'contato',
+        interesse: form.interesse,
+        ...utm,
       })
       setStatus('success')
     } catch {

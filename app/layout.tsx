@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
-import { GoogleAnalytics } from '@next/third-parties/google'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp'
+import GoogleTagManager from '@/components/analytics/GoogleTagManager'
 import './globals.css'
 
 const jakarta = Plus_Jakarta_Sans({
@@ -210,13 +210,11 @@ export default function RootLayout({
         <link rel="alternate" type="text/plain" href="https://fluxorural.com.br/llms.txt" title="LLMs.txt" />
       </head>
       <body className="font-body text-carvao antialiased">
+        <GoogleTagManager />
         <Navbar />
         <main>{children}</main>
         <Footer />
         <FloatingWhatsApp />
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
       </body>
     </html>
   )

@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
 
@@ -244,9 +245,7 @@ export function DiagnosticoForm() {
   const handleNext = () => {
     if (!step1Valid) return
     setStep(2)
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('event', 'diagnostico_step1_complete')
-    }
+    trackEvent('diagnostico_step1_complete')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -271,11 +270,13 @@ export function DiagnosticoForm() {
         }),
       })
 
-      if (typeof window !== 'undefined' && 'gtag' in window) {
-        const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag
-        gtag('event', 'diagnostico_scored', { score, level: qualLevel })
-        gtag('event', 'diagnostico_submit')
-      }
+      trackEvent('diagnostico_scored', { score, level: qualLevel })
+      trackEvent('form_submit', {
+        form_name: 'diagnostico',
+        score,
+        level: qualLevel,
+        ...utmParams,
+      })
 
       setSubmitted(true)
     } catch {
