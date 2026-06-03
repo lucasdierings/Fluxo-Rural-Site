@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { BarChart2, DollarSign, Users, Mic2, ArrowRight } from 'lucide-react'
+import { BarChart2, DollarSign, Megaphone, Mic2, ArrowRight } from 'lucide-react'
 
 const services = [
   {
@@ -18,15 +18,15 @@ const services = [
     href: '/servicos/financeiro',
   },
   {
-    icon: Users,
-    title: 'Mentoria para Sucessão Familiar',
-    description: 'Programa estruturado para planejar e executar a transição geracional com segurança e clareza.',
-    href: '/servicos/mentoria',
+    icon: Megaphone,
+    title: 'Marketing e Vendas Digitais',
+    description: 'Posicionamento de marca, presença digital e funil de vendas para produtores e empresas do agronegócio atraírem clientes e venderem mais.',
+    href: '/servicos/marketing-digital',
   },
   {
     icon: Mic2,
     title: 'Palestras e Workshops',
-    description: 'Conteúdo aplicado sobre gestão, finanças, sucessão familiar e inteligência artificial no agronegócio.',
+    description: 'Conteúdo aplicado sobre gestão, finanças, marketing e inteligência artificial no agronegócio.',
     href: '/servicos/palestras',
   },
 ]

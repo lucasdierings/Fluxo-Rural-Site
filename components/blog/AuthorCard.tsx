@@ -18,7 +18,7 @@ export default function AuthorCard() {
           Engenheiro Agrônomo | Consultor Estratégico | Palestrante
         </p>
         <p className="text-carvao/50 text-sm mt-1">
-          Fundador da Fluxo Rural Consultoria. Especialista em gestão, inovação e sucessão no agronegócio.
+          Fundador da Fluxo Rural Consultoria. Especialista em gestão, inovação e estratégia no agronegócio.
         </p>
         <Link href="/sobre" className="text-navy text-sm font-medium hover:text-dourado transition-colors mt-2 inline-block">
           Saiba mais →

@@ -27,7 +27,7 @@ export default function Footer() {
               loading="lazy"
             />
             <p className="text-white/70 text-sm leading-relaxed">
-              Gestão, Inovação e Sucessão no Agronegócio. Consultoria, Mentoria e Palestras para quem transforma o campo em resultado.
+              Inovação e Gestão Estratégica no Agronegócio. Consultoria, Marketing e Palestras para quem transforma o campo em resultado.
             </p>
             <div className="flex gap-4 mt-6">
               <a
@@ -66,7 +66,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-white/70">
               <li><Link href="/servicos/consultoria" className="hover:text-dourado transition-colors">Consultoria em Gestão</Link></li>
               <li><Link href="/servicos/financeiro" className="hover:text-dourado transition-colors">Gestão Financeira Rural</Link></li>
-              <li><Link href="/servicos/mentoria" className="hover:text-dourado transition-colors">Mentoria para Sucessão</Link></li>
+              <li><Link href="/servicos/marketing-digital" className="hover:text-dourado transition-colors">Marketing e Vendas Digitais</Link></li>
               <li><Link href="/servicos/palestras" className="hover:text-dourado transition-colors">Palestras e Workshops</Link></li>
             </ul>
           </div>

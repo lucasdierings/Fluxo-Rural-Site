@@ -15,7 +15,7 @@ const ESTADOS_BR = [
 
 const INTERESSES = [
   'Consultoria em Gestão Financeira',
-  'Mentoria Individual',
+  'Marketing e Vendas Digitais',
   'Palestra / Workshop',
   'Quero convidar para um novo projeto',
 ]

@@ -64,13 +64,12 @@ export default function NaMidia() {
             transition={{ delay: 0.1 }}
             className="rounded-xl overflow-hidden group bg-white shadow-lg block flex flex-col"
           >
-            <div className="relative h-48 overflow-hidden flex-shrink-0 bg-white flex items-center justify-center p-6">
+            <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
-                src="/images/nh-cast-logo-azul-fundo-branco.png"
-                alt="NHCast — New Holland Brasil"
-                width={200}
-                height={200}
-                className="object-contain group-hover:scale-110 transition-transform duration-500"
+                src="/images/lucas-nhcast.jpg"
+                alt="Lucas Dierings — Host do NHCast, podcast da New Holland Brasil"
+                fill
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
             </div>
             <div className="p-4 bg-white flex-1">
@@ -137,7 +136,7 @@ export default function NaMidia() {
           >
             <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
-                src="/images/Lucas discurso JCI.JPG"
+                src="/images/lucas-discurso-jci.jpg"
                 alt="Lucas Dierings — JCI"
                 fill
                 className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500"

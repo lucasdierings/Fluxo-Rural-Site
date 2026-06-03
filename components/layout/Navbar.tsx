@@ -29,13 +29,20 @@ export default function Navbar() {
 
   if (pathname?.startsWith('/beweather')) return null
 
+  // Home: transparente sobre o hero escuro, vira navy ao rolar (imersivo, inalterado).
+  // Demais páginas têm topo claro (ex.: /blog, /contato bg-off-white) — header sempre
+  // navy sólido pra a logo/links brancos terem contraste desde o topo.
+  const isHome = pathname === '/'
+
   return (
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out',
-        scrolled
-          ? 'bg-navy/70 backdrop-blur-2xl shadow-apple-md border-b border-white/10'
-          : 'bg-transparent'
+        isHome
+          ? scrolled
+            ? 'bg-navy/70 backdrop-blur-2xl shadow-apple-md border-b border-white/10'
+            : 'bg-transparent'
+          : 'bg-navy/90 backdrop-blur-2xl shadow-apple-md border-b border-white/10'
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,11 +50,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 transition-smooth hover:opacity-80">
             <Image
-              src="/logo-colorido.svg"
+              src="/logo-fluxo-rural-branco-horizontal.png"
               alt="Fluxo Rural"
-              width={240}
-              height={72}
-              className="h-16 sm:h-20 w-auto object-contain"
+              width={1037}
+              height={240}
+              className="h-10 sm:h-12 lg:h-16 w-auto object-contain"
               priority
             />
           </Link>
