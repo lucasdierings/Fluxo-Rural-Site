@@ -197,13 +197,15 @@ const EXPECTATIVA_EMPRESA_OPTIONS = [
 ]
 
 type Perfil = 'produtor' | 'empresa'
+type Etapa = 'perfil' | 'contato' | 'gate' | 'perguntas'
 
 interface FormData {
-  perfil: Perfil
+  perfil: Perfil | ''
   nome: string
   email: string
   whatsapp: string
   estado: string
+  empresa: string
   // produtor
   atividade: string
   faturamento: string
@@ -218,8 +220,7 @@ interface FormData {
   urgencia: string
   consultor: string
   expectativa: string
-  // empresa (B2B) — opcionais
-  empresa?: string
+  // empresa (B2B)
   cargo?: string
   segmento?: string
   faturamentoEmpresa?: string
@@ -237,15 +238,12 @@ type QualLevel = 'verde' | 'amarelo' | 'laranja' | 'vermelho'
 function calculateScore(d: FormData): number {
   let score = 0
 
-  // Faturamento (max 30)
   const fat: Record<string, number> = { '<100k': 0, '100k-500k': 10, '500k-1M': 20, '1M-5M': 25, '>5M': 30 }
   score += fat[d.faturamento] || 0
 
-  // Hectares (max 10)
   const hec: Record<string, number> = { '<50ha': 0, '50-200ha': 5, '200-500ha': 7, '>500ha': 10 }
   score += hec[d.hectares] || 0
 
-  // Desafios (max 25)
   let desafioScore = 0
   if (d.desafios.includes('Gestão financeira')) desafioScore += 10
   if (d.desafios.includes('Dívidas')) desafioScore += 8
@@ -256,31 +254,24 @@ function calculateScore(d: FormData): number {
   if (d.desafios.includes('Inovação')) desafioScore += 3
   score += Math.min(desafioScore, 25)
 
-  // Conflito (max 20)
   const conf: Record<string, number> = { 'Não, alinhados': 0, 'Algumas discussões': 8, 'Brigas sérias': 20, 'Prefiro não comentar': 5 }
   score += conf[d.conflito] || 0
 
-  // Situação filhos (max 15)
   const sit: Record<string, number> = { 'Já trabalham na propriedade': 15, 'Querem entrar': 15, 'Interesse mas outra área': 5, 'Não tenho certeza': 3 }
   score += sit[d.situacaoFilhos] || 0
 
-  // Dívidas (max 20)
   const div: Record<string, number> = { 'Nenhuma': 0, 'Pequenas (<20%)': 5, 'Moderadas (20-50%)': 15, 'Altas (>50%)': 20 }
   score += div[d.dividas] || 0
 
-  // Investimento (max 10)
   const inv: Record<string, number> = { 'Nada': 0, '<10k': 2, '10k-50k': 5, '50k-200k': 7, '>200k': 10 }
   score += inv[d.investimento] || 0
 
-  // Urgência (max 25)
   const urg: Record<string, number> = { 'Próximos 30 dias': 25, 'Próximos 3 meses': 15, 'Até fim do ano': 8, 'Sem pressa': 0 }
   score += urg[d.urgencia] || 0
 
-  // Consultor (max 5)
   const con: Record<string, number> = { 'Sim, recomendaria': 5, 'Sim, não funcionou': 0, 'Nunca': 5, 'Não tenho certeza': 0 }
   score += con[d.consultor] || 0
 
-  // Expectativa (max 10)
   const exp: Record<string, number> = { 'Entender meus números': 5, 'Ter um plano de ação': 10, 'Saber como preparar sucessão': 10, 'Descobrir se preciso ajuda': 5, 'Apenas conversar': 0 }
   score += exp[d.expectativa] || 0
 
@@ -291,35 +282,27 @@ function calculateScore(d: FormData): number {
 function calculateScoreEmpresa(d: FormData): number {
   let score = 0
 
-  // Faturamento empresa (max 30)
   const fat: Record<string, number> = { '<500k': 5, '500k-2M': 15, '2M-10M': 25, '10M-50M': 30, '>50M': 30 }
   score += fat[d.faturamentoEmpresa || ''] || 0
 
-  // Funcionários (max 10)
   const fun: Record<string, number> = { 'Só eu / sócios': 2, '1 a 10': 5, '11 a 50': 8, '51 a 200': 10, 'Mais de 200': 10 }
   score += fun[d.funcionarios || ''] || 0
 
-  // Tempo de operação (max 5)
   const tmp: Record<string, number> = { 'Menos de 1 ano': 2, '1 a 3 anos': 5, '3 a 10 anos': 5, 'Mais de 10 anos': 3 }
   score += tmp[d.tempoOperacao || ''] || 0
 
-  // Gestão (max 15) — quanto menos estruturada, maior a oportunidade
   const ges: Record<string, number> = { 'Sim, estruturada': 2, 'Parcialmente (planilhas)': 10, 'Básico': 13, 'Nenhuma': 15 }
   score += ges[d.gestao] || 0
 
-  // Como gera clientes (max 20) — núcleo do fit com Marketing/Vendas
   const ger: Record<string, number> = { 'Só indicação / boca a boca': 20, 'Vendedores na rua / prospecção ativa': 12, 'Redes sociais e conteúdo': 8, 'Tráfego pago / anúncios': 6, 'Mix de canais estruturado': 3 }
   score += ger[d.geraClientes || ''] || 0
 
-  // Presença digital (max 15) — pior presença = maior oportunidade
   const pre: Record<string, number> = { 'Não tem presença digital': 15, 'Só redes sociais, sem constância': 12, 'Posta com frequência, mas sem estratégia': 8, 'Estratégia definida e ativa': 3 }
   score += pre[d.presencaDigital || ''] || 0
 
-  // Processo de vendas (max 15)
   const pro: Record<string, number> = { 'Não, cada venda é do jeito que dá': 15, 'Tem um básico, mas não é seguido': 11, 'Processo definido, sem ferramenta/CRM': 7, 'Processo + CRM funcionando': 3 }
   score += pro[d.processoVendas || ''] || 0
 
-  // Desafios B2B (max 25, capado)
   let desafioScore = 0
   if (d.desafios.includes('Gerar leads / novos clientes')) desafioScore += 10
   if (d.desafios.includes('Estruturar marketing e vendas')) desafioScore += 10
@@ -331,15 +314,12 @@ function calculateScoreEmpresa(d: FormData): number {
   if (d.desafios.includes('Não sei por onde começar')) desafioScore += 8
   score += Math.min(desafioScore, 25)
 
-  // Urgência (max 25) — mesmo mapa do produtor
   const urg: Record<string, number> = { 'Próximos 30 dias': 25, 'Próximos 3 meses': 15, 'Até fim do ano': 8, 'Sem pressa': 0 }
   score += urg[d.urgencia] || 0
 
-  // Expectativa empresa (max 10)
   const exp: Record<string, number> = { 'Vender mais / gerar clientes': 10, 'Organizar marketing e vendas': 10, 'Profissionalizar a gestão': 8, 'Ter um plano de crescimento': 8, 'Descobrir se preciso de ajuda': 5, 'Apenas conversar': 0 }
   score += exp[d.expectativaEmpresa || ''] || 0
 
-  // Cargo (bônus de qualificação, max 5)
   const car: Record<string, number> = { 'Dono / sócio': 5, 'Diretor / C-level': 5, 'Gerente': 3, 'Coordenador / analista': 1, 'Outro': 1 }
   score += car[d.cargo || ''] || 0
 
@@ -353,23 +333,25 @@ function getQualLevel(score: number): QualLevel {
   return 'vermelho'
 }
 
+const SCRIPT_URL = '/api/diagnostico'
 const selectClass = 'w-full border border-input rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-navy/30'
+const labelClass = 'block text-sm font-medium text-gray-700 mb-1'
 
 export function DiagnosticoForm() {
-  const [step, setStep] = useState<1 | 2>(1)
+  const [etapa, setEtapa] = useState<Etapa>('perfil')
   const [form, setForm] = useState<FormData>({
-    perfil: 'produtor',
-    nome: '', email: '', whatsapp: '', estado: '',
+    perfil: '',
+    nome: '', email: '', whatsapp: '', estado: '', empresa: '',
     atividade: '', faturamento: '', hectares: '',
     desafios: [], gestao: '', filhos: '', situacaoFilhos: '',
     conflito: '', dividas: '', investimento: '',
     urgencia: '', consultor: '', expectativa: '',
-    empresa: '', cargo: '', segmento: '', faturamentoEmpresa: '',
+    cargo: '', segmento: '', faturamentoEmpresa: '',
     funcionarios: '', tempoOperacao: '', geraClientes: '',
     presencaDigital: '', processoVendas: '', expectativaEmpresa: '',
   })
   const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState<false | 'parcial' | 'completo'>(false)
   const [error, setError] = useState(false)
   const [utmParams, setUtmParams] = useState({ utm_source: '', utm_medium: '', utm_campaign: '' })
 
@@ -384,18 +366,22 @@ export function DiagnosticoForm() {
     }
   }, [])
 
-  const score = useMemo(
-    () => (form.perfil === 'empresa' ? calculateScoreEmpresa(form) : calculateScore(form)),
-    [form]
-  )
+  const isEmpresa = form.perfil === 'empresa'
+  const score = useMemo(() => (isEmpresa ? calculateScoreEmpresa(form) : calculateScore(form)), [form, isEmpresa])
   const qualLevel = useMemo(() => getQualLevel(score), [score])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // Troca de perfil: zera TODOS os campos ramificados (dos dois lados) → scoring/payload limpos
-  const setPerfil = (p: Perfil) => {
+  const gtagEvent = (name: string, params?: Record<string, unknown>) => {
+    if (typeof window !== 'undefined' && 'gtag' in window) {
+      (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('event', name, params || {})
+    }
+  }
+
+  // Seleciona perfil e zera os campos ramificados (caso volte e troque)
+  const escolherPerfil = (p: Perfil) => {
     setForm(prev => ({
       ...prev,
       perfil: p,
@@ -403,7 +389,7 @@ export function DiagnosticoForm() {
       gestao: '', filhos: '', situacaoFilhos: '', conflito: '',
       dividas: '', investimento: '', consultor: '', expectativa: '',
       desafios: [],
-      empresa: '', cargo: '', segmento: '', faturamentoEmpresa: '',
+      cargo: '', segmento: '', faturamentoEmpresa: '',
       funcionarios: '', tempoOperacao: '', geraClientes: '',
       presencaDigital: '', processoVendas: '', expectativaEmpresa: '',
     }))
@@ -418,50 +404,70 @@ export function DiagnosticoForm() {
     })
   }
 
-  const step1Valid =
-    form.nome && form.email && form.whatsapp && form.estado &&
-    (form.perfil === 'produtor' || form.empresa)
+  const origem = utmParams.utm_source ? `ads-${utmParams.utm_source}` : 'diagnostico-gratis'
 
-  const step2Valid =
-    form.perfil === 'empresa'
-      ? (form.segmento && form.faturamentoEmpresa && form.funcionarios && form.tempoOperacao &&
+  const contatoValido = !!(form.nome && form.whatsapp && form.email && form.empresa && form.estado)
+  const perguntasValidas = isEmpresa
+    ? !!(form.segmento && form.faturamentoEmpresa && form.funcionarios && form.tempoOperacao &&
          form.gestao && form.geraClientes && form.presencaDigital && form.processoVendas &&
          form.desafios.length > 0 && form.urgencia && form.expectativaEmpresa)
-      : (form.atividade && form.faturamento && form.hectares && form.desafios.length > 0 &&
+    : !!(form.atividade && form.faturamento && form.hectares && form.desafios.length > 0 &&
          form.gestao && form.urgencia && form.expectativa)
 
-  const handleNext = () => {
-    if (!step1Valid) return
-    setStep(2)
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('event', 'diagnostico_step1_complete', { perfil: form.perfil })
+  // Etapa 2 → envia o LEAD PARCIAL (contato) e segue pro gate
+  const handleContato = async () => {
+    if (!contatoValido) return
+    setSubmitting(true)
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          etapa: 'contato',
+          perfil: form.perfil,
+          nome: form.nome,
+          email: form.email,
+          whatsapp: form.whatsapp,
+          empresa: form.empresa,
+          estado: form.estado,
+          origem,
+          ...utmParams,
+        }),
+      })
+    } catch {
+      // segue mesmo se falhar — o envio completo no fim é o backup
     }
+    gtagEvent('diagnostico_contato', { perfil: form.perfil })
+    setSubmitting(false)
+    setEtapa('gate')
   }
 
+  // Etapa final → envia o DIAGNÓSTICO COMPLETO + dispara e-mail rico pro Lucas
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!step2Valid) return
+    if (!perguntasValidas) return
     setSubmitting(true)
     setError(false)
 
     const common = {
+      etapa: 'completo',
       perfil: form.perfil,
       nome: form.nome,
       email: form.email,
       whatsapp: form.whatsapp,
+      empresa: form.empresa,
       estado: form.estado,
       desafios: form.desafios.join(', '),
       urgencia: form.urgencia,
-      origem: utmParams.utm_source ? `ads-${utmParams.utm_source}` : 'diagnostico-gratis',
+      origem,
       score,
       qualificationLevel: qualLevel,
       ...utmParams,
     }
 
-    const payload = form.perfil === 'empresa'
+    const payload = isEmpresa
       ? {
           ...common,
-          empresa: form.empresa,
           cargo: form.cargo,
           segmento: form.segmento,
           faturamentoEmpresa: form.faturamentoEmpresa,
@@ -489,21 +495,15 @@ export function DiagnosticoForm() {
         }
 
     try {
-      const res = await fetch('/api/diagnostico', {
+      const res = await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-
       if (!res.ok) throw new Error('Falha no envio')
-
-      if (typeof window !== 'undefined' && 'gtag' in window) {
-        const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag
-        gtag('event', 'diagnostico_scored', { score, level: qualLevel, perfil: form.perfil })
-        gtag('event', 'diagnostico_submit', { perfil: form.perfil })
-      }
-
-      setSubmitted(true)
+      gtagEvent('diagnostico_scored', { score, level: qualLevel, perfil: form.perfil })
+      gtagEvent('diagnostico_submit', { perfil: form.perfil })
+      setSubmitted('completo')
     } catch {
       setError(true)
     } finally {
@@ -511,41 +511,52 @@ export function DiagnosticoForm() {
     }
   }
 
-  if (submitted) {
+  const primeiroNome = (form.nome || '').split(' ')[0]
+
+  // ── Telas finais ──
+  if (submitted === 'completo') {
     return (
       <div className="text-center py-10 space-y-4">
         <CheckCircle2 className="mx-auto text-verde-folha" size={64} />
-        <h3 className="text-2xl font-heading font-bold text-navy">
-          Diagnóstico recebido! 📋
-        </h3>
+        <h3 className="text-2xl font-heading font-bold text-navy">Diagnóstico recebido! 📋</h3>
         <p className="text-carvao/60 max-w-md mx-auto">
-          Obrigado, {(form.nome || '').split(' ')[0]}! Entraremos em contato em breve para agendar sua sessão.
+          Obrigado, {primeiroNome}! Recebemos suas respostas e entraremos em contato em breve para agendar sua sessão.
         </p>
       </div>
     )
   }
 
-  const isEmpresa = form.perfil === 'empresa'
+  if (submitted === 'parcial') {
+    return (
+      <div className="text-center py-10 space-y-4">
+        <CheckCircle2 className="mx-auto text-verde-folha" size={64} />
+        <h3 className="text-2xl font-heading font-bold text-navy">Recebemos seu contato! 👍</h3>
+        <p className="text-carvao/60 max-w-md mx-auto">
+          Obrigado, {primeiroNome}! Já estamos com seus dados e entraremos em contato em breve. Quando quiser, é só voltar para responder o diagnóstico completo.
+        </p>
+      </div>
+    )
+  }
+
+  // Progresso (3 etapas; gate compartilha com contato)
+  const passo = etapa === 'perfil' ? 1 : etapa === 'perguntas' ? 3 : 2
+  const pct = passo === 1 ? 33 : passo === 2 ? 66 : 100
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="space-y-6">
       {/* Progress bar */}
       <div className="flex items-center gap-3 mb-2">
-        <span className="text-sm font-medium text-navy">{step} de 2</span>
+        <span className="text-sm font-medium text-navy whitespace-nowrap">{passo} de 3</span>
         <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-verde-folha rounded-full transition-all duration-500"
-            style={{ width: step === 1 ? '50%' : '100%' }}
-          />
+          <div className="h-full bg-verde-folha rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
         </div>
       </div>
 
-      {step === 1 ? (
-        /* ── STEP 1: Perfil + Identificação ── */
+      {/* ── ETAPA 1: PERFIL (sem default) ── */}
+      {etapa === 'perfil' && (
         <div className="space-y-5">
-          {/* Seletor de perfil */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Este diagnóstico é pra... *</label>
+            <label className={labelClass}>Este diagnóstico é pra... *</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {([
                 ['produtor', 'Produtor Rural', 'Tenho propriedade / faço a gestão da fazenda'],
@@ -554,7 +565,7 @@ export function DiagnosticoForm() {
                 <button
                   key={val}
                   type="button"
-                  onClick={() => setPerfil(val)}
+                  onClick={() => escolherPerfil(val)}
                   className={`text-left p-4 rounded-xl border-2 transition-colors ${
                     form.perfil === val
                       ? 'bg-navy text-white border-navy'
@@ -566,68 +577,91 @@ export function DiagnosticoForm() {
                 </button>
               ))}
             </div>
+            <p className="text-xs text-carvao/50 mt-2">Escolha uma opção para continuar.</p>
           </div>
 
+          <Button type="button" onClick={() => setEtapa('contato')} disabled={form.perfil === ''} className="w-full" size="lg">
+            Próximo <ArrowRight className="ml-2" size={18} />
+          </Button>
+        </div>
+      )}
+
+      {/* ── ETAPA 2: CONTATO (envia lead parcial) ── */}
+      {etapa === 'contato' && (
+        <div className="space-y-5">
           <p className="text-sm text-carvao/50">Leva menos de 30 segundos</p>
 
-          {isEmpresa && (
-            <>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Nome da empresa *</label>
-                <Input name="empresa" value={form.empresa || ''} onChange={handleChange} required placeholder="Razão social ou nome fantasia" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Seu cargo</label>
-                <select name="cargo" value={form.cargo || ''} onChange={handleChange} className={selectClass}>
-                  <option value="">Selecione...</option>
-                  {CARGO_OPTIONS.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
-              </div>
-            </>
-          )}
-
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nome completo *</label>
+            <label className={labelClass}>Nome completo *</label>
             <Input name="nome" value={form.nome} onChange={handleChange} required placeholder="Seu nome" />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">E-mail *</label>
-            <Input name="email" value={form.email} onChange={handleChange} required type="email" placeholder="seu@email.com" />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">WhatsApp *</label>
+            <label className={labelClass}>WhatsApp *</label>
             <Input name="whatsapp" value={form.whatsapp} onChange={handleChange} required type="tel" placeholder="(XX) 9XXXX-XXXX" />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Estado *</label>
+            <label className={labelClass}>E-mail *</label>
+            <Input name="email" value={form.email} onChange={handleChange} required type="email" placeholder="seu@email.com" />
+          </div>
+
+          <div>
+            <label className={labelClass}>Empresa / Propriedade *</label>
+            <Input name="empresa" value={form.empresa} onChange={handleChange} required placeholder="Nome da empresa ou propriedade" />
+          </div>
+
+          <div>
+            <label className={labelClass}>Estado *</label>
             <select name="estado" value={form.estado} onChange={handleChange} required className={selectClass}>
               <option value="">Selecione...</option>
               {ESTADOS_BR.map(uf => <option key={uf} value={uf}>{uf}</option>)}
             </select>
           </div>
 
-          <Button type="button" onClick={handleNext} disabled={!step1Valid} className="w-full" size="lg">
-            Próximo <ArrowRight className="ml-2" size={18} />
-          </Button>
+          <div className="flex gap-3">
+            <Button type="button" variant="outline" onClick={() => setEtapa('perfil')} className="flex-1" size="lg">
+              <ArrowLeft className="mr-2" size={18} /> Voltar
+            </Button>
+            <Button type="button" onClick={handleContato} disabled={submitting || !contatoValido} className="flex-1" size="lg">
+              {submitting ? 'Enviando...' : <>Continuar <ArrowRight className="ml-2" size={18} /></>}
+            </Button>
+          </div>
         </div>
-      ) : (
-        /* ── STEP 2: Diagnóstico Estratégico (ramificado por perfil) ── */
-        <div className="space-y-6">
+      )}
+
+      {/* ── ETAPA 3: GATE ── */}
+      {etapa === 'gate' && (
+        <div className="space-y-6 text-center py-4">
+          <h3 className="font-heading text-2xl font-bold text-navy">Tudo certo, {primeiroNome}! 🎉</h3>
+          <p className="text-carvao/70 max-w-md mx-auto">
+            Pra gente já chegar com um diagnóstico de verdade, dá pra responder algumas perguntas rápidas agora? Leva cerca de 3 minutos.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+            <Button type="button" onClick={() => setEtapa('perguntas')} size="lg" className="sm:px-8">
+              Sim, vamos lá <ArrowRight className="ml-2" size={18} />
+            </Button>
+            <Button type="button" variant="outline" onClick={() => setSubmitted('parcial')} size="lg">
+              Agora não
+            </Button>
+          </div>
+          <p className="text-xs text-carvao/40 pt-2">Seus dados já foram recebidos. Sem compromisso.</p>
+        </div>
+      )}
+
+      {/* ── ETAPA 4: PERGUNTAS (diagnóstico completo) ── */}
+      {etapa === 'perguntas' && (
+        <form onSubmit={handleSubmit} className="space-y-6">
           <p className="text-sm text-carvao/50">Responda com calma — leva cerca de 3 minutos</p>
 
           {isEmpresa ? (
             /* ===== EMPRESA DO AGRO ===== */
             <>
-              {/* A: A Empresa */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">A Empresa</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Segmento da empresa *</label>
+                  <label className={labelClass}>Segmento da empresa *</label>
                   <select name="segmento" value={form.segmento || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {SEGMENTOS_EMPRESA.map(s => <option key={s} value={s}>{s}</option>)}
@@ -635,7 +669,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Faturamento anual *</label>
+                  <label className={labelClass}>Faturamento anual *</label>
                   <select name="faturamentoEmpresa" value={form.faturamentoEmpresa || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {FATURAMENTO_EMPRESA_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -643,7 +677,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Número de funcionários *</label>
+                  <label className={labelClass}>Número de funcionários *</label>
                   <select name="funcionarios" value={form.funcionarios || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {FUNCIONARIOS_OPTIONS.map(f => <option key={f} value={f}>{f}</option>)}
@@ -651,19 +685,26 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Há quanto tempo a empresa opera? *</label>
+                  <label className={labelClass}>Há quanto tempo a empresa opera? *</label>
                   <select name="tempoOperacao" value={form.tempoOperacao || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {TEMPO_OPERACAO_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </div>
+
+                <div>
+                  <label className={labelClass}>Seu cargo</label>
+                  <select name="cargo" value={form.cargo || ''} onChange={handleChange} className={selectClass}>
+                    <option value="">Selecione...</option>
+                    {CARGO_OPTIONS.map(c => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
               </fieldset>
 
-              {/* B: Gestão */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Gestão</legend>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">A gestão da empresa é estruturada? *</label>
+                  <label className={labelClass}>A gestão da empresa é estruturada? *</label>
                   <select name="gestao" value={form.gestao} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {GESTAO_OPTIONS.map(g => <option key={g} value={g}>{g}</option>)}
@@ -671,12 +712,11 @@ export function DiagnosticoForm() {
                 </div>
               </fieldset>
 
-              {/* C: Marketing & Vendas */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Marketing &amp; Vendas</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Como a empresa consegue clientes hoje? *</label>
+                  <label className={labelClass}>Como a empresa consegue clientes hoje? *</label>
                   <select name="geraClientes" value={form.geraClientes || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {GERA_CLIENTES_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
@@ -684,7 +724,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Como está a presença digital da empresa? *</label>
+                  <label className={labelClass}>Como está a presença digital da empresa? *</label>
                   <select name="presencaDigital" value={form.presencaDigital || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {PRESENCA_DIGITAL_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
@@ -692,7 +732,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Existe um processo de vendas estruturado? *</label>
+                  <label className={labelClass}>Existe um processo de vendas estruturado? *</label>
                   <select name="processoVendas" value={form.processoVendas || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {PROCESSO_VENDAS_OPTIONS.map(o => <option key={o} value={o}>{o}</option>)}
@@ -700,12 +740,11 @@ export function DiagnosticoForm() {
                 </div>
               </fieldset>
 
-              {/* D: Desafios & Urgência */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Desafios &amp; Urgência</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Maior desafio AGORA (máx. 3) *</label>
+                  <label className={labelClass}>Maior desafio AGORA (máx. 3) *</label>
                   <div className="flex flex-wrap gap-2 mt-1">
                     {DESAFIOS_EMPRESA_OPTIONS.map(d => (
                       <button
@@ -713,9 +752,7 @@ export function DiagnosticoForm() {
                         type="button"
                         onClick={() => toggleDesafio(d)}
                         className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
-                          form.desafios.includes(d)
-                            ? 'bg-navy text-white border-navy'
-                            : 'bg-white text-carvao/70 border-gray-300 hover:border-navy/50'
+                          form.desafios.includes(d) ? 'bg-navy text-white border-navy' : 'bg-white text-carvao/70 border-gray-300 hover:border-navy/50'
                         } ${!form.desafios.includes(d) && form.desafios.length >= 3 ? 'opacity-40 cursor-not-allowed' : ''}`}
                       >
                         {d}
@@ -725,7 +762,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Urgência para resolver? *</label>
+                  <label className={labelClass}>Urgência para resolver? *</label>
                   <select name="urgencia" value={form.urgencia} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {URGENCIA_OPTIONS.map(u => <option key={u} value={u}>{u}</option>)}
@@ -733,7 +770,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">O que espera do diagnóstico? *</label>
+                  <label className={labelClass}>O que espera do diagnóstico? *</label>
                   <select name="expectativaEmpresa" value={form.expectativaEmpresa || ''} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {EXPECTATIVA_EMPRESA_OPTIONS.map(e => <option key={e} value={e}>{e}</option>)}
@@ -744,12 +781,11 @@ export function DiagnosticoForm() {
           ) : (
             /* ===== PRODUTOR RURAL ===== */
             <>
-              {/* Secao A: Atividade Rural */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Atividade Rural</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Principal atividade *</label>
+                  <label className={labelClass}>Principal atividade *</label>
                   <select name="atividade" value={form.atividade} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {ATIVIDADES.map(a => <option key={a} value={a}>{a}</option>)}
@@ -757,7 +793,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Faturamento anual *</label>
+                  <label className={labelClass}>Faturamento anual *</label>
                   <select name="faturamento" value={form.faturamento} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {FATURAMENTO_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -765,7 +801,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Hectares aproximados *</label>
+                  <label className={labelClass}>Hectares aproximados *</label>
                   <select name="hectares" value={form.hectares} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {HECTARES_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -773,12 +809,11 @@ export function DiagnosticoForm() {
                 </div>
               </fieldset>
 
-              {/* Secao B: Gestao */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Gestão Financeira</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Maior desafio AGORA (máx. 3) *</label>
+                  <label className={labelClass}>Maior desafio AGORA (máx. 3) *</label>
                   <div className="flex flex-wrap gap-2 mt-1">
                     {DESAFIOS_OPTIONS.map(d => (
                       <button
@@ -786,9 +821,7 @@ export function DiagnosticoForm() {
                         type="button"
                         onClick={() => toggleDesafio(d)}
                         className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${
-                          form.desafios.includes(d)
-                            ? 'bg-navy text-white border-navy'
-                            : 'bg-white text-carvao/70 border-gray-300 hover:border-navy/50'
+                          form.desafios.includes(d) ? 'bg-navy text-white border-navy' : 'bg-white text-carvao/70 border-gray-300 hover:border-navy/50'
                         } ${!form.desafios.includes(d) && form.desafios.length >= 3 ? 'opacity-40 cursor-not-allowed' : ''}`}
                       >
                         {d}
@@ -798,7 +831,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Gestão estruturada? *</label>
+                  <label className={labelClass}>Gestão estruturada? *</label>
                   <select name="gestao" value={form.gestao} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {GESTAO_OPTIONS.map(g => <option key={g} value={g}>{g}</option>)}
@@ -806,12 +839,11 @@ export function DiagnosticoForm() {
                 </div>
               </fieldset>
 
-              {/* Secao C: Sucessao */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Sucessão &amp; Família</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Filhos/herdeiros interessados?</label>
+                  <label className={labelClass}>Filhos/herdeiros interessados?</label>
                   <select name="filhos" value={form.filhos} onChange={handleChange} className={selectClass}>
                     <option value="">Selecione...</option>
                     {FILHOS_OPTIONS.map(f => <option key={f} value={f}>{f}</option>)}
@@ -819,7 +851,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Situação dos filhos</label>
+                  <label className={labelClass}>Situação dos filhos</label>
                   <select name="situacaoFilhos" value={form.situacaoFilhos} onChange={handleChange} className={selectClass}>
                     <option value="">Selecione...</option>
                     {SITUACAO_FILHOS_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}
@@ -827,7 +859,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Existe conflito familiar?</label>
+                  <label className={labelClass}>Existe conflito familiar?</label>
                   <select name="conflito" value={form.conflito} onChange={handleChange} className={selectClass}>
                     <option value="">Selecione...</option>
                     {CONFLITO_OPTIONS.map(c => <option key={c} value={c}>{c}</option>)}
@@ -835,12 +867,11 @@ export function DiagnosticoForm() {
                 </div>
               </fieldset>
 
-              {/* Secao D: Saude Financeira */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Saúde Financeira</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Dívidas (financiamentos/empréstimos)?</label>
+                  <label className={labelClass}>Dívidas (financiamentos/empréstimos)?</label>
                   <select name="dividas" value={form.dividas} onChange={handleChange} className={selectClass}>
                     <option value="">Selecione...</option>
                     {DIVIDAS_OPTIONS.map(d => <option key={d.value} value={d.value}>{d.label}</option>)}
@@ -848,7 +879,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Investimento em tecnologia/ano?</label>
+                  <label className={labelClass}>Investimento em tecnologia/ano?</label>
                   <select name="investimento" value={form.investimento} onChange={handleChange} className={selectClass}>
                     <option value="">Selecione...</option>
                     {INVESTIMENTO_OPTIONS.map(i => <option key={i.value} value={i.value}>{i.label}</option>)}
@@ -856,12 +887,11 @@ export function DiagnosticoForm() {
                 </div>
               </fieldset>
 
-              {/* Secao E: Urgencia & Expectativa */}
               <fieldset className="space-y-4">
                 <legend className="text-sm font-bold text-navy uppercase tracking-wide">Urgência &amp; Expectativa</legend>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Urgência para resolver? *</label>
+                  <label className={labelClass}>Urgência para resolver? *</label>
                   <select name="urgencia" value={form.urgencia} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {URGENCIA_OPTIONS.map(u => <option key={u} value={u}>{u}</option>)}
@@ -869,7 +899,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Já trabalhou com consultor?</label>
+                  <label className={labelClass}>Já trabalhou com consultor?</label>
                   <select name="consultor" value={form.consultor} onChange={handleChange} className={selectClass}>
                     <option value="">Selecione...</option>
                     {CONSULTOR_OPTIONS.map(c => <option key={c} value={c}>{c}</option>)}
@@ -877,7 +907,7 @@ export function DiagnosticoForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">O que espera do diagnóstico? *</label>
+                  <label className={labelClass}>O que espera do diagnóstico? *</label>
                   <select name="expectativa" value={form.expectativa} onChange={handleChange} required className={selectClass}>
                     <option value="">Selecione...</option>
                     {EXPECTATIVA_OPTIONS.map(e => <option key={e} value={e}>{e}</option>)}
@@ -894,15 +924,15 @@ export function DiagnosticoForm() {
           )}
 
           <div className="flex gap-3">
-            <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1" size="lg">
+            <Button type="button" variant="outline" onClick={() => setEtapa('gate')} className="flex-1" size="lg">
               <ArrowLeft className="mr-2" size={18} /> Voltar
             </Button>
-            <Button type="submit" disabled={submitting || !step2Valid} className="flex-1" size="lg">
+            <Button type="submit" disabled={submitting || !perguntasValidas} className="flex-1" size="lg">
               {submitting ? 'Enviando...' : 'Enviar Diagnóstico'}
             </Button>
           </div>
-        </div>
+        </form>
       )}
-    </form>
+    </div>
   )
 }

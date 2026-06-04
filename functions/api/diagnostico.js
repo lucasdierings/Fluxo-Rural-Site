@@ -121,6 +121,39 @@ function buildEmail(data) {
     </div>`
 }
 
+// E-mail do LEAD PARCIAL (etapa de contato — antes das perguntas)
+function buildEmailParcial(data) {
+  const isEmpresa = data.perfil === 'empresa'
+  const titulo = isEmpresa ? 'Novo Lead — Empresa do Agro (parcial)' : 'Novo Lead — Produtor Rural (parcial)'
+  const contato = bloco('Contato', [
+    linha('Nome', data.nome),
+    linha('E-mail', data.email),
+    linha('WhatsApp', data.whatsapp),
+    linha('Empresa / Propriedade', data.empresa),
+    linha('Estado', data.estado),
+  ])
+  const tracking = bloco('Tracking', [
+    linha('Origem', data.origem),
+    linha('UTM source', data.utm_source),
+    linha('UTM medium', data.utm_medium),
+    linha('UTM campaign', data.utm_campaign),
+  ])
+  return `
+    <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;background:#F8F6F1;">
+      <div style="background:#7AB648;padding:24px;text-align:center;">
+        <h1 style="color:#FFFFFF;margin:0;font-size:20px;">${esc(titulo)}</h1>
+      </div>
+      <div style="padding:24px;background:#FFFFFF;">
+        <p style="margin:0 0 14px;color:#1C1C1C;font-size:14px;">Contato capturado no inicio do diagnostico (a pessoa ainda NAO completou as perguntas).</p>
+        ${contato}
+        ${tracking}
+      </div>
+      <div style="background:#1E4D7B;padding:16px;text-align:center;">
+        <p style="color:#FFFFFF;margin:0;font-size:12px;">Fluxo Rural Consultoria</p>
+      </div>
+    </div>`
+}
+
 export async function onRequest(context) {
   const { request, env } = context
 
@@ -148,10 +181,21 @@ export async function onRequest(context) {
       })
     }
 
-    const nivel = NIVEIS[data.qualificationLevel] || { emoji: '⚪', label: data.qualificationLevel || '—' }
     const primeiroNome = String(data.nome).split(' ')[0]
     const tag = data.perfil === 'empresa' ? '🏢 Empresa' : '🌾 Produtor'
-    const subject = `${nivel.emoji} Novo Diagnóstico (${tag}): ${primeiroNome} — ${nivel.label} · Score ${data.score ?? '-'}`
+
+    let subject
+    let html
+    if (data.etapa === 'contato') {
+      // Lead parcial (so contato) — disparado na etapa de contato
+      subject = `🆕 Lead parcial (${tag}): ${primeiroNome}${data.empresa ? ' — ' + data.empresa : ''}`
+      html = buildEmailParcial(data)
+    } else {
+      // Diagnostico completo
+      const nivel = NIVEIS[data.qualificationLevel] || { emoji: '⚪', label: data.qualificationLevel || '—' }
+      subject = `${nivel.emoji} Novo Diagnóstico (${tag}): ${primeiroNome} — ${nivel.label} · Score ${data.score ?? '-'}`
+      html = buildEmail(data)
+    }
 
     const resp = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -164,7 +208,7 @@ export async function onRequest(context) {
         to: TO,
         reply_to: data.email,
         subject,
-        html: buildEmail(data),
+        html,
       }),
     })
 
