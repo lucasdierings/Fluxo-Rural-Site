@@ -204,23 +204,28 @@ Hoje `WHATSAPP_URL` em `BeweatherLanding.tsx` aponta pro número pessoal do Luca
 
 ## Diagnostico Inteligente (/diagnostico)
 
-### Status: CONCLUIDO (formulario + scoring)
-- Formulario 2-step: Identificacao (nome, email, whatsapp, estado) + Pre-diagnostico (17 campos)
-- Scoring 0-150 pontos (backend only, user nao ve)
-- Qualificacao: Verde/Amarelo/Laranja/Vermelho (enviado pro Google Sheets)
-- UTM tracking no formulario
-- Apps Script com notificacao por email
+### Status: CONCLUIDO — com SELETOR DE PERFIL (produtor B2C + empresa B2B) desde jun/2026
+- **Step 1** tem seletor de perfil: **Produtor Rural** vs **Empresa do Agro** (default produtor). Para empresa, o Step 1 ganha `empresa` (obrigatorio) e `cargo` (opcional).
+- **Step 2 ramifica por perfil** (`components/forms/DiagnosticoForm.tsx`, render condicional, NAO data-driven):
+  - **Produtor** (inalterado): Atividade Rural, Gestao, Sucessao & Familia, Saude Financeira, Urgencia.
+  - **Empresa (B2B)**: A Empresa (segmento/faturamento/funcionarios/tempo), Gestao, **Marketing & Vendas** (geraClientes/presencaDigital/processoVendas), Desafios & Urgencia. Foco = gestao + marketing/vendas digitais.
+- **Scoring profile-aware**: `calculateScore` (produtor, byte-for-byte intacto) + `calculateScoreEmpresa`; mesma escala 0-150 e tiers Verde(>=100)/Amarelo(>=70)/Laranja(>=40)/Vermelho. Oculto do usuario.
+- `setPerfil` reseta TODOS os campos ramificados ao trocar de perfil (evita vazamento no scoring/payload). UTM tracking mantido.
+- Pagina `/diagnostico` agora e **dual-audience** (copy produtor + empresa).
 
-### Integracao
-- Google Apps Script: recebe dados do formulario + scoring + UTM
-- Script URL configurada nos formularios (contato + diagnostico)
+### Integracao — MIGRADO de Apps Script/Sheets para Cloudflare Function + Resend (jun/2026)
+- O diagnostico **NAO usa mais Google Sheets/Apps Script**. Faz **POST real** (nao mais `no-cors`) para **`functions/api/diagnostico.js`** (Cloudflare Pages Function).
+- A Function envia o lead por **e-mail via Resend** (REST API, HTML formatado por perfil, com escape) para `lucasdierings12@gmail.com`, `reply_to` = e-mail do lead. Resposta real → o form so mostra sucesso se o e-mail saiu (acabou o envio as cegas).
+- **REQUER** env var `RESEND_API_KEY` no Cloudflare Pages (projeto `fluxo-rural-site`, Production) — setada com key dedicada **"fluxorural-pages-prod"** (Sending access). Dominio `fluxorural.com.br` ja verificado no Resend (remetente `contato@fluxorural.com.br`).
+- **Testado ponta-a-ponta (jun/2026): POST → 200 → e-mail Delivered no Gmail.** ✓
+- Email-only (sem armazenar lista). Registro futuro, se quiser: Cloudflare D1/KV ou Airtable (NAO voltar pro Sheets).
 
 ---
 
 ## Formularios e APIs
-- `/api/contact` — formulario de contato (Resend)
-- `/api/newsletter` — newsletter (MailerLite + Resend welcome email)
-- Formulario de diagnostico envia direto pro Google Apps Script (client-side)
+- **Diagnostico** (`/diagnostico`) → **POST real** para `functions/api/diagnostico.js` (Cloudflare Function) → e-mail via Resend. NAO usa mais GAS (ver secao Diagnostico).
+- **Contato e Newsletter** → ainda enviam client-side `no-cors` pro **Google Apps Script** (`docs/google-apps-script.js`: grava em Sheets + e-mail via MailApp). As rotas Next `/api/contact` e `/api/newsletter` (Resend, `lib/resend.ts`) existem no codigo mas **NAO rodam em producao** (static export nao executa route handlers). Migrar pra Cloudflare Function + Resend tambem e um TODO futuro, se quiser sair do Sheets nesses tambem.
+- **Resend:** 1 conta cobre todos os forms (limite = volume: 3k e-mails/mes no free, NAO "nº de forms"). Keys existentes: `beweather-pages-prod`, `fluxorural-pages-prod`. **Cloudflare Pages e projeto SEPARADO por marca:** `fluxo-rural-site` (consultoria) ≠ `beweather-fluxo-rural` (estacoes) — cada um com suas env vars.
 
 ---
 
@@ -257,7 +262,7 @@ Hoje `WHATSAPP_URL` em `BeweatherLanding.tsx` aponta pro número pessoal do Luca
 - [x] Footer logo com lazy loading e sizes
 
 ## Pendencias
-- [ ] Aumentar logo Navbar (muito pequeno)
+- [x] Logo Navbar — resolvida: nova logo horizontal branca + tamanho ajustado (jun/2026)
 - [ ] Investigar badge "3 Issues" (canto inferior esquerdo)
 - [ ] Configurar sequencia de email automatica (MailerLite)
 - [ ] Campanha Google Ads com R$ 880
@@ -266,5 +271,33 @@ Hoje `WHATSAPP_URL` em `BeweatherLanding.tsx` aponta pro número pessoal do Luca
 
 ---
 
-**Ultima atualizacao:** 07 de abril de 2026
-**Status:** Revisao completa UX/UI/Mobile/SEO mergeada na main. Todas as imagens otimizadas. Breadcrumbs, OG images, newsletter nativa, robots.txt para IA.
+## Sessao 03 jun/2026 — Pivo B2B: Marketing/Vendas + Diagnostico empresa + entrega via Resend
+
+Tudo deployado na main (commits `bdb20ab` e `c8f53ec`) e no ar em fluxorural.com.br.
+
+### Marca / Logo (Navbar)
+- Nova **logo horizontal branca sem fundo**: `public/logo-fluxo-rural-branco-horizontal.png` (~60KB, alpha limpo via Pillow). Substitui `logo-colorido.svg` (que era PNG embutido em SVG).
+- **Header navy solido nas paginas internas** (guard `isHome` em `components/layout/Navbar.tsx`): home segue transparente→navy no scroll; demais paginas (topo claro, ex. /blog, /contato) ficam navy desde o topo pra a logo branca ter contraste.
+- Logo reduzida ~20% a pedido do Lucas: className `h-8 sm:h-10 lg:h-12`. (Resolve a antiga pendencia "logo Navbar muito pequeno".)
+
+### Pivo de servico: Mentoria/Sucessao → **Marketing e Vendas Digitais**
+- Lucas focou **B2B (empresas do agro)** alem do produtor. "Mentoria para Sucessao Familiar" foi **substituido** por **"Marketing e Vendas Digitais"** em TODO o site: card da home (`ServicesPreview`), `/servicos`, footer, ContactForm (assunto), JSON-LD do `layout.tsx`.
+- **Nova pagina** `app/servicos/marketing-digital/page.tsx` (3 pilares + "O que esta incluido", SEM depoimento fake). **Redirect 301** `/servicos/mentoria` → `/servicos/marketing-digital` em `public/_redirects` (rota antiga removida).
+- Hero H1 → **"Inovacao e Gestao Estrategica no Agronegocio"**. "Sucessao" de-enfatizada no posicionamento, mas **mantida** como expertise no JSON-LD e como artigo de blog / tema de palestra legitimos.
+
+### Na Midia (homepage, `NaMidia.tsx`)
+- **JCI** estava quebrada (path `/images/Lucas discurso JCI.JPG` com espacos/maiusculo) → corrigido pra `lucas-discurso-jci.jpg` + comprimida (5.7MB→142KB).
+- **NH Cast**: trocado o logo pela **foto do Lucas no estudio** (`public/images/lucas-nhcast.jpg`, 89KB).
+
+### Diagnostico B2B + backend Resend
+Ver secao **"Diagnostico Inteligente"** acima (seletor de perfil, perguntas/scoring B2B, migracao do envio pra Cloudflare Function + Resend — testado, e-mail Delivered).
+
+### Observacoes p/ proximas sessoes
+- **Capas do blog pesadas** (`public/images/gestao-blog.png` ~8MB e outras) — comprimir com sips (padrao do repo) pra melhorar LCP. **Oferta ainda pendente.**
+- **Arquivos soltos nao commitados** (tooling local, fora do site): `.agents/`, `AGENTS.md`, `public/google-ads/`, `scripts/` — decidir gitignore vs commit.
+- Contato/Newsletter ainda no Apps Script/Sheets (so o diagnostico migrou pro Resend).
+
+---
+
+**Ultima atualizacao:** 03 de junho de 2026
+**Status:** Pivo B2B no ar. Diagnostico com seletor de perfil (produtor/empresa) entregando lead por e-mail via Cloudflare Function + Resend (testado ponta-a-ponta, Delivered). Servico "Marketing e Vendas Digitais" substituiu "Mentoria/Sucessao". Logo horizontal branca (-20%) no header. Anterior (07/abr/2026): revisao UX/UI/Mobile/SEO, imagens otimizadas, breadcrumbs, OG images, newsletter nativa, robots.txt para IA.
