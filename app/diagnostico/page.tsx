@@ -4,26 +4,27 @@ import { CheckCircle2, Clock, CalendarCheck, FileText, Shield, Monitor, MapPin }
 import { DiagnosticoForm } from '@/components/forms/DiagnosticoForm'
 
 export const metadata: Metadata = {
-  title: 'Diagnóstico Gratuito de Gestão Rural | Fluxo Rural',
-  description: '30 minutos para avaliar sua gestão financeira, sucessão familiar e inovação. Sem compromisso.',
+  title: 'Diagnóstico Gratuito para o Agro | Fluxo Rural',
+  description: '30 minutos para avaliar gestão, marketing e vendas — para produtores rurais e empresas do agro. Sem compromisso.',
   openGraph: {
     title: 'Diagnóstico Gratuito | Fluxo Rural Consultoria',
-    description: 'Agende um diagnóstico gratuito de 30 minutos para sua propriedade rural.',
+    description: 'Diagnóstico gratuito de 30 minutos para produtores rurais e empresas do agronegócio.',
     images: [{ url: '/og-image.png' }],
   },
 }
 
 const benefits = [
-  { icon: FileText, emoji: '📊', title: 'Análise personalizada', desc: 'Avaliação completa da gestão financeira da sua propriedade' },
-  { icon: CheckCircle2, emoji: '🎯', title: 'Gargalos identificados', desc: 'Identificação de oportunidades de melhoria imediatas' },
+  { icon: FileText, emoji: '📊', title: 'Análise personalizada', desc: 'Avaliação completa da gestão do seu negócio no agro' },
+  { icon: CheckCircle2, emoji: '🎯', title: 'Gargalos identificados', desc: 'Onde você perde dinheiro, clientes ou eficiência — e como melhorar' },
   { icon: CalendarCheck, emoji: '📅', title: 'Plano de ação 90 dias', desc: 'Roadmap prático com próximos passos concretos' },
-  { icon: Shield, emoji: '✨', title: 'Recomendações reais', desc: 'Baseadas em dados e experiência com centenas de produtores' },
+  { icon: Shield, emoji: '✨', title: 'Recomendações reais', desc: 'Baseadas em dados e experiência com produtores e empresas do agro' },
 ]
 
 const audience = [
   'Produtores rurais que querem organizar as finanças',
   'Famílias em processo de sucessão',
-  'Gestores buscando inovação tecnológica',
+  'Revendas, cooperativas e empresas do agro que querem vender mais',
+  'Negócios do agro que dependem só de indicação e querem estruturar marketing e vendas',
   'Quem sente que poderia ter mais resultado com o que já tem',
 ]
 
@@ -38,6 +39,7 @@ const faqs = [
   { q: 'Quanto tempo leva a sessão?', a: '30 minutos focados e objetivos. Você sai com um plano claro.' },
   { q: 'Preciso contratar algo depois?', a: 'Não. O diagnóstico é 100% independente. Se fizer sentido, podemos conversar sobre consultoria, mas não há obrigação.' },
   { q: 'Como funciona o agendamento?', a: 'Após preencher o formulário, entraremos em contato em até 24h para marcar o melhor dia e horário para você.' },
+  { q: 'Funciona pra empresa, não só produtor?', a: 'Sim. Você escolhe no início se é produtor rural ou empresa do agro, e as perguntas se adaptam ao seu caso.' },
 ]
 
 export default function DiagnosticoPage() {
@@ -53,7 +55,7 @@ export default function DiagnosticoPage() {
             Diagnóstico Gratuito de 30 Minutos
           </h1>
           <p className="text-white/80 text-lg md:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
-            Descubra oportunidades de melhoria na gestão da sua propriedade rural. Avalie gestão financeira, sucessão e inovação.
+            Descubra oportunidades de melhoria na gestão, no marketing e nas vendas — seja você produtor rural ou empresa do agro.
           </p>
           <a
             href="#formulario"
@@ -210,13 +212,13 @@ export default function DiagnosticoPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Diagnóstico Gratuito de Gestão Rural',
+            name: 'Diagnóstico Gratuito para o Agronegócio',
             provider: {
               '@type': 'Person',
               name: 'Lucas Dierings',
               jobTitle: 'Engenheiro Agrônomo e Consultor',
             },
-            description: 'Diagnóstico gratuito de 30 minutos para avaliar gestão financeira, sucessão familiar e inovação em propriedades rurais.',
+            description: 'Diagnóstico gratuito de 30 minutos para avaliar gestão, marketing e vendas de produtores rurais e empresas do agronegócio.',
             offers: {
               '@type': 'Offer',
               price: '0',
