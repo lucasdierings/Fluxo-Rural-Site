@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react'
+import { trackLead } from '@/lib/track'
 
 const ESTADOS_BR = [
   'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA',
@@ -437,7 +438,7 @@ export function DiagnosticoForm() {
     } catch {
       // segue mesmo se falhar — o envio completo no fim é o backup
     }
-    gtagEvent('diagnostico_contato', { perfil: form.perfil })
+    trackLead('diagnostico_contato', { form_location: 'diagnostico', perfil: form.perfil, origem })
     setSubmitting(false)
     setEtapa('gate')
   }
@@ -502,7 +503,7 @@ export function DiagnosticoForm() {
       })
       if (!res.ok) throw new Error('Falha no envio')
       gtagEvent('diagnostico_scored', { score, level: qualLevel, perfil: form.perfil })
-      gtagEvent('diagnostico_submit', { perfil: form.perfil })
+      trackLead('diagnostico_submit', { form_location: 'diagnostico', perfil: form.perfil, origem })
       setSubmitted('completo')
     } catch {
       setError(true)

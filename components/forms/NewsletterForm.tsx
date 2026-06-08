@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { trackLead, readAttribution } from '@/lib/track'
 
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
 
@@ -19,6 +20,9 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
     if (!email) return
 
     setStatus('loading')
+    const attr = readAttribution()
+    const formLocation =
+      variant === 'footer' ? 'newsletter-footer' : variant === 'inline' ? 'newsletter-artigo' : 'newsletter-pagina'
     try {
       await fetch(SCRIPT_URL, {
         method: 'POST',
@@ -28,10 +32,12 @@ export function NewsletterForm({ variant = 'default' }: NewsletterFormProps) {
           _tipo: 'newsletter',
           email,
           fonte: variant === 'footer' ? 'footer' : variant === 'inline' ? 'artigo' : 'página',
+          ...attr,
         }),
       })
       setStatus('success')
       setEmail('')
+      trackLead('newsletter_signup', { form_location: formLocation, origem: attr.origem })
     } catch {
       setStatus('error')
     }

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { trackLead, readAttribution } from '@/lib/track'
 
 // ↓ Preencher com a URL do Google Apps Script após o deploy
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
@@ -47,15 +48,18 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('loading')
+    const attr = readAttribution()
     try {
       // mode: 'no-cors' necessário para Google Apps Script via site estático
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, _tipo: 'contato' }),
+        body: JSON.stringify({ ...form, _tipo: 'contato', ...attr }),
       })
       setStatus('success')
+      // Lead quente — só params não-PII vão pro GA4/GTM (nome/email ficam no fetch)
+      trackLead('generate_lead', { form_location: 'contato', interesse: form.interesse, origem: attr.origem })
     } catch {
       setStatus('error')
     }

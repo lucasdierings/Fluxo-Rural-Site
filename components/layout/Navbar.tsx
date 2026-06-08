@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { trackCta } from '@/lib/track'
 
 const navLinks = [
   { href: '/sobre', label: 'Sobre' },
@@ -71,7 +72,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Button asChild size="sm">
-              <Link href="/diagnostico">Diagnóstico Grátis</Link>
+              <Link href="/diagnostico" onClick={() => trackCta({ cta: 'diagnostico', local: 'navbar-desktop' })}>Diagnóstico Grátis</Link>
             </Button>
           </div>
 
@@ -105,7 +106,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Button asChild size="lg" className="mt-4 w-full max-w-xs">
-            <Link href="/diagnostico" onClick={() => setIsOpen(false)}>
+            <Link href="/diagnostico" onClick={() => { setIsOpen(false); trackCta({ cta: 'diagnostico', local: 'navbar-mobile' }) }}>
               Diagnóstico Grátis
             </Link>
           </Button>

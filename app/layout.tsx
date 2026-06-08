@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import AnalyticsGate from '@/components/analytics/AnalyticsGate'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp'
@@ -210,16 +210,12 @@ export default function RootLayout({
         <link rel="alternate" type="text/plain" href="https://fluxorural.com.br/llms.txt" title="LLMs.txt" />
       </head>
       <body className="font-body text-carvao antialiased">
-        {/* GTM do site principal (fluxorural.com.br). Container separado do Beweather.
-            GA4 continua via GoogleAnalytics abaixo; o GTM cuida da conversão Lead - Palestra. */}
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || 'GTM-NG4CVQ38'} />
+        {/* GA4 + GTM do site principal, com guard de rota (não carrega em /beweather). */}
+        <AnalyticsGate />
         <Navbar />
         <main>{children}</main>
         <Footer />
         <FloatingWhatsApp />
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
       </body>
     </html>
   )

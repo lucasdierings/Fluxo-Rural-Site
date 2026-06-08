@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CheckCircle2, BarChart2, Sprout, Users, TrendingUp } from 'lucide-react'
+import { trackLead, readAttribution } from '@/lib/track'
 
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
 
@@ -39,6 +40,7 @@ export default function NewsletterPage() {
   const onSubmit = async (data: FormData) => {
     setStatus('loading')
     setSubmittedName(data.nome.split(' ')[0])
+    const attr = readAttribution()
     try {
       await fetch(SCRIPT_URL, {
         method: 'POST',
@@ -49,9 +51,11 @@ export default function NewsletterPage() {
           nome: data.nome,
           email: data.email,
           fonte: 'pagina-newsletter',
+          ...attr,
         }),
       })
       setStatus('success')
+      trackLead('newsletter_signup', { form_location: 'newsletter-landing', origem: attr.origem })
     } catch {
       setStatus('error')
     }

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { trackCta } from '@/lib/track'
 
 export default function FinalCTA() {
   return (
@@ -22,7 +23,7 @@ export default function FinalCTA() {
             Vamos conversar sobre como levar mais organização, clareza financeira e inovação para o seu negócio no campo.
           </p>
           <Button asChild size="lg" className="bg-white text-verde-escuro hover:bg-white/90 hover:shadow-apple-lg">
-            <Link href="/diagnostico">
+            <Link href="/diagnostico" onClick={() => trackCta({ cta: 'diagnostico', local: 'final-cta-home' })}>
               Agendar Diagnóstico Grátis <ArrowRight className="ml-2" size={18} />
             </Link>
           </Button>

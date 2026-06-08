@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Linkedin, Instagram, MessageCircle } from 'lucide-react'
+import { trackLead } from '@/lib/track'
 import { NewsletterForm } from '@/components/forms/NewsletterForm'
 
 export default function Footer() {
@@ -53,6 +54,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp de Lucas Dierings"
+                onClick={() => trackLead('whatsapp_click', { form_location: 'footer', page: pathname || '/', origem: 'site' })}
                 className="bg-white/10 hover:bg-verde-folha/20 p-2.5 rounded-lg transition-colors"
               >
                 <MessageCircle size={20} />

@@ -3,6 +3,7 @@
 import { MessageCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
+import { trackLead } from '@/lib/track'
 import type { VariantProps } from 'class-variance-authority'
 
 // Número oficial Fluxo Rural (Lucas). Mantido em um só lugar.
@@ -33,17 +34,9 @@ export function WhatsappCTA({
 }: WhatsappCTAProps) {
   const href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(message)}`
 
-  // Conversão "Lead - Palestra": GA4 (gtag) p/ relatório + dataLayer (GTM) que
-  // dispara a tag de conversão do Google Ads (container GTM-NG4CVQ38).
+  // Conversão "Lead - Palestra" via helper compartilhado (gtag→GA4 + dataLayer→GTM/Ads).
   const handleClick = () => {
-    if (typeof window === 'undefined') return
-    const w = window as unknown as {
-      gtag?: (...args: unknown[]) => void
-      dataLayer?: Record<string, unknown>[]
-    }
-    w.gtag?.('event', 'palestra_whatsapp_click', { origem: origem || 'geral' })
-    w.dataLayer = w.dataLayer || []
-    w.dataLayer.push({ event: 'palestra_whatsapp_click', origem: origem || 'geral' })
+    trackLead('palestra_whatsapp_click', { form_location: 'palestras', origem: origem || 'geral' })
   }
 
   return (

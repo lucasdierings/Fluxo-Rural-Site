@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-react'
+import { trackCta } from '@/lib/track'
 
 export default function Hero() {
   return (
@@ -62,7 +63,7 @@ export default function Hero() {
                 <Link href="/servicos">Conheça os Serviços</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/diagnostico">Diagnóstico Grátis</Link>
+                <Link href="/diagnostico" onClick={() => trackCta({ cta: 'diagnostico', local: 'hero' })}>Diagnóstico Grátis</Link>
               </Button>
             </motion.div>
           </motion.div>
