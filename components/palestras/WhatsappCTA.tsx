@@ -33,16 +33,17 @@ export function WhatsappCTA({
 }: WhatsappCTAProps) {
   const href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(message)}`
 
-  // Conversão: dispara no mesmo padrão gtag já usado no DiagnosticoForm.
-  // Vira a ação "Lead - Palestra" quando o Google Ads estiver ligado.
+  // Conversão "Lead - Palestra": GA4 (gtag) p/ relatório + dataLayer (GTM) que
+  // dispara a tag de conversão do Google Ads (container GTM-NG4CVQ38).
   const handleClick = () => {
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      ;(window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-        'event',
-        'palestra_whatsapp_click',
-        { origem: origem || 'geral' }
-      )
+    if (typeof window === 'undefined') return
+    const w = window as unknown as {
+      gtag?: (...args: unknown[]) => void
+      dataLayer?: Record<string, unknown>[]
     }
+    w.gtag?.('event', 'palestra_whatsapp_click', { origem: origem || 'geral' })
+    w.dataLayer = w.dataLayer || []
+    w.dataLayer.push({ event: 'palestra_whatsapp_click', origem: origem || 'geral' })
   }
 
   return (
