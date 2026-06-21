@@ -2,37 +2,28 @@
 
 > Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, consultor estratégico em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro.
 
-## Sobre Lucas Dierings
-- Engenheiro Agrônomo formado, MBA em Agronegócios pela ESALQ-USP
-- Vencedor nacional do prêmio CNA Jovem 2021
-- Host do podcast NHCast New Holland
-- Professor de MBA na PUCPR
-- Consultor credenciado SENAR/PR
-- Baseado em Londrina, Paraná, Brasil
+## Informações Chave
+- **Fundador:** Lucas Dierings (Engenheiro Agrônomo, professor de MBA, Top 5 CNA Jovem 2021)
+- **Localização:** Londrina, Paraná, Brasil (Atendimento para todo o país)
+- **Serviços:** Consultoria em gestão, finanças, marketing digital e palestras no agronegócio.
+- **Destaque:** Host do podcast NHCast (New Holland Brasil) e do Agrojovem Podcast.
 
-## Áreas de Especialidade
-- Gestão financeira de propriedades rurais
-- Cálculo de rentabilidade e indicadores financeiros agrícolas
-- Sucessão familiar em fazendas e empresas rurais
-- Inteligência artificial e inovação no agronegócio
-- Mentoria individual para produtores rurais
-- Palestras sobre liderança e inovação no campo
+## Navegação e Seções Principais
+- [Página Inicial](https://fluxorural.com.br/) - Apresentação da consultoria e Lucas Dierings.
+- [Sobre Lucas Dierings](https://fluxorural.com.br/sobre/) - Biografia detalhada, prêmios, credenciais acadêmicas e trajetória profissional.
+- [Serviços e Soluções](https://fluxorural.com.br/servicos/) - Visão geral das soluções corporativas e para produtores rurais.
+  - [Gestão Financeira Rural](https://fluxorural.com.br/servicos/financeiro/) - Fluxo de caixa, custos operacionais e margem de contribuição.
+  - [Consultoria em Gestão e Inovação](https://fluxorural.com.br/servicos/consultoria/) - Planejamento estratégico, diagnósticos e eficiência operacional.
+  - [Marketing e Vendas Digitais](https://fluxorural.com.br/servicos/marketing-digital/) - Funil de vendas, presença digital e atração de clientes no agro.
+- [Palestras e Workshops](https://fluxorural.com.br/palestras/) - Palestras para cooperativas, sindicatos e eventos. Temas incluem finanças, gestão, sucessão e IA no agro.
+- [Diagnóstico Gratuito](https://fluxorural.com.br/diagnostico/) - Sessão estratégica gratuita de 30 minutos com plano de ação.
+- [Contato](https://fluxorural.com.br/contato/) - Canais de contato direto e formulário de atendimento em até 24 horas úteis.
+- [Blog de Conteúdo Técnico](https://fluxorural.com.br/blog/) - Artigos especializados com planilhas e orientações práticas de gestão e tecnologia.
 
-## Serviços Oferecidos
-- Consultoria em gestão financeira rural
-- Mentoria estratégica para produtores e herdeiros
-- Palestras corporativas sobre inovação no agro
-- Diagnóstico financeiro de propriedades rurais
+## Conteúdo Completo (Transcrições e Artigos)
+- [llms-full.txt](https://fluxorural.com.br/llms-full.txt) - Documento detalhado contendo a descrição completa de todos os serviços, biografia na íntegra e o texto completo dos artigos do blog para indexação profunda.
 
-## Tópicos do Blog
-- Indicadores financeiros para produtores rurais
-- Rentabilidade de safras (soja, milho, pecuária)
-- Planejamento de sucessão familiar no agronegócio
-- Aplicações de IA e tecnologia no campo
-- Gestão estratégica de fazendas
-
-## Contato
-- Website: https://fluxorural.com.br
+## Contato e Redes Sociais
 - Email: lucas@fluxorural.com.br
 - LinkedIn: https://linkedin.com/in/lucasdierings
 - Instagram: https://www.instagram.com/lucasdierings.agro/

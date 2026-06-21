@@ -30,9 +30,19 @@ const deliverables = [
   'Indicadores e acompanhamento de resultados (ROI)',
 ]
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Marketing e Vendas Digitais no Agronegócio',
+  provider: { '@type': 'Person', name: 'Lucas Dierings' },
+  description: 'Posicione sua marca, atraia clientes e venda mais — sem depender só da indicação.',
+  url: 'https://fluxorural.com.br/servicos/marketing-digital/',
+}
+
 export default function MarketingDigitalPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos' }, { label: 'Marketing e Vendas Digitais' }]} />
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
         <Image src="/images/lucas-palestrante.jpg" alt="Lucas Dierings — Marketing e vendas digitais no agronegócio" fill className="object-cover object-[center_30%]" priority />

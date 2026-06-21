@@ -14,5 +14,5 @@ module.exports = {
     ],
     additionalSitemaps: [],
   },
-  exclude: ['/api/*', '/admin', '/beweather', '/beweather/'],
+  exclude: ['/api/*', '/admin', '/beweather', '/beweather/', '/servicos/palestras', '/servicos/palestras/'],
 }

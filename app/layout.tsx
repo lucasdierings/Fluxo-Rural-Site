@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://fluxorural.com.br'),
   title: {
     default: 'Lucas Dierings | Fluxo Rural Consultoria',
-    template: '%s | Lucas Dierings — Fluxo Rural',
+    template: '%s | Fluxo Rural',
   },
   description: 'Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem. Referência em gestão financeira rural, inovação e estratégia no agronegócio brasileiro. Consultoria, marketing e palestras. Londrina, PR.',
   keywords: [
@@ -149,7 +149,7 @@ const localBusinessJsonLd = {
   },
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Curitiba',
+    addressLocality: 'Londrina',
     addressRegion: 'PR',
     addressCountry: 'BR',
   },

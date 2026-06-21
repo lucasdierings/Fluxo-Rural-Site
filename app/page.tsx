@@ -1,5 +1,4 @@
-'use client'
-
+import type { Metadata } from 'next'
 import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'
 import ServicesPreview from '@/components/sections/ServicesPreview'
@@ -9,6 +8,18 @@ import BlogPreview from '@/components/sections/BlogPreview'
 import NaMidia from '@/components/sections/NaMidia'
 import Testimonials from '@/components/sections/Testimonials'
 import FinalCTA from '@/components/sections/FinalCTA'
+
+export const metadata: Metadata = {
+  title: {
+    absolute: 'Lucas Dierings | Consultoria, Marketing e Palestras no Agronegócio',
+  },
+  description: 'Consultoria estratégica em gestão financeira rural, inovação, sucessão familiar e marketing digital no agronegócio. Lucas Dierings, fundador da Fluxo Rural.',
+  openGraph: {
+    title: 'Lucas Dierings | Consultoria, Marketing e Palestras no Agronegócio',
+    description: 'Consultoria estratégica em gestão financeira rural, inovação, sucessão familiar e marketing digital no agronegócio. Lucas Dierings, fundador da Fluxo Rural.',
+    images: [{ url: '/og-image.png' }],
+  },
+}
 
 export default function HomePage() {
   return (
@@ -25,3 +36,4 @@ export default function HomePage() {
     </>
   )
 }
+
