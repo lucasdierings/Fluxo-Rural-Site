@@ -9,7 +9,7 @@ import { NewsletterForm } from '@/components/forms/NewsletterForm'
 
 export default function Footer() {
   const pathname = usePathname()
-  if (pathname?.startsWith('/beweather')) return null
+  if (pathname?.startsWith('/beweather') || pathname?.startsWith('/links')) return null
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5545991447004'
 
   return (
@@ -80,6 +80,17 @@ export default function Footer() {
               <li><Link href="/blog" className="hover:text-dourado transition-colors">Blog</Link></li>
               <li><Link href="/newsletter" className="hover:text-dourado transition-colors">Newsletter</Link></li>
               <li><Link href="/palestras" className="hover:text-dourado transition-colors">Palestras</Link></li>
+              <li>
+                <a
+                  href="/midia-kit-palestras-lucas-dierings.pdf"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-dourado transition-colors"
+                >
+                  Mídia Kit (PDF)
+                </a>
+              </li>
               <li><Link href="/sobre" className="hover:text-dourado transition-colors">Sobre Lucas</Link></li>
               <li><Link href="/diagnostico" className="hover:text-dourado transition-colors">Diagnóstico Gratuito</Link></li>
             </ul>

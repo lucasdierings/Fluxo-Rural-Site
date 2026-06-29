@@ -7,6 +7,7 @@
 - **Localização:** Londrina, Paraná, Brasil (Atendimento para todo o país)
 - **Serviços:** Consultoria em gestão, finanças, marketing digital e palestras no agronegócio.
 - **Destaque:** Host do podcast NHCast (New Holland Brasil) e do Agrojovem Podcast.
+- **Mídia Kit de Palestras (PDF):** https://fluxorural.com.br/midia-kit-palestras-lucas-dierings.pdf — bio, credenciais, temas e formatos para organizadores de eventos.
 
 ## Navegação e Seções Principais
 - [Página Inicial](https://fluxorural.com.br/) - Apresentação da consultoria e Lucas Dierings.
@@ -15,8 +16,10 @@
   - [Gestão Financeira Rural](https://fluxorural.com.br/servicos/financeiro/) - Fluxo de caixa, custos operacionais e margem de contribuição.
   - [Consultoria em Gestão e Inovação](https://fluxorural.com.br/servicos/consultoria/) - Planejamento estratégico, diagnósticos e eficiência operacional.
   - [Marketing e Vendas Digitais](https://fluxorural.com.br/servicos/marketing-digital/) - Funil de vendas, presença digital e atração de clientes no agro.
-- [Palestras e Workshops](https://fluxorural.com.br/palestras/) - Palestras para cooperativas, sindicatos e eventos. Temas incluem finanças, gestão, sucessão e IA no agro.
+- [Palestras e Workshops](https://fluxorural.com.br/palestras/) - Palestras para cooperativas, sindicatos e eventos. Temas incluem finanças, gestão, sucessão e IA no agro. Mídia kit em PDF disponível para download.
+- [Mídia Kit de Palestras (PDF)](https://fluxorural.com.br/midia-kit-palestras-lucas-dierings.pdf) - Material pronto com bio, credenciais, temas e formatos para apresentar a comissões e patrocinadores de eventos.
 - [Diagnóstico Gratuito](https://fluxorural.com.br/diagnostico/) - Sessão estratégica gratuita de 30 minutos com plano de ação.
+- [Hub de Links (bio)](https://fluxorural.com.br/links) - Página única com contato direto, redes sociais, podcasts e materiais de Lucas Dierings.
 - [Contato](https://fluxorural.com.br/contato/) - Canais de contato direto e formulário de atendimento em até 24 horas úteis.
 - [Blog de Conteúdo Técnico](https://fluxorural.com.br/blog/) - Artigos especializados com planilhas e orientações práticas de gestão e tecnologia.
 

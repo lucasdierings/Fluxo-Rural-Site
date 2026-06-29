@@ -10,8 +10,10 @@ import {
   Monitor,
   Building2,
   MessageCircle,
+  FileText,
 } from 'lucide-react'
 import { WhatsappCTA } from '@/components/palestras/WhatsappCTA'
+import { MidiaKitDownload } from '@/components/palestras/MidiaKitDownload'
 
 export const metadata: Metadata = {
   title: 'Palestrante para Agronegócio | Gestão, Finanças e IA no Agro',
@@ -192,7 +194,7 @@ export default function PalestrasPage() {
             Conteúdo aplicado, linguagem do campo e resultado na prática — para cooperativas,
             sindicatos, empresas e eventos do agronegócio.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
             <WhatsappCTA message={MSG_GERAL} label="Levar essa palestra ao meu evento" origem="hero" />
             <a
               href="#temas"
@@ -200,6 +202,7 @@ export default function PalestrasPage() {
             >
               Ver os temas
             </a>
+            <MidiaKitDownload variant="outline" label="Baixar mídia kit (PDF)" origem="hero" />
           </div>
         </div>
       </section>
@@ -281,6 +284,44 @@ export default function PalestrasPage() {
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mídia Kit — material para apresentar à diretoria */}
+      <section className="py-16 md:py-20 bg-navy">
+        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+            <div className="flex-1 text-center lg:text-left">
+              <span className="inline-block bg-dourado/15 text-dourado text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+                Material para download
+              </span>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
+                Precisa apresentar para a diretoria?
+              </h2>
+              <p className="text-white/75 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
+                Baixe o mídia kit completo em PDF — bio, credenciais, os temas de palestra e
+                formatos. Pronto para enviar à comissão, cooperativa ou patrocinador do seu evento.
+              </p>
+              <ul className="flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-2 mb-8">
+                {temas.map((t) => (
+                  <li key={t.title} className="flex items-center gap-2 text-white/70 text-sm">
+                    <CheckCircle2 className="text-verde-folha shrink-0" size={16} />
+                    {t.title}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex justify-center lg:justify-start">
+                <MidiaKitDownload label="Baixar mídia kit (PDF)" origem="banda-temas" />
+              </div>
+            </div>
+            <div className="shrink-0">
+              <div className="bg-dourado/10 border border-dourado/20 rounded-2xl w-40 h-52 md:w-48 md:h-64 flex flex-col items-center justify-center text-center px-4">
+                <FileText className="text-dourado mb-3" size={44} />
+                <p className="font-heading font-bold text-white text-sm leading-tight">Mídia Kit</p>
+                <p className="text-white/60 text-xs mt-1">Palestras · PDF · 5 páginas</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

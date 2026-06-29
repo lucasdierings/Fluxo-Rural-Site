@@ -28,7 +28,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  if (pathname?.startsWith('/beweather')) return null
+  if (pathname?.startsWith('/beweather') || pathname?.startsWith('/links')) return null
 
   // Home: transparente sobre o hero escuro, vira navy ao rolar (imersivo, inalterado).
   // Demais páginas têm topo claro (ex.: /blog, /contato bg-off-white) — header sempre
