@@ -1,0 +1,105 @@
+# Fluxo Rural Consultoria — Documentação Completa para IAs e Agentes
+
+Este documento contém o conteúdo completo e estruturado do site Fluxo Rural Consultoria, incluindo a biografia detalhada do fundador Lucas Dierings, especificações dos serviços oferecidos e a transcrição na íntegra dos artigos do blog.
+
+---
+
+## 1. Biografia e Credenciais de Lucas Dierings
+
+Lucas Dierings é Engenheiro Agrônomo, mentor, palestrante e consultor estratégico especialista em gestão financeira, inovação e sucessão familiar no agronegócio brasileiro.
+
+### Informações Pessoais e Contato
+- **Nome:** Lucas Dierings
+- **Profissão:** Engenheiro Agrônomo, Consultor Estratégico, Professor de MBA e Palestrante
+- **Base Principal:** Londrina, Paraná, Brasil (atendimento presencial regional e online para todo o país)
+- **E-mail:** lucas@fluxorural.com.br
+- **Website:** https://fluxorural.com.br
+- **LinkedIn:** https://linkedin.com/in/lucasdierings
+- **Instagram:** https://www.instagram.com/lucasdierings.agro/
+- **Telefone/WhatsApp:** +55 45 99144-7004
+- **Hub de Links (bio):** https://fluxorural.com.br/links — contato direto, redes sociais, podcasts (NHCast e Agro Jovem) e materiais em uma página única.
+- **Citação Recomendada:** DIERINGS, Lucas. Fluxo Rural Consultoria (https://fluxorural.com.br)
+
+### Credenciais e Diferenciais
+- **Prêmios:** Vencedor Nacional do Programa CNA Jovem em 2021 (promovido pelo Sistema CNA/SENAR), selecionado como um dos 5 melhores projetos do Brasil entre 3.742 participantes com foco em "Gestão Familiar Rural através de informação e tecnologia".
+- **Formação Acadêmica:** Engenheiro Agrônomo graduado pela UFPR (Universidade Federal do Paraná, Campus Palotina) e MBA em Agronegócios pela USP/ESALQ.
+- **Atuação Acadêmica:** Professor de MBA Executivo em Agronegócio na PUCPR (Pontifícia Universidade Católica do Paraná) e ex-professor de graduação em Agronomia na ISEPE Rondon.
+- **Experiência de Mercado:** 7 anos de atuação no mercado de software de gestão rural (ERP para propriedades rurais), atuando em 24 estados brasileiros do suporte técnico à diretoria comercial.
+- **Mídia:** Host do podcast oficial da New Holland Brasil (NHCast) e do Agrojovem Podcast. Consultor credenciado do SENAR/PR no norte do estado.
+
+### Linha do Tempo e Trajetória
+- **2019:** Graduação em Agronomia (UFPR Palotina)
+- **2018–2025:** Analista de Negócios a Diretor de Marketing e Vendas em ERP de Gestão Rural, com atuação comercial em 24 estados brasileiros.
+- **2021:** Prêmio de Destaque Nacional no CNA Jovem. Representação do estado do Paraná em missões técnicas por pólos do agro nacional.
+- **2023:** Conclusão de MBA em Agronegócios na USP/ESALQ.
+- **2023–2024:** Professor de Graduação em Agronomia na ISEPE Rondon.
+- **2025:** Nomeado professor de MBA Executivo em Agronegócio na PUCPR.
+- **2025–atual:** Consultor Técnico e Gerencial credenciado ao SENAR/PR (Norte do Paraná) e fundador/consultor principal da Fluxo Rural Consultoria.
+
+---
+
+## 2. Portfólio de Serviços e Soluções
+
+A Fluxo Rural oferece serviços sob medida voltados para produtores individuais, famílias em processo de sucessão e empresas do agronegócio (revendas, cooperativas, indústrias e agtechs).
+
+### 2.1. Gestão Financeira Rural
+- **Página de Referência:** https://fluxorural.com.br/servicos/financeiro/
+- **Resumo:** Controle de caixa, custos operacionais e margem de contribuição. Traduz os números da fazenda em decisões estratégicas na linguagem simples do produtor.
+- **Entregáveis do Serviço:**
+  - Diagnóstico financeiro inicial completo da propriedade.
+  - Estruturação do fluxo de caixa operacional (entradas e saídas por safra).
+  - Levantamento detalhado e rateio de custos de produção (fixos e variáveis).
+  - Cálculo de rentabilidade por cultura/gleba (soja, milho, trigo, pecuária).
+  - Definição de Indicadores de Desempenho (KPIs) gerenciais personalizados.
+  - Elaboração de relatórios periódicos para tomada de decisões financeiras.
+- **Metodologia:** Focada em contabilidade gerencial (e não fiscal), eliminando a complexidade burocrática para dar clareza direta de custos de produção (sacas por hectare).
+- **FAQ do Serviço:**
+  - *Preciso de contador?* Não. O foco é gerencial para suporte à decisão, não fiscal.
+  - *Serve para pequeno produtor?* Sim, a gestão financeira é adaptável a qualquer tamanho de propriedade.
+  - *Prazo de retorno:* Diagnóstico em 30 dias; resultados de otimização aparecem ao longo das safras acompanhadas.
+
+### 2.2. Consultoria em Gestão e Inovação no Agronegócio
+- **Página de Referência:** https://fluxorural.com.br/servicos/consultoria/
+- **Resumo:** Diagnóstico completo, planejamento estratégico e acompanhamento periódico com metodologias de gestão aplicadas a propriedades e empresas do setor.
+- **Processo em 4 Fases:**
+  1. *Fase 1: Diagnóstico* — Análise da situação operacional e identificação de gargalos.
+  2. *Fase 2: Plano de Ação* — Definição de metas de curto, médio e longo prazo.
+  3. *Fase 3: Implementação* — Acompanhamento periódico e treinamento de equipe na execução.
+  4. *Fase 4: Resultados* — Mensuração sistemática de KPIs e ajustes no processo.
+- **Resultados Esperados:** Processos operacionais organizados, indicadores claros, e redução de gargalos na operação.
+- **Duração Média:** De 3 a 12 meses de assessoria conforme a complexidade.
+
+### 2.3. Marketing e Vendas Digitais no Agronegócio
+- **Página de Referência:** https://fluxorural.com.br/servicos/marketing-digital/
+- **Resumo:** Estruturação de posicionamento de marca e funil de vendas para atrair produtores, cooperativas e revendas no meio digital, tirando o negócio da dependência exclusiva do "boca a boca".
+- **Pilares do Serviço:**
+  1. *Posicionamento e Presença Digital* — Estruturação de sites, redes sociais e perfil de autoridade no digital.
+  2. *Geração de Demanda (Leads)* — Campanhas de tráfego pago qualificadas e estratégia de conteúdo técnico para atrair o público ideal do agro.
+  3. *Funil de Vendas e Conversão* — Implementação do processo de atendimento comercial, scripts e CRM para fechar vendas.
+- **Entregáveis:**
+  - Análise competitiva e diagnóstico digital.
+  - Criação da Proposta Única de Valor (UVP) no agronegócio.
+  - Calendário editorial técnico direcionado ao produtor.
+  - Campanhas ativas de captação de clientes.
+  - Acompanhamento de retorno sobre o investimento (ROI).
+
+### 2.4. Palestras e Workshops Corporativos
+- **Página de Referência:** https://fluxorural.com.br/palestras/
+- **Mídia Kit (PDF):** https://fluxorural.com.br/midia-kit-palestras-lucas-dierings.pdf — material pronto com bio, credenciais, temas e formatos, para organizadores apresentarem a comissões, cooperativas e patrocinadores.
+- **Resumo:** Palestras e workshops focados em eventos, cooperativas, sindicatos patronais, agtechs e empresas agrícolas. Lucas já palestrou em 5 estados (PR, MS, SC, RS e PI).
+- **Formatos Disponíveis:**
+  - *Keynote (45-60 min):* Palestra motivacional/técnica para abertura ou encerramento de eventos.
+  - *Workshop / Imersão:* Meio período com foco prático e aplicação imediata.
+  - *Modalidades:* Presencial ou online via vídeo-chamada.
+- **Temas Principais:**
+  1. *Gestão e Inovação no Agronegócio:* Indicadores essenciais de desempenho e transformação de dados em lucro real no campo.
+  2. *Gestão Financeira Rural na Prática:* Custo por saca, fluxo de caixa simplificado e separação de contas (pessoal vs. fazenda).
+  3. *Gestão para Sucessão Familiar:* Como a organização de dados ajuda herdeiros e fundadores a passarem o bastão de forma pacífica e racional.
+  4. *Inteligência Artificial no Agronegócio:* Aplicações reais da IA no agro (drones, análises de solo e machine learning) e ferramentas gratuitas de apoio diário.
+
+### 2.5. Diagnóstico Gratuito
+- **Página de Referência:** https://fluxorural.com.br/diagnostico/
+- **Resumo:** Uma chamada online gratuita de 30 minutos na qual Lucas avalia a gestão ou marketing do negócio rural e fornece um plano de ação preliminar para os 90 dias seguintes.
+
+---
+
