@@ -5,6 +5,7 @@ import BlogList from '@/components/blog/BlogList'
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Conteúdo prático sobre gestão, finanças e inovação no agronegócio brasileiro. Artigos semanais por Lucas Dierings.',
+  alternates: { canonical: 'https://fluxorural.com.br/blog' },
 }
 
 export default function BlogPage() {

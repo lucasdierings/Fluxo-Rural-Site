@@ -248,3 +248,26 @@ Algumas das plataformas líderes com inteligência artificial ativa no campo bra
 - **Agrosmart:** irrigação inteligente e insights climáticos baseados em dados.
 
 Produtores de qualquer porte podem começar definindo o problema central da fazenda, testando ferramentas em áreas menores e capacitando a equipe para extrair o valor da tecnologia.
+
+---
+
+### 3.5. Plano Safra 2026/2027: Vale a Pena Contratar? Guia Prático de Crédito Rural, Taxas de Juros e Como Proteger o Caixa da sua Fazenda
+- **URL:** https://fluxorural.com.br/blog/plano-safra-2026-2027-vale-a-pena-contratar-guia-pratico-de-credito-rural-taxas-de-juros-e-como-proteger-o-caixa-da-sua-fazenda/
+- **Data:** 2026-06-30 | **Categoria:** Finanças
+- **Resumo:** O Plano Safra 2026/2027 foi lançado! Compare as taxas de juros, veja a diferença entre custeio e investimento e aprenda a calcular a margem de segurança da sua fazenda.
+- **Texto do Artigo:**
+O governo federal lançou o novo Plano Safra 2026/2027, destinando R$ 525,1 bilhões em crédito para a agricultura empresarial. O custeio (capital de giro) encolheu 7,2%, caindo para R$ 384,9 bilhões, enquanto as linhas de investimento (infraestrutura, tecnologia e máquinas) cresceram 38,1%, para R$ 140,2 bilhões. O volume de recursos equalizados pelo governo também caiu, forçando o produtor a captar uma fatia maior de crédito a juros livres de mercado.
+
+O artigo compara as taxas do ciclo 2026/2027 com o ciclo anterior: Custeio Empresarial Geral (12,5% a.a.), Custeio Pronamp (9,0% a.a.), PCA — armazéns até 12 mil toneladas (8,0% a.a.), RenovAgro Ambiental (8,5% a.a.), Inovagro/Proirriga (11,5% a.a.) e Moderfrota Geral (12,5% a.a.).
+
+Para orientar a decisão do produtor, o texto conecta as regras do Plano Safra às filosofias de três referências em finanças: **Ray Dalio** (crédito como promessa de pagamento futuro e risco de alavancagem excessiva), **Benjamin Graham** (cálculo da Margem de Segurança via Ponto de Equilíbrio Agrícola — PEA) e **Morgan Housel** (a importância do caixa próprio para sobreviver a ciclos de baixa).
+
+#### Custeio vs. Investimento
+- *Custeio:* CAR regularizado garante 0,5 p.p. de desconto na taxa; práticas sustentáveis comprovadas garantem mais 0,5 p.p. A Resolução CMN nº 5.314/2026 tornou opcional para bancos a prorrogação de parcelas por perdas climáticas, e a renegociação passou a exigir seguro rural ou Proagro.
+- *Investimento:* Destaque para o PCA (armazéns até 12 mil toneladas, 8% a.a.), que permite reter grãos para vender em melhores momentos de preço. O Moderfrota (até 12,5% a.a. por 10 anos) deve ser usado só quando o investimento trouxer ganho real de produtividade.
+
+#### Checklist antes de assinar o contrato de crédito
+1. Fazer o planejamento de safra (custos fixos, variáveis e margem de segurança).
+2. Atualizar o CAR e regularizar licenças ambientais.
+3. Evitar venda casada (previdência, consórcios ou títulos de capitalização exigidos como condição do crédito são ilegais).
+4. Preparar documentação com fotos de GPS, exigida pela Resolução CMN nº 5.315/2026 para vistorias de sinistro no Proagro.
