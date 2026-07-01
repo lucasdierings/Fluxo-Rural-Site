@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.excerpt,
     image: `${siteUrl}${post.coverImage}`,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updated || post.date,
     wordCount,
     articleSection: post.category,
     inLanguage: 'pt-BR',
@@ -81,8 +81,18 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'Lucas Dierings',
-      url: siteUrl,
+      url: `${siteUrl}/sobre/`,
       jobTitle: 'Engenheiro Agrônomo e Consultor Estratégico',
+      description: 'Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e consultor em gestão financeira rural, inovação e sucessão familiar no agronegócio.',
+      alumniOf: [
+        { '@type': 'CollegeOrUniversity', name: 'USP/ESALQ — MBA em Agronegócios' },
+        { '@type': 'CollegeOrUniversity', name: 'UFPR — Engenharia Agronômica' },
+      ],
+      knowsAbout: ['Gestão financeira rural', 'Agronegócio', 'Sucessão familiar rural', 'Inovação no agro', 'Crédito rural'],
+      sameAs: [
+        'https://linkedin.com/in/lucasdierings',
+        'https://www.instagram.com/lucasdierings.agro/',
+      ],
     },
     publisher: {
       '@type': 'Organization',
@@ -159,6 +169,8 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
           <div className="flex items-center gap-4 text-white/70 text-sm">
+            <span>Por Lucas Dierings · Eng. Agrônomo</span>
+            <span>·</span>
             <span>{formatDate(post.date)}</span>
             <span>·</span>
             <span>{post.readingTime} min de leitura</span>

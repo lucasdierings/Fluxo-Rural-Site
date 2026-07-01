@@ -13,6 +13,7 @@ export interface BlogPost {
   slug: string
   title: string
   date: string
+  updated?: string
   category: string
   coverImage: string
   readingTime: number
@@ -48,6 +49,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     slug,
     title: data.title,
     date: data.date,
+    updated: data.updated || undefined,
     category: data.category,
     coverImage: data.coverImage,
     readingTime: data.readingTime || 5,
