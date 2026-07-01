@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import remarkGfm from 'remark-gfm'
 import { getPostBySlug, getAllPosts } from '@/lib/mdx'
 import { formatDate } from '@/lib/utils'
 import AuthorCard from '@/components/blog/AuthorCard'
@@ -26,9 +27,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug)
   if (!post) return {}
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fluxorural.com.br'
+
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `${siteUrl}/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -175,7 +179,10 @@ export default async function BlogPostPage({ params }: Props) {
           </Button>
 
           <article className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-navy prose-a:text-navy prose-a:no-underline hover:prose-a:text-dourado">
-            <MDXRemote source={post.content} />
+            <MDXRemote
+              source={post.content}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+            />
           </article>
 
           {/* FAQs */}

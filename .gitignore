@@ -11,6 +11,12 @@
 /.next/
 /out/
 
+# gerado pelo postbuild (next-sitemap) direto em /out a cada build — nunca commitar,
+# senão fica um build atrasado do sitemap/robots real (ver next-sitemap.config.js)
+/public/sitemap.xml
+/public/sitemap-0.xml
+/public/robots.txt
+
 # production
 /build
 
