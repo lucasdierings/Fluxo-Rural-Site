@@ -157,7 +157,7 @@ export default async function BlogPostPage({ params }: Props) {
           src={post.coverImage}
           alt={post.title}
           fill
-          className="object-cover"
+          className="object-cover object-[center_25%]"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />
