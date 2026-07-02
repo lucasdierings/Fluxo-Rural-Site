@@ -13,7 +13,7 @@ export default function Hero() {
       {/* Fundo */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-bg.png"
+          src="/images/hero-fazenda-aerea.jpg"
           alt="Fazenda ao entardecer vista aérea"
           fill
           className="object-cover"
