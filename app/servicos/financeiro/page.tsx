@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Gestão Financeira Rural | Fluxo Rural',
     description: 'Clareza financeira para decisões mais seguras no campo. Fluxo de caixa, custos e rentabilidade.',
-    images: [{ url: '/images/gestao-blog.png' }],
+    images: [{ url: '/images/gestao-rural-blog.jpg' }],
   },
 }
 
@@ -59,7 +59,7 @@ export default function FinanceiroPage() {
 
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos' }, { label: 'Gestão Financeira' }]} />
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
-        <Image src="/images/gestao-blog.png" alt="Gestão financeira rural" fill className="object-cover" priority />
+        <Image src="/images/gestao-rural-blog.jpg" alt="Gestão financeira rural" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10 pb-12">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Gestão Financeira Rural</h1>
