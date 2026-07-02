@@ -77,6 +77,16 @@ export default function ConsultoriaPage() {
         </div>
       </section>
 
+      {/* Crença */}
+      <section className="bg-off-white py-12 md:py-16">
+        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
+          <p className="font-heading text-2xl md:text-3xl font-bold text-navy mb-3">Direção antes de velocidade.</p>
+          <p className="text-carvao/70 text-lg leading-relaxed">
+            Não adianta correr na direção errada. Antes de acelerar, a gente acerta o rumo — com diagnóstico, plano e os números na mesa.
+          </p>
+        </div>
+      </section>
+
       {/* Fases */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 lg:px-8">

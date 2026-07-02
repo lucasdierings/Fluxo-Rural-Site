@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Target, TrendingUp, Heart, ArrowRight, Trophy, GraduationCap, Radio, MapPin, Smartphone } from 'lucide-react'
+import { Award, HeartHandshake, ShieldCheck, ArrowRight, Trophy, GraduationCap, Radio, MapPin, Smartphone } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Sobre Lucas Dierings',
@@ -88,19 +88,19 @@ const credentials = [
 
 const values = [
   {
-    icon: Target,
-    title: 'Clareza',
-    description: 'Diagnósticos honestos e planos de ação objetivos.',
+    icon: Award,
+    title: 'Ir além do combinado',
+    description: 'Fazer mais do que se é pago é o que separa quem cresce de quem estaciona.',
   },
   {
-    icon: TrendingUp,
-    title: 'Resultado',
-    description: 'Estratégias que se traduzem em números reais.',
+    icon: HeartHandshake,
+    title: 'Respeito a quem é do campo',
+    description: 'Ninguém conhece a terra melhor que quem está nela. Bom trabalho soma à experiência do produtor — não passa por cima dela.',
   },
   {
-    icon: Heart,
-    title: 'Propósito',
-    description: 'O campo como legado para as próximas gerações.',
+    icon: ShieldCheck,
+    title: 'Verdade antes de agradar',
+    description: 'Dizer o que precisa ser ouvido, não o que é confortável. A verdade é o que muda o jogo.',
   },
 ]
 

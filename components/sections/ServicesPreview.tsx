@@ -46,7 +46,7 @@ export default function ServicesPreview() {
             Como Posso Ajudar
           </h2>
           <p className="text-white/80 text-base md:text-lg lg:text-xl font-light max-w-2xl mx-auto">
-            Soluções estratégicas para propriedades e empresas do agronegócio
+            O resultado da sua terra não é refém do clima nem do mercado: começa nas suas decisões. Meu trabalho é fortalecer cada uma delas.
           </p>
         </motion.div>
 

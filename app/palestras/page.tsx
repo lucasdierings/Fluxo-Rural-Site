@@ -190,9 +190,12 @@ export default function PalestrasPage() {
           <h1 className="font-heading text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-4 max-w-3xl">
             Palestras de Gestão, Finanças e IA no Agro
           </h1>
-          <p className="text-white/85 text-lg md:text-xl font-light mb-8 max-w-2xl">
+          <p className="text-white/85 text-lg md:text-xl font-light mb-3 max-w-2xl">
             Conteúdo aplicado, linguagem do campo e resultado na prática — para cooperativas,
             sindicatos, empresas e eventos do agronegócio.
+          </p>
+          <p className="text-dourado font-medium text-base md:text-lg mb-8 max-w-2xl">
+            Nada de palco motivacional vazio: quem sobe ao palco vive o que ensina.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap gap-4">
             <WhatsappCTA message={MSG_GERAL} label="Levar essa palestra ao meu evento" origem="hero" />

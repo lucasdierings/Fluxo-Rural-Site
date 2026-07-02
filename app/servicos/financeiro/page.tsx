@@ -67,6 +67,16 @@ export default function FinanceiroPage() {
         </div>
       </section>
 
+      {/* Crença */}
+      <section className="bg-off-white py-12 md:py-16">
+        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
+          <p className="font-heading text-2xl md:text-3xl font-bold text-navy mb-3">Consistência vence o ano de sorte.</p>
+          <p className="text-carvao/70 text-lg leading-relaxed">
+            Resultado no campo não vem de uma safra boa — vem do básico bem feito, safra após safra. É isso que uma boa gestão financeira constrói.
+          </p>
+        </div>
+      </section>
+
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
