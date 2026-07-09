@@ -16,6 +16,7 @@ export interface BlogPost {
   updated?: string
   category: string
   coverImage: string
+  coverPosition?: string
   readingTime: number
   excerpt: string
   content: string
@@ -52,6 +53,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     updated: data.updated || undefined,
     category: data.category,
     coverImage: data.coverImage,
+    coverPosition: data.coverPosition || undefined,
     readingTime: data.readingTime || 5,
     excerpt: data.excerpt || content.slice(0, 160).replace(/[#*\n]/g, '') + '...',
     content,

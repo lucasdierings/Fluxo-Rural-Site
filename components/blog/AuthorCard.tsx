@@ -18,7 +18,7 @@ export default function AuthorCard() {
           Engenheiro Agrônomo (CREA-PR 179906/D) | MBA em Agronegócios USP/ESALQ
         </p>
         <p className="text-carvao/50 text-sm mt-1">
-          Fundador da Fluxo Rural Consultoria e professor de MBA. Pesquisou indicadores econômico-financeiros de propriedades rurais no MBA da USP/ESALQ e atua com gestão, inovação e sucessão no agronegócio.
+          Fundador da Fluxo Rural Consultoria, consultor credenciado do SENAR-PR e professor de MBA. Destaque Nacional do Programa Jovens Líderes do Agro (CNA Jovem 2021), entre os 5 melhores de 3.742 participantes. Membro ativo da JCI (Junior Chamber International), organização mundial de formação de líderes presente em mais de 100 países. Coautor do livro <em>Jovens, o Brasil e o Agro</em>.
         </p>
         <Link href="/sobre" className="text-navy text-sm font-medium hover:text-dourado transition-colors mt-2 inline-block">
           Saiba mais →
