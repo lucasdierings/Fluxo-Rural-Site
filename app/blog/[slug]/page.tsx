@@ -179,7 +179,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Conteúdo */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
+        <div className="container mx-auto px-4 pr-24 lg:px-8 lg:pr-8 max-w-3xl">
           <Button asChild variant="ghost" className="mb-8 text-navy">
             <Link href="/blog">
               <ArrowLeft className="mr-2" size={16} /> Voltar ao Blog
