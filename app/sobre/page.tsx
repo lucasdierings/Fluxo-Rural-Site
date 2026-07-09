@@ -310,6 +310,54 @@ export default function SobrePage() {
         </div>
       </section>
 
+      {/* Autor / Livro */}
+      <section className="py-24 md:py-32 lg:py-40 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-navy text-center mb-12 md:mb-16 lg:mb-20">
+            Autor
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center max-w-5xl mx-auto">
+            <div className="relative w-full max-w-xs mx-auto aspect-[3/4]">
+              <Image
+                src="/images/livro-os-jovens-brasil-agro.jpg"
+                alt="Capa do livro Os Jovens, o Brasil e o Agro, do qual Lucas Dierings é coautor"
+                fill
+                className="object-contain drop-shadow-xl"
+                sizes="(max-width: 768px) 20rem, 20rem"
+              />
+            </div>
+            <div>
+              <span className="bg-dourado text-carvao text-xs md:text-sm font-semibold px-4 py-2 rounded-full inline-block">
+                Coautor
+              </span>
+              <h3 className="font-heading text-2xl md:text-3xl font-bold text-navy mt-4 mb-4">
+                Os Jovens, o Brasil e o Agro
+              </h3>
+              <p className="text-carvao/70 text-base md:text-lg font-light leading-relaxed">
+                Mais do que reunir histórias de jovens que constroem o agronegócio brasileiro,
+                a obra dá voz, vez e luz a trajetórias que, mesmo ainda no início, já são
+                significativas para o setor e muitas vezes seguem desconhecidas. São histórias
+                reais de dificuldade, superação e conquista, que mostram que voltar para o agro
+                é necessário, assim como permanecer nele, ou encontrá-lo e decidir ficar.
+                Inspiração, inovação e escolha: são os jovens do agro brasileiro.
+              </p>
+              <p className="text-carvao/50 text-sm mt-4">
+                Coletânea do projeto Ler o Agro, com coordenação editorial de Laura Meireles.
+                Lucas Dierings é um dos coautores.
+              </p>
+              <a
+                href="https://loja.uiclap.com/titulo/ua163654"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-navy font-semibold hover:text-dourado transition-colors mt-4 inline-block"
+              >
+                Conhecer o livro →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-verde-folha py-20 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
