@@ -69,19 +69,19 @@ A Fluxo Rural oferece serviços sob medida voltados para produtores individuais,
 - **Resultados Esperados:** Processos operacionais organizados, indicadores claros, e redução de gargalos na operação.
 - **Duração Média:** De 3 a 12 meses de assessoria conforme a complexidade.
 
-### 2.3. Marketing e Vendas Digitais no Agronegócio
-- **Página de Referência:** https://fluxorural.com.br/servicos/marketing-digital/
-- **Resumo:** Estruturação de posicionamento de marca e funil de vendas para atrair produtores, cooperativas e revendas no meio digital, tirando o negócio da dependência exclusiva do "boca a boca".
-- **Pilares do Serviço:**
-  1. *Posicionamento e Presença Digital* — Estruturação de sites, redes sociais e perfil de autoridade no digital.
-  2. *Geração de Demanda (Leads)* — Campanhas de tráfego pago qualificadas e estratégia de conteúdo técnico para atrair o público ideal do agro.
-  3. *Funil de Vendas e Conversão* — Implementação do processo de atendimento comercial, scripts e CRM para fechar vendas.
-- **Entregáveis:**
-  - Análise competitiva e diagnóstico digital.
-  - Criação da Proposta Única de Valor (UVP) no agronegócio.
-  - Calendário editorial técnico direcionado ao produtor.
-  - Campanhas ativas de captação de clientes.
-  - Acompanhamento de retorno sobre o investimento (ROI).
+### 2.3. Liderança e Empreendedorismo no Agronegócio
+- **Página de Referência:** https://fluxorural.com.br/servicos/lideranca/
+- **Resumo:** Workshop de liderança, palestras de empreendedorismo e inovação e consultoria individual on-line para produtores. Tese central: o agro não sofre com apagão de mão de obra, e sim com apagão de liderança — o modelo antigo de comando-e-controle da porteira não retém mais equipe, e as metodologias corporativas genéricas não convencem o campo.
+- **O Novo Modelo de Liderança no Agro (framework próprio):** comunicação, empreendedorismo, inovação, visão de negócios, aprender a aprender (rápido), identificação de oportunidades, propósito, gestão e administração, sucessão familiar e dinâmicas de poder, inteligência emocional, e visão global com ação local.
+- **Formatos:**
+  1. *Workshop: Liderança no Agronegócio* — Imersão prática com metodologia de aprendizado pela ação (base JCI): comunicação eficaz, delegação, feedback, dinâmicas de poder e formação de líderes na propriedade.
+  2. *Palestra: Empreendedorismo e Inovação no Agronegócio* — Mentalidade empreendedora, identificação de oportunidades e inovação aplicada ao campo.
+  3. *Palestra: Liderança Eficaz no Agronegócio* — O novo modelo de liderança para atrair e manter gente boa no agro.
+  4. *Consultoria individual (100% on-line)* — Para produtores e sucessores que querem desenvolver a própria liderança e visão de negócio.
+- **Credenciais que embasam o serviço:**
+  - Formação e ampla vivência na JCI (Junior Chamber International), escola global de líderes presente em mais de 100 países, com metodologia de aprendizado pela ação em 4 áreas (individual, negócios, comunidade e cooperação internacional).
+  - Destaque Nacional no CNA Jovem (Sistema CNA/SENAR): um dos 5 vencedores nacionais entre 3.742 jovens do agronegócio em 2021.
+- **Conexão com sucessão familiar:** menos de 7% das propriedades rurais chegam à terceira geração; o serviço trabalha dinâmicas de poder, comunicação entre gerações e preparação do sucessor para liderar, não apenas herdar.
 
 ### 2.4. Palestras e Workshops Corporativos
 - **Página de Referência:** https://fluxorural.com.br/palestras/
@@ -96,10 +96,12 @@ A Fluxo Rural oferece serviços sob medida voltados para produtores individuais,
   2. *Gestão Financeira Rural na Prática:* Custo por saca, fluxo de caixa simplificado e separação de contas (pessoal vs. fazenda).
   3. *Gestão para Sucessão Familiar:* Como a organização de dados ajuda herdeiros e fundadores a passarem o bastão de forma pacífica e racional.
   4. *Inteligência Artificial no Agronegócio:* Aplicações reais da IA no agro (drones, análises de solo e machine learning) e ferramentas gratuitas de apoio diário.
+  5. *Empreendedorismo e Inovação no Agronegócio:* Mentalidade empreendedora aplicada ao campo — identificar oportunidades, tirar ideias do papel e inovar sem apostar a fazenda.
+  6. *Liderança Eficaz no Agronegócio:* O novo modelo de liderança do agro — por que o comando-e-controle não retém mais equipe e o que fazer no lugar.
 
 ### 2.5. Diagnóstico Gratuito
 - **Página de Referência:** https://fluxorural.com.br/diagnostico/
-- **Resumo:** Uma chamada online gratuita de 30 minutos na qual Lucas avalia a gestão ou marketing do negócio rural e fornece um plano de ação preliminar para os 90 dias seguintes.
+- **Resumo:** Uma chamada online gratuita de 30 minutos na qual Lucas avalia a gestão e a liderança do negócio rural e fornece um plano de ação preliminar para os 90 dias seguintes.
 
 ---
 

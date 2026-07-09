@@ -127,8 +127,9 @@ export default function LinksPage() {
           Explore
         </h2>
         <section className="space-y-3 mb-7">
-          <LinkButton href={`/palestras/${U}`} label="Palestras" sublabel="Gestão, finanças, sucessão e IA no agro" icon="mic" cta="palestras" />
-          <LinkButton href={`/servicos/${U}`} label="Serviços e Consultoria" sublabel="Gestão, financeiro e marketing no agro" icon="briefcase" cta="servicos" />
+          <LinkButton href={`/palestras/${U}`} label="Palestras" sublabel="Liderança, gestão, empreendedorismo e IA" icon="mic" cta="palestras" />
+          <LinkButton href={`/servicos/lideranca/${U}`} label="Liderança e Empreendedorismo" sublabel="Workshop, palestras e consultoria on-line" icon="sparkles" cta="lideranca" />
+          <LinkButton href={`/servicos/${U}`} label="Serviços e Consultoria" sublabel="Gestão, financeiro e liderança no agro" icon="briefcase" cta="servicos" />
           <LinkButton href={`/sobre/${U}`} label="Sobre o Lucas" sublabel="Trajetória, prêmios e credenciais" icon="user" cta="sobre" />
           <LinkButton href={`/blog/${U}`} label="Blog" sublabel="Artigos práticos de gestão no campo" icon="book" cta="blog" />
         </section>

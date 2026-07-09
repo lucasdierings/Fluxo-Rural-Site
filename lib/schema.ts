@@ -5,7 +5,7 @@ export const contactSchema = z.object({
   email: z.string().email('E-mail inválido'),
   telefone: z.string().min(10, 'Telefone inválido'),
   empresa: z.string().optional(),
-  tipo: z.enum(['Consultoria', 'Gestão Financeira', 'Mentoria', 'Palestra', 'Outro']),
+  tipo: z.enum(['Consultoria', 'Gestão Financeira', 'Liderança e Empreendedorismo', 'Palestra', 'Outro']),
   mensagem: z.string().min(10, 'Mensagem deve ter pelo menos 10 caracteres'),
   lgpd: z.literal(true, {
     errorMap: () => ({ message: 'Você precisa concordar com a Política de Privacidade' }),

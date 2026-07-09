@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BarChart2, DollarSign, Megaphone, Mic2, ArrowRight } from 'lucide-react'
+import { BarChart2, DollarSign, Users, Mic2, ArrowRight } from 'lucide-react'
 import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Serviços',
-  description: 'Consultoria em gestão, gestão financeira rural, marketing e vendas digitais e palestras sobre agronegócio. Conheça os serviços da Fluxo Rural.',
+  description: 'Consultoria em gestão, gestão financeira rural, liderança e empreendedorismo e palestras sobre agronegócio. Conheça os serviços da Fluxo Rural.',
   openGraph: {
     title: 'Serviços | Fluxo Rural Consultoria',
     description: 'Soluções estratégicas para propriedades e empresas do agronegócio.',
@@ -28,16 +28,16 @@ const services = [
     color: 'bg-verde-folha',
   },
   {
-    icon: Megaphone,
-    title: 'Marketing e Vendas Digitais',
-    description: 'Posicionamento de marca, presença digital e funil de vendas para produtores e empresas do agronegócio atraírem clientes e venderem mais. Do campo para o cliente.',
-    href: '/servicos/marketing-digital',
+    icon: Users,
+    title: 'Liderança e Empreendedorismo',
+    description: 'Workshop de liderança, palestras de empreendedorismo e inovação e consultoria individual on-line. Um novo modelo de liderança para formar quem faz o agro crescer.',
+    href: '/servicos/lideranca',
     color: 'bg-dourado',
   },
   {
     icon: Mic2,
     title: 'Palestras e Workshops',
-    description: 'Conteúdo aplicado sobre gestão, finanças, marketing e inteligência artificial no agronegócio. Palestras que transformam perspectivas.',
+    description: 'Conteúdo aplicado sobre gestão, finanças, liderança e inteligência artificial no agronegócio. Palestras que transformam perspectivas.',
     href: '/servicos/palestras',
     color: 'bg-verde-escuro',
   },

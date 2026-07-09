@@ -6,7 +6,7 @@ import { DiagnosticoForm } from '@/components/forms/DiagnosticoForm'
 
 export const metadata: Metadata = {
   title: 'Diagnóstico Gratuito para o Agro | Fluxo Rural',
-  description: '30 minutos para descobrir onde sua gestão, marketing e vendas perdem resultado — para produtores rurais e empresas do agro. Você sai com um plano de ação de 90 dias. Sem compromisso.',
+  description: '30 minutos para descobrir onde sua gestão, liderança e resultados perdem dinheiro — para produtores rurais e empresas do agro. Você sai com um plano de ação de 90 dias. Sem compromisso.',
   openGraph: {
     title: 'Diagnóstico Gratuito | Fluxo Rural Consultoria',
     description: 'Diagnóstico gratuito de 30 minutos para produtores rurais e empresas do agronegócio. Plano de ação de 90 dias, sem compromisso.',
@@ -25,7 +25,7 @@ const audience = [
   'Produtores rurais que querem organizar as finanças',
   'Famílias em processo de sucessão',
   'Revendas, cooperativas e empresas do agro que querem vender mais',
-  'Negócios do agro que dependem só de indicação e querem estruturar marketing e vendas',
+  'Negócios do agro que querem desenvolver liderança e formar equipe que fica',
   'Quem sente que poderia ter mais resultado com o que já tem',
 ]
 
@@ -63,7 +63,7 @@ export default function DiagnosticoPage() {
             Descubra os Gargalos que Travam o Resultado do seu Agro
           </h1>
           <p className="text-white/80 text-lg md:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
-            Em 30 minutos, um diagnóstico gratuito da sua gestão, marketing e vendas — e você sai com um plano de ação de 90 dias. Seja produtor rural ou empresa do agro.
+            Em 30 minutos, um diagnóstico gratuito da sua gestão, liderança e resultados — e você sai com um plano de ação de 90 dias. Seja produtor rural ou empresa do agro.
           </p>
           <a
             href="#formulario"
@@ -265,7 +265,7 @@ export default function DiagnosticoPage() {
               name: 'Lucas Dierings',
               jobTitle: 'Engenheiro Agrônomo e Consultor',
             },
-            description: 'Diagnóstico gratuito de 30 minutos para avaliar gestão, marketing e vendas de produtores rurais e empresas do agronegócio.',
+            description: 'Diagnóstico gratuito de 30 minutos para avaliar gestão, liderança e resultados de produtores rurais e empresas do agronegócio.',
             offers: {
               '@type': 'Offer',
               price: '0',

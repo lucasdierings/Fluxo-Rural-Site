@@ -16,14 +16,14 @@ import { WhatsappCTA } from '@/components/palestras/WhatsappCTA'
 import { MidiaKitDownload } from '@/components/palestras/MidiaKitDownload'
 
 export const metadata: Metadata = {
-  title: 'Palestrante para Agronegócio | Gestão, Finanças e IA no Agro',
+  title: 'Palestrante para Agronegócio | Gestão, Liderança e IA no Agro',
   description:
-    'Contrate Lucas Dierings — palestrante de gestão, finanças, marketing e IA no agronegócio. Host do NHCast (New Holland), Top 5 CNA Jovem do Brasil. Proposta em 24h.',
+    'Contrate Lucas Dierings — palestrante de gestão, finanças, liderança e IA no agronegócio. Host do NHCast (New Holland), Top 5 CNA Jovem do Brasil. Proposta em 24h.',
   alternates: { canonical: 'https://fluxorural.com.br/palestras' },
   openGraph: {
     title: 'Palestrante para Agronegócio | Lucas Dierings',
     description:
-      'Palestras de gestão, finanças, marketing e IA no agro. Conteúdo aplicado, linguagem do campo. Para cooperativas, sindicatos, empresas e eventos.',
+      'Palestras de gestão, finanças, liderança e IA no agro. Conteúdo aplicado, linguagem do campo. Para cooperativas, sindicatos, empresas e eventos.',
   },
 }
 
@@ -69,7 +69,27 @@ const temas = [
     bullets: [
       'O que a IA já faz hoje no agro — e o que ainda é promessa de palco',
       'Ferramentas práticas que um produtor ou empresa pode usar essa semana',
-      'Como usar IA para ganhar tempo em gestão, marketing e decisão, sem ser técnico',
+      'Como usar IA para ganhar tempo em gestão e decisão, sem ser técnico',
+    ],
+  },
+  {
+    title: 'Empreendedorismo e Inovação no Agronegócio',
+    promise:
+      'Mentalidade empreendedora aplicada ao campo: identificar oportunidades, tirar ideias do papel e inovar sem apostar a fazenda.',
+    bullets: [
+      'Como enxergar oportunidades onde a maioria só vê rotina de safra',
+      'Inovação de verdade: testar pequeno, errar barato e escalar o que funciona',
+      'Casos de quem empreendeu dentro da porteira — e o que dá pra copiar amanhã',
+    ],
+  },
+  {
+    title: 'Liderança Eficaz no Agronegócio',
+    promise:
+      'O novo modelo de liderança do agro: por que o comando-e-controle da porteira não segura mais ninguém — e o que fazer no lugar.',
+    bullets: [
+      'Não é apagão de mão de obra, é apagão de liderança: como atrair e manter gente boa',
+      'Comunicação, propósito e inteligência emocional na linguagem do campo',
+      'Se nem os filhos querem ficar na propriedade, imagina os funcionários: liderança e sucessão',
     ],
   },
 ]
@@ -146,7 +166,7 @@ const serviceJsonLd = {
   serviceType: 'Palestras e workshops sobre agronegócio',
   name: 'Palestras de Lucas Dierings sobre Agronegócio',
   description:
-    'Palestras e workshops sobre gestão, finanças, marketing e inteligência artificial no agronegócio, para cooperativas, sindicatos, empresas e eventos do agro.',
+    'Palestras e workshops sobre gestão, finanças, liderança, empreendedorismo e inteligência artificial no agronegócio, para cooperativas, sindicatos, empresas e eventos do agro.',
   url: 'https://fluxorural.com.br/palestras',
   areaServed: { '@type': 'Country', name: 'Brasil' },
   provider: {

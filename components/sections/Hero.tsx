@@ -50,7 +50,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-white/90 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Consultoria, Marketing e Palestras para quem transforma o campo em resultado.
+              Consultoria, Liderança e Palestras para quem transforma o campo em resultado.
             </p>
 
             <motion.div

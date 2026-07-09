@@ -179,7 +179,7 @@ const PROCESSO_VENDAS_OPTIONS = [
 
 const DESAFIOS_EMPRESA_OPTIONS = [
   'Gerar leads / novos clientes',
-  'Estruturar marketing e vendas',
+  'Liderança e gestão de pessoas',
   'Presença digital fraca',
   'Gestão financeira',
   'Escalar / crescer',
@@ -190,7 +190,7 @@ const DESAFIOS_EMPRESA_OPTIONS = [
 
 const EXPECTATIVA_EMPRESA_OPTIONS = [
   'Vender mais / gerar clientes',
-  'Organizar marketing e vendas',
+  'Desenvolver liderança e equipe',
   'Profissionalizar a gestão',
   'Ter um plano de crescimento',
   'Descobrir se preciso de ajuda',
@@ -279,7 +279,7 @@ function calculateScore(d: FormData): number {
   return score
 }
 
-// Scoring da EMPRESA (B2B) — prioriza dor de marketing/vendas + porte + urgência
+// Scoring da EMPRESA (B2B) — prioriza dor de liderança/pessoas + porte + urgência
 function calculateScoreEmpresa(d: FormData): number {
   let score = 0
 
@@ -306,7 +306,7 @@ function calculateScoreEmpresa(d: FormData): number {
 
   let desafioScore = 0
   if (d.desafios.includes('Gerar leads / novos clientes')) desafioScore += 10
-  if (d.desafios.includes('Estruturar marketing e vendas')) desafioScore += 10
+  if (d.desafios.includes('Liderança e gestão de pessoas')) desafioScore += 10
   if (d.desafios.includes('Presença digital fraca')) desafioScore += 6
   if (d.desafios.includes('Gestão financeira')) desafioScore += 8
   if (d.desafios.includes('Escalar / crescer')) desafioScore += 6
@@ -318,7 +318,7 @@ function calculateScoreEmpresa(d: FormData): number {
   const urg: Record<string, number> = { 'Próximos 30 dias': 25, 'Próximos 3 meses': 15, 'Até fim do ano': 8, 'Sem pressa': 0 }
   score += urg[d.urgencia] || 0
 
-  const exp: Record<string, number> = { 'Vender mais / gerar clientes': 10, 'Organizar marketing e vendas': 10, 'Profissionalizar a gestão': 8, 'Ter um plano de crescimento': 8, 'Descobrir se preciso de ajuda': 5, 'Apenas conversar': 0 }
+  const exp: Record<string, number> = { 'Vender mais / gerar clientes': 10, 'Desenvolver liderança e equipe': 10, 'Profissionalizar a gestão': 8, 'Ter um plano de crescimento': 8, 'Descobrir se preciso de ajuda': 5, 'Apenas conversar': 0 }
   score += exp[d.expectativaEmpresa || ''] || 0
 
   const car: Record<string, number> = { 'Dono / sócio': 5, 'Diretor / C-level': 5, 'Gerente': 3, 'Coordenador / analista': 1, 'Outro': 1 }
@@ -714,7 +714,7 @@ export function DiagnosticoForm() {
               </fieldset>
 
               <fieldset className="space-y-4">
-                <legend className="text-sm font-bold text-navy uppercase tracking-wide">Marketing &amp; Vendas</legend>
+                <legend className="text-sm font-bold text-navy uppercase tracking-wide">Comercial &amp; Mercado</legend>
 
                 <div>
                   <label className={labelClass}>Como a empresa consegue clientes hoje? *</label>

@@ -11,12 +11,12 @@ import FinalCTA from '@/components/sections/FinalCTA'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Lucas Dierings | Consultoria, Marketing e Palestras no Agronegócio',
+    absolute: 'Lucas Dierings | Consultoria, Liderança e Palestras no Agronegócio',
   },
-  description: 'Consultoria estratégica em gestão financeira rural, inovação, sucessão familiar e marketing digital no agronegócio. Lucas Dierings, fundador da Fluxo Rural.',
+  description: 'Consultoria estratégica em gestão financeira rural, inovação, sucessão familiar e liderança no agronegócio. Lucas Dierings, fundador da Fluxo Rural.',
   openGraph: {
-    title: 'Lucas Dierings | Consultoria, Marketing e Palestras no Agronegócio',
-    description: 'Consultoria estratégica em gestão financeira rural, inovação, sucessão familiar e marketing digital no agronegócio. Lucas Dierings, fundador da Fluxo Rural.',
+    title: 'Lucas Dierings | Consultoria, Liderança e Palestras no Agronegócio',
+    description: 'Consultoria estratégica em gestão financeira rural, inovação, sucessão familiar e liderança no agronegócio. Lucas Dierings, fundador da Fluxo Rural.',
     images: [{ url: '/og-image.png' }],
   },
 }
