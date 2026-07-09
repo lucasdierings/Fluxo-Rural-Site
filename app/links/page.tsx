@@ -46,7 +46,7 @@ const profilePageJsonLd = {
       addressCountry: 'BR',
     },
     sameAs: [
-      'https://www.linkedin.com/in/lucasdierings',
+      'https://www.linkedin.com/in/lucas-dierings/',
       'https://www.instagram.com/lucasdierings.agro/',
       'https://www.youtube.com/@agrojovempodcast',
     ],
@@ -131,7 +131,6 @@ export default function LinksPage() {
           <LinkButton href={`/servicos/${U}`} label="Serviços e Consultoria" sublabel="Gestão, financeiro e marketing no agro" icon="briefcase" cta="servicos" />
           <LinkButton href={`/sobre/${U}`} label="Sobre o Lucas" sublabel="Trajetória, prêmios e credenciais" icon="user" cta="sobre" />
           <LinkButton href={`/blog/${U}`} label="Blog" sublabel="Artigos práticos de gestão no campo" icon="book" cta="blog" />
-          <LinkButton href={`/newsletter/${U}`} label="Newsletter" sublabel="Conteúdo de gestão no agro toda semana" icon="newspaper" cta="newsletter" />
         </section>
 
         {/* Conteúdo & Podcasts */}
@@ -140,7 +139,7 @@ export default function LinksPage() {
         </h2>
         <section className="space-y-3 mb-7">
           <LinkButton
-            href="https://www.youtube.com/watch?v=Dt3m-VGw8zo&list=PLd-Myf-teNs_TrmvHpNkxS_BjpQl5BdCl"
+            href="https://www.youtube.com/playlist?list=PLdv5Ps8k7ij8UDT_9aOTuzs_G5uo6lNva"
             label="NHCast — New Holland"
             sublabel="Host do podcast oficial da New Holland Brasil"
             icon="radio"

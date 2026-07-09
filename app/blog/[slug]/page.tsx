@@ -9,7 +9,6 @@ import { formatDate } from '@/lib/utils'
 import AuthorCard from '@/components/blog/AuthorCard'
 import ShareButtons from '@/components/blog/ShareButtons'
 import ArticleCard from '@/components/blog/ArticleCard'
-import { NewsletterForm } from '@/components/forms/NewsletterForm'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 
@@ -90,7 +89,7 @@ export default async function BlogPostPage({ params }: Props) {
       ],
       knowsAbout: ['Gestão financeira rural', 'Agronegócio', 'Sucessão familiar rural', 'Inovação no agro', 'Crédito rural'],
       sameAs: [
-        'https://linkedin.com/in/lucasdierings',
+        'https://www.linkedin.com/in/lucas-dierings/',
         'https://www.instagram.com/lucasdierings.agro/',
       ],
     },
@@ -211,19 +210,6 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
           )}
-
-          {/* CTA Newsletter inline */}
-          <div className="my-12 bg-off-white rounded-xl p-8 text-center">
-            <h3 className="font-heading text-xl font-bold text-navy mb-2">
-              Gostou deste conteúdo? Receba mais toda semana.
-            </h3>
-            <p className="text-carvao/60 text-sm mb-4">
-              Inscreva-se na newsletter da Fluxo Rural.
-            </p>
-            <div className="max-w-md mx-auto">
-              <NewsletterForm variant="inline" />
-            </div>
-          </div>
 
           {/* Share */}
           <div className="border-t border-b py-6 my-8">

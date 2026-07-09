@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Check, BookOpen } from 'lucide-react'
-import { NewsletterForm } from '@/components/forms/NewsletterForm'
 
 const benefits = [
   'Fluxo de caixa simplificado para o agro',
@@ -55,18 +54,11 @@ export default function ContentCTA() {
             transition={{ delay: 0.3 }}
             className="text-center"
           >
-            <Button asChild size="lg" className="mb-8">
+            <Button asChild size="lg">
               <Link href="/blog/5-indicadores-financeiros-produtor-rural">
                 Ler Artigo Completo
               </Link>
             </Button>
-
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6 max-w-md mx-auto">
-              <p className="text-white/80 text-sm mb-4">
-                Quer receber mais conteúdo como esse?
-              </p>
-              <NewsletterForm variant="footer" />
-            </div>
           </motion.div>
         </div>
       </div>

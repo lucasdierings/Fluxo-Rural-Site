@@ -12,10 +12,4 @@ export const contactSchema = z.object({
   }),
 })
 
-export const newsletterSchema = z.object({
-  nome: z.string().min(2, 'Nome é obrigatório').optional(),
-  email: z.string().email('E-mail inválido'),
-})
-
 export type ContactFormData = z.infer<typeof contactSchema>
-export type NewsletterFormData = z.infer<typeof newsletterSchema>

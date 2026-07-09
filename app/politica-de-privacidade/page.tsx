@@ -22,14 +22,12 @@ export default function PoliticaPage() {
           <p>Coletamos os seguintes dados pessoais:</p>
           <ul>
             <li><strong>Formulário de contato:</strong> nome, e-mail, telefone/WhatsApp, empresa/propriedade, tipo de interesse e mensagem.</li>
-            <li><strong>Newsletter:</strong> nome e e-mail.</li>
             <li><strong>Navegação:</strong> dados de acesso via Google Analytics (anonimizados).</li>
           </ul>
 
           <h2>3. Finalidade do Tratamento</h2>
           <ul>
             <li>Responder a solicitações de contato.</li>
-            <li>Enviar conteúdo da newsletter (mediante consentimento).</li>
             <li>Melhorar a experiência de navegação do site.</li>
           </ul>
 
@@ -40,7 +38,6 @@ export default function PoliticaPage() {
           <p>Seus dados podem ser compartilhados com:</p>
           <ul>
             <li><strong>Resend:</strong> para envio de e-mails transacionais.</li>
-            <li><strong>MailerLite:</strong> para gestão da newsletter.</li>
             <li><strong>Google Analytics:</strong> para análise de tráfego (dados anonimizados).</li>
           </ul>
 

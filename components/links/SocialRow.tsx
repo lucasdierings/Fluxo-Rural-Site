@@ -11,7 +11,7 @@ const socials = [
     Icon: Instagram,
   },
   {
-    href: 'https://www.linkedin.com/in/lucasdierings',
+    href: 'https://www.linkedin.com/in/lucas-dierings/',
     label: 'LinkedIn de Lucas Dierings',
     cta: 'social_linkedin',
     Icon: Linkedin,

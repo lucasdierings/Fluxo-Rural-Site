@@ -268,7 +268,7 @@ export default function SobrePage() {
             </a>
             {/* NHCast */}
             <a
-              href="https://www.youtube.com/watch?v=Dt3m-VGw8zo&list=PLd-Myf-teNs_TrmvHpNkxS_BjpQl5BdCl"
+              href="https://www.youtube.com/playlist?list=PLdv5Ps8k7ij8UDT_9aOTuzs_G5uo6lNva"
               target="_blank"
               rel="noopener noreferrer"
               className="relative h-80 md:h-96 rounded-3xl overflow-hidden group shadow-apple-lg hover:shadow-apple-lg transition-smooth block"

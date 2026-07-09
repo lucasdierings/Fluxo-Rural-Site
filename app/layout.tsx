@@ -99,7 +99,7 @@ const personJsonLd = {
   image: 'https://fluxorural.com.br/images/lucas-hero.jpg',
   email: 'lucas@fluxorural.com.br',
   sameAs: [
-    'https://linkedin.com/in/lucasdierings',
+    'https://www.linkedin.com/in/lucas-dierings/',
     'https://www.instagram.com/lucasdierings.agro/',
     'https://fluxorural.com.br',
   ],
@@ -165,7 +165,7 @@ const localBusinessJsonLd = {
   ],
   priceRange: 'Consulte',
   sameAs: [
-    'https://linkedin.com/in/lucasdierings',
+    'https://www.linkedin.com/in/lucas-dierings/',
     'https://www.instagram.com/lucasdierings.agro/',
   ],
 }

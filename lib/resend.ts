@@ -38,26 +38,3 @@ export function buildContactEmailHtml(data: ContactEmailProps): string {
     </div>
   `
 }
-
-export function buildWelcomeEmailHtml(nome?: string): string {
-  return `
-    <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-      <div style="background: #1E4D7B; padding: 30px; text-align: center;">
-        <h1 style="color: #FFFFFF; margin: 0; font-size: 24px;">Bem-vindo(a) à Newsletter Fluxo Rural!</h1>
-      </div>
-      <div style="padding: 30px; background: #FFFFFF;">
-        <p style="color: #1C1C1C; font-size: 16px; line-height: 1.6;">
-          ${nome ? `Olá, ${nome}!` : 'Olá!'}<br><br>
-          Obrigado por se inscrever na newsletter da Fluxo Rural Consultoria.<br><br>
-          Toda semana você receberá conteúdo sobre gestão financeira rural, inovação no agronegócio, sucessão familiar e estratégias práticas para o campo.<br><br>
-          Um abraço,<br>
-          <strong>Lucas Dierings</strong><br>
-          Engenheiro Agrônomo | Consultor Estratégico
-        </p>
-      </div>
-      <div style="background: #1E4D7B; padding: 20px; text-align: center;">
-        <p style="color: #FFFFFF; margin: 0; font-size: 12px;">Fluxo Rural Consultoria | Curitiba, PR — Brasil</p>
-      </div>
-    </div>
-  `
-}
