@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { MessageCircle } from 'lucide-react'
 import { trackLead } from '@/lib/track'
+import { cn } from '@/lib/utils'
 
 export default function FloatingWhatsApp() {
   const pathname = usePathname()
@@ -11,6 +12,9 @@ export default function FloatingWhatsApp() {
   const message = encodeURIComponent(
     'Olá Lucas! Vim pelo site fluxorural.com.br e gostaria de saber mais sobre seus serviços.'
   )
+  // No mobile o botão sobrepõe o texto durante a leitura do artigo — some só ali,
+  // continua disponível no desktop e em todas as outras páginas do site.
+  const isArticlePage = pathname?.startsWith('/blog/')
 
   return (
     <a
@@ -19,7 +23,7 @@ export default function FloatingWhatsApp() {
       rel="noopener noreferrer"
       aria-label="Fale conosco pelo WhatsApp"
       onClick={() => trackLead('whatsapp_click', { form_location: 'floating', page: pathname || '/', origem: 'site' })}
-      className="group fixed bottom-6 right-6 z-50"
+      className={cn('group fixed bottom-6 right-6 z-50', isArticlePage && 'hidden lg:block')}
     >
       {/* Tooltip */}
       <span className="absolute bottom-full right-0 mb-2 bg-carvao text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
