@@ -15,6 +15,20 @@
       })(window, document, 'script', 'dataLayer', 'GTM-NG4CVQ38');
     }
   </script>
+  <!-- GA4 da Fluxo Rural (propriedade 530020679) — mede a calculadora no Analytics (filtrar por /calculadora).
+       Mesmo padrão do site: GA4 recebe eventos por gtag; o generate_lead vai pro GA4 aqui e pro Ads via GTM (sem duplicar).
+       Não carrega em modo embed (a página que hospeda o iframe já tem o GA4). -->
+  <script>
+    if (new URLSearchParams(location.search).get('embed') !== 'true') {
+      var _ga = document.createElement('script');
+      _ga.async = true; _ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-VTCGYR206P';
+      document.head.appendChild(_ga);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-VTCGYR206P');
+    }
+  </script>
   <title>Calculadora de Margem por Hectare — Fluxo Rural</title>
   <meta name="description" content="Descubra em minutos sua margem bruta por hectare e compare com produtores do seu estado. Gratuito, sem cadastro para começar." />
   <!-- Front-end (Fase 1) pronto e funcional; cálculo 100% no navegador via benchmark-inicial.json. Backend real (POST /api/calculadora) fica para a Fase 2 — por ora noindex até termos SEO/JSON-LD dedicados. -->
