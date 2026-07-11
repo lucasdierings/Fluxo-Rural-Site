@@ -1,0 +1,14 @@
+# Fluxo Rural Site — config wrangler.
+# Serve para: (1) desenvolvimento local com `wrangler pages dev out` e (2) declarar o
+# binding D1 "DB" para as Pages Functions em produção.
+#
+# ATENÇÃO (Fase 0): este arquivo só passa a valer para o build do Cloudflare Pages a
+# partir do primeiro push da Fase 1. Antes de publicar, confirmar que o projeto Pages
+# não tem um binding conflitante configurado no dashboard. Para reverter, remover o arquivo.
+pages_build_output_dir = "out"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fluxo_calculadora"
+database_id = "a3e4abbd-e962-44b5-b6be-40bd1d29d213"
