@@ -1,0 +1,55 @@
+{
+  "_meta": {
+    "descricao": "Seed de referência de mercado (dados públicos aproximados). Valores em sc/ha (produtividade), R$/sc (preço) e R$/ha (custos por categoria).",
+    "fontes": ["CONAB (custo de produção)", "IMEA (MT)", "Deral (PR)", "CEPEA/Esalq (preços)"],
+    "safra_referencia": "2024/2025",
+    "atualizado_em": "2026-07-10",
+    "aviso": "Referência de mercado aproximada — o Lucas refina/enriquece com o tempo. O app usa dados próprios quando houver >=10 amostras por cultura x estado; senão usa este seed.",
+    "calculo": "custo_total = soma(custos); margem_bruta_ha_ref = produtividade*preco - custo_total (sem arrendamento e sem depreciação/custo de oportunidade)."
+  },
+  "culturas": {
+    "soja": {
+      "estados": {
+        "MT": { "prod": 61, "preco": 128, "custos": { "sementes": 680, "defensivos": 1550, "fertilizantes": 2400, "diesel": 620, "mao_obra": 240, "manutencao": 460, "admin": 360 } },
+        "PR": { "prod": 62, "preco": 126, "custos": { "sementes": 620, "defensivos": 1400, "fertilizantes": 2200, "diesel": 560, "mao_obra": 300, "manutencao": 480, "admin": 380 } },
+        "RS": { "prod": 50, "preco": 124, "custos": { "sementes": 600, "defensivos": 1300, "fertilizantes": 2100, "diesel": 540, "mao_obra": 320, "manutencao": 470, "admin": 360 } },
+        "GO": { "prod": 58, "preco": 124, "custos": { "sementes": 650, "defensivos": 1450, "fertilizantes": 2300, "diesel": 600, "mao_obra": 240, "manutencao": 450, "admin": 350 } },
+        "MS": { "prod": 57, "preco": 124, "custos": { "sementes": 640, "defensivos": 1420, "fertilizantes": 2250, "diesel": 590, "mao_obra": 250, "manutencao": 450, "admin": 350 } },
+        "BA": { "prod": 60, "preco": 126, "custos": { "sementes": 680, "defensivos": 1600, "fertilizantes": 2500, "diesel": 650, "mao_obra": 260, "manutencao": 480, "admin": 380 } },
+        "MG": { "prod": 60, "preco": 125, "custos": { "sementes": 660, "defensivos": 1500, "fertilizantes": 2350, "diesel": 610, "mao_obra": 250, "manutencao": 460, "admin": 360 } },
+        "SP": { "prod": 55, "preco": 126, "custos": { "sementes": 650, "defensivos": 1480, "fertilizantes": 2300, "diesel": 600, "mao_obra": 280, "manutencao": 470, "admin": 370 } },
+        "SC": { "prod": 58, "preco": 125, "custos": { "sementes": 620, "defensivos": 1380, "fertilizantes": 2180, "diesel": 560, "mao_obra": 300, "manutencao": 470, "admin": 370 } },
+        "TO": { "prod": 56, "preco": 124, "custos": { "sementes": 660, "defensivos": 1520, "fertilizantes": 2400, "diesel": 620, "mao_obra": 250, "manutencao": 460, "admin": 360 } },
+        "MA": { "prod": 56, "preco": 124, "custos": { "sementes": 670, "defensivos": 1550, "fertilizantes": 2450, "diesel": 630, "mao_obra": 250, "manutencao": 470, "admin": 360 } },
+        "PI": { "prod": 55, "preco": 123, "custos": { "sementes": 670, "defensivos": 1560, "fertilizantes": 2460, "diesel": 630, "mao_obra": 250, "manutencao": 470, "admin": 360 } }
+      }
+    },
+    "milho": {
+      "estados": {
+        "MT": { "prod": 110, "preco": 58, "custos": { "sementes": 720, "defensivos": 900, "fertilizantes": 1900, "diesel": 520, "mao_obra": 200, "manutencao": 420, "admin": 300 } },
+        "PR": { "prod": 115, "preco": 62, "custos": { "sementes": 700, "defensivos": 850, "fertilizantes": 1850, "diesel": 500, "mao_obra": 240, "manutencao": 440, "admin": 320 } },
+        "GO": { "prod": 108, "preco": 59, "custos": { "sementes": 710, "defensivos": 880, "fertilizantes": 1880, "diesel": 520, "mao_obra": 200, "manutencao": 420, "admin": 300 } },
+        "MS": { "prod": 105, "preco": 59, "custos": { "sementes": 700, "defensivos": 870, "fertilizantes": 1860, "diesel": 510, "mao_obra": 200, "manutencao": 420, "admin": 300 } },
+        "MG": { "prod": 100, "preco": 60, "custos": { "sementes": 700, "defensivos": 860, "fertilizantes": 1850, "diesel": 510, "mao_obra": 220, "manutencao": 430, "admin": 310 } },
+        "SP": { "prod": 95, "preco": 61, "custos": { "sementes": 700, "defensivos": 860, "fertilizantes": 1840, "diesel": 510, "mao_obra": 240, "manutencao": 440, "admin": 320 } },
+        "RS": { "prod": 90, "preco": 62, "custos": { "sementes": 680, "defensivos": 820, "fertilizantes": 1780, "diesel": 490, "mao_obra": 250, "manutencao": 430, "admin": 310 } },
+        "BA": { "prod": 95, "preco": 58, "custos": { "sementes": 720, "defensivos": 900, "fertilizantes": 1900, "diesel": 540, "mao_obra": 210, "manutencao": 440, "admin": 310 } }
+      }
+    },
+    "trigo": {
+      "estados": {
+        "PR": { "prod": 55, "preco": 78, "custos": { "sementes": 480, "defensivos": 700, "fertilizantes": 1400, "diesel": 460, "mao_obra": 220, "manutencao": 400, "admin": 300 } },
+        "RS": { "prod": 52, "preco": 77, "custos": { "sementes": 470, "defensivos": 680, "fertilizantes": 1350, "diesel": 450, "mao_obra": 230, "manutencao": 400, "admin": 300 } },
+        "MS": { "prod": 52, "preco": 76, "custos": { "sementes": 470, "defensivos": 690, "fertilizantes": 1360, "diesel": 470, "mao_obra": 210, "manutencao": 400, "admin": 300 } },
+        "SC": { "prod": 54, "preco": 77, "custos": { "sementes": 480, "defensivos": 690, "fertilizantes": 1380, "diesel": 450, "mao_obra": 230, "manutencao": 400, "admin": 300 } },
+        "GO": { "prod": 58, "preco": 77, "custos": { "sementes": 500, "defensivos": 720, "fertilizantes": 1450, "diesel": 480, "mao_obra": 200, "manutencao": 410, "admin": 310 } },
+        "SP": { "prod": 53, "preco": 77, "custos": { "sementes": 490, "defensivos": 700, "fertilizantes": 1400, "diesel": 470, "mao_obra": 230, "manutencao": 410, "admin": 310 } }
+      }
+    }
+  },
+  "nacional": {
+    "soja": { "prod": 57, "preco": 125, "margem_bruta_ha_ref": 1050 },
+    "milho": { "prod": 103, "preco": 60, "margem_bruta_ha_ref": 1180 },
+    "trigo": { "prod": 53, "preco": 77, "margem_bruta_ha_ref": 190 }
+  }
+}

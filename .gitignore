@@ -38,3 +38,9 @@ next-env.d.ts
 
 # claude code
 .claude/
+
+# wrangler (D1 local state / cache)
+.wrangler/
+
+# wrangler config (fica só local; binding D1 em produção vai pelo painel Cloudflare)
+wrangler.toml
