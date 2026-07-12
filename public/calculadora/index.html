@@ -3,23 +3,76 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Google Tag Manager (mesmo container do site) — dispara a conversão generate_lead no Google Ads.
-       Não carrega em modo embed (a página do blog que hospeda o iframe já tem o GTM). -->
+
+  <title>Calculadora de Margem por Hectare — Fluxo Rural</title>
+  <meta name="description" content="Descubra em minutos sua margem bruta por hectare e compare com produtores do seu estado. Gratuito, sem cadastro para começar." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fluxorural.com.br/calculadora/" />
+
+  <!-- Open Graph / WhatsApp Link Preview Metadata -->
+  <meta property="og:title" content="Calculadora de Margem por Hectare — Fluxo Rural" />
+  <meta property="og:description" content="Descubra sua margem por hectare em 2 minutos e compare com produtores do seu estado. Gratuito e anônimo." />
+  <meta property="og:image" content="https://fluxorural.com.br/calculadora/og-image-calculadora.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://fluxorural.com.br/calculadora/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fluxo Rural" />
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Calculadora de Margem por Hectare — Fluxo Rural" />
+  <meta name="twitter:description" content="Descubra sua margem por hectare em 2 minutos e compare com produtores do seu estado. Gratuito e anônimo." />
+  <meta name="twitter:image" content="https://fluxorural.com.br/calculadora/og-image-calculadora.jpg" />
+
+  <!-- JSON-LD: Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculadora de Margem por Hectare",
+    "url": "https://fluxorural.com.br/calculadora/",
+    "description": "Descubra em minutos sua margem bruta por hectare e compare com produtores do seu estado. Gratuito, sem cadastro para começar.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Fluxo Rural Consultoria",
+      "url": "https://fluxorural.com.br"
+    },
+    "inLanguage": "pt-BR"
+  }
+  </script>
+
+  <!-- Preload CSS para renderização rápida -->
+  <link rel="preload" href="./styles.css" as="style" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Google Fonts: carregamento não-bloqueante via preload -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+  <!-- GTM + GA4: adiados via requestIdleCallback para não bloquear FCP/LCP.
+       O generate_lead dispara depois que o usuário já interagiu — não precisa carregar no paint. -->
   <script>
-    if (new URLSearchParams(location.search).get('embed') !== 'true') {
+    function _loadAnalytics() {
+      if (new URLSearchParams(location.search).get('embed') === 'true') return;
+      // GTM
       (function (w, d, s, l, i) {
         w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
         var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
         j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
         f.parentNode.insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', 'GTM-NG4CVQ38');
-    }
-  </script>
-  <!-- GA4 da Fluxo Rural (propriedade 530020679) — mede a calculadora no Analytics (filtrar por /calculadora).
-       Mesmo padrão do site: GA4 recebe eventos por gtag; o generate_lead vai pro GA4 aqui e pro Ads via GTM (sem duplicar).
-       Não carrega em modo embed (a página que hospeda o iframe já tem o GA4). -->
-  <script>
-    if (new URLSearchParams(location.search).get('embed') !== 'true') {
+      // GA4
       var _ga = document.createElement('script');
       _ga.async = true; _ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-VTCGYR206P';
       document.head.appendChild(_ga);
@@ -28,15 +81,12 @@
       gtag('js', new Date());
       gtag('config', 'G-VTCGYR206P');
     }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(_loadAnalytics, { timeout: 3000 });
+    } else {
+      setTimeout(_loadAnalytics, 2000);
+    }
   </script>
-  <title>Calculadora de Margem por Hectare — Fluxo Rural</title>
-  <meta name="description" content="Descubra em minutos sua margem bruta por hectare e compare com produtores do seu estado. Gratuito, sem cadastro para começar." />
-  <!-- Front-end (Fase 1) pronto e funcional; cálculo 100% no navegador via benchmark-inicial.json. Backend real (POST /api/calculadora) fica para a Fase 2 — por ora noindex até termos SEO/JSON-LD dedicados. -->
-  <meta name="robots" content="noindex" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NG4CVQ38" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -63,6 +113,9 @@
         <!-- PASSO 0 — Onboarding -->
         <div class="wizard-step" id="wz-intro" data-step="intro">
           <div class="card intro-card">
+            <div class="intro-banner-wrap">
+              <img src="./banner-colheita.jpg" alt="Colheita de soja no campo" class="intro-banner-img" width="800" height="447" loading="lazy" decoding="async" fetchpriority="low" />
+            </div>
             <span class="intro-eyebrow">Calculadora de Margem · ~2 min</span>
             <h1>Descubra sua margem por hectare</h1>
             <p class="intro-lead">Responda algumas perguntas simples sobre a sua lavoura e veja onde você está — sem planilha, direto no celular.</p>
@@ -77,7 +130,7 @@
               </li>
               <li>
                 <span class="bico"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <span>Um <strong>diagnóstico</strong> e o seu <strong>ranking</strong> entre produtores</span>
+                <span>Um <strong>diagnóstico</strong> e <strong>onde você está</strong> entre os produtores</span>
               </li>
             </ul>
             <p class="confidence-note">
@@ -101,8 +154,14 @@
               <p class="error-msg">Selecione o estado.</p>
             </div>
             <div class="field">
-              <label for="lCidade">Cidade</label>
-              <input id="lCidade" class="input" type="text" placeholder="opcional" autocomplete="address-level2" />
+              <label for="lCidade">Cidade <span class="req">*</span></label>
+              <div class="city-combo" id="cityCombo">
+                <span class="city-search-ico" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.8"/><path d="M13.5 13.5L18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                <input id="lCidade" class="input city-input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cityList" autocomplete="off" placeholder="Selecione o estado primeiro" disabled required />
+                <ul class="city-list" id="cityList" role="listbox" hidden></ul>
+              </div>
+              <p class="hint" id="lCidadeHint">Comece a digitar — no futuro isso libera a média da sua cidade.</p>
+              <p class="error-msg">Selecione a cidade da lista.</p>
             </div>
             <div class="field">
               <label for="pSafra">Safra</label>
@@ -110,6 +169,51 @@
                 <option value="2025/2026">2025/2026</option>
                 <option value="2024/2025">2024/2025</option>
               </select>
+            </div>
+          </div>
+          <div class="wz-footer">
+            <button type="button" class="btn btn-ghost" data-action="back">Voltar</button>
+            <button type="button" class="btn btn-primary" data-action="next">Continuar →</button>
+          </div>
+        </div>
+
+        <!-- PASSO 1b — Terra (própria / arrendada / mista) + arrendamento -->
+        <div class="wizard-step" id="wz-terra" data-step="terra" hidden>
+          <div class="card">
+            <h2 class="wz-title">Sua terra é...</h2>
+            <p class="wz-sub">Se você arrenda, a gente desconta o arrendamento no seu resultado.</p>
+            <div class="field">
+              <div class="segmented segmented-3" id="terraTipo" role="group" aria-label="Tipo de propriedade">
+                <button type="button" data-val="propria" aria-pressed="true">Própria</button>
+                <button type="button" data-val="arrendada" aria-pressed="false">Arrendada</button>
+                <button type="button" data-val="mista" aria-pressed="false">Própria + arrendada</button>
+              </div>
+            </div>
+
+            <div id="terraHectares" hidden>
+              <div class="field-row">
+                <div class="field" id="fHaProprio">
+                  <label for="haProprio">Hectares próprios</label>
+                  <input id="haProprio" class="input" type="text" inputmode="decimal" placeholder="Informe os hectares" />
+                </div>
+                <div class="field" id="fHaArrendado">
+                  <label for="haArrendado">Hectares arrendados</label>
+                  <input id="haArrendado" class="input" type="text" inputmode="decimal" placeholder="Informe os hectares" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Como você paga o arrendamento?</label>
+                <div class="segmented" id="arrendUnidade" role="group" aria-label="Unidade do arrendamento">
+                  <button type="button" data-val="sc_ha" aria-pressed="true">Sacas por hectare</button>
+                  <button type="button" data-val="rs_ha" aria-pressed="false">R$ por hectare</button>
+                </div>
+              </div>
+              <div class="field">
+                <label for="arrendValor" id="arrendValorLabel">Valor do arrendamento (sc/ha)</label>
+                <input id="arrendValor" class="input" type="text" inputmode="decimal" placeholder="Informe o valor" />
+                <p class="hint" id="arrendHint">Em sacas, convertemos pelo seu preço médio de venda — só sobre os hectares arrendados.</p>
+              </div>
             </div>
           </div>
           <div class="wz-footer">
@@ -139,19 +243,17 @@
             <p class="wz-sub">Quanto você planta e colhe nessa cultura.</p>
             <div class="field">
               <label for="pArea">Área plantada (ha) <span class="req">*</span></label>
-              <input id="pArea" class="input" type="text" inputmode="decimal" placeholder="Ex: 120" required />
+              <input id="pArea" class="input" type="text" inputmode="decimal" placeholder="Informe a área" required />
               <p class="error-msg">Informe a área plantada.</p>
             </div>
             <div class="field">
               <label for="pProd">Produtividade (sc/ha) <span class="req">*</span> <span class="tip" tabindex="0" role="note" data-tip="Sacas colhidas por hectare. Soja, milho e trigo em sacas de 60 kg.">?</span></label>
-              <input id="pProd" class="input" type="text" inputmode="decimal" placeholder="Ex: 60" required />
-              <button type="button" class="btn-media" id="btnMediaProd" hidden></button>
+              <input id="pProd" class="input" type="text" inputmode="decimal" placeholder="Informe a produtividade" required />
               <p class="error-msg">Informe a produtividade.</p>
             </div>
             <div class="field">
-              <label for="pPreco">Preço médio de venda (R$/sc) <span class="req">*</span></label>
-              <input id="pPreco" class="input" type="text" inputmode="decimal" placeholder="Ex: 125,00" required />
-              <button type="button" class="btn-media" id="btnMediaPreco" hidden></button>
+              <label for="pPreco">Preço médio de venda (R$/sc) <span class="req">*</span> <span class="tip" tabindex="0" role="note" data-tip="Vendeu em vários lotes? Use a média aproximada — não precisa ser exato.">?</span></label>
+              <input id="pPreco" class="input" type="text" inputmode="decimal" placeholder="Informe o preço médio" required />
               <p class="error-msg">Informe o preço de venda.</p>
             </div>
             <div class="live-feedback empty" id="wzReceitaLive" aria-live="polite">Preencha os campos para ver a receita estimada.</div>
@@ -165,51 +267,41 @@
         <!-- PASSO 2c — Custos da cultura -->
         <div class="wizard-step" id="wz-cultura_custos" data-step="cultura_custos" hidden>
           <div class="card">
-            <h2 class="wz-title">Custos · <span id="wzCustosCultura">—</span></h2>
-            <p class="wz-sub">Todos opcionais. O que você deixar em branco, a gente completa com a média do seu estado.</p>
-
-            <div class="field">
-              <label>Como você tem seus números? <span class="tip" tabindex="0" role="note" data-tip="Em 'Valor total', dividimos o valor pela área plantada desta cultura para chegar no R$/ha.">?</span></label>
-              <div class="segmented" id="custoModeToggle" role="group" aria-label="Como você tem seus números">
-                <button type="button" data-val="ha" aria-pressed="true">Por hectare</button>
-                <button type="button" data-val="total" aria-pressed="false">Valor total</button>
-              </div>
-            </div>
-
-            <button type="button" class="btn btn-secondary btn-block" id="btnMediaCustos" style="margin-bottom:.5rem">Usar a média do meu estado</button>
+            <h2 class="wz-title">Custos · <span id="wzCustosCultura">—</span> <span class="wz-area-tag" id="wzCustosArea"></span></h2>
+            <p class="wz-sub">Quanto você <strong>gastou no total</strong> nesta safra com cada item. A gente converte pra R$/ha. Deixe em branco o que não souber.</p>
 
             <div class="custos-grid">
               <div class="field">
-                <label for="cSementes">Sementes <span class="tip" tabindex="0" role="note" data-tip="Custo com sementes e tratamento de sementes.">?</span></label>
-                <input id="cSementes" class="input" type="text" inputmode="decimal" placeholder="opcional" />
+                <label for="cSementes">Sementes <span class="tip" tabindex="0" role="note" data-tip="Total gasto com sementes e tratamento de sementes.">?</span></label>
+                <input id="cSementes" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
               </div>
               <div class="field">
-                <label for="cDefensivos">Defensivos <span class="tip" tabindex="0" role="note" data-tip="Herbicidas, fungicidas, inseticidas e adjuvantes.">?</span></label>
-                <input id="cDefensivos" class="input" type="text" inputmode="decimal" placeholder="opcional" />
+                <label for="cDefensivos">Defensivos <span class="tip" tabindex="0" role="note" data-tip="Total gasto com herbicidas, fungicidas, inseticidas e adjuvantes.">?</span></label>
+                <input id="cDefensivos" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
               </div>
               <div class="field">
-                <label for="cFertilizantes">Fertilizantes <span class="tip" tabindex="0" role="note" data-tip="Adubos, corretivos e fertilizantes foliares.">?</span></label>
-                <input id="cFertilizantes" class="input" type="text" inputmode="decimal" placeholder="opcional" />
+                <label for="cFertilizantes">Fertilizantes <span class="tip" tabindex="0" role="note" data-tip="Total gasto com adubos, corretivos e fertilizantes foliares.">?</span></label>
+                <input id="cFertilizantes" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
               </div>
               <div class="field">
-                <label for="cDiesel">Diesel <span class="tip" tabindex="0" role="note" data-tip="Combustível de máquinas e operações da lavoura.">?</span></label>
-                <input id="cDiesel" class="input" type="text" inputmode="decimal" placeholder="opcional" />
+                <label for="cDiesel">Diesel <span class="tip" tabindex="0" role="note" data-tip="Total gasto com combustível de máquinas e operações.">?</span></label>
+                <input id="cDiesel" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
               </div>
               <div class="field">
-                <label for="cMaoObra">Mão de obra <span class="tip" tabindex="0" role="note" data-tip="Salários, diaristas e encargos ligados à lavoura.">?</span></label>
-                <input id="cMaoObra" class="input" type="text" inputmode="decimal" placeholder="opcional" />
+                <label for="cMaoObra">Mão de obra <span class="tip" tabindex="0" role="note" data-tip="Total gasto com salários, diaristas e encargos da lavoura.">?</span></label>
+                <input id="cMaoObra" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
               </div>
               <div class="field">
-                <label for="cManutencao">Manutenção <span class="tip" tabindex="0" role="note" data-tip="Manutenção e reparo de máquinas e implementos.">?</span></label>
-                <input id="cManutencao" class="input" type="text" inputmode="decimal" placeholder="opcional" />
+                <label for="cManutencao">Manutenção <span class="tip" tabindex="0" role="note" data-tip="Total gasto com manutenção e reparo de máquinas e implementos.">?</span></label>
+                <input id="cManutencao" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
               </div>
               <div class="field">
-                <label for="cAdmin">Administrativo <span class="tip" tabindex="0" role="note" data-tip="Escritório, contador, energia e outras despesas fixas.">?</span></label>
-                <input id="cAdmin" class="input" type="text" inputmode="decimal" placeholder="opcional" />
+                <label for="cAdmin">Administrativo <span class="tip" tabindex="0" role="note" data-tip="Total gasto com escritório, contador, energia e outras despesas fixas.">?</span></label>
+                <input id="cAdmin" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
               </div>
             </div>
 
-            <div class="live-feedback empty" id="wzCustoLive" aria-live="polite">Deixe em branco para usar a média do estado.</div>
+            <div class="live-feedback empty" id="wzCustoLive" aria-live="polite">Preencha os custos para ver o total por hectare.</div>
           </div>
           <div class="wz-footer">
             <button type="button" class="btn btn-ghost" data-action="back">Voltar</button>
@@ -228,30 +320,6 @@
           <div class="wz-footer">
             <button type="button" class="btn btn-ghost" data-action="back">Voltar</button>
             <button type="button" class="btn btn-primary" data-action="continue">Não, continuar →</button>
-          </div>
-        </div>
-
-        <!-- PASSO 3 — Arrendamento -->
-        <div class="wizard-step" id="wz-arrendamento" data-step="arrendamento" hidden>
-          <div class="card">
-            <h2 class="wz-title">Arrendamento</h2>
-            <p class="wz-sub">Se você arrenda a terra, informe o valor. Terra própria? É só deixar em branco.</p>
-            <div class="field">
-              <label>Unidade</label>
-              <div class="segmented" id="arrendUnidade" role="group" aria-label="Unidade do arrendamento">
-                <button type="button" data-val="rs_ha" aria-pressed="true">R$/ha</button>
-                <button type="button" data-val="sc_ha" aria-pressed="false">sc/ha</button>
-              </div>
-            </div>
-            <div class="field">
-              <label for="arrendValor" id="arrendValorLabel">Valor do arrendamento (R$/ha)</label>
-              <input id="arrendValor" class="input" type="text" inputmode="decimal" placeholder="Ex: 0" />
-              <p class="hint" id="arrendHint">Aplica a toda a área de grãos. Em sc/ha, convertemos pelo preço da 1ª cultura.</p>
-            </div>
-          </div>
-          <div class="wz-footer">
-            <button type="button" class="btn btn-ghost" data-action="back">Voltar</button>
-            <button type="button" class="btn btn-primary" data-action="next">Continuar →</button>
           </div>
         </div>
 
@@ -316,9 +384,10 @@
         <div class="result-hero">
           <p class="label">Margem bruta da fazenda</p>
           <p class="value" id="t2Margem">—</p>
-          <p class="compare" id="t2Compare"></p>
-          <div id="t2Semaforo"></div>
+          <p class="result-sub" id="t2MargemHa"></p>
         </div>
+
+        <div class="result-metrics" id="t2Metrics"></div>
 
         <div class="gate-wrap">
           <div class="gate-preview" aria-hidden="true">
@@ -329,13 +398,13 @@
               <div class="skeleton-line w60"></div>
             </div>
             <div class="card">
-              <h2>Breakdown de custos</h2>
+              <h2>Seus custos vs. a média</h2>
               <div class="skeleton-line w80"></div>
               <div class="skeleton-line w60"></div>
               <div class="skeleton-line w80"></div>
             </div>
             <div class="card">
-              <h2>Diagnóstico e ranking</h2>
+              <h2>Diagnóstico e sua posição</h2>
               <div class="skeleton-line w60"></div>
               <div class="skeleton-line w80"></div>
             </div>
@@ -343,11 +412,19 @@
 
           <div class="gate-overlay">
             <div class="gate-card">
-              <h2>Ver diagnóstico completo</h2>
-              <p class="card-sub">Cadastre-se grátis para liberar o breakdown de custos, dívida, ranking e recomendação.</p>
+              <div class="gate-badge-wrap">
+                <img src="./selo-seguranca-sm.jpg" alt="Dados 100% Anônimos - Segurança Fluxo Rural" width="80" height="80" class="gate-seal-img" loading="lazy" decoding="async" />
+              </div>
+              <h2>Quer ver como você se compara?</h2>
+              <p class="card-sub">Seu resultado está pronto. Para liberar a comparação, compartilhe seus dados de forma <strong>anônima</strong> — é assim que as médias existem: cada produtor que participa deixa o comparativo mais preciso para todos.</p>
+              <ul class="gate-unlocks">
+                <li>Compare <strong>margem/ha, produtividade e custos</strong> com a média do <strong>seu estado</strong> e do <strong>Brasil</strong></li>
+                <li>Veja <strong>sua posição</strong> entre os produtores da sua cultura</li>
+                <li><strong>Em breve:</strong> a média da sua região e da sua cidade</li>
+              </ul>
               <p class="lock-line">
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 9V7a5 5 0 0110 0v2M4 9h12v8a1 1 0 01-1 1H5a1 1 0 01-1-1V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-                Gratuita · seus dados são preservados e não são divulgados.
+                O ranking é anônimo — seus dados individuais nunca aparecem. O cadastro serve só para organizar os dados e evitar duplicações.
               </p>
 
               <form id="formCadastro" novalidate>
@@ -376,7 +453,7 @@
                   </span>
                 </label>
 
-                <button type="submit" class="btn btn-primary btn-block" id="btnVerDiagnostico" disabled>VER DIAGNÓSTICO COMPLETO →</button>
+                <button type="submit" class="btn btn-primary btn-block" id="btnVerDiagnostico" disabled>VER MINHA COMPARAÇÃO →</button>
               </form>
             </div>
           </div>
@@ -399,25 +476,29 @@
           <div id="t3CulturasBlocks"></div>
         </div>
 
-        <!-- 2. Benchmark -->
+        <!-- 2. Como você se compara -->
         <div class="card">
-          <h2>Benchmark</h2>
-          <p class="card-sub">Sua margem e produtividade frente à média estadual e nacional.</p>
+          <h2>Como você se compara</h2>
+          <p class="card-sub">Seus números lado a lado com a média do seu estado e do Brasil.</p>
           <div id="t3Benchmark"></div>
         </div>
 
-        <!-- 3. Breakdown de custos -->
+        <!-- 3. Seus custos -->
         <div class="card">
-          <h2>Custos vs. média regional</h2>
-          <p class="card-sub">Categorias que você deixou em branco usam a média do estado.</p>
+          <h2>Seus custos vs. a média do estado</h2>
+          <p class="card-sub">Verde: você gasta menos que a média. Vermelho: gasta mais. O que você deixou em branco usa a média do estado.</p>
+          <div id="t3Completeness"></div>
           <div id="t3CostTable"></div>
         </div>
 
-        <!-- 4. Impacto da dívida -->
+        <!-- 4. Dívida e caixa -->
         <div class="card" id="t3DividaCard" hidden>
-          <h2>Impacto da dívida</h2>
+          <h2>Sua dívida e o caixa</h2>
+          <p class="card-sub">Aqui a conta é outra: não é a margem da lavoura, é o dinheiro que sobra no bolso.</p>
+          <p class="debt-explain" id="t3DividaExplain"></p>
           <div class="debt-grid" id="t3DividaGrid"></div>
           <p class="hint" id="t3Alavancagem" style="margin-top:.75rem"></p>
+          <div id="t3DividaCallout"></div>
         </div>
 
         <!-- 5. Diversificação -->
@@ -429,9 +510,11 @@
         <!-- 6. Diagnóstico inteligente -->
         <div class="diag-card" id="t3DiagCard"></div>
 
-        <!-- 7. Ranking -->
+        <!-- 7. Sua posição -->
         <div class="card">
-          <h2>Ranking anônimo</h2>
+          <h2>Sua posição entre os produtores</h2>
+          <p class="card-sub">Comparação anônima — ninguém vê os dados de ninguém.</p>
+          <div id="t3Tier"></div>
           <p id="t3RankingTexto"></p>
           <div class="rank-stats" id="t3RankStats"></div>
           <div class="percentile-bar">
@@ -440,30 +523,35 @@
           <p class="rank-estimate-tag">Estimativa a partir de referência pública — vai ficando mais precisa conforme mais produtores usam a calculadora.</p>
         </div>
 
+        <!-- 7b. Card compartilhável (orgulho) -->
+        <div class="card share-card no-print" id="t3ShareCard">
+          <h2>Seu card pra compartilhar</h2>
+          <p class="card-sub">Mostre seu resultado no grupo — e ajude a fortalecer o comparativo da sua região.</p>
+          <div class="share-canvas-wrap">
+            <canvas id="shareCanvas" width="1080" height="1350" role="img" aria-label="Card de resultado da minha lavoura"></canvas>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="btnShareCard">Compartilhar meu card</button>
+        </div>
+
         <!-- 8. Aviso obrigatório -->
         <div class="disclaimer">
           <strong>Atenção:</strong> esta é sua <strong>margem bruta</strong>. Não é margem líquida — não descontamos
           depreciação de máquinas nem custo de oportunidade, isso exigiria o inventário completo da sua fazenda.
-          <div class="interesse-row">
-            <label class="check-row" for="interesseGestao">
-              <input type="checkbox" id="interesseGestao" />
-              <span class="check-label">Quero conhecer uma ferramenta de gestão completa (com depreciação, custo de oportunidade e inventário).</span>
-            </label>
-          </div>
         </div>
 
-        <!-- 9. CTAs -->
+        <!-- 9. CTAs — viralização + coleta -->
         <div class="card no-print">
+          <h2>Deixe esse comparativo mais forte</h2>
+          <p class="cta-invite-note" id="ctaInviteNote"></p>
+          <label class="check-row" for="avisarCidade" style="margin:.25rem 0 1.1rem">
+            <input type="checkbox" id="avisarCidade" />
+            <span class="check-label">Me avise no WhatsApp quando a média de <strong id="avisarCidadeNome"></strong> sair.</span>
+          </label>
           <div class="cta-block">
-            <a class="btn btn-primary btn-block" id="ctaWhatsapp" href="#" target="_blank" rel="noopener">Falar com a Fluxo Rural</a>
-            <div class="cta-secondary-row">
-              <a class="btn btn-secondary" id="ctaAgendar" href="#" target="_blank" rel="noopener">Agendar apresentação</a>
-            </div>
-            <div class="utility-row">
-              <button type="button" class="btn btn-utility" id="btnPdf">Baixar meu diagnóstico em PDF</button>
-              <button type="button" class="btn btn-utility" id="btnShare">Compartilhar no WhatsApp</button>
-            </div>
+            <button type="button" class="btn btn-primary btn-block" id="btnConvidar">Convidar outros produtores</button>
+            <button type="button" class="btn btn-utility btn-block" id="btnPdf">Baixar meu diagnóstico em PDF</button>
           </div>
+          <p class="safra-teaser">Guarde este resultado — na próxima safra, você vai poder comparar sua evolução aqui mesmo.</p>
         </div>
 
         <!-- 10. Avaliação -->
