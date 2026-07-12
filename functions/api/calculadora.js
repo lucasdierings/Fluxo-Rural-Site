@@ -35,12 +35,20 @@ function fmtBRL(v) {
 
 // ---------------------------------------------------------------------------
 // Ranking a partir de dados próprios (fallback = null → o front usa o seed)
+//
+// Política de amostra (bootstrap): no início, com poucos produtores, contamos TODAS as linhas
+// (inclusive as anônimas, sem cadastro) pra povoar o ranking mais rápido. Quando já tiver volume
+// suficiente, muda pra contar só quem deu consentimento (consent_lgpd=1, ou seja, completou o
+// cadastro) — ativa isso setando a env var CALC_SOMENTE_CONSENTIDOS=1 no painel do Cloudflare
+// Pages (Settings → Environment variables); normalmente exige um novo deploy pra valer.
 // ---------------------------------------------------------------------------
 async function computeRanking(env, cultura, estado, userMargem) {
   if (!cultura || !estado || userMargem == null) return null
   try {
+    const somenteConsentidos = env.CALC_SOMENTE_CONSENTIDOS === '1' || env.CALC_SOMENTE_CONSENTIDOS === 'true'
+    const filtroConsent = somenteConsentidos ? ' AND consent_lgpd=1' : ''
     const q = await env.DB
-      .prepare('SELECT margem_bruta_ha FROM calculadora_diagnosticos WHERE cultura=? AND estado=? AND margem_bruta_ha IS NOT NULL')
+      .prepare(`SELECT margem_bruta_ha FROM calculadora_diagnosticos WHERE cultura=? AND estado=? AND margem_bruta_ha IS NOT NULL${filtroConsent}`)
       .bind(cultura, estado).all()
     const arr = (q.results || []).map((r) => r.margem_bruta_ha).filter((v) => v != null).sort((a, b) => a - b)
     if (arr.length < 10) return null
@@ -119,16 +127,42 @@ async function handleCalcular(body, request, env) {
   return json({ id, ranking })
 }
 
+// E-mail é o balizador de identidade (normalizado: minúsculo + trim — WhatsApp varia de formatação
+// e IP é dinâmico/compartilhado, não servem). Mesma e-mail + mesma safra = a mesma pessoa recalculando
+// nesta safra → atualiza a linha existente em vez de duplicar (evita lead duplicado no seu inbox e
+// viés no ranking/benchmark, que soma margem_bruta_ha de TODAS as linhas sem dedup).
+// Mesma e-mail + safra DIFERENTE → linha nova de propósito: é o histórico de evolução entre safras.
+async function findLinhaExistente(env, email, safra) {
+  if (!safra) return null
+  try {
+    const row = await env.DB.prepare(
+      'SELECT id FROM calculadora_diagnosticos WHERE lower(trim(email))=? AND safra=? ORDER BY created_at DESC LIMIT 1'
+    ).bind(String(email).trim().toLowerCase(), safra).first()
+    return row ? row.id : null
+  } catch (_) { return null } // checagem best-effort; se falhar, segue o fluxo normal (insere linha nova)
+}
+
 async function handleCadastrar(body, request, env) {
   const cad = body.cadastro || {}
   if (!cad.nome || !cad.email) return json({ error: 'Dados incompletos' }, 400)
   const nowIso = new Date().toISOString()
 
-  let id = body.calcId || null
+  const idExistente = await findLinhaExistente(env, cad.email, body.safra)
+  const isReturning = !!idExistente
+  let id = idExistente || body.calcId || null
+
   if (!id) {
-    // Sem calcId (o calcular não rodou/falhou) — insere a linha completa agora pra não perder o lead.
+    // Sem calcId nem linha anterior nesta safra — insere a linha completa agora pra não perder o lead.
     id = await insertRow(await payloadToCols(body, request, env), env)
+  } else if (isReturning) {
+    // Achou submissão anterior deste e-mail na mesma safra — atualiza os dados de produção/resultado
+    // também (o produtor pode ter recalculado com números diferentes desta vez).
+    const cols = await payloadToCols(body, request, env)
+    const keys = Object.keys(cols)
+    const sql = `UPDATE calculadora_diagnosticos SET ${keys.map((k) => `${k}=?`).join(',')} WHERE id=?`
+    await env.DB.prepare(sql).bind(...keys.map((k) => (cols[k] === undefined ? null : cols[k])), id).run()
   }
+
   if (id) {
     await env.DB.prepare(
       'UPDATE calculadora_diagnosticos SET nome=?, email=?, whatsapp=?, consent_lgpd=1, consent_at=?, interesse_gestao=?, updated_at=? WHERE id=?'
@@ -136,12 +170,12 @@ async function handleCadastrar(body, request, env) {
   }
 
   if (env.RESEND_API_KEY) {
-    try { await sendEmail(env, body) } catch (_) { /* e-mail é best-effort; o lead já está no D1 */ }
+    try { await sendEmail(env, body, isReturning) } catch (_) { /* e-mail é best-effort; o lead já está no D1 */ }
   }
 
   const r = body.resultado || {}
   const ranking = await computeRanking(env, (r.headline && r.headline.cultura) || null, (body.local && body.local.uf) || null, num(r.margem_conjunta_ha))
-  return json({ success: true, id, ranking })
+  return json({ success: true, id, isReturning, ranking })
 }
 
 async function handleAvaliar(body, env) {
@@ -185,7 +219,7 @@ const DIAG_LABEL = {
   margem: 'Problema de Margem', caixa: 'Problema de Caixa', endividamento: 'Problema de Endividamento',
   saudavel: 'Situação Saudável', multiplos: 'Múltiplos Desafios',
 }
-async function sendEmail(env, body) {
+async function sendEmail(env, body, isReturning) {
   const cad = body.cadastro || {}
   const r = body.resultado || {}
   const local = body.local || {}
@@ -204,9 +238,10 @@ async function sendEmail(env, body) {
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;background:#F8F6F1;">
       <div style="background:#1E4D7B;padding:24px;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:20px;">Novo lead — Calculadora de Margem</h1>
+        <h1 style="color:#fff;margin:0;font-size:20px;">${isReturning ? 'Lead atualizou os dados (mesma safra)' : 'Novo lead'} — Calculadora de Margem</h1>
       </div>
       <div style="padding:24px;background:#fff;">
+        ${isReturning ? `<p style="margin:0 0 14px;padding:10px 14px;background:#FFF7E6;border-left:3px solid #E8B84B;color:#8a5a10;font-size:13px;font-weight:600;">Este e-mail já tinha calculado nesta safra — os dados abaixo são a versão mais recente, não um lead novo.</p>` : ''}
         <div style="background:#7AB648;color:#fff;display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;">
           ${esc(diag)} · Margem ${fmtBRL(r.margem_conjunta_ha)}/ha · Lead ${esc(leadQ)}
         </div>
@@ -239,7 +274,9 @@ async function sendEmail(env, body) {
       </div>
     </div>`
 
-  const subject = `🌾 Lead calculadora: ${primeiroNome || 'produtor'} — ${diag} · ${fmtBRL(r.margem_conjunta_ha)}/ha`
+  const subject = isReturning
+    ? `🔄 Lead atualizado (mesma safra): ${primeiroNome || 'produtor'} — ${diag} · ${fmtBRL(r.margem_conjunta_ha)}/ha`
+    : `🌾 Lead calculadora: ${primeiroNome || 'produtor'} — ${diag} · ${fmtBRL(r.margem_conjunta_ha)}/ha`
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
