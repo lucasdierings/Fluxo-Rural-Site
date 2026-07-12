@@ -49,6 +49,9 @@
   }
   </script>
 
+  <!-- Preload da imagem de LCP (banner da tela de onboarding) para descoberta antecipada pelo navegador -->
+  <link rel="preload" href="./banner-colheita.jpg" as="image" fetchpriority="high" />
+
   <!-- Preload CSS para renderização rápida -->
   <link rel="preload" href="./styles.css" as="style" />
   <link rel="stylesheet" href="./styles.css" />
@@ -60,10 +63,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" /></noscript>
 
-  <!-- GTM + GA4: adiados via requestIdleCallback para não bloquear FCP/LCP.
-       O generate_lead dispara depois que o usuário já interagiu — não precisa carregar no paint. -->
+  <!-- GTM + GA4: adiados até a primeira interação real (ou um fallback de 5s pra quem só rola a
+       página sem clicar). O container do GTM pesa ~300 KiB de JS majoritariamente não usado nesta
+       página — isso tira essa competição de rede/CPU do caminho crítico de LCP. O generate_lead só
+       dispara depois que o usuário já interagiu de qualquer forma, então carregar tarde não perde nada. -->
   <script>
     function _loadAnalytics() {
+      if (window.__analyticsLoaded) return;
+      window.__analyticsLoaded = true;
       if (new URLSearchParams(location.search).get('embed') === 'true') return;
       // GTM
       (function (w, d, s, l, i) {
@@ -81,11 +88,9 @@
       gtag('js', new Date());
       gtag('config', 'G-VTCGYR206P');
     }
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(_loadAnalytics, { timeout: 3000 });
-    } else {
-      setTimeout(_loadAnalytics, 2000);
-    }
+    var _interacoes = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
+    _interacoes.forEach(function (ev) { window.addEventListener(ev, _loadAnalytics, { once: true, passive: true }); });
+    setTimeout(_loadAnalytics, 5000); // fallback pra quem fica parado lendo, sem interagir
   </script>
 </head>
 <body>
@@ -114,7 +119,7 @@
         <div class="wizard-step" id="wz-intro" data-step="intro">
           <div class="card intro-card">
             <div class="intro-banner-wrap">
-              <img src="./banner-colheita.jpg" alt="Colheita de soja no campo" class="intro-banner-img" width="800" height="447" loading="lazy" decoding="async" fetchpriority="low" />
+              <img src="./banner-colheita.jpg" alt="Colheita de soja no campo" class="intro-banner-img" width="800" height="447" loading="eager" decoding="async" fetchpriority="high" />
             </div>
             <span class="intro-eyebrow">Calculadora de Margem · ~2 min</span>
             <h1>Descubra sua margem por hectare</h1>

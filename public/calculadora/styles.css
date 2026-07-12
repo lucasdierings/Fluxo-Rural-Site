@@ -188,9 +188,10 @@ select.input{
 }
 
 .confidence-note{
-  display:flex;align-items:center;gap:.5rem;justify-content:center;text-align:center;
+  display:flex;align-items:flex-start;gap:.5rem;justify-content:center;text-align:center;
   color:var(--verde-escuro);font-size:var(--fs-sm);font-weight:600;margin:1rem 0;
 }
+.confidence-note svg{flex:none;margin-top:.15rem}
 
 /* ---------- Linhas repetíveis (diversificação) ---------- */
 .repeat-row{
