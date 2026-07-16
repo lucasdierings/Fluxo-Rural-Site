@@ -22,6 +22,7 @@ import {
 import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/servicos/lideranca/' },
   title: 'Liderança e Empreendedorismo no Agronegócio',
   description:
     'Workshop de liderança, palestras de empreendedorismo e inovação no agronegócio e consultoria individual on-line para produtores. Um novo modelo de liderança para o agro — com Lucas Dierings, Destaque Nacional CNA Jovem.',

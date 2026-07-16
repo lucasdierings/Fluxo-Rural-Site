@@ -4,6 +4,7 @@ import { ContactForm } from '@/components/forms/ContactForm'
 import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/contato/' },
   title: 'Contato',
   description: 'Entre em contato com a Fluxo Rural Consultoria. Consultoria, mentoria e palestras para o agronegócio. Resposta em até 24 horas.',
   openGraph: {

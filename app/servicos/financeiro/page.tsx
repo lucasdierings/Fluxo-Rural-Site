@@ -7,6 +7,7 @@ import { Check, ArrowRight } from 'lucide-react'
 import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/servicos/financeiro/' },
   title: 'Gestão Financeira Rural',
   description: 'Fluxo de caixa, custos operacionais e análise de rentabilidade de safra. Gestão financeira rural com Lucas Dierings — Fluxo Rural Consultoria.',
   openGraph: {

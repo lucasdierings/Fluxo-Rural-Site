@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Award, HeartHandshake, ShieldCheck, ArrowRight, Trophy, GraduationCap, Radio, MapPin, Smartphone } from 'lucide-react'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/sobre/' },
   title: 'Sobre Lucas Dierings',
   description: 'Conheça Lucas Dierings — destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
   openGraph: {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Links de Lucas Dierings | Fluxo Rural',
   description:
     'Todos os links de Lucas Dierings em um lugar: WhatsApp, diagnóstico de gestão, mídia kit de palestras, podcasts (NHCast e Agro Jovem), redes sociais e contato.',
-  alternates: { canonical: 'https://fluxorural.com.br/links' },
+  alternates: { canonical: '/links/' },
   openGraph: {
     title: 'Links de Lucas Dierings | Fluxo Rural',
     description:

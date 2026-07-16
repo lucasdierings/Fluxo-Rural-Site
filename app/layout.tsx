@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://fluxorural.com.br',
+    canonical: '/',
   },
 }
 

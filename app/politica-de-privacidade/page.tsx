@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/politica-de-privacidade/' },
   title: 'Política de Privacidade',
   description: 'Política de Privacidade da Fluxo Rural Consultoria — como tratamos seus dados pessoais em conformidade com a LGPD.',
 }

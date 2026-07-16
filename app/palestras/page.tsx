@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: 'Palestrante para Agronegócio | Gestão, Liderança e IA no Agro',
   description:
     'Contrate Lucas Dierings — palestrante de gestão, finanças, liderança e IA no agronegócio. Host do NHCast (New Holland), Top 5 CNA Jovem do Brasil. Proposta em 24h.',
-  alternates: { canonical: 'https://fluxorural.com.br/palestras' },
+  alternates: { canonical: '/palestras/' },
   openGraph: {
     title: 'Palestrante para Agronegócio | Lucas Dierings',
     description:

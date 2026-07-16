@@ -5,6 +5,7 @@ import { CheckCircle2, Clock, CalendarCheck, FileText, Shield, Monitor, MapPin, 
 import { DiagnosticoForm } from '@/components/forms/DiagnosticoForm'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/diagnostico/' },
   title: 'Diagnóstico Gratuito para o Agro | Fluxo Rural',
   description: '30 minutos para descobrir onde sua gestão, liderança e resultados perdem dinheiro — para produtores rurais e empresas do agro. Você sai com um plano de ação de 90 dias. Sem compromisso.',
   openGraph: {

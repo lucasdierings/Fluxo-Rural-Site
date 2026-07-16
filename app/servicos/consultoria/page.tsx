@@ -7,6 +7,7 @@ import { Search, FileText, Cog, TrendingUp, Check, ArrowRight } from 'lucide-rea
 import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/servicos/consultoria/' },
   title: 'Consultoria em Gestão e Inovação',
   description: 'Diagnóstico, planejamento estratégico e acompanhamento para propriedades e empresas do agronegócio. Consultoria com Lucas Dierings em Londrina, PR.',
   openGraph: {

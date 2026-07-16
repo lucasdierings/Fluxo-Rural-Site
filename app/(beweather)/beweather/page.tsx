@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'pluviômetro digital lavoura',
     'evapotranspiração cálculo',
   ],
-  alternates: { canonical: '/beweather' },
+  alternates: { canonical: '/beweather/' },
   openGraph: {
     type: 'website',
     locale: 'pt_BR',

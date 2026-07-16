@@ -4,6 +4,7 @@ import { BarChart2, DollarSign, Users, Mic2, ArrowRight } from 'lucide-react'
 import Breadcrumbs from '@/components/ui/breadcrumbs'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/servicos/' },
   title: 'Serviços',
   description: 'Consultoria em gestão, gestão financeira rural, liderança e empreendedorismo e palestras sobre agronegócio. Conheça os serviços da Fluxo Rural.',
   openGraph: {

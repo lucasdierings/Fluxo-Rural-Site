@@ -3,6 +3,7 @@ import { getAllPosts, getAllCategories } from '@/lib/mdx'
 import BlogList from '@/components/blog/BlogList'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/blog/' },
   title: 'Blog',
   description: 'Conteúdo prático sobre gestão, finanças e inovação no agronegócio brasileiro. Artigos semanais por Lucas Dierings.',
 }
