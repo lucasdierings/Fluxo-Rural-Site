@@ -214,26 +214,37 @@ R: EBITDA é o lucro antes de juros, impostos, depreciação e amortização —
 
 ---
 
-### 3.2. Rentabilidade da Soja: Como Calcular seu Lucro Real por Hectare
+### 3.2. Como Calcular a Rentabilidade da Soja por Hectare (Passo a Passo com Exemplo)
 - **URL:** https://fluxorural.com.br/blog/rentabilidade-safra-soja-como-calcular/
 - **Data:** 2026-03-08 | **Categoria:** Finanças
-- **Resumo:** Custo de produção de soja por hectare, custo por saca, COE x COT e ponto de equilíbrio: o passo a passo para calcular o lucro real da sua safra — com exemplo numérico completo e tabela de cenários.
+- **Resumo:** Como calcular a rentabilidade real da soja por hectare, passo a passo: custo de produção, custo por saca, COE x COT e ponto de equilíbrio — com exemplo numérico completo e tabela de três cenários.
 - **Texto do Artigo:**
-Produzir 60 sacas por hectare é um bom resultado? Depende. Se o custo de produção foi equivalente a 55 sacas, sobram 5 sacas de margem — e qualquer imprevisto elimina o lucro. Esse é o problema de olhar apenas para a produtividade sem calcular a **rentabilidade real**.
+Produzir 60 sacas por hectare é um bom resultado? Depende. Se o custo de produção foi equivalente a 55 sacas, sobram 5 sacas de margem — e qualquer imprevisto come o lucro inteiro. Esse é o problema de olhar só para a produtividade e esquecer da **rentabilidade real**.
 
-A rentabilidade real da soja é o lucro que sobra depois de **todos** os custos — variáveis, fixos e financeiros — dividido pelo que você colocou em risco. Neste artigo, mostro o passo a passo do cálculo, com exemplo numérico completo, e os dois conceitos que separam quem gerencia de quem torce: COE x COT e custo por saca.
+Rentabilidade real da soja é o que sobra depois de **todos** os custos — variáveis, fixos e financeiros — dividido pelo que você colocou em risco. Neste guia eu mostro o passo a passo do cálculo, com um exemplo numérico fechado, e os dois conceitos que separam quem gerencia de quem torce: COE x COT e custo por saca.
 
-#### Receita bruta não é lucro
+#### Como calcular a rentabilidade da soja, em resumo
 
-O primeiro erro é confundir receita bruta com resultado. Receita bruta é o total recebido pela venda da produção; entre ela e o lucro existe um caminho cheio de custos.
+A rentabilidade real da soja é o lucro que sobra depois de todos os custos, dividido pelo que você investiu por hectare. São quatro passos:
+
+1. **Some o custo total por hectare** — os variáveis (semente, adubo, defensivo, operações), os fixos rateados (depreciação, terra, mão de obra) e os financeiros (juros do custeio).
+2. **Calcule o lucro líquido por hectare** = receita bruta/ha − custo total/ha.
+3. **Divida o lucro pelo custo total** e multiplique por 100 → é a sua rentabilidade em %.
+4. **Ache o custo por saca** (custo total ÷ produtividade) — esse número é o seu preço mínimo de venda.
+
+Um exemplo rápido: custo de R$ 6.200/ha, produtividade de 60 sc/ha e soja a R$ 130 → receita de R$ 7.800/ha, lucro de R$ 1.600/ha, **rentabilidade de 25,8%** e custo por saca de R$ 103,33. Abaixo eu abro cada parte, com COE x COT e três cenários de preço.
+
+#### Por que receita bruta não é lucro?
+
+O primeiro erro é confundir receita bruta com resultado. Receita bruta é o total que entrou pela venda da produção; entre ela e o lucro existe um caminho cheio de custo.
 
 **Receita Bruta** = Produtividade (sacas/ha) × Preço de Venda (R$/saca)
 
-Se você produziu 60 sc/ha e vendeu a R$ 130/saca, sua receita bruta é R$ 7.800/ha. Parece bom — mas quanto sobra?
+Se você colheu 60 sc/ha e vendeu a R$ 130/saca, a receita bruta é R$ 7.800/ha. Parece bom — mas a pergunta certa é: quanto sobra?
 
 #### Quanto custa produzir 1 hectare de soja?
 
-Para chegar à rentabilidade real, considere todos os custos, não apenas os óbvios:
+Para chegar na rentabilidade real, entra tudo, não só o custo óbvio:
 
 ##### Custos variáveis diretos
 - Sementes e tratamento de sementes
@@ -245,23 +256,23 @@ Para chegar à rentabilidade real, considere todos os custos, não apenas os ób
 ##### Custos fixos rateados
 - Depreciação de máquinas e benfeitorias
 - Mão de obra fixa (salários e encargos) e pró-labore da família
-- Arrendamento — ou custo de oportunidade da terra própria
+- Arrendamento — ou o custo de oportunidade da terra própria
 - Seguros e impostos (ITR)
 
 ##### Custos financeiros
-- Juros do custeio agrícola e de investimentos — que mudaram de patamar no novo ciclo, como mostro no artigo sobre [o Plano Safra 2026/2027](/blog/plano-safra-2026-2027-margem-seguranca/)
+- Juros do custeio agrícola e de investimento — que mudaram de patamar no novo ciclo, como mostro no artigo sobre [o Plano Safra 2026/2027](/blog/plano-safra-2026-2027-margem-seguranca/)
 - Custo de oportunidade do capital de giro
 
 #### COE x COT: qual usar na decisão?
 
 Dois conceitos clássicos da administração rural organizam essa conta:
 
-- **COE (Custo Operacional Efetivo):** só os desembolsos da safra — o dinheiro que efetivamente sai do bolso. Responde: "vale a pena plantar este ano?"
-- **COT (Custo Operacional Total):** COE + depreciação + pró-labore. Responde: "o negócio se sustenta no longo prazo, repondo máquinas e remunerando a família?"
+- **COE (Custo Operacional Efetivo):** só os desembolsos da safra — o dinheiro que de fato sai do bolso. Responde: "vale a pena plantar este ano?"
+- **COT (Custo Operacional Total):** COE + depreciação + pró-labore. Responde: "o negócio se sustenta no longo prazo, repondo máquina e remunerando a família?"
 
-Muita fazenda "dá lucro" no COE e quebra no COT: opera anos sem repor depreciação, até que o parque de máquinas envelhece e a conta chega de uma vez.
+Tem muita fazenda que "dá lucro" no COE e quebra no COT: roda anos sem repor depreciação, até que o parque de máquinas envelhece e a conta chega toda de uma vez.
 
-*Dica: Plataformas modernas como o [eProdutor](https://eprodutor.fluxorural.com.br) já calculam automaticamente tanto o COE quanto o COT da sua safra, integrando as notas fiscais de entrada direto com os custos de cada talhão, sem a necessidade de digitação ou planilhas complexas.*
+*Na prática, o chato aqui é separar COE de COT nota por nota, safra após safra. Foi por isso que, na Fluxo Rural, a gente montou o [eProdutor](https://eprodutor.fluxorural.com.br): as notas fiscais de entrada entram sozinhas pelo certificado digital e o sistema rateia cada custo por talhão — COE e COT calculados na hora, sem planilha.*
 
 #### O cálculo completo, passo a passo
 
@@ -285,30 +296,30 @@ Considere uma lavoura com custo total de R$ 6.200/ha e produtividade de 60 sc/ha
 | Ponto de equilíbrio | 56,4 sc/ha | 47,7 sc/ha | 41,3 sc/ha |
 | Custo por saca | R$ 103,33 | R$ 103,33 | R$ 103,33 |
 
-A tabela escancara dois detalhes: o **custo por saca não muda com o preço** — ele é o seu piso de venda em qualquer cenário. E no cenário pessimista, o ponto de equilíbrio (56,4 sc/ha) fica perigosamente perto da produtividade real (60 sc/ha): margem de segurança de apenas 6%. Levantamentos de safras recentes têm apontado exatamente esse aperto em várias regiões do país.
+A tabela escancara dois detalhes. Primeiro: o **custo por saca não muda com o preço** — ele é o seu piso de venda em qualquer cenário. Segundo: no cenário pessimista, o ponto de equilíbrio (56,4 sc/ha) fica perigosamente perto da produtividade real (60 sc/ha) — margem de segurança de só 6%. Levantamentos de safras recentes têm mostrado exatamente esse aperto em várias regiões do país.
 
-#### Como comparar safras e tomar decisões
+#### Como usar esses números para decidir?
 
-O poder do cálculo está na comparação. Com os números organizados safra a safra, você responde:
+O poder do cálculo está na comparação. Com os números organizados safra a safra, você responde de cabeça fria:
 
-- **O custo sobe mais rápido que a receita?** Na pesquisa que conduzi no MBA em Agronegócios (USP/ESALQ), acompanhando três anos de uma propriedade diversificada no Paraná, a receita cresceu dois dígitos ao ano — e mesmo assim a margem caiu, porque os custos subiram mais rápido. Só o indicador revelou isso.
-- **Vale aumentar a área plantada?** Só se a rentabilidade por hectare se mantiver com o novo custo (arrendamento marginal costuma ser mais caro).
+- **O custo sobe mais rápido que a receita?** Na pesquisa que conduzi no MBA em Agronegócios (USP/ESALQ), acompanhando três anos de uma propriedade diversificada no Paraná, a receita cresceu dois dígitos ao ano — e mesmo assim a margem caiu, porque o custo subiu mais rápido. Só o indicador revelou isso.
+- **Vale aumentar a área plantada?** Só se a rentabilidade por hectare se mantiver com o novo custo (arrendamento marginal costuma vir mais caro).
 - **O milho safrinha compensa o risco?** Compare a margem de contribuição das alternativas, não a receita bruta.
-- **O arrendamento está caro demais?** Acima de ~30% da receita bruta, renegocie.
+- **O arrendamento está caro demais?** Acima de uns 30% da receita bruta, é hora de renegociar.
 
-#### Indicadores complementares
+#### Que outros indicadores acompanhar?
 
 - **Margem sobre o preço de venda:** quanto do preço sobra depois dos custos. Abaixo de 20%, acende o alerta.
-- **Margem de segurança:** distância entre sua produtividade média e o ponto de equilíbrio. É ela que absorve seca, geada e preço ruim.
-- **Rentabilidade sobre o capital total:** o lucro também precisa remunerar terra e máquinas — detalho esse e outros indicadores em [os 5 indicadores da fazenda lucrativa](/blog/5-indicadores-financeiros-produtor-rural/).
+- **Margem de segurança:** a distância entre sua produtividade média e o ponto de equilíbrio. É ela que absorve seca, geada e preço ruim.
+- **Rentabilidade sobre o capital total:** o lucro também precisa remunerar terra e máquina — detalho esse e outros em [os 5 indicadores da fazenda lucrativa](/blog/5-indicadores-financeiros-produtor-rural/).
 
-#### Comece agora
+#### Como começar hoje
 
-Não espere a próxima safra. Pegue os dados da última colheita, levante todos os custos e faça o cálculo — mesmo aproximado, ele traz uma clareza que muda decisões. Depois, refine: separe COE de COT, calcule o custo por saca e acompanhe a margem de segurança antes de cada venda.
+Não espere a próxima safra. Pega os dados da última colheita, levanta todos os custos e faz o cálculo — mesmo aproximado, ele já traz uma clareza que muda decisão. Depois refina: separa COE de COT, calcula o custo por saca e acompanha a margem de segurança antes de cada venda.
 
-Para facilitar e automatizar todo esse controle na sua propriedade (de forma integrada entre financeiro, fiscal e campo), nós desenvolvemos o **Diagnóstico de Gestão Rural**. Em apenas 2 minutos, respondendo a 7 perguntas rápidas, você recebe um raio-x completo dos gargalos financeiros e operacionais da sua safra:
+Se quiser um atalho pra saber por onde começar na sua fazenda, eu montei um diagnóstico rápido: **7 perguntas, 2 minutos**, e você recebe um raio-x dos gargalos financeiros e operacionais da sua safra — de graça.
 
-👉 **[Fazer Diagnóstico de Gestão Grátis no eProdutor](https://eprodutor.fluxorural.com.br/diagnostico.html)**
+👉 **[Fazer o Diagnóstico de Gestão Rural grátis](https://eprodutor.fluxorural.com.br/diagnostico.html)**
 
 ---
 
@@ -912,3 +923,136 @@ R: Um conjunto novo de competências: comunicação, empreendedorismo, inovaçã
 
 **P: Liderança se aprende ou é dom?**
 R: Se aprende, e se aprende liderando. Metodologias de aprendizado pela ação, como a da JCI (Junior Chamber International, organização mundial de formação de líderes), desenvolvem gente colocando as pessoas para conduzir projetos reais, errar barato e corrigir rápido. Dentro da fazenda vale o mesmo: dar responsabilidade aos poucos e acompanhar de perto é o melhor treinamento de liderança que existe.
+
+---
+
+### 3.8. El Niño 2026 no Brasil: o que muda na safra 2026/27 e como se preparar
+- **URL:** https://fluxorural.com.br/blog/el-nino-2026-safra-brasil/
+- **Data:** 2026-07-16 | **Categoria:** Clima
+- **Resumo:** O El Niño 2026 está se formando e pode ser um dos mais fortes já registrados. Veja a previsão de NOAA, INMET e INPE, o impacto por região na safra 2026/27 e como se preparar no campo.
+- **Texto do Artigo:**
+O ano de 2026 entrou no radar de todo produtor por um motivo: um **El Niño forte, possivelmente um dos maiores já registrados**, está se formando no Oceano Pacífico bem em cima do ciclo da safra 2026/27. Nas buscas do Google, "El Niño 2026" disparou; nos grupos de WhatsApp, sobra boato e previsão de fim do mundo.
+
+Neste artigo, a **Fluxo Rural** separa o fato do ruído: o que dizem de verdade as agências de meteorologia, o que muda em cada região do Brasil e — o mais importante para quem vive de lavoura — o que dá para fazer da porteira para dentro para atravessar esse ciclo com o caixa em pé.
+
+#### Em resumo: o que esperar do El Niño 2026
+
+- **É real e forte.** NOAA, INMET e INPE apontam mais de 90% de probabilidade de um El Niño "muito forte" persistindo até, no mínimo, o início de 2027.
+- **Pico entre a primavera e o verão 2026/27**, ou seja, em cima do plantio e do enchimento de grãos.
+- **O Brasil se divide:** mais chuva no Sul; veranicos, calor e plantio atrasado no Centro-Oeste e no MATOPIBA; seca severa no Norte e Nordeste.
+- **O maior risco da soja é o calendário**, não o volume: atraso no plantio aperta a janela do milho safrinha.
+- **A previsão é regional; a decisão é local.** Quanto choveu de verdade no seu talhão, só a medição na fazenda responde.
+
+#### O El Niño 2026 é verdade? O que dizem NOAA, INMET e INPE
+
+Sim, e com um nível de concordância raro entre os centros de previsão. Em **9 de julho de 2026, o NOAA/CPC** (o centro de previsão climática dos Estados Unidos) emitiu oficialmente um **Aviso de El Niño** e projeta **81% de chance de um evento "muito forte" entre outubro e dezembro de 2026** — o que o colocaria entre os maiores da série histórica iniciada em 1950. No Brasil, a **Nota Técnica Conjunta do INPE, INMET, Funceme e CENSIPAM** vai na mesma direção, e o modelo do **IRI, da Universidade Columbia**, também.
+
+| Fonte | Probabilidade de El Niño | Intensidade prevista | Pico |
+| :--- | :--- | :--- | :--- |
+| **NOAA / CPC (EUA)** | 97% de persistir até o início de 2027 | 81% de "muito forte" | out–dez/2026 |
+| **IRI / Universidade Columbia** | ~98% a 100% ao longo do ciclo | Metade dos modelos: muito forte (≥ +2,0 °C) | set–nov/2026 |
+| **INMET / INPE (Brasil)** | Acima de 90% até, no mínimo, início de 2027 | "Muito forte" (TSM acima de 2,0 °C) | primavera–verão 2026/27 |
+
+Na prática, "muito forte" significa que a temperatura da superfície do mar no Pacífico Equatorial deve ficar mais de **2,0 °C acima do normal** — o mesmo patamar dos episódios históricos de **1982/83, 1997/98 e 2015/16**. Não é pouca coisa: no super El Niño de 1997/98, a chuva acumulada entre outubro e abril no Rio Grande do Sul chegou a **110% a 150% da média histórica**. Bem drenada, essa água afasta a estiagem; em excesso, ela encharca o solo, alimenta doença e atrasa a colheita.
+
+> **⚠️ O que é fato e o que é exagero:** o fenômeno é real e forte, isso não é boato. O exagero mora nos efeitos apocalípticos que circulam nas redes. Nem o El Niño mais intenso produz o mesmo impacto em todo lugar — como o próprio NOAA faz questão de lembrar, os efeitos não são uniformes. O trabalho do produtor não é entrar em pânico; é entender o que o fenômeno faz na *sua* região.
+
+#### Quando o El Niño 2026 começa e chega ao Brasil?
+
+O fenômeno vem se consolidando ao longo do segundo semestre de 2026 e deve atingir o pico **entre a primavera e o início do verão — aproximadamente de outubro de 2026 a janeiro de 2027**. O problema é o timing: essa janela cai exatamente sobre as decisões mais caras do ano.
+
+- **Setembro a novembro/2026:** abertura do plantio da soja no Centro-Oeste e no Sul.
+- **Novembro a janeiro:** enchimento de grãos da soja e definição da janela do **milho safrinha**.
+- **Dezembro a fevereiro:** auge dos efeitos do El Niño, com chuva concentrada no Sul e calor no centro-norte.
+
+Ou seja: o El Niño 2026 não é um problema abstrato do noticiário. Ele chega junto com a semente na terra.
+
+#### Como o El Niño divide o Brasil em dois na safra 2026/27
+
+Esta é a informação que mais importa e a que menos aparece nos boatos: o El Niño **não afeta o Brasil de forma igual**. Ele divide o país.
+
+| Região | Tendência de chuva | Temperatura | Principal risco agronômico |
+| :--- | :--- | :--- | :--- |
+| **Sul (RS, SC, PR)** | Acima da média (primavera/verão) | Elevada | Encharcamento, doença fúngica, atraso de plantio e de colheita |
+| **Centro-Oeste / MATOPIBA** | Irregular, com veranicos | Acima da média | Plantio atrasado, janela apertada da safrinha, veranico no enchimento |
+| **Norte / Nordeste** | Muito abaixo da média | Bem acima da média | Seca severa, quebra no sequeiro, risco de incêndio |
+
+##### Sul (RS, SC, PR): chuva demais, doença fúngica e janela apertada
+
+No Sul, o El Niño costuma trazer **chuva acima da média** na primavera e no início do verão. Parece boa notícia — e em parte é, porque garante água. Mas o excesso cobra caro: solo encharcado que impede a entrada de máquina, plantio e colheita atrasados, e um ambiente perfeito para **doenças fúngicas** como a ferrugem-asiática e o mofo-branco. A qualidade do grão sofre, e a colheita na chuva derruba o preço recebido. Depois das enchentes de 2024 no Rio Grande do Sul, a região entra nesse ciclo com a guarda ainda mais baixa. E não é só a soja: no trigo, a umidade constante favorece a **giberela** (fusariose de espiga), que produz micotoxinas e chega a inviabilizar a venda do lote — anomalias climáticas de El Niño já comprometeram até 20% da produção de trigo do Sul em anos ruins.
+
+##### Centro-Oeste e MATOPIBA: veranicos, calor e o risco do calendário
+
+No coração da soja brasileira, o El Niño tende a deixar as chuvas **irregulares**, com **veranicos** (períodos secos dentro da estação chuvosa) e temperaturas acima da média. O efeito mais perigoso é indireto: chuva que atrasa a abertura do plantio da soja **empurra todo o calendário para frente e comprime a janela ideal do milho safrinha** — que precisa ser plantado dentro de uma data-limite para escapar da seca de outono. É aí que o El Niño costuma cobrar a conta no Centro-Oeste.
+
+##### Norte e Nordeste: seca severa e risco no sequeiro
+
+É onde o El Niño bate mais forte. Norte e Nordeste enfrentam **chuva muito abaixo da média, calor intenso e risco de seca severa a extrema**, com aumento de queimadas. As culturas de sequeiro e de subsistência, como feijão e mandioca, são as mais expostas, e a disponibilidade de água para o rebanho entra na conta.
+
+#### O El Niño derruba ou sustenta o preço da soja e do milho?
+
+Aqui vale um freio de arrumação, porque circula muita bobagem. **O efeito médio do El Niño sobre a soja costuma ser neutro a levemente positivo em escala global** — a expectativa-base segue sendo de uma safra brasileira cheia. O que o fenômeno adiciona é **volatilidade**: notícia de clima extremo mexe com Chicago, e o risco de calendário sobre a safrinha de milho é real.
+
+Traduzindo para o caixa da fazenda: o problema raramente é "o El Niño destruiu a lavoura". É a soma de perdas menores e evitáveis — um lote colhido úmido, uma pulverização perdida, um veranico no enchimento — que corrói a margem por hectare. Por isso, entender o clima é inseparável de entender o financeiro. Se você ainda não fez as contas, vale revisar [como calcular a rentabilidade da soja por hectare](/blog/rentabilidade-safra-soja-como-calcular/) e [como proteger o caixa da fazenda na safra 2026/2027](/blog/plano-safra-2026-2027-margem-seguranca/) antes de assinar qualquer contrato.
+
+#### Não é só a lavoura: o El Niño também bate na pecuária
+
+O calor e a umidade alta de um El Niño forte não param na porteira da lavoura. Na pecuária, o **estresse térmico** derruba o desempenho: vacas leiteiras da raça Holandesa entram em estresse quando o Índice de Temperatura e Umidade (ITU) passa de 72, e episódios severos podem cortar de **10% a 30% a produção de leite**, além de reduzir a taxa de concepção. Gado de corte de raças britânicas, suínos em terminação e aves de corte também perdem desempenho no calor úmido.
+
+O detalhe que interessa: esse ITU é calculado a partir de **temperatura e ponto de orvalho** — as mesmas variáveis que uma estação na sede mede o tempo todo. O mesmo equipamento que ajuda a decidir a pulverização da soja ajuda a saber a hora de ligar a ventilação e a aspersão no confinamento.
+
+#### Da previsão regional ao dado da sua fazenda: o elo que falta
+
+Até aqui, falamos de **tendência regional** — e tendência é exatamente o que a previsão do El Niño entrega. Ela diz o que é mais provável acontecer no Sul, no Cerrado ou no Nordeste. O que ela **não** diz é quanto choveu na sua fazenda ontem.
+
+E essa diferença não é detalhe. Temperatura, umidade e vento variam pouco dentro de uma mesma região. **A chuva, não.** Todo produtor conhece a cena: chove forte num talhão e, do outro lado da estrada, o vizinho fica olhando a nuvem passar. A estação meteorológica pública mais próxima pode estar a dezenas de quilômetros — e, num ano de El Niño, decidir com a chuva "da cidade" em vez da chuva "do talhão" é onde a perda se instala. E isso não é secundário: boa parte das perdas de produtividade de uma lavoura está ligada a variáveis climáticas **locais** — chuva, molhamento foliar, vento — que só a medição na própria fazenda captura.
+
+É por isso que cada vez mais produtores instalam uma **estação meteorológica na própria sede**. Não para prever o tempo — isso é papel das agências —, mas para **medir o que de fato aconteceu** no seu raio de atuação:
+
+- **Chuva acumulada de verdade (mm)** — o número que define se dá para entrar com a máquina, se o solo está em ponto de plantio e se a lavoura precisa (ou não) de irrigação.
+- **Evapotranspiração de referência (ETo)** — quanto de água a lavoura efetivamente perdeu, base para calcular a lâmina de irrigação sem desperdiçar água nem energia.
+- **Vento e umidade** — para acertar a **janela de pulverização** e não jogar dinheiro fora com deriva ou produto lavado pela chuva seguinte.
+- **Ponto de orvalho e molhamento foliar** — o gatilho das doenças. A ferrugem-asiática da soja, por exemplo, precisa de folha molhada por **10 horas ou mais a cerca de 23 °C** para infectar; em anos de El Niño, segundo a **Embrapa Soja**, os primeiros focos aparecem já em novembro, e não em meados de dezembro. Saber quando esse gatilho ligou no seu talhão separa a aplicação preventiva da corretiva.
+
+> **💡 Sede, não talhão a talhão:** a estação normalmente fica na **sede da fazenda** e cobre um raio de atuação — o usual é espalhar uma por sede, não uma por talhão (embora nada impeça). Para temperatura, umidade e vento, esse raio representa bem a área. Para a chuva, quanto mais próxima a medição, melhor a decisão.
+
+#### El Niño 2026: como se preparar no campo (checklist prático)
+
+Não dá para mudar o Pacífico, mas dá para chegar preparado. O que fazer depende de onde você está:
+
+1. **No Sul:** priorize cultivares mais tolerantes a doença, reforce o programa de fungicidas e planeje a colheita para aproveitar as janelas secas. Solo encharcado e pulverização atrasada são os dois maiores ladrões de margem aqui.
+2. **No Centro-Oeste e MATOPIBA:** proteja a **janela da safrinha**. Cada dia de atraso no plantio da soja é um dia a menos de segurança para o milho. Tenha um plano B de cultivar de ciclo mais curto.
+3. **No Norte e Nordeste:** planeje água. Reveja capacidade de irrigação, reserva para o rebanho e o risco de veranico prolongado no sequeiro.
+4. **Em qualquer região — monitore o clima localmente.** Acompanhar chuva acumulada, ETo e condições de pulverização na própria fazenda transforma a tendência do El Niño em decisão de campo. E tem um ganho pouco lembrado: em caso de **quebra de safra**, ter **dados climáticos próprios e próximos da lavoura** ajuda a contrastar com as bases oficiais e a sustentar o pedido de **seguro rural** — a diferença entre uma indenização aprovada e uma negada muitas vezes está na qualidade da evidência.
+
+Para esse monitoramento local existem estações meteorológicas agrícolas — como a [Beweather](https://beweather.fluxorural.com.br/cotacao), que fica na sede e transmite chuva, ETo, vento e umidade em tempo real —, mas o princípio vale para qualquer equipamento: **decidir com o dado do seu talhão pesa mais do que decidir com a média da região.**
+
+#### O ponto final: o El Niño é certeza, a perda não
+
+O El Niño 2026 é um dos eventos climáticos mais bem previstos da história recente — e isso é uma vantagem, não uma ameaça. Quem sabe que vem chuva no Sul, veranico no Cerrado e seca no Nordeste tem **meses** para ajustar cultivar, calendário, manejo de doença e planejamento de água.
+
+O fenômeno é o mesmo para todo mundo. O que separa a fazenda que perde da que se protege não é a sorte com o clima: é a **qualidade da informação** com que cada decisão é tomada. E, num ano assim, informação boa começa no seu próprio talhão.
+#### Perguntas Frequentes
+**P: O El Niño 2026 é verdade?**
+R: Sim. Em 9 de julho de 2026, o NOAA/CPC emitiu um Aviso de El Niño, com 97% de chance de o fenômeno persistir até o início de 2027. INMET e INPE também apontam probabilidade acima de 90%. O que circula como boato é o exagero nos efeitos: o fenômeno é real, mas seus impactos variam muito de uma região para outra.
+
+**P: Quando o El Niño 2026 começa e chega ao Brasil?**
+R: Os modelos indicam o El Niño se consolidando ao longo do segundo semestre de 2026, com pico entre a primavera e o início do verão — aproximadamente de outubro de 2026 a janeiro de 2027, justamente sobre o plantio e o enchimento de grãos da safra 2026/27. Os primeiros efeitos no Brasil aparecem já na primavera.
+
+**P: O El Niño 2026 vai ser um Super El Niño?**
+R: Há alta probabilidade. O NOAA/CPC estima 81% de chance de um El Niño muito forte entre outubro e dezembro de 2026, o que o colocaria entre os maiores registrados desde 1950. INMET e INPE também projetam intensidade muito forte, com anomalia de temperatura do mar acima de 2,0 °C no Pacífico Equatorial.
+
+**P: Como o El Niño 2026 afeta o Rio Grande do Sul e Santa Catarina?**
+R: No Sul, o El Niño costuma trazer chuvas acima da média na primavera e no início do verão. Isso ajuda na disponibilidade de água, mas o excesso encharca o solo, atrasa plantio e colheita, favorece doenças fúngicas e prejudica a qualidade do grão. Depois das enchentes de 2024, a vulnerabilidade da região segue elevada.
+
+**P: O El Niño 2026 vai atrapalhar o plantio da soja 2026/27?**
+R: O maior risco não é a soja em si: o efeito médio do El Niño sobre a oleaginosa costuma ser neutro a levemente positivo. O problema é de calendário. Chuvas irregulares no Centro-Oeste no início da estação podem atrasar o plantio da soja e comprimir a janela ideal do milho safrinha, que é onde mora o risco.
+
+**P: O El Niño 2026 aumenta a ferrugem asiática da soja?**
+R: Sim. O clima úmido do El Niño cria o ambiente ideal para a ferrugem-asiática (Phakopsora pachyrhizi), que precisa de folha molhada por 10 horas ou mais a cerca de 23 °C para infectar. Segundo a Embrapa Soja, em anos de El Niño os primeiros focos costumam surgir já em novembro, e não em meados de dezembro, o que exige monitoramento e fungicida preventivo mais cedo.
+
+**P: O El Niño aumenta ou diminui a chuva na minha região?**
+R: Depende. O El Niño divide o Brasil: tende a trazer mais chuva no Sul e menos chuva, com veranicos e calor, no centro-norte do país, além de seca severa no Norte e Nordeste. Mas a média regional não diz quanto choveu no seu talhão. A chuva varia muito de ponto a ponto, e só a medição local dá esse número.
+
+**P: Como se preparar para o El Niño 2026 na fazenda?**
+R: Ajuste o calendário de plantio à janela real da sua região, reforce o manejo de doenças onde vai chover mais e planeje a irrigação onde vai faltar água. Acompanhar chuva acumulada, evapotranspiração e condições de pulverização na própria fazenda ajuda a decidir com dado local, e não com achismo.
