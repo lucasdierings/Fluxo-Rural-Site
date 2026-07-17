@@ -53,8 +53,8 @@
   <link rel="preload" href="./banner-colheita.jpg" as="image" fetchpriority="high" />
 
   <!-- Preload CSS para renderização rápida -->
-  <link rel="preload" href="./styles.css?v=2" as="style" />
-  <link rel="stylesheet" href="./styles.css?v=2" />
+  <link rel="preload" href="./styles.css?v=3" as="style" />
+  <link rel="stylesheet" href="./styles.css?v=3" />
 
   <!-- Google Fonts: carregamento não-bloqueante via preload -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -521,12 +521,35 @@
         <div class="card">
           <h2>Sua posição entre os produtores</h2>
           <p class="card-sub">Comparação anônima — ninguém vê os dados de ninguém.</p>
+
+          <div class="rank-gauge-wrap">
+            <svg class="rank-gauge" viewBox="0 0 220 128" aria-hidden="true">
+              <defs>
+                <linearGradient id="rgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#E4572E" />
+                  <stop offset="50%" stop-color="#E8B84B" />
+                  <stop offset="100%" stop-color="#7AB648" />
+                </linearGradient>
+              </defs>
+              <path class="rg-track" d="M12,120 A98,98 0 0 1 208,120" />
+              <text class="rg-endlabel" x="12" y="113" text-anchor="start">menos eficiente</text>
+              <text class="rg-endlabel" x="208" y="113" text-anchor="end">mais eficiente</text>
+              <g id="t3GaugeNeedle" class="rg-needle">
+                <line x1="110" y1="120" x2="110" y2="34" />
+                <circle cx="110" cy="120" r="6.5" />
+              </g>
+            </svg>
+            <div class="rank-gauge-center">
+              <div class="rg-num" id="t3RankPct">0%</div>
+              <div class="rg-num-label">à frente</div>
+            </div>
+          </div>
+
           <div id="t3Tier"></div>
           <p id="t3RankingTexto"></p>
+          <p class="rank-next" id="t3RankNext"></p>
+
           <div class="rank-stats" id="t3RankStats"></div>
-          <div class="percentile-bar">
-            <div class="percentile-marker" id="t3PercentileMarker"></div>
-          </div>
           <p class="rank-estimate-tag">Estimativa a partir de referência pública — vai ficando mais precisa conforme mais produtores usam a calculadora.</p>
         </div>
 
@@ -584,6 +607,6 @@
     </footer>
   </div>
 
-  <script src="./app.js?v=2" defer></script>
+  <script src="./app.js?v=4" defer></script>
 </body>
 </html>

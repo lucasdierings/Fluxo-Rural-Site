@@ -474,7 +474,7 @@
     't3Tier', 't3ShareCard', 'shareCanvas', 'btnShareCard',
     't3DividaCard', 't3DividaExplain', 't3DividaGrid', 't3Alavancagem', 't3DividaCallout',
     't3DiversifCard', 't3DiversifNote', 't3DiagCard',
-    't3RankingTexto', 't3RankStats', 't3PercentileMarker',
+    't3RankingTexto', 't3RankStats', 't3RankNext', 't3GaugeNeedle', 't3RankPct',
     'btnPdf', 'btnConvidar', 'btnRefazer', 'ctaInviteNote', 'avisarCidade', 'avisarCidadeNome',
     'ratingStars', 'ratingComentario', 'btnEnviarAvaliacao', 'ratingThanks'
   ].forEach(grab);
@@ -1345,48 +1345,54 @@
     const prodMedia = r.itens.reduce((s, i) => s + i.prod * i.area, 0) / r.area_total;
     const custoScHa = (custoProducao / r.area_total) / r.precoMedio;
     const arrendScHa = r.area_total > 0 ? (r.arrend_sacas / r.area_total) : 0;
-    const sobra = prodMedia - custoScHa - arrendScHa;
-    const arrendTxt = arrendScHa > 0.1 ? ` e mais <b>${fmtNum(arrendScHa)} sc/ha</b> de arrendamento` : '';
-    return `<p class="sacas-note">Traduzindo em sacas: seu custo de produção equivale a <b>${fmtNum(custoScHa)} sc/ha</b>${arrendTxt}. Você colheu <b>${fmtNum(prodMedia)} sc/ha</b> — sobram <b class="${sobra < 0 ? 'negativo' : ''}">${fmtNum(sobra)} sc/ha</b> de margem.</p>`;
-  }
-
-  // Arrendamento É custo de produção real (reduz a margem) — só fica de fora da comparação com a
-  // média abaixo porque nem todo produtor paga arrendamento (não seria justo comparar quem paga com
-  // quem não paga). Aqui mostramos o tamanho desse impacto, na mesma lógica didática da dívida.
-  function renderArrendNote(r) {
-    if (!(r.arrend_total > 0)) return '';
-    const impactoPct = r.resultado_producao > 0 ? (r.arrend_total / r.resultado_producao) * 100 : null;
-    const impactoTxt = impactoPct === null ? 'todo o resultado da lavoura (e mais)' : `${impactoPct.toFixed(0)}% da margem da lavoura`;
-    return `<div class="arrend-note">
-      <strong>O arrendamento é custo de produção real</strong> — ele reduz sua margem. Sem ele, sua margem seria de
-      <strong>${fmtBRL(r.margem_producao_ha)}/ha</strong> em vez de ${fmtBRL(r.margem_conjunta_ha)}/ha: hoje o arrendamento consome
-      <strong>${impactoTxt}</strong>. Ele fica de fora da comparação abaixo porque nem todo produtor paga arrendamento —
-      não seria justo comparar quem paga com quem não paga. <em>Em breve, vamos comparar também o seu custo de arrendamento
-      com a média do estado e do Brasil.</em>
-    </div>`;
+    const comercScHa = (r.comerc_total / r.area_total) / r.precoMedio || 0;
+    const sobra = prodMedia - custoScHa - arrendScHa - comercScHa;
+    const extras = [
+      comercScHa > 0.1 ? `<b>${fmtNum(comercScHa)} sc/ha</b> de comercialização` : null,
+      arrendScHa > 0.1 ? `<b>${fmtNum(arrendScHa)} sc/ha</b> de arrendamento` : null
+    ].filter(Boolean);
+    const extrasTxt = extras.length ? ` e mais ${extras.join(' e ')}` : '';
+    return `<p class="sacas-note">Traduzindo em sacas: seu custo de produção equivale a <b>${fmtNum(custoScHa)} sc/ha</b>${extrasTxt}. Você colheu <b>${fmtNum(prodMedia)} sc/ha</b> — sobram <b class="${sobra < 0 ? 'negativo' : ''}">${fmtNum(sobra)} sc/ha</b> de margem.</p>`;
   }
 
   function renderResumoExecutivo(r) {
     const custoProducao = r.custo_producao_total;
     const temArrend = r.arrend_total > 0;
     const temComerc = r.comerc_total > 0;
+    const temExtras = temArrend || temComerc;
     const arrendLabel = r.arrend_sacas > 0
       ? `− Arrendamento <span class="dre-sub">(${fmtNum(r.arrend_sacas)} sc · ${fmtNum(r.haArrendado)} ha)</span>`
       : '− Arrendamento';
-    // DRE simples: receita − custo − comercialização − arrendamento = resultado dos grãos
-    el.t3ResumoGrid.innerHTML = `
+
+    // DRE 1 — só produção (Receita − COE). É este número, e só este, que se compara com a média
+    // nas próximas seções: comercialização e arrendamento não entram no benchmark público.
+    const dreProducao = `
       <div class="dre">
         <div class="dre-row"><span>Receita total</span><span>${fmtBRL(r.receita_total)}</span></div>
         <div class="dre-row dre-neg"><span>− Custo operacional (COE)</span><span>${fmtBRL(custoProducao)}</span></div>
+        <div class="dre-row dre-total"><span>= Resultado da lavoura</span><span class="${r.resultado_producao < 0 ? 'negativo' : ''}">${fmtBRL(r.resultado_producao)}</span></div>
+      </div>
+      <p class="dre-note"><strong>COE = Custo Operacional Efetivo:</strong> o que você gastou em dinheiro na safra (sementes, defensivos, fertilizantes, diesel, mão de obra...). Não inclui depreciação de máquinas nem custo de oportunidade da terra — por isso o resultado é <strong>margem bruta</strong>, não líquida.</p>
+    `;
+
+    // DRE 2 — só aparece se houver comercialização/arrendamento: continua do resultado da lavoura
+    // até o que sobra de verdade na conta. Fica separado de propósito (não é comparável).
+    const dreReal = temExtras ? `
+      <h3 style="font-size:var(--fs-sm);color:var(--navy);margin:1.1rem 0 .6rem">Seu resultado financeiro real</h3>
+      <div class="dre">
+        <div class="dre-row"><span>Resultado da lavoura</span><span>${fmtBRL(r.resultado_producao)}</span></div>
         ${temComerc ? `<div class="dre-row dre-neg"><span>− Comercialização <span class="dre-sub">(frete, armazenagem, taxas)</span></span><span>${fmtBRL(r.comerc_total)}</span></div>` : ''}
         ${temArrend ? `<div class="dre-row dre-neg"><span>${arrendLabel}</span><span>${fmtBRL(r.arrend_total)}</span></div>` : ''}
         <div class="dre-row dre-total"><span>= Resultado dos grãos</span><span class="${r.resultado_graos < 0 ? 'negativo' : ''}">${fmtBRL(r.resultado_graos)}</span></div>
       </div>
-      <p class="dre-note"><strong>COE = Custo Operacional Efetivo:</strong> o que você gastou em dinheiro na safra (sementes, defensivos, fertilizantes, diesel, mão de obra...). Não inclui depreciação de máquinas nem custo de oportunidade da terra — por isso o resultado é <strong>margem bruta</strong>, não líquida.</p>
-      ${temComerc ? '<p class="dre-note">A <strong>comercialização</strong> fica fora da comparação com a média das próximas seções — a referência pública não inclui esses custos. Ela entra no seu resultado, como você vê acima.</p>' : ''}
-      ${renderArrendNote(r)}
+      <p class="dre-note">Este é o valor que sobra de verdade na conta. Ele fica <strong>fora da comparação</strong> com a média mais abaixo — nem todo produtor paga comercialização e arrendamento do mesmo jeito, então comparar só a lavoura é mais justo.</p>
+    ` : '';
+
+    el.t3ResumoGrid.innerHTML = `
+      ${dreProducao}
+      ${dreReal}
       <div class="summary-grid" style="margin-top:1rem">
-        <div class="summary-item"><div class="k">Margem por hectare</div><div class="v ${r.margem_conjunta_ha < 0 ? 'negativo' : ''}">${fmtBRL(r.margem_conjunta_ha)}</div></div>
+        <div class="summary-item"><div class="k">Margem por hectare${temExtras ? ' (real)' : ''}</div><div class="v ${r.margem_conjunta_ha < 0 ? 'negativo' : ''}">${fmtBRL(r.margem_conjunta_ha)}</div></div>
         <div class="summary-item"><div class="k">Margem sobre a receita</div><div class="v ${(r.margem_pct || 0) < 0 ? 'negativo' : ''}">${r.margem_pct === null ? '—' : r.margem_pct.toFixed(0) + '%'}</div></div>
       </div>
       ${renderSacasNote(r, custoProducao)}
@@ -1661,37 +1667,63 @@
   }
 
   // Faixa de status — "top 25%" é conquista que produtor persegue (mais forte que "percentil N").
+  // Ícones usam stroke="currentColor" — herdam a cor do texto de cada .tier-* no CSS, sem precisar de classe extra.
+  const TIER_ICONS = {
+    top: '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 3h10v3a5 5 0 01-5 5 5 5 0 01-5-5V3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 4H3a2 2 0 002 4M15 4h2a2 2 0 01-2 4M8 16h4M10 11v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    acima: '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 12l5-5 3 3 4-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 4h4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    media: '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    abaixo: '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 6l5 5 3-3 4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8V4h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  };
   function tierFromPercentil(p) {
-    if (p >= 75) return { label: 'Top 25% mais eficientes', cls: 'tier-top' };
-    if (p >= 50) return { label: 'Acima da média da região', cls: 'tier-acima' };
-    if (p >= 25) return { label: 'Na média da região', cls: 'tier-media' };
-    return { label: 'Abaixo da média da região', cls: 'tier-abaixo' };
+    if (p >= 75) return { label: 'Top 25% mais eficientes', cls: 'tier-top', icon: TIER_ICONS.top };
+    if (p >= 50) return { label: 'Acima da média da região', cls: 'tier-acima', icon: TIER_ICONS.acima };
+    if (p >= 25) return { label: 'Na média da região', cls: 'tier-media', icon: TIER_ICONS.media };
+    return { label: 'Abaixo da média da região', cls: 'tier-abaixo', icon: TIER_ICONS.abaixo };
+  }
+
+  // Distância pro próximo degrau — vira gancho pra "vale a pena melhorar isso" (e pra falar com a Fluxo Rural).
+  // Usa os mesmos P25/mediana/P75 do headline (referência da cultura de maior área), então a régua bate com os stats abaixo.
+  function nextTierGap(h) {
+    const p = h.percentil, sua = h.margem_bruta_ha;
+    if (p >= 75) {
+      const acima = sua - h.P75;
+      return acima > 0
+        ? `Você está no <strong>Top 25%</strong> — <strong>${fmtBRL(acima)}/ha</strong> acima do início dessa faixa.`
+        : 'Você está no <strong>Top 25%</strong> da sua região.';
+    }
+    if (p >= 50) return `Faltam <strong>${fmtBRL(Math.max(0, h.P75 - sua))}/ha</strong> para você entrar no Top 25%.`;
+    if (p >= 25) return `Faltam <strong>${fmtBRL(Math.max(0, h.mediana - sua))}/ha</strong> para você ficar acima da média.`;
+    return `Faltam <strong>${fmtBRL(Math.max(0, h.P25 - sua))}/ha</strong> para você sair da faixa abaixo da média.`;
   }
 
   function renderRanking(r) {
     const h = r.headline;
     const cultura = CULTURA_LABEL[h.cultura] || h.cultura;
     const tier = tierFromPercentil(h.percentil);
-    el.t3Tier.innerHTML = `<div class="tier-badge ${tier.cls}"><span class="tier-dot"></span>${tier.label}</div>`;
-    el.t3RankingTexto.innerHTML = `Sua margem está à frente de <strong class="rank-num" data-target="${h.percentil}">0%</strong> dos produtores de ${cultura} em ${r.uf}${r.multi ? ' <span class="hint" style="display:inline">(sua cultura de maior área)</span>' : ''}.`;
+    el.t3Tier.innerHTML = `<div class="tier-badge ${tier.cls}">${tier.icon}<span>${tier.label}</span></div>`;
+    el.t3RankingTexto.innerHTML = `Sua margem está à frente de <strong class="rank-num">${h.percentil}%</strong> dos produtores de ${cultura} em ${r.uf}${r.multi ? ' <span class="hint" style="display:inline">(sua cultura de maior área)</span>' : ''}.`;
+    el.t3RankNext.innerHTML = nextTierGap(h);
     el.t3RankStats.innerHTML = `
       <div class="rank-stat"><div class="v">${fmtBRL(h.P25)}</div><div class="k">1 em cada 4 ganha menos que isso</div></div>
       <div class="rank-stat"><div class="v">${fmtBRL(h.mediana)}</div><div class="k">O produtor típico</div></div>
       <div class="rank-stat"><div class="v">${fmtBRL(h.P75)}</div><div class="k">1 em cada 4 ganha mais que isso</div></div>
     `;
-    el.t3PercentileMarker.dataset.label = 'Você';
-    el.t3PercentileMarker.dataset.target = h.percentil;
-    el.t3PercentileMarker.style.left = '-1.5px'; // começa no 0; animateRanking() preenche
+    if (el.t3GaugeNeedle) {
+      el.t3GaugeNeedle.dataset.target = h.percentil;
+      el.t3GaugeNeedle.setAttribute('transform', 'rotate(-90 110 120)'); // começa no mínimo; animateRanking() gira até a posição
+    }
+    if (el.t3RankPct) el.t3RankPct.textContent = '0%';
   }
 
-  // Reveal: conta o "à frente de X%" subindo + o marcador andando até a posição. Pico emocional da tela.
+  // Reveal: o ponteiro do velocímetro gira até a posição + o número sobe junto. Pico emocional da tela.
   function animateRanking() {
-    const numEl = el.tela3.querySelector('.rank-num');
-    const marker = el.t3PercentileMarker;
-    const target = +(marker.dataset.target || 0);
+    const numEl = el.t3RankPct;
+    const needle = el.t3GaugeNeedle;
+    const target = +((needle && needle.dataset.target) || 0);
+    const angleFor = (p) => (p / 100) * 180 - 90; // percentil 0→-90°(esquerda) … 100→+90°(direita)
     const setFinal = () => {
       if (numEl) numEl.textContent = target + '%';
-      marker.style.left = `calc(${target}% - 1.5px)`;
+      if (needle) needle.setAttribute('transform', `rotate(${angleFor(target)} 110 120)`);
     };
     const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced || typeof requestAnimationFrame !== 'function') { setFinal(); return; }
@@ -1700,8 +1732,9 @@
       if (t0 === null) t0 = t;
       const k = Math.min(1, (t - t0) / dur);
       const eased = 1 - Math.pow(1 - k, 3);
-      if (numEl) numEl.textContent = Math.round(target * eased) + '%';
-      marker.style.left = `calc(${(target * eased).toFixed(1)}% - 1.5px)`;
+      const cur = target * eased;
+      if (numEl) numEl.textContent = Math.round(cur) + '%';
+      if (needle) needle.setAttribute('transform', `rotate(${angleFor(cur)} 110 120)`);
       if (k < 1) requestAnimationFrame(frame); else setFinal();
     }
     requestAnimationFrame(frame);
@@ -1839,13 +1872,15 @@
     ctx.strokeStyle = 'rgba(28,28,28,.12)'; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.moveTo(px + 80, py + 360); ctx.lineTo(px + pw - 80, py + 360); ctx.stroke();
 
-    // Margem por hectare (líquida)
-    ctx.fillStyle = '#1B4332';
+    // Sobra em sacas/ha (não em R$ — margem em dinheiro é dado pessoal demais pra um card público;
+    // sacas é a unidade que o produtor já pensa no dia a dia, e não expõe o valor exato em reais).
+    const sobraScHa = r.precoMedio > 0 ? r.margem_conjunta_ha / r.precoMedio : null;
+    ctx.fillStyle = sobraScHa !== null && sobraScHa < 0 ? '#a83a1d' : '#1B4332';
     ctx.font = `800 96px ${head}`;
-    ctx.fillText(fmtBRL(r.margem_conjunta_ha), center, py + 470);
+    ctx.fillText(sobraScHa === null ? '—' : fmtNum(sobraScHa), center, py + 470);
     ctx.fillStyle = '#5B5B57';
     ctx.font = `700 38px ${body}`;
-    ctx.fillText('de margem por hectare', center, py + 522);
+    ctx.fillText('sacas de margem por hectare', center, py + 522);
 
     // Pílula de faixa (status)
     const pill = tier.label.toUpperCase();
