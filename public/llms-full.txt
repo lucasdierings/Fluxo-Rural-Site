@@ -296,7 +296,7 @@ Considere uma lavoura com custo total de R$ 6.200/ha e produtividade de 60 sc/ha
 | Ponto de equilíbrio | 56,4 sc/ha | 47,7 sc/ha | 41,3 sc/ha |
 | Custo por saca | R$ 103,33 | R$ 103,33 | R$ 103,33 |
 
-A tabela escancara dois detalhes. Primeiro: o **custo por saca não muda com o preço**, ele é o seu piso de venda em qualquer cenário. Segundo: no cenário pessimista, o ponto de equilíbrio (56,4 sc/ha) fica perigosamente perto da produtividade real (60 sc/ha), com margem de segurança de só 6%. Levantamentos de safras recentes têm mostrado exatamente esse aperto em várias regiões do país.
+A tabela escancara dois detalhes. Primeiro: o **custo por saca não muda com o preço**. Ele é o seu piso de venda em qualquer cenário. Segundo: no cenário pessimista, o ponto de equilíbrio (56,4 sc/ha) fica perigosamente perto da produtividade real (60 sc/ha), com margem de segurança de só 6%. Levantamentos de safras recentes têm mostrado exatamente esse aperto em várias regiões do país.
 
 #### Como usar esses números para decidir?
 
@@ -520,7 +520,7 @@ Antes de contratar qualquer plataforma, pergunte como ela se comporta sem sinal.
 4. **Integre com a gestão.** Dado de IA que não alimenta decisão financeira e operacional é custo, não investimento.
 5. **Busque apoio especializado.** Quem entende de agro e de tecnologia ao mesmo tempo encurta o caminho e evita compras erradas.
 
-#### O futuro já chegou, para quem tem dados
+#### O futuro já chegou, mas só para quem tem dados
 
 A inteligência artificial não é tendência futura no agro: é realidade presente. Mas a vantagem competitiva não está em "ter IA". Está em ter **dados organizados e gestão estruturada** para que a IA tenha o que potencializar. Produtores que arrumarem a casa agora vão colher essa vantagem na próxima década; os demais vão pagar por ferramentas que não conseguem usar.
 
@@ -729,7 +729,7 @@ Essa distinção vale dinheiro e passa despercebida. Foi inclusive um dos pontos
 
 O erro caro: chamar de "parceria" um contrato com **valor fixo garantido** ao proprietário. A fiscalização requalifica como arrendamento e cobra a diferença de imposto **com multa de até 75%**. Se o contrato diz parceria, o risco tem que ser real e compartilhado.
 
-#### Funrural 2026: folha ou comercialização, e as novas alíquotas
+#### Funrural 2026: folha, comercialização e as novas alíquotas
 
 O Funrural é a contribuição previdenciária do empregador rural, e desde 2018 a pessoa física pode escolher a base de recolhimento a cada ano:
 
@@ -955,7 +955,7 @@ Sim, e com um nível de concordância raro entre os centros de previsão. Em **9
 
 Na prática, "muito forte" significa que a temperatura da superfície do mar no Pacífico Equatorial deve ficar mais de **2,0 °C acima do normal**, o mesmo patamar dos episódios históricos de **1982/83, 1997/98 e 2015/16**. Não é pouca coisa. No super El Niño de 1997/98, a chuva acumulada entre outubro e abril no Rio Grande do Sul chegou a **110% a 150% da média histórica**. Bem drenada, essa água afasta a estiagem. Em excesso, ela encharca o solo, alimenta doença e atrasa a colheita.
 
-> **⚠️ O que é fato e o que é exagero:** o fenômeno é real e forte, isso não é boato. O exagero mora nos efeitos apocalípticos que circulam nas redes. Nem o El Niño mais intenso produz o mesmo impacto em todo lugar. Como o próprio NOAA faz questão de lembrar, os efeitos não são uniformes. O trabalho do produtor não é entrar em pânico, é entender o que o fenômeno faz na *sua* região.
+> **⚠️ O que é fato e o que é exagero:** o fenômeno é real e forte. Isso não é boato. O exagero mora nos efeitos apocalípticos que circulam nas redes. Nem o El Niño mais intenso produz o mesmo impacto em todo lugar. Como o próprio NOAA faz questão de lembrar, os efeitos não são uniformes. O trabalho do produtor não é entrar em pânico, é entender o que o fenômeno faz na *sua* região.
 
 #### Quando o El Niño 2026 começa e chega ao Brasil?
 
