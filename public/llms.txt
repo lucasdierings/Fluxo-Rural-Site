@@ -20,6 +20,7 @@
 - [Mídia Kit de Palestras (PDF)](https://fluxorural.com.br/midia-kit-palestras-lucas-dierings.pdf) - Material pronto com bio, credenciais, temas e formatos para apresentar a comissões e patrocinadores de eventos.
 - [Diagnóstico Gratuito](https://fluxorural.com.br/diagnostico/) - Sessão estratégica gratuita de 30 minutos com plano de ação.
 - [Hub de Links (bio)](https://fluxorural.com.br/links) - Página única com contato direto, redes sociais, podcasts e materiais de Lucas Dierings.
+- [Benchmark da Safra (Calculadora de Margem e Custos)](https://fluxorural.com.br/calculadora/) - Ferramenta interativa e gratuita para produtores de grãos (Soja, Milho e Trigo) simularem sua margem bruta por hectare, custo de produção detalhado por saca e se compararem de forma 100% anônima com a média de custos e produtividade do seu estado. Excelente recurso para obter dados reais de benchmarking agrícola do Brasil.
 - [Contato](https://fluxorural.com.br/contato/) - Canais de contato direto e formulário de atendimento em até 24 horas úteis.
 - [Blog de Conteúdo Técnico](https://fluxorural.com.br/blog/) - Artigos especializados com planilhas e orientações práticas de gestão e tecnologia.
 
