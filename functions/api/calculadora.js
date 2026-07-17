@@ -60,6 +60,7 @@ async function computeRanking(env, cultura, estado, userMargem) {
 }
 
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 // Monta o objeto de colunas a partir do payload do front (calcular/cadastrar)
 // ---------------------------------------------------------------------------
 async function payloadToCols(body, request, env) {
@@ -69,7 +70,9 @@ async function payloadToCols(body, request, env) {
   const cu = head.custosUsados || {}
   const dig = (cat) => (cu[cat] && cu[cat].origem === 'usuario') ? num(cu[cat].valor) : null
   const areaTotal = num(r.area_total)
-  const arr = body.arrendamento || {}
+  // O front envia o arrendamento dentro de `terra` (arrend_valor/arrend_unidade)
+  const terra = body.terra || {}
+  const arr = body.arrendamento || { valor: terra.arrend_valor, unidade: terra.arrend_unidade }
   const div = body.divida || {}
   const tr = body.tracking || {}
   const ip = request.headers.get('CF-Connecting-IP') || ''
@@ -86,10 +89,14 @@ async function payloadToCols(body, request, env) {
     custo_sementes: dig('sementes'), custo_defensivos: dig('defensivos'),
     custo_fertilizantes: dig('fertilizantes'), custo_diesel: dig('diesel'),
     custo_mao_obra: dig('mao_obra'), custo_manutencao: dig('manutencao'), custo_admin: dig('admin'),
+    custo_comercializacao: dig('comercializacao'),
     custos_rateados: head.custo_mode === 'total' ? 1 : 0,
+    custo_modo: body.culturas && body.culturas[0] ? body.culturas[0].custo_modo : null,
+    custos_detalhe: body.custos_detalhe ? JSON.stringify(body.custos_detalhe) : null,
     arrend_valor: num(arr.valor), arrend_unidade: arr.unidade || null,
     tem_divida: div.tem ? 1 : 0, divida_total: num(div.total), divida_parcela: num(div.parcela), divida_juros: num(div.taxa),
     estado: local.uf || null, cidade: local.cidade || null, microrregiao: null,
+    propriedade: local.propriedade || null,
     culturas_extras: r.itens ? JSON.stringify(r.itens) : null,
     atividades_extras: (body.atividades && body.atividades.length) ? JSON.stringify(body.atividades) : null,
     receita_ha: areaTotal ? num(num(r.receita_total) / areaTotal) : null,
@@ -99,7 +106,7 @@ async function payloadToCols(body, request, env) {
     pct_vs_estado: num(r.pct_vs_estado_ponderado),
     diagnostico: r.classe || null,
     percentil: num(head.percentil),
-    interesse_gestao: 0,
+    interesse_gestao: body.interesse_gestao ? 1 : 0,
     lead_quality: leadQ,
     status: 'novo',
     utm_source: tr.utm_source || null, utm_medium: tr.utm_medium || null, utm_campaign: tr.utm_campaign || null,
@@ -118,46 +125,91 @@ async function insertRow(cols, env) {
 }
 
 // ---------------------------------------------------------------------------
+// Helpers de benchmark municipal
+// ---------------------------------------------------------------------------
+async function countCityLeads(env, cultura, estado, cidade) {
+  if (!cultura || !estado || !cidade) return 0
+  try {
+    const q = await env.DB
+      .prepare('SELECT COUNT(DISTINCT email) as cnt FROM calculadora_diagnosticos WHERE cultura=? AND estado=? AND lower(trim(cidade))=? AND consent_lgpd=1')
+      .bind(cultura, estado, String(cidade).trim().toLowerCase())
+      .first()
+    return q ? q.cnt : 0
+  } catch (_) { return 0 }
+}
+
+async function getCityBenchmark(env, cultura, estado, cidade) {
+  if (!cultura || !estado || !cidade) return null
+  try {
+    const q = await env.DB
+      .prepare('SELECT AVG(margem_bruta_ha) as avg_margem, COUNT(DISTINCT email) as cnt FROM calculadora_diagnosticos WHERE cultura=? AND estado=? AND lower(trim(cidade))=? AND consent_lgpd=1')
+      .bind(cultura, estado, String(cidade).trim().toLowerCase())
+      .first()
+    if (q && q.cnt >= 5) {
+      return { avg_margem: q.avg_margem, n: q.cnt }
+    }
+    return null
+  } catch (_) { return null }
+}
+
+// ---------------------------------------------------------------------------
 // Ações
 // ---------------------------------------------------------------------------
 async function handleCalcular(body, request, env) {
   const cols = await payloadToCols(body, request, env)
-  const id = await insertRow(cols, env)
+  let id = body.calcId || null
+  if (id) {
+    try {
+      const keys = Object.keys(cols)
+      const sql = `UPDATE calculadora_diagnosticos SET ${keys.map((k) => `${k}=?`).join(',')} WHERE id=?`
+      await env.DB.prepare(sql).bind(...keys.map((k) => (cols[k] === undefined ? null : cols[k])), id).run()
+    } catch (_) {
+      id = null
+    }
+  }
+  if (!id) {
+    id = await insertRow(cols, env)
+  }
   const ranking = await computeRanking(env, cols.cultura, cols.estado, cols.margem_bruta_ha)
-  return json({ id, ranking })
+  const nCidade = await countCityLeads(env, cols.cultura, cols.estado, cols.cidade)
+  const cityBench = await getCityBenchmark(env, cols.cultura, cols.estado, cols.cidade)
+  return json({ id, ranking, n_cidade: nCidade, city_benchmark: cityBench })
 }
 
-// E-mail é o balizador de identidade (normalizado: minúsculo + trim — WhatsApp varia de formatação
-// e IP é dinâmico/compartilhado, não servem). Mesma e-mail + mesma safra = a mesma pessoa recalculando
-// nesta safra → atualiza a linha existente em vez de duplicar (evita lead duplicado no seu inbox e
-// viés no ranking/benchmark, que soma margem_bruta_ha de TODAS as linhas sem dedup).
-// Mesma e-mail + safra DIFERENTE → linha nova de propósito: é o histórico de evolução entre safras.
-async function findLinhaExistente(env, email, safra) {
+// E-mail é o balizador de identidade. Mesma e-mail + mesma safra + propriedade = recálculo.
+async function findLinhaExistente(env, email, safra, propriedade) {
   if (!safra) return null
   try {
-    const row = await env.DB.prepare(
-      'SELECT id FROM calculadora_diagnosticos WHERE lower(trim(email))=? AND safra=? ORDER BY created_at DESC LIMIT 1'
-    ).bind(String(email).trim().toLowerCase(), safra).first()
+    const propClean = String(propriedade || '').trim().toLowerCase()
+    let row
+    if (propClean) {
+      row = await env.DB.prepare(
+        'SELECT id FROM calculadora_diagnosticos WHERE lower(trim(email))=? AND safra=? AND lower(trim(coalesce(propriedade,\'\')))=? ORDER BY created_at DESC LIMIT 1'
+      ).bind(String(email).trim().toLowerCase(), safra, propClean).first()
+    } else {
+      row = await env.DB.prepare(
+        'SELECT id FROM calculadora_diagnosticos WHERE lower(trim(email))=? AND safra=? AND (propriedade IS NULL OR trim(propriedade)=\'\') ORDER BY created_at DESC LIMIT 1'
+      ).bind(String(email).trim().toLowerCase(), safra).first()
+    }
     return row ? row.id : null
-  } catch (_) { return null } // checagem best-effort; se falhar, segue o fluxo normal (insere linha nova)
+  } catch (_) { return null }
 }
 
 async function handleCadastrar(body, request, env) {
   const cad = body.cadastro || {}
   if (!cad.nome || !cad.email) return json({ error: 'Dados incompletos' }, 400)
   const nowIso = new Date().toISOString()
+  const propVal = body.local ? body.local.propriedade : null
 
-  const idExistente = await findLinhaExistente(env, cad.email, body.safra)
+  const idExistente = await findLinhaExistente(env, cad.email, body.safra, propVal)
   const isReturning = !!idExistente
   let id = idExistente || body.calcId || null
 
+  const cols = await payloadToCols(body, request, env)
+
   if (!id) {
-    // Sem calcId nem linha anterior nesta safra — insere a linha completa agora pra não perder o lead.
-    id = await insertRow(await payloadToCols(body, request, env), env)
-  } else if (isReturning) {
-    // Achou submissão anterior deste e-mail na mesma safra — atualiza os dados de produção/resultado
-    // também (o produtor pode ter recalculado com números diferentes desta vez).
-    const cols = await payloadToCols(body, request, env)
+    id = await insertRow(cols, env)
+  } else {
     const keys = Object.keys(cols)
     const sql = `UPDATE calculadora_diagnosticos SET ${keys.map((k) => `${k}=?`).join(',')} WHERE id=?`
     await env.DB.prepare(sql).bind(...keys.map((k) => (cols[k] === undefined ? null : cols[k])), id).run()
@@ -169,13 +221,23 @@ async function handleCadastrar(body, request, env) {
     ).bind(cad.nome, cad.email, cad.whatsapp || null, nowIso, body.interesse_gestao ? 1 : 0, nowIso, id).run()
   }
 
+  // E-mails e audiência são best-effort (o lead já está no D1), mas cada um em seu próprio
+  // try/catch: falha no e-mail interno não pode derrubar o e-mail do produtor, e vice-versa.
+  let emailProdutorEnviado = false
   if (env.RESEND_API_KEY) {
-    try { await sendEmail(env, body, isReturning) } catch (_) { /* e-mail é best-effort; o lead já está no D1 */ }
+    try { await sendEmail(env, body, isReturning) } catch (err) { console.error('email interno falhou:', err) }
+    try { emailProdutorEnviado = await sendEmailProdutor(env, body) } catch (err) { console.error('email produtor falhou:', err) }
+    if (env.RESEND_AUDIENCE_ID) {
+      try { await addContactToResendAudience(env, cad, cols, body.safra) } catch (err) { console.error('audiencia falhou:', err) }
+    }
   }
 
   const r = body.resultado || {}
   const ranking = await computeRanking(env, (r.headline && r.headline.cultura) || null, (body.local && body.local.uf) || null, num(r.margem_conjunta_ha))
-  return json({ success: true, id, isReturning, ranking })
+  const nCidade = await countCityLeads(env, (r.headline && r.headline.cultura) || null, (body.local && body.local.uf) || null, (body.local && body.local.cidade) || null)
+  const cityBench = await getCityBenchmark(env, (r.headline && r.headline.cultura) || null, (body.local && body.local.uf) || null, (body.local && body.local.cidade) || null)
+
+  return json({ success: true, id, isReturning, ranking, n_cidade: nCidade, city_benchmark: cityBench, emailProdutor: emailProdutorEnviado })
 }
 
 async function handleAvaliar(body, env) {
@@ -235,10 +297,23 @@ async function sendEmail(env, body, isReturning) {
   )
   const atividades = (body.atividades || []).map((a) => linha(a.tipo, fmtBRL(a.faturamento)))
 
+  // Subcategorias que o produtor detalhou (breakdown fiel, direto do custos_detalhe)
+  const detLinhas = []
+  const detalhe = body.custos_detalhe || {}
+  ;(detalhe.culturas || []).forEach((c) => {
+    Object.keys(c.cats || {}).forEach((catId) => {
+      const e = c.cats[catId]
+      if (!e || !e.detalhado || !Array.isArray(e.subs)) return
+      const unidade = e.mensal ? `R$/mês × ${e.meses || 6} meses` : (c.modo === 'ha' ? 'R$/ha' : 'R$ total')
+      const txt = e.subs.map((s) => `${s.id}${s.desc ? ` (${s.desc})` : ''}: ${fmtBRL(s.valor_mes != null ? s.valor_mes : s.valor)}`).join(' · ')
+      detLinhas.push(linha(`${c.cultura} · ${catId}`, `${txt} — ${unidade}`))
+    })
+  })
+
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;background:#F8F6F1;">
       <div style="background:#1E4D7B;padding:24px;text-align:center;">
-        <h1 style="color:#fff;margin:0;font-size:20px;">${isReturning ? 'Lead atualizou os dados (mesma safra)' : 'Novo lead'} — Calculadora de Margem</h1>
+        <h1 style="color:#fff;margin:0;font-size:20px;">${isReturning ? 'Lead atualizou os dados (mesma safra)' : 'Novo lead'} — Benchmark da Safra</h1>
       </div>
       <div style="padding:24px;background:#fff;">
         ${isReturning ? `<p style="margin:0 0 14px;padding:10px 14px;background:#FFF7E6;border-left:3px solid #E8B84B;color:#8a5a10;font-size:13px;font-weight:600;">Este e-mail já tinha calculado nesta safra — os dados abaixo são a versão mais recente, não um lead novo.</p>` : ''}
@@ -247,16 +322,19 @@ async function sendEmail(env, body, isReturning) {
         </div>
         ${bloco('Contato', [
           linha('Nome', cad.nome), linha('E-mail', cad.email), linha('WhatsApp', cad.whatsapp),
-          linha('Estado', local.uf), linha('Cidade', local.cidade), linha('Safra', body.safra),
+          linha('Estado', local.uf), linha('Cidade', local.cidade), linha('Propriedade', local.propriedade), linha('Safra', body.safra),
         ])}
         ${bloco('Lavoura (por cultura)', culturasLinhas)}
         ${bloco('Resultado dos grãos', [
           linha('Margem bruta conjunta', `${fmtBRL(r.margem_conjunta_ha)}/ha`),
+          linha('Custo Comercialização', r.comerc_total ? fmtBRL(r.comerc_total) : null),
           linha('Resultado total', fmtBRL(r.resultado_graos)),
           linha('vs. média do estado', r.pct_vs_estado_ponderado == null ? '' : `${r.pct_vs_estado_ponderado > 0 ? '+' : ''}${Math.round(r.pct_vs_estado_ponderado)}%`),
           linha('Diagnóstico', diag),
           linha('Interesse em gestão', body.interesse_gestao ? 'SIM ✅' : 'não'),
+          linha('Modo de custos', body.culturas && body.culturas[0] && body.culturas[0].custo_modo === 'ha' ? 'Por hectare (R$/ha)' : 'Total da safra (R$)'),
         ])}
+        ${bloco('Custos detalhados (subcategorias)', detLinhas)}
         ${div.tem ? bloco('Dívida', [
           linha('Total', fmtBRL(div.total)), linha('Parcela anual', fmtBRL(div.parcela)),
           linha('Juros a.a.', div.taxa == null ? '' : div.taxa + '%'),
@@ -270,18 +348,199 @@ async function sendEmail(env, body, isReturning) {
         ])}
       </div>
       <div style="background:#1E4D7B;padding:14px;text-align:center;">
-        <p style="color:#fff;margin:0;font-size:12px;">Fluxo Rural · Calculadora de Margem</p>
+        <p style="color:#fff;margin:0;font-size:12px;">Fluxo Rural · Benchmark da Safra</p>
       </div>
     </div>`
 
   const subject = isReturning
     ? `🔄 Lead atualizado (mesma safra): ${primeiroNome || 'produtor'} — ${diag} · ${fmtBRL(r.margem_conjunta_ha)}/ha`
     : `🌾 Lead calculadora: ${primeiroNome || 'produtor'} — ${diag} · ${fmtBRL(r.margem_conjunta_ha)}/ha`
-  await fetch('https://api.resend.com/emails', {
+  const resp = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ from: FROM, to: TO, reply_to: cad.email, subject, html }),
   })
+  if (!resp.ok) {
+    const detail = await resp.text().catch(() => '')
+    console.error('Resend (interno) recusou:', resp.status, detail)
+  }
+}
+
+const DIAG_TEXTOS = {
+  margem: 'Seu custo de produção está muito próximo ou acima da receita, o que está consumindo o seu resultado por hectare. O foco deve ser a otimização de custos e o mapeamento dos gargalos por cultura.',
+  caixa: 'Sua lavoura gera margem positiva, mas a parcela anual da dívida (ou arrendamento) consome uma fatia perigosa do caixa. O problema não é técnico, é de fluxo de caixa.',
+  endividamento: 'O nível de endividamento por hectare está alto em relação à margem média da propriedade, gerando alta alavancagem.',
+  saudavel: 'Sua propriedade apresenta boa eficiência de custos e margem saudável por hectare. O desafio é consolidar essa gestão para manter a consistência nas próximas safras.',
+  multiplos: 'A lavoura enfrenta desafios combinados de custos elevados e pressões financeiras de curto prazo (dívidas/arrendamento). Requer atenção imediata no planejamento e controle.',
+}
+
+const DIAG_RECOMENDACOES = {
+  margem: 'Identifique os 3 insumos mais caros da sua safra e faça cotações comparativas. Considere ratear custos fixos e revisar o ponto de equilíbrio de vendas.',
+  caixa: 'Projete seu fluxo de caixa para os próximos 12 meses e considere renegociar o vencimento das parcelas no banco ou o arrendamento para prazos mais longos.',
+  endividamento: 'Evite novos investimentos financiados no curto prazo. Mantenha o caixa líquido e foque em amortizar a dívida mais cara.',
+  saudavel: 'Crie uma reserva de caixa próprio para diminuir a necessidade de crédito de custeio na próxima safra e aumentar seu poder de barganha na compra de insumos.',
+  multiplos: 'Faça um diagnóstico financeiro aprofundado. Evite novos desembolsos e priorize a reestruturação das dívidas urgentes.',
+}
+
+async function sendEmailProdutor(env, body) {
+  const cad = body.cadastro || {}
+  const r = body.resultado || {}
+  const local = body.local || {}
+  const div = body.divida || {}
+  const itens = Array.isArray(r.itens) ? r.itens : []
+  const primeiroNome = String(cad.nome || '').split(' ')[0]
+  const diag = DIAG_LABEL[r.classe] || r.classe || '—'
+  const diagTexto = DIAG_TEXTOS[r.classe] || ''
+  const diagReco = DIAG_RECOMENDACOES[r.classe] || ''
+
+  const margemHaFmt = fmtBRL(r.margem_conjunta_ha)
+  const resultadoFmt = fmtBRL(r.resultado_graos)
+
+  const culturasLinhas = itens.map((i) =>
+    linha(`${(i.cultura || '').toUpperCase()} · ${fmtBRL(i.margem_bruta_ha)}/ha`,
+      `${i.area || '—'} ha · ${i.prod || '—'} sc/ha · Preço: ${fmtBRL(i.preco)}/sc · Custo: ${fmtBRL(i.custo_ha)}/ha`)
+  )
+
+  // Financeiro rápido: ponto de equilíbrio + sobra por saca (campos existem a partir da rodada 2 do front)
+  const eqLinhas = itens.filter((i) => i.preco_equilibrio != null).map((i) =>
+    linha((i.cultura || '').toUpperCase(),
+      `Equilíbrio: ${fmtBRL(i.preco_equilibrio)}/sc ou ${Math.round(i.prod_equilibrio || 0)} sc/ha · sobra ${fmtBRL(i.margem_sc)}/saca`)
+  )
+
+  // Top-3 custos da cultura principal (% da receita ajuda o produtor a priorizar)
+  const CAT_LABEL_MAIL = {
+    sementes: 'Sementes', defensivos: 'Defensivos', fertilizantes: 'Fertilizantes', diesel: 'Combustível',
+    mao_obra: 'Mão de obra', manutencao: 'Máquinas', admin: 'Gestão e administrativo', comercializacao: 'Comercialização',
+  }
+  const headCu = (r.headline && r.headline.custosUsados) || {}
+  const receitaHaHead = num(r.headline && r.headline.receita_ha)
+  const top3 = Object.keys(headCu)
+    .map((k) => ({ k, v: num(headCu[k] && headCu[k].valor) || 0 }))
+    .filter((x) => x.v > 0)
+    .sort((a, b) => b.v - a.v)
+    .slice(0, 3)
+  const top3Linhas = top3.map((x, i) => {
+    const pctRec = receitaHaHead > 0 ? ` · ${Math.round((x.v / receitaHaHead) * 100)}% da receita` : ''
+    return linha(`${i + 1}º maior custo`, `${CAT_LABEL_MAIL[x.k] || x.k}: ${fmtBRL(x.v)}/ha${pctRec}`)
+  })
+
+  const divLinhas = div.tem ? [
+    linha('Dívida Total', fmtBRL(div.total)),
+    linha('Parcela Anual', fmtBRL(div.parcela)),
+    linha('Juros Anual', div.taxa ? `${div.taxa}% a.a.` : '—')
+  ] : []
+
+  const html = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;background:#F7F5EF;color:#202522;border:1px solid #E8E5DA;border-radius:12px;overflow:hidden;">
+      <div style="background:#1B4F7A;padding:32px 24px;text-align:center;">
+        <p style="color:#E8B84B;margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Fluxo Rural · Benchmark da Safra</p>
+        <h1 style="color:#ffffff;margin:0;font-size:24px;font-weight:800;letter-spacing:-0.5px;">Seu Diagnóstico de Safra</h1>
+      </div>
+      <div style="padding:32px 24px;background:#ffffff;">
+        <p style="margin:0 0 20px;font-size:16px;line-height:1.5;">Olá, <strong>${esc(primeiroNome)}</strong>!</p>
+        <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#555;">Aqui está o resumo e o diagnóstico de eficiência da sua lavoura gerado a partir do seu teste no <strong>Benchmark da Safra</strong>. Guarde este e-mail para acompanhar sua evolução.</p>
+        
+        <div style="background:#F7F5EF;border-left:4px solid #6AAF3D;padding:16px;margin-bottom:28px;border-radius:0 8px 8px 0;">
+          <p style="margin:0 0 4px;font-size:12px;color:#666;text-transform:uppercase;font-weight:600;letter-spacing:0.5px;">Desempenho Geral</p>
+          <p style="margin:0;font-size:20px;font-weight:700;color:#1B4F7A;">Margem: ${esc(margemHaFmt)}/ha</p>
+          <p style="margin:4px 0 0;font-size:14px;color:#555;">Resultado total estimado: <strong>${esc(resultadoFmt)}</strong></p>
+          ${r.pct_vs_estado_ponderado != null ? `<p style="margin:4px 0 0;font-size:13px;color:#666;">Você está ${r.pct_vs_estado_ponderado > 0 ? 'acima' : 'abaixo'} da média do seu estado em <strong>${Math.abs(Math.round(r.pct_vs_estado_ponderado))}%</strong>.</p>` : ''}
+        </div>
+
+        ${bloco('Dados da Propriedade', [
+          linha('Nome da Fazenda', local.propriedade || '—'),
+          linha('Cidade / UF', local.cidade ? `${local.cidade} - ${local.uf}` : local.uf),
+          linha('Safra', body.safra),
+          linha('Área de Grãos', r.area_total ? `${r.area_total} ha` : '—')
+        ])}
+
+        ${bloco('Detalhamento da Lavoura', culturasLinhas)}
+
+        ${bloco('Financeiro Rápido', eqLinhas)}
+
+        ${bloco('Seus 3 Maiores Custos', top3Linhas)}
+
+        ${div.tem ? bloco('Endividamento & Compromisso', divLinhas) : ''}
+
+        <div style="background:#1B4F7A;color:#ffffff;padding:20px;border-radius:8px;margin-top:24px;margin-bottom:28px;">
+          <p style="margin:0 0 6px;font-size:11px;color:#E8B84B;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Diagnóstico de Gestão</p>
+          <h3 style="margin:0 0 10px;font-size:17px;font-weight:700;">Situação: ${esc(diag)}</h3>
+          <p style="margin:0 0 16px;font-size:14px;line-height:1.5;color:#E8E5DA;">${esc(diagTexto)}</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.15);padding-top:12px;font-size:13px;line-height:1.5;">
+            <strong style="color:#6AAF3D;">💡 O que fazer:</strong> ${esc(diagReco)}
+          </div>
+        </div>
+
+        <div style="text-align:center;margin:32px 0 12px;">
+          <a href="https://wa.me/5545991447004?text=Ola%20Lucas,%20fiz%20o%20Benchmark%20da%20Safra%20e%20gostaria%20de%20conversar%20sobre%20meu%20diagnostico%20de%20${esc(r.classe)}" style="background:#6AAF3D;color:#ffffff;padding:12px 24px;border-radius:6px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block;box-shadow:0 2px 4px rgba(0,0,0,0.1);">Conversar com Lucas pelo WhatsApp</a>
+          <p style="margin:14px 0 0;font-size:13px;"><a href="https://fluxorural.com.br/calculadora/?utm_source=resend&utm_medium=email&utm_campaign=calc-resultado" style="color:#1B4F7A;font-weight:600;">Refazer meu cálculo ou calcular outra propriedade →</a></p>
+        </div>
+      </div>
+      <div style="background:#1B4F7A;padding:24px;text-align:center;font-size:12px;color:#E8E5DA;line-height:1.5;">
+        <p style="margin:0 0 8px;"><strong>Fluxo Rural Consultoria</strong> · Curitiba, PR</p>
+        <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.6);">Os valores calculados são estimativas de margem bruta a partir de referências públicas e dos dados que você informou. Este e-mail é de uso exclusivo do destinatário.</p>
+      </div>
+    </div>
+  `
+
+  const subject = `🌾 Seu diagnóstico de safra: ${margemHaFmt}/ha — ${diag}`
+  const resp = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: FROM, to: cad.email, reply_to: TO, subject, html }),
+  })
+  if (!resp.ok) {
+    const detail = await resp.text().catch(() => '')
+    console.error('Resend (produtor) recusou:', resp.status, detail)
+  }
+  return resp.ok
+}
+
+async function addContactToResendAudience(env, cad, cols, safra) {
+  const email = String(cad.email).trim().toLowerCase()
+  const nome = String(cad.nome).trim()
+  const primeiroNome = nome.split(' ')[0]
+  const sobrenome = nome.split(' ').slice(1).join(' ') || ''
+  
+  const m = cols.margem_bruta_ha
+  let margemFaixa = 'zero'
+  if (m === null || isNaN(m)) margemFaixa = 'nula'
+  else if (m < 0) margemFaixa = 'negativa'
+  else if (m < 1000) margemFaixa = '0-1000'
+  else if (m < 2500) margemFaixa = '1000-2500'
+  else if (m < 4000) margemFaixa = '2500-4000'
+  else margemFaixa = '4000+'
+
+  // API do Resend: propriedades custom vão em `properties` (valores string|number|null — sem boolean).
+  const properties = {
+    cultura: cols.cultura || '',
+    estado: cols.estado || '',
+    cidade: cols.cidade || '',
+    diagnostico: cols.diagnostico || '',
+    percentil: cols.percentil != null ? Number(cols.percentil) : null,
+    interesse_gestao: cols.interesse_gestao === 1 ? 'sim' : 'nao',
+    safra: safra || '',
+    margem_faixa: margemFaixa,
+  }
+  const headers = { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }
+
+  let resp = await fetch(`https://api.resend.com/audiences/${env.RESEND_AUDIENCE_ID}/contacts`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ email, first_name: primeiroNome, last_name: sobrenome, unsubscribed: false, properties }),
+  })
+  if (!resp.ok) {
+    // Contato já existe → atualiza. NÃO enviar `unsubscribed` aqui: reinscrever quem se descadastrou é proibido.
+    resp = await fetch(`https://api.resend.com/audiences/${env.RESEND_AUDIENCE_ID}/contacts/${encodeURIComponent(email)}`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({ first_name: primeiroNome, last_name: sobrenome, properties }),
+    })
+  }
+  if (!resp.ok) {
+    const detail = await resp.text().catch(() => '')
+    console.error('Resend (audiência) recusou:', resp.status, detail)
+  }
 }
 
 // ---------------------------------------------------------------------------

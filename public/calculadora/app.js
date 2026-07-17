@@ -8,15 +8,50 @@
   // ============================================================
   // Constantes
   // ============================================================
+  // Categorias CANÔNICAS: colunas do D1 e chaves do benchmark (comparação com a média).
+  // A UI agrupa/detalha mais fino (GRUPOS_CUSTO) e agrega de volta nas canônicas via `canon`.
   const CATEGORIAS = ['sementes', 'defensivos', 'fertilizantes', 'diesel', 'mao_obra', 'manutencao', 'admin'];
   const CATEGORIA_LABEL = {
     sementes: 'Sementes', defensivos: 'Defensivos', fertilizantes: 'Fertilizantes',
-    diesel: 'Diesel / combustível', mao_obra: 'Mão de obra', manutencao: 'Manutenção de máquinas',
-    admin: 'Despesas administrativas'
+    diesel: 'Combustível', mao_obra: 'Mão de obra', manutencao: 'Máquinas (manut., seguro, serviços)',
+    admin: 'Gestão e administrativo', comercializacao: 'Comercialização'
   };
-  const CATEGORIA_INPUT_ID = {
-    sementes: 'cSementes', defensivos: 'cDefensivos', fertilizantes: 'cFertilizantes',
-    diesel: 'cDiesel', mao_obra: 'cMaoObra', manutencao: 'cManutencao', admin: 'cAdmin'
+  // Comercialização fica FORA da comparação com benchmark (a referência pública não a inclui) —
+  // entra na margem do produtor como linha própria, no mesmo padrão do arrendamento.
+  const GRUPOS_CUSTO = [
+    { id: 'insumos', label: 'Insumos', cats: [
+      { id: 'sementes', label: 'Sementes', canon: 'sementes', tip: 'Sementes e tratamento de sementes.' },
+      { id: 'defensivos', label: 'Defensivos', canon: 'defensivos', tip: 'Herbicidas, fungicidas, inseticidas e adjuvantes.',
+        subs: [{ id: 'herbicida', label: 'Herbicidas' }, { id: 'fungicida', label: 'Fungicidas' }, { id: 'inseticida', label: 'Inseticidas' }, { id: 'adjuvante', label: 'Adjuvantes' }, { id: 'outros', label: 'Outros', desc: true }] },
+      { id: 'fertilizantes', label: 'Fertilizantes', canon: 'fertilizantes', tip: 'Adubos, corretivos e foliares.',
+        subs: [{ id: 'base', label: 'Adubação de base' }, { id: 'cobertura', label: 'Cobertura' }, { id: 'foliar', label: 'Foliares' }, { id: 'outros', label: 'Outros', desc: true }] }
+    ] },
+    { id: 'maquinas', label: 'Máquinas e operações', cats: [
+      { id: 'combustivel', label: 'Combustível', canon: 'diesel', tip: 'Diesel das máquinas e operações da lavoura.' },
+      { id: 'manutencao_pecas', label: 'Manutenção e peças', canon: 'manutencao', tip: 'Manutenção e reparo de máquinas e implementos.' },
+      { id: 'seguro_maq', label: 'Seguro de máquinas', canon: 'manutencao' },
+      { id: 'servicos', label: 'Serviços terceirizados', canon: 'manutencao', tip: 'Operações contratadas: plantio, pulverização, colheita...' },
+      { id: 'maquinas_outros', label: 'Outros', canon: 'manutencao', desc: true }
+    ] },
+    { id: 'pessoas', label: 'Pessoas e gestão', cats: [
+      { id: 'mao_obra', label: 'Mão de obra', canon: 'mao_obra', tip: 'Salários, diaristas e encargos da lavoura.' },
+      { id: 'assistencia', label: 'Assistência técnica', canon: 'admin', tip: 'Agrônomo e consultoria técnica ou de gestão.' },
+      { id: 'admin', label: 'Administrativo', canon: 'admin', tip: 'Escritório, contador, energia, internet e outras despesas fixas.', mensal: true,
+        subs: [{ id: 'energia', label: 'Energia' }, { id: 'internet', label: 'Internet' }, { id: 'gasolina', label: 'Gasolina' }, { id: 'outros', label: 'Outros', desc: true }] }
+    ] },
+    { id: 'comercializacao', label: 'Comercialização',
+      nota: 'Preencha só se o preço de venda que você informou <strong>não</strong> estava líquido de frete, armazenagem e taxas — senão esse custo contaria duas vezes.',
+      cats: [
+        { id: 'armazenagem', label: 'Armazenagem', canon: 'comercializacao' },
+        { id: 'frete', label: 'Frete', canon: 'comercializacao' },
+        { id: 'taxas', label: 'Taxas', canon: 'comercializacao', tip: 'Secagem, classificação, corretagem, Funrural...' },
+        { id: 'comerc_outros', label: 'Outros', canon: 'comercializacao', desc: true }
+      ] }
+  ];
+  const UI_CATS = GRUPOS_CUSTO.reduce((arr, g) => arr.concat(g.cats), []);
+  const CATEGORIA_COR = {
+    sementes: '#7AB648', defensivos: '#1E4D7B', fertilizantes: '#E8B84B', diesel: '#B06F1C',
+    mao_obra: '#5B8DB8', manutencao: '#1B4332', admin: '#8B8D86', comercializacao: '#E4572E'
   };
   const CULTURAS_GRAO = ['soja', 'milho', 'trigo']; // wizard: só as que têm benchmark
   const CULTURA_LABEL = { soja: 'Soja', milho: 'Milho', trigo: 'Trigo' };
@@ -66,12 +101,20 @@
   // ============================================================
   // Estado global (Round 2 — culturas individuais em array)
   // ============================================================
-  function novaCultura() {
+  function novaCultura(modoHerdado) {
+    const custos = {};
+    UI_CATS.forEach((c) => { custos[c.id] = null; });
     return {
       cultura: '', area: null, prod: null, preco: null,
-      custo_mode: 'total', // sempre "total gasto por categoria" → convertido p/ R$/ha na conta
-      custos: { sementes: null, defensivos: null, fertilizantes: null, diesel: null, mao_obra: null, manutencao: null, admin: null }
+      custo_modo: modoHerdado || 'total',  // 'total' (da safra) | 'ha' (R$/ha) — escolha do produtor
+      meses_admin: 6,                      // subcategorias mensais do administrativo: R$/mês × meses da safra
+      custos,                              // valor no nível CATEGORIA da UI, na unidade do modo
+      detalhes: {}                         // por categoria detalhada: { on, subs:{subId:valor}, descs:{subId:texto}, descCat }
     };
+  }
+  function modoAtual() {
+    const ultima = S.culturas[S.culturas.length - 1];
+    return ultima ? ultima.custo_modo : 'total';
   }
 
   const S = {
@@ -81,7 +124,7 @@
     local: { uf: '', cidade: '' },
     // Perfil de propriedade + arrendamento (passo Terra, logo após a fazenda)
     terra: { tipo: 'propria', ha_proprio: null, ha_arrendado: null, arrend_unidade: 'sc_ha', arrend_valor: 0 },
-    culturas: [],       // [{ cultura, area, prod, preco, custo_mode, custos:{...} }]
+    culturas: [],       // [{ cultura, area, prod, preco, custo_modo, meses_admin, custos:{...}, detalhes:{...} }]
     editIndex: -1,      // índice da cultura sendo editada no loop
     divida: { tem: false, total: 0, parcela: 0, taxa: null },
     atividades: [],
@@ -90,7 +133,10 @@
     avisar_media_cidade: false,
     avaliacao: { estrelas: 0, comentario: '' },
     resultado: null,
-    calcId: null
+    calcId: null,
+    ranking: null,
+    n_cidade: null,
+    city_benchmark: null
   };
 
   let BENCH = { culturas: {}, nacional: {} };
@@ -164,6 +210,78 @@
   }
 
   // ============================================================
+  // Custos — conversão e agregação (helper central, usado pela conta,
+  // pelo live feedback e pelo preview — antes essa lógica era triplicada)
+  // ============================================================
+  // Soma das subcategorias preenchidas de uma categoria (na unidade digitada). null = nenhuma.
+  function somaSubs(c, cat) {
+    const det = c.detalhes[cat.id];
+    if (!det || !det.subs) return null;
+    let soma = 0, tem = false;
+    (cat.subs || []).forEach((s) => {
+      const v = det.subs[s.id];
+      if (v !== null && v !== undefined && !isNaN(v)) { soma += v; tem = true; }
+    });
+    return tem ? soma : null;
+  }
+  // Valor efetivo de uma categoria da UI em R$/ha (null = não preenchida → benchmark).
+  // Detalhada: soma das subs (mensal: R$/mês × meses ÷ área). Simples: valor na unidade do modo.
+  function categoriaHa(c, cat) {
+    const area = c.area || 0;
+    const det = c.detalhes[cat.id];
+    if (det && det.on) {
+      const soma = somaSubs(c, cat);
+      if (soma === null) return null;
+      if (cat.mensal) return area > 0 ? (soma * (c.meses_admin || 6)) / area : 0;
+      return c.custo_modo === 'ha' ? soma : (area > 0 ? soma / area : 0);
+    }
+    const v = c.custos[cat.id];
+    if (v === null || v === undefined || isNaN(v)) return null;
+    return c.custo_modo === 'ha' ? v : (area > 0 ? v / area : 0);
+  }
+  // Valor da categoria expresso na unidade do MODO (p/ exibir no campo pai quando detalhada).
+  function valorCategoriaModoUnit(c, cat) {
+    const vha = categoriaHa(c, cat);
+    if (vha === null) return null;
+    return c.custo_modo === 'ha' ? vha : vha * (c.area || 0);
+  }
+  // Agrega as categorias da UI nas canônicas (7 de produção + comercialização), em R$/ha.
+  function custosCanonicosHa(c) {
+    const out = {};
+    CATEGORIAS.concat(['comercializacao']).forEach((k) => { out[k] = { valor_ha: 0, temUsuario: false, digitadoTotal: 0 }; });
+    UI_CATS.forEach((cat) => {
+      const vha = categoriaHa(c, cat);
+      if (vha === null) return;
+      const o = out[cat.canon];
+      o.valor_ha += vha;
+      o.temUsuario = true;
+      o.digitadoTotal += vha * (c.area || 0);
+    });
+    return out;
+  }
+  // Troca de modo preserva o valor efetivo: converte o que já foi digitado (÷área ou ×área).
+  // Subcategorias mensais não mudam (são R$/mês por definição).
+  function convertCustoModo(c, novo) {
+    if (c.custo_modo === novo) return;
+    const area = c.area || 0;
+    const fator = novo === 'ha' ? (area > 0 ? 1 / area : 0) : area;
+    const conv = (v) => Math.round(v * fator * 100) / 100;
+    UI_CATS.forEach((cat) => {
+      const det = c.detalhes[cat.id];
+      if (det && det.on) {
+        if (!cat.mensal && det.subs) {
+          Object.keys(det.subs).forEach((k) => {
+            if (det.subs[k] !== null && det.subs[k] !== undefined && !isNaN(det.subs[k])) det.subs[k] = conv(det.subs[k]);
+          });
+        }
+      } else if (c.custos[cat.id] !== null && c.custos[cat.id] !== undefined && !isNaN(c.custos[cat.id])) {
+        c.custos[cat.id] = conv(c.custos[cat.id]);
+      }
+    });
+    c.custo_modo = novo;
+  }
+
+  // ============================================================
   // Engine de cálculo — margem bruta (culturas individuais)
   // ============================================================
   function calcularTudo() {
@@ -175,27 +293,33 @@
     const itens = culturas.map((c) => {
       const receita_ha = c.prod * c.preco;
       const bench = custoBenchmark(c.cultura, uf);
+      const canon = custosCanonicosHa(c);
       const custosUsados = {};
       let custo_ha = 0;
       CATEGORIAS.forEach((cat) => {
-        const digitado = c.custos[cat];
+        const o = canon[cat];
         let valor_ha, origem, valorDigitado = null;
-        if (digitado !== null && digitado !== undefined && !isNaN(digitado)) {
-          valorDigitado = digitado;
-          valor_ha = c.area > 0 ? digitado / c.area : 0; // total gasto ÷ área
-          origem = 'usuario';
+        if (o.temUsuario) {
+          valor_ha = o.valor_ha; origem = 'usuario'; valorDigitado = o.digitadoTotal;
         } else if (bench && bench[cat] !== undefined) {
           valor_ha = bench[cat]; origem = 'benchmark';
         } else {
           valor_ha = 0; origem = 'zero';
         }
-        custosUsados[cat] = { valor: valor_ha, origem, valorDigitado, mode: 'total' };
+        custosUsados[cat] = { valor: valor_ha, origem, valorDigitado, mode: c.custo_modo };
         custo_ha += valor_ha;
       });
-      const margem_bruta_ha = receita_ha - custo_ha; // margem da LAVOURA (sem arrendamento)
+      // Comercialização: custo real do produtor, mas fora da comparação (benchmark não inclui)
+      const comerc_ha = canon.comercializacao.temUsuario ? canon.comercializacao.valor_ha : 0;
+      custosUsados.comercializacao = {
+        valor: comerc_ha, origem: canon.comercializacao.temUsuario ? 'usuario' : 'zero',
+        valorDigitado: canon.comercializacao.temUsuario ? canon.comercializacao.digitadoTotal : null, mode: c.custo_modo
+      };
+      const margem_bruta_ha = receita_ha - custo_ha; // margem da LAVOURA (produção; sem comercialização/arrendamento)
+      const margem_pos_comerc_ha = margem_bruta_ha - comerc_ha;
       const resultado = margem_bruta_ha * c.area;
 
-      // Benchmark POR CULTURA (referência exclui arrendamento — comparável à margem da lavoura)
+      // Benchmark POR CULTURA (referência exclui comercialização e arrendamento — comparável à margem da lavoura)
       const ref = margemRefEstado(c.cultura, uf);
       const pct_vs_estado = ref !== 0 ? ((margem_bruta_ha - ref) / ref) * 100 : null;
       let semaforo = 'verde';
@@ -206,9 +330,15 @@
       const z = (margem_bruta_ha - ref) / sd;
       const percentil = clamp(Math.round(100 * normalCDF(z)), 1, 99);
 
+      // Financeiro rápido (base: custo de produção, comparável ao preço cheio de venda)
+      const preco_equilibrio = c.prod > 0 ? custo_ha / c.prod : null;   // R$/sc pra empatar (= custo por saca)
+      const prod_equilibrio = c.preco > 0 ? custo_ha / c.preco : null;  // sc/ha pra empatar
+      const margem_sc = preco_equilibrio !== null ? c.preco - preco_equilibrio : null;
+
       return {
-        cultura: c.cultura, area: c.area, prod: c.prod, preco: c.preco, custo_mode: 'total',
+        cultura: c.cultura, area: c.area, prod: c.prod, preco: c.preco, custo_mode: c.custo_modo,
         receita_ha, custo_ha, custosUsados, arrend_rs_ha: 0, margem_bruta_ha, resultado,
+        comerc_ha, margem_pos_comerc_ha, preco_equilibrio, prod_equilibrio, margem_sc,
         ref, pct_vs_estado, semaforo, percentil, temBenchmarkEstado: !!bench,
         P25: ref * 0.75, mediana: ref, P75: ref * 1.3
       };
@@ -217,7 +347,9 @@
     const area_total = itens.reduce((s, i) => s + i.area, 0);
     const receita_total = itens.reduce((s, i) => s + i.receita_ha * i.area, 0);
     const custo_producao_total = itens.reduce((s, i) => s + i.custo_ha * i.area, 0);
-    const resultado_producao = itens.reduce((s, i) => s + i.resultado, 0); // antes do arrendamento
+    const resultado_producao = itens.reduce((s, i) => s + i.resultado, 0); // antes de comercialização/arrendamento
+    const comerc_total = itens.reduce((s, i) => s + i.comerc_ha * i.area, 0);
+    const sacas_total = itens.reduce((s, i) => s + i.prod * i.area, 0);
 
     // Arrendamento: custo da fazenda, só sobre os hectares arrendados. Sacas → R$ pelo preço médio ponderado.
     const precoMedio = area_total > 0 ? itens.reduce((s, i) => s + i.preco * i.area, 0) / area_total : 0;
@@ -227,12 +359,14 @@
     const arrend_sacas = S.terra.arrend_unidade === 'sc_ha' ? (S.terra.arrend_valor || 0) * haArrendado : (precoMedio > 0 ? arrend_total / precoMedio : 0);
     const arrend_rs_ha_medio = area_total > 0 ? arrend_total / area_total : 0;
 
-    // Resultado dos grãos = produção − arrendamento (o que a fazenda fez depois de pagar a terra)
-    const resultado_graos = resultado_producao - arrend_total;
-    const margem_conjunta_ha = area_total > 0 ? resultado_graos / area_total : 0;       // líquida de arrendamento (herói)
+    // Resultado dos grãos = produção − comercialização − arrendamento (o que sobra de verdade)
+    const resultado_graos = resultado_producao - comerc_total - arrend_total;
+    const margem_conjunta_ha = area_total > 0 ? resultado_graos / area_total : 0;       // líquida de comerc.+arrend. (herói)
     const margem_producao_ha = area_total > 0 ? resultado_producao / area_total : 0;    // bruta da lavoura (p/ comparação)
     const margem_pct = receita_total > 0 ? (resultado_graos / receita_total) * 100 : null;
-    const custo_total = custo_producao_total + arrend_total;
+    const custo_total = custo_producao_total + comerc_total + arrend_total;
+    // Custo por saca "cheio" da fazenda (produção + comercialização + arrendamento)
+    const custo_sc_cheio = sacas_total > 0 ? custo_total / sacas_total : null;
 
     // Caixa disponível = resultado dos grãos − parcela anual da dívida
     const parcela = S.divida.tem ? (S.divida.parcela || 0) : 0;
@@ -273,7 +407,8 @@
       uf, itens, headline, multi: itens.length >= 2,
       terra: S.terra.tipo, area_total, precoMedio,
       resultado_producao, resultado_graos, margem_conjunta_ha, margem_producao_ha, margem_pct,
-      receita_total, custo_total, caixa_disponivel,
+      receita_total, custo_total, custo_producao_total, comerc_total, sacas_total, custo_sc_cheio,
+      caixa_disponivel,
       arrend_total, arrend_sacas, arrend_rs_ha_medio, haArrendado,
       ref_ponderado, pct_vs_estado_ponderado, semaforo_headline,
       divida, classe, flags: { p_margem, p_caixa, p_end }
@@ -323,24 +458,24 @@
     'siteHeader', 'siteFooter', 'progressWrap', 'progressFill', 'progressLabel',
     'tela1', 'tela2', 'tela3',
     'btnComecar',
-    'lUf', 'lCidade', 'cityCombo', 'cityList', 'lCidadeHint', 'pSafra',
+    'lUf', 'lCidade', 'cityCombo', 'cityList', 'lCidadeHint', 'lPropriedade', 'pSafra',
     'terraTipo', 'terraHectares', 'fHaProprio', 'fHaArrendado', 'haProprio', 'haArrendado',
     'arrendUnidade', 'arrendValor', 'arrendValorLabel', 'arrendHint',
     'wzEscolhaTitle', 'culturaChips', 'escolhaError',
     'wzProdCultura', 'pArea', 'pProd', 'pPreco', 'wzReceitaLive',
-    'wzCustosCultura', 'wzCustosArea', 'wzCustoLive',
-    'cSementes', 'cDefensivos', 'cFertilizantes', 'cDiesel', 'cMaoObra', 'cManutencao', 'cAdmin',
+    'wzCustosCultura', 'wzCustosArea', 'wzCustosSub', 'wzCustoLive', 'custoModo', 'custosGroups',
     'culturasResumo', 'btnAddOutra',
     'dividaToggle', 'dividaCampos', 'dTotal', 'dParcela', 'dTaxa',
     'atividadesList', 'btnAddAtividade', 'btnVerMargem',
     't2Margem', 't2MargemHa', 't2Metrics',
-    'formCadastro', 'regNome', 'regEmail', 'regWhats', 'regLgpd', 'btnVerDiagnostico',
+    'formCadastro', 'regNome', 'regEmail', 'regWhats', 'regInteresse', 'regLgpd', 'btnVerDiagnostico',
     't3Subtitulo', 't3ResumoGrid', 't3CulturasBlocks', 't3Benchmark', 't3Completeness', 't3CostTable',
+    't3EquilibrioCard', 't3Equilibrio', 't3ComposicaoCard', 't3Composicao',
     't3Tier', 't3ShareCard', 'shareCanvas', 'btnShareCard',
     't3DividaCard', 't3DividaExplain', 't3DividaGrid', 't3Alavancagem', 't3DividaCallout',
     't3DiversifCard', 't3DiversifNote', 't3DiagCard',
     't3RankingTexto', 't3RankStats', 't3PercentileMarker',
-    'btnPdf', 'btnConvidar', 'ctaInviteNote', 'avisarCidade', 'avisarCidadeNome',
+    'btnPdf', 'btnConvidar', 'btnRefazer', 'ctaInviteNote', 'avisarCidade', 'avisarCidadeNome',
     'ratingStars', 'ratingComentario', 'btnEnviarAvaliacao', 'ratingThanks'
   ].forEach(grab);
 
@@ -363,7 +498,18 @@
   function apiCadastrar(payload) { return postAPI('cadastrar', payload); }
   function apiAvaliar(payload) { return postAPI('avaliar', payload); }
 
+  // Evento GA4 genérico (nomes em português, ASCII). gtag (GA4) + dataLayer (GTM), SEM PII.
+  // Garante que o analytics lazy já carregou antes de disparar (elimina corrida do 1º clique).
+  function fireEvent(name, params) {
+    try { if (typeof window._loadAnalytics === 'function') window._loadAnalytics(); } catch (_) {}
+    const p = params || {};
+    try { if (window.gtag) window.gtag('event', name, p); } catch (_) {}
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: name }, p));
+  }
+
   // Dispara generate_lead sem PII (GA4 via gtag se existir + GTM/Google Ads via dataLayer).
+  // NÃO renomear: a conversão do Google Ads no GTM escuta exatamente este nome.
   function fireGenerateLead(r) {
     const head = (r && r.headline) || {};
     const band = (a) => a == null ? '' : (a < 200 ? '<200' : a < 500 ? '200-500' : a < 1000 ? '500-1000' : '1000+');
@@ -578,6 +724,7 @@
     if (step === 'fazenda') {
       S.local.uf = el.lUf.value;
       S.local.cidade = getCidadeValue();
+      S.local.propriedade = el.lPropriedade.value.trim();
       S.safra = el.pSafra.value;
     } else if (step === 'terra') {
       S.terra.tipo = el.terraTipo.querySelector('[aria-pressed="true"]').dataset.val;
@@ -592,9 +739,7 @@
       c.prod = numOrZero(el.pProd.value);
       c.preco = numOrZero(el.pPreco.value);
     } else if (step === 'cultura_custos') {
-      const c = cur(); if (!c) return;
-      c.custo_mode = 'total'; // sempre total gasto
-      CATEGORIAS.forEach((cat) => { c.custos[cat] = numOrNull(document.getElementById(CATEGORIA_INPUT_ID[cat]).value); });
+      // Estado dos custos é sincronizado ao vivo pela delegação de eventos (renderCustosStep) — nada a ler aqui.
     } else if (step === 'divida') {
       S.divida.tem = el.dividaToggle.querySelector('[aria-pressed="true"]').dataset.val === 'sim';
       S.divida.total = numOrZero(el.dTotal.value);
@@ -611,6 +756,7 @@
       el.lUf.value = S.local.uf;
       loadCidadeLista(S.local.uf);
       el.lCidade.value = S.local.cidade || '';
+      el.lPropriedade.value = S.local.propriedade || '';
       el.pSafra.value = S.safra;
     } else if (step === 'terra') {
       setSegmented(el.terraTipo, S.terra.tipo);
@@ -633,11 +779,7 @@
       const c = cur(); if (!c) return;
       el.wzCustosCultura.textContent = CULTURA_LABEL[c.cultura] || '';
       el.wzCustosArea.textContent = c.area > 0 ? `· ${fmtNum(c.area)} ha` : '';
-      CATEGORIAS.forEach((cat) => {
-        const inp = document.getElementById(CATEGORIA_INPUT_ID[cat]);
-        inp.value = c.custos[cat] != null ? String(c.custos[cat]).replace('.', ',') : '';
-      });
-      updateCustoLive();
+      renderCustosStep();
     } else if (step === 'cultura_add') {
       renderResumoCulturas();
     } else if (step === 'divida') {
@@ -655,6 +797,8 @@
     const step = curStep;
     if (!validateStep(step)) return;
     readStep(step);
+    if (step === 'intro') fireEvent('calculadora_inicio');
+    else fireEvent('calculadora_etapa', { etapa: step });
 
     switch (step) {
       case 'intro':
@@ -662,7 +806,9 @@
       case 'fazenda':
         showStep('terra'); break;
       case 'terra':
-        S.culturas.push(novaCultura()); S.editIndex = S.culturas.length - 1;
+        // Refazendo (culturas já existem): vai direto pro resumo — o produtor edita o que quiser.
+        if (S.culturas.length) { S.editIndex = S.culturas.length - 1; showStep('cultura_add'); break; }
+        S.culturas.push(novaCultura(modoAtual())); S.editIndex = S.culturas.length - 1;
         showStep('cultura_escolha'); break;
       case 'cultura_escolha':
         showStep('cultura_producao'); break;
@@ -687,12 +833,16 @@
         showStep('intro'); break;
       case 'terra':
         showStep('fazenda'); break;
-      case 'cultura_escolha':
-        // descarta a cultura em edição (ainda incompleta)
-        S.culturas.splice(S.editIndex, 1); S.editIndex = -1;
+      case 'cultura_escolha': {
+        // Descarta só se a cultura em edição está incompleta (editar uma completa via chip não pode apagá-la)
+        const c = cur();
+        const incompleta = !(c && c.cultura && c.area > 0 && c.prod > 0 && c.preco > 0);
+        if (incompleta) S.culturas.splice(S.editIndex, 1);
+        S.editIndex = -1;
         if (S.culturas.length) { S.editIndex = S.culturas.length - 1; showStep('cultura_add'); }
         else showStep('terra');
         break;
+      }
       case 'cultura_producao':
         showStep('cultura_escolha'); break;
       case 'cultura_custos':
@@ -709,15 +859,25 @@
   }
 
   function addAnotherCultura() {
-    S.culturas.push(novaCultura()); S.editIndex = S.culturas.length - 1;
+    S.culturas.push(novaCultura(modoAtual())); S.editIndex = S.culturas.length - 1;
     showStep('cultura_escolha');
   }
 
   async function finishWizard() {
     S.resultado = calcularTudo();
+    const r = S.resultado;
+    fireEvent('calculadora_resultado', {
+      cultura: (r.headline && r.headline.cultura) || '',
+      estado: S.local.uf || '',
+      faixa_area: faixaAreaLabel(r.area_total),
+      diagnostico: r.classe || ''
+    });
     el.btnVerMargem.disabled = true;
     const res = await apiCalcular(buildCalcPayload());
-    S.calcId = res.id;
+    if (res.id) S.calcId = res.id;
+    if (res.ranking) S.ranking = res.ranking;
+    if (res.n_cidade !== undefined) S.n_cidade = res.n_cidade;
+    if (res.city_benchmark !== undefined) S.city_benchmark = res.city_benchmark;
     el.btnVerMargem.disabled = false;
     renderTela2();
     goToScreen(2);
@@ -771,56 +931,226 @@
   }
   [el.pArea, el.pProd, el.pPreco].forEach((i) => i.addEventListener('input', updateReceitaLive));
 
-  // ---------- Custos: sempre "total gasto" → convertido p/ R$/ha pela área da cultura ----------
+  // ---------- Custos: 4 grupos colapsáveis, modo R$/ha ↔ total, detalhamento opcional ----------
+  function fmtInputVal(v) { return v !== null && v !== undefined && !isNaN(v) ? String(v).replace('.', ',') : ''; }
+  function placeholderModo(c) { return c.custo_modo === 'ha' ? 'R$ por hectare' : 'Total gasto (R$)'; }
+
+  function updateCustosSub() {
+    const c = cur(); if (!c || !el.wzCustosSub) return;
+    el.wzCustosSub.innerHTML = c.custo_modo === 'ha'
+      ? 'Informe quanto você gasta <strong>por hectare</strong> em cada item. Deixe em branco o que não souber — usamos a média do seu estado.'
+      : 'Informe o <strong>total gasto na safra</strong> com cada item — a gente converte pra R$/ha. Deixe em branco o que não souber — usamos a média do seu estado.';
+  }
+
+  function renderCatRow(c, cat) {
+    const det = c.detalhes[cat.id];
+    const detOn = !!(det && det.on);
+    const tip = cat.tip ? ` <span class="tip" tabindex="0" role="note" data-tip="${escapeHtml(cat.tip)}">?</span>` : '';
+    const btnDet = cat.subs
+      ? `<button type="button" class="btn-detalhar" data-toggle-det="${cat.id}" aria-expanded="${detOn}">${detOn ? 'resumir' : 'detalhar'}</button>`
+      : '';
+    let parentInput;
+    if (detOn) {
+      const somaModo = valorCategoriaModoUnit(c, cat);
+      const display = somaModo !== null ? fmtInputVal(Math.round(somaModo * 100) / 100) : '';
+      parentInput = `<input class="input cat-parent-view" type="text" data-catview="${cat.id}" value="${display}" placeholder="soma das subcategorias" readonly tabindex="-1" />`;
+    } else {
+      parentInput = `<input class="input" type="text" inputmode="decimal" data-cat="${cat.id}" value="${fmtInputVal(c.custos[cat.id])}" placeholder="${placeholderModo(c)}" />`;
+    }
+    const descCat = cat.desc
+      ? `<input class="input cat-desc" type="text" data-catdesc="${cat.id}" value="${escapeHtml((det && det.descCat) || '')}" placeholder="O que entra aqui? (opcional)" />`
+      : '';
+    let subsHtml = '';
+    if (detOn) {
+      const phSub = cat.mensal ? 'R$ por mês' : placeholderModo(c);
+      const mesesRow = cat.mensal
+        ? `<div class="subcat-row subcat-meses"><label>Meses da safra</label><input class="input" type="text" inputmode="decimal" data-meses="${cat.id}" value="${fmtInputVal(c.meses_admin || 6)}" /></div>
+           <p class="subcat-hint">Gastos mensais: R$/mês × meses = total da safra. Uma soja ocupa ~6 meses do ano.</p>`
+        : '';
+      const rows = (cat.subs || []).map((s) => {
+        const v = det && det.subs ? det.subs[s.id] : null;
+        const descInput = s.desc
+          ? `<input class="input sub-desc" type="text" data-subdesc="${cat.id}:${s.id}" value="${escapeHtml((det && det.descs && det.descs[s.id]) || '')}" placeholder="O que é? (opcional)" />`
+          : '';
+        return `<div class="subcat-row"><label>${s.label}</label><input class="input" type="text" inputmode="decimal" data-sub="${cat.id}:${s.id}" value="${fmtInputVal(v)}" placeholder="${phSub}" />${descInput}</div>`;
+      }).join('');
+      subsHtml = `<div class="subcats">${mesesRow}${rows}</div>`;
+    }
+    return `<div class="cat-block" data-cat-block="${cat.id}">
+      <div class="field cat-field">
+        <label>${cat.label}${tip}${btnDet}</label>
+        ${parentInput}
+        ${descCat}
+      </div>
+      ${subsHtml}
+    </div>`;
+  }
+
+  function renderCatBlock(c, cat) {
+    const holder = el.custosGroups.querySelector(`[data-cat-block="${cat.id}"]`);
+    if (!holder) return;
+    holder.outerHTML = renderCatRow(c, cat);
+  }
+
+  function updateGroupSums() {
+    const c = cur(); if (!c) return;
+    GRUPOS_CUSTO.forEach((g) => {
+      const span = el.custosGroups.querySelector(`[data-group-sum="${g.id}"]`);
+      if (!span) return;
+      let somaHa = 0, tem = false;
+      g.cats.forEach((cat) => { const v = categoriaHa(c, cat); if (v !== null) { somaHa += v; tem = true; } });
+      if (!tem) { span.textContent = ''; return; }
+      span.textContent = c.custo_modo === 'ha' ? `${fmtBRL(somaHa)}/ha` : fmtBRL(somaHa * (c.area || 0));
+    });
+  }
+
+  function syncParentView(c, catId) {
+    const cat = UI_CATS.find((x) => x.id === catId); if (!cat) return;
+    const view = el.custosGroups.querySelector(`[data-catview="${catId}"]`);
+    if (!view) return;
+    const v = valorCategoriaModoUnit(c, cat);
+    view.value = v !== null ? fmtInputVal(Math.round(v * 100) / 100) : '';
+  }
+
+  function renderCustosStep() {
+    const c = cur(); if (!c) return;
+    setSegmented(el.custoModo, c.custo_modo);
+    updateCustosSub();
+    el.custosGroups.innerHTML = GRUPOS_CUSTO.map((g, gi) => {
+      const nota = g.nota ? `<p class="group-nota">${g.nota}</p>` : '';
+      const rows = g.cats.map((cat) => renderCatRow(c, cat)).join('');
+      return `<details class="cost-group" data-group="${g.id}"${gi === 0 ? ' open' : ''}>
+        <summary><span class="cg-label">${g.label}</span><span class="cg-sum" data-group-sum="${g.id}"></span><span class="cg-chevron" aria-hidden="true"></span></summary>
+        ${nota}
+        <div class="cg-body">${rows}</div>
+      </details>`;
+    }).join('');
+    updateGroupSums();
+    updateCustoLive();
+  }
+
+  wireSegmented(el.custoModo, (val) => {
+    const c = cur(); if (!c || c.custo_modo === val) return;
+    convertCustoModo(c, val);
+    renderCustosStep();
+  });
+
+  el.custosGroups.addEventListener('input', (e) => {
+    const t = e.target; const c = cur(); if (!c) return;
+    if (t.dataset.cat !== undefined) {
+      c.custos[t.dataset.cat] = numOrNull(t.value);
+    } else if (t.dataset.sub) {
+      const parts = t.dataset.sub.split(':');
+      const det = c.detalhes[parts[0]] = c.detalhes[parts[0]] || { on: true, subs: {}, descs: {} };
+      det.subs = det.subs || {};
+      det.subs[parts[1]] = numOrNull(t.value);
+      syncParentView(c, parts[0]);
+    } else if (t.dataset.subdesc) {
+      const parts = t.dataset.subdesc.split(':');
+      const det = c.detalhes[parts[0]] = c.detalhes[parts[0]] || { on: true, subs: {}, descs: {} };
+      det.descs = det.descs || {};
+      det.descs[parts[1]] = t.value.trim();
+      return; // descrição não muda números
+    } else if (t.dataset.catdesc !== undefined) {
+      const det = c.detalhes[t.dataset.catdesc] = c.detalhes[t.dataset.catdesc] || {};
+      det.descCat = t.value.trim();
+      return;
+    } else if (t.dataset.meses !== undefined) {
+      c.meses_admin = numOrZero(t.value) || 6;
+      syncParentView(c, t.dataset.meses);
+    } else return;
+    updateGroupSums();
+    updateCustoLive();
+  });
+
+  el.custosGroups.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-toggle-det]');
+    if (!btn) return;
+    e.preventDefault();
+    const c = cur(); if (!c) return;
+    const catId = btn.dataset.toggleDet;
+    const cat = UI_CATS.find((x) => x.id === catId); if (!cat) return;
+    const det = c.detalhes[catId] = c.detalhes[catId] || { subs: {}, descs: {} };
+    det.on = !det.on;
+    if (det.on) {
+      // Ligou: se já havia valor no campo pai e nenhuma sub, preserva o total em "Outros".
+      const pv = c.custos[catId];
+      if (somaSubs(c, cat) === null && pv !== null && pv !== undefined && !isNaN(pv)) {
+        let v = pv;
+        if (cat.mensal) {
+          const total = c.custo_modo === 'ha' ? pv * (c.area || 0) : pv;
+          v = Math.round((total / (c.meses_admin || 6)) * 100) / 100;
+        }
+        det.subs = det.subs || {};
+        det.subs.outros = v;
+      }
+    } else {
+      // Desligou: consolida a soma das subs de volta no campo pai (na unidade do modo).
+      const val = valorCategoriaModoUnit(c, cat);
+      if (val !== null) c.custos[catId] = Math.round(val * 100) / 100;
+    }
+    renderCatBlock(c, cat);
+    if (det.on) {
+      const first = el.custosGroups.querySelector(`[data-cat-block="${catId}"] [data-sub]`);
+      if (first) { try { first.focus({ preventScroll: true }); } catch (_) { first.focus(); } }
+    }
+    updateGroupSums();
+    updateCustoLive();
+  });
+
   function updateCustoLive() {
     const c = cur(); if (!c) return;
-    const area = numOrZero(el.pArea.value) || c.area || 0;
-    const eb = estadoBenchmark(c.cultura, S.local.uf);
-    const bench = eb ? eb.custos : null;
+    const bench = custoBenchmark(c.cultura, S.local.uf);
+    const canon = custosCanonicosHa(c);
     let custo_ha = 0;
     CATEGORIAS.forEach((cat) => {
-      const dig = numOrNull(document.getElementById(CATEGORIA_INPUT_ID[cat]).value);
-      if (dig !== null) custo_ha += (area > 0 ? dig / area : 0);
+      if (canon[cat].temUsuario) custo_ha += canon[cat].valor_ha;
       else if (bench && bench[cat] !== undefined) custo_ha += bench[cat];
     });
-    const receita_ha = (numOrZero(el.pProd.value) || c.prod || 0) * (numOrZero(el.pPreco.value) || c.preco || 0);
-    const margem_prev = receita_ha - custo_ha; // sem arrendamento (é custo da fazenda, não da cultura)
+    const comerc_ha = canon.comercializacao.temUsuario ? canon.comercializacao.valor_ha : 0;
+    const receita_ha = (c.prod || 0) * (c.preco || 0);
+    const margem_prev = receita_ha - custo_ha - comerc_ha; // sem arrendamento (é custo da fazenda, não da cultura)
     el.wzCustoLive.classList.remove('empty');
     el.wzCustoLive.innerHTML =
-      `<span class="lf-item">Custo: <b>${fmtBRL(custo_ha)}</b>/ha</span>` +
+      `<span class="lf-item">Custo: <b>${fmtBRL(custo_ha + comerc_ha)}</b>/ha</span>` +
       `<span class="lf-sep">·</span>` +
       `<span class="lf-item">Margem da lavoura: <b class="${margem_prev < 0 ? 'negativo' : ''}">${fmtBRL(margem_prev)}</b>/ha</span>`;
   }
-  CATEGORIAS.forEach((cat) => {
-    document.getElementById(CATEGORIA_INPUT_ID[cat]).addEventListener('input', updateCustoLive);
-  });
 
-  // ---------- Resumo de culturas (2d) ----------
+  // ---------- Resumo de culturas (2d) — chips clicáveis pra editar (essencial no "refazer") ----------
   function marginPreviewCultura(c) {
     if (!(c.cultura && c.area > 0 && c.prod > 0 && c.preco > 0)) return null;
     const receita_ha = c.prod * c.preco;
     const bench = custoBenchmark(c.cultura, S.local.uf);
+    const canon = custosCanonicosHa(c);
     let custo_ha = 0;
     CATEGORIAS.forEach((cat) => {
-      const dig = c.custos[cat];
-      if (dig !== null && dig !== undefined && !isNaN(dig)) custo_ha += (c.custo_mode === 'total' ? (c.area > 0 ? dig / c.area : 0) : dig);
+      if (canon[cat].temUsuario) custo_ha += canon[cat].valor_ha;
       else if (bench && bench[cat] !== undefined) custo_ha += bench[cat];
     });
-    return receita_ha - custo_ha; // preview sem arrendamento
+    const comerc_ha = canon.comercializacao.temUsuario ? canon.comercializacao.valor_ha : 0;
+    return receita_ha - custo_ha - comerc_ha; // preview sem arrendamento
   }
   function renderResumoCulturas() {
-    const list = S.culturas.filter((c) => c.cultura && c.area > 0 && c.prod > 0 && c.preco > 0);
-    el.culturasResumo.innerHTML = list.map((c) => {
+    el.culturasResumo.innerHTML = S.culturas.map((c, idx) => {
+      if (!(c.cultura && c.area > 0 && c.prod > 0 && c.preco > 0)) return '';
       const m = marginPreviewCultura(c);
       return `
-        <div class="cult-chip">
+        <button type="button" class="cult-chip cult-chip-btn" data-edit-cultura="${idx}" aria-label="Editar ${CULTURA_LABEL[c.cultura] || c.cultura}">
           <div class="cc-name">
             <span class="cc-emoji" aria-hidden="true">${CULTURA_EMOJI[c.cultura] || ''}</span>
             <span>${CULTURA_LABEL[c.cultura] || c.cultura}<span class="cc-meta">${fmtNum(c.area)} ha · ${fmtNum(c.prod)} sc/ha</span></span>
           </div>
           <div class="cc-margem ${m < 0 ? 'negativo' : ''}">${fmtBRL(m)}<small>margem/ha</small></div>
-        </div>`;
+          <span class="cc-edit" aria-hidden="true">editar ✎</span>
+        </button>`;
     }).join('');
+    el.culturasResumo.querySelectorAll('[data-edit-cultura]').forEach((b) => {
+      b.addEventListener('click', () => {
+        S.editIndex = +b.dataset.editCultura;
+        showStep('cultura_producao');
+      });
+    });
     // Esconde "adicionar" se todas as culturas já foram usadas
     const usadas = S.culturas.map((c) => c.cultura).filter(Boolean);
     el.btnAddOutra.style.display = CULTURAS_GRAO.every((c) => usadas.includes(c)) ? 'none' : '';
@@ -897,6 +1227,10 @@
     el.regWhats.setSelectionRange(pos, pos);
   });
   el.regLgpd.addEventListener('change', () => { el.btnVerDiagnostico.disabled = !el.regLgpd.checked; });
+  el.regInteresse.addEventListener('change', () => {
+    S.interesse_gestao = el.regInteresse.checked;
+    if (el.regInteresse.checked) fireEvent('interesse_gestao');
+  });
 
   function validateCadastro() {
     let ok = true; let firstInvalid = null;
@@ -918,10 +1252,47 @@
   // ============================================================
   // Payloads (formato final que a Fase 2 vai consumir)
   // ============================================================
+  // Breakdown fiel do que o produtor digitou (subcategorias, modo, meses) → coluna custos_detalhe no D1.
+  function buildCustosDetalhe() {
+    return {
+      v: 2,
+      culturas: S.culturas.filter((c) => c.cultura).map((c) => {
+        const cats = {};
+        UI_CATS.forEach((cat) => {
+          const det = c.detalhes[cat.id];
+          if (det && det.on) {
+            const subs = (cat.subs || []).map((s) => {
+              const v = det.subs ? det.subs[s.id] : null;
+              if (v === null || v === undefined || isNaN(v)) return null;
+              const o = { id: s.id };
+              o[cat.mensal ? 'valor_mes' : 'valor'] = v;
+              const d = det.descs && det.descs[s.id];
+              if (d) o.desc = d;
+              return o;
+            }).filter(Boolean);
+            if (!subs.length) return;
+            const entry = { detalhado: true, subs };
+            if (cat.mensal) { entry.mensal = true; entry.meses = c.meses_admin || 6; }
+            cats[cat.id] = entry;
+          } else {
+            const v = c.custos[cat.id];
+            if (v === null || v === undefined || isNaN(v)) return;
+            const entry = { valor: v };
+            const d = det && det.descCat;
+            if (d) entry.desc = d;
+            cats[cat.id] = entry;
+          }
+        });
+        return { cultura: c.cultura, modo: c.custo_modo, meses_admin: c.meses_admin || 6, cats };
+      })
+    };
+  }
   function buildCalcPayload() {
     return {
+      calcId: S.calcId, // refazer: atualiza a mesma linha em vez de criar órfã anônima
       safra: S.safra, local: S.local, terra: S.terra,
       culturas: S.culturas, divida: S.divida, atividades: S.atividades,
+      custos_detalhe: buildCustosDetalhe(),
       tracking: S.tracking, resultado: S.resultado
     };
   }
@@ -931,6 +1302,7 @@
       avisar_media_cidade: S.avisar_media_cidade,
       safra: S.safra, local: S.local, terra: S.terra, culturas: S.culturas,
       divida: S.divida, atividades: S.atividades,
+      custos_detalhe: buildCustosDetalhe(),
       tracking: S.tracking, resultado: S.resultado
     };
   }
@@ -995,20 +1367,23 @@
   }
 
   function renderResumoExecutivo(r) {
-    const custoProducao = r.custo_total - r.arrend_total;
+    const custoProducao = r.custo_producao_total;
     const temArrend = r.arrend_total > 0;
+    const temComerc = r.comerc_total > 0;
     const arrendLabel = r.arrend_sacas > 0
       ? `− Arrendamento <span class="dre-sub">(${fmtNum(r.arrend_sacas)} sc · ${fmtNum(r.haArrendado)} ha)</span>`
       : '− Arrendamento';
-    // DRE simples: receita − custo − arrendamento = resultado dos grãos
+    // DRE simples: receita − custo − comercialização − arrendamento = resultado dos grãos
     el.t3ResumoGrid.innerHTML = `
       <div class="dre">
         <div class="dre-row"><span>Receita total</span><span>${fmtBRL(r.receita_total)}</span></div>
         <div class="dre-row dre-neg"><span>− Custo operacional (COE)</span><span>${fmtBRL(custoProducao)}</span></div>
+        ${temComerc ? `<div class="dre-row dre-neg"><span>− Comercialização <span class="dre-sub">(frete, armazenagem, taxas)</span></span><span>${fmtBRL(r.comerc_total)}</span></div>` : ''}
         ${temArrend ? `<div class="dre-row dre-neg"><span>${arrendLabel}</span><span>${fmtBRL(r.arrend_total)}</span></div>` : ''}
         <div class="dre-row dre-total"><span>= Resultado dos grãos</span><span class="${r.resultado_graos < 0 ? 'negativo' : ''}">${fmtBRL(r.resultado_graos)}</span></div>
       </div>
       <p class="dre-note"><strong>COE = Custo Operacional Efetivo:</strong> o que você gastou em dinheiro na safra (sementes, defensivos, fertilizantes, diesel, mão de obra...). Não inclui depreciação de máquinas nem custo de oportunidade da terra — por isso o resultado é <strong>margem bruta</strong>, não líquida.</p>
+      ${temComerc ? '<p class="dre-note">A <strong>comercialização</strong> fica fora da comparação com a média das próximas seções — a referência pública não inclui esses custos. Ela entra no seu resultado, como você vê acima.</p>' : ''}
       ${renderArrendNote(r)}
       <div class="summary-grid" style="margin-top:1rem">
         <div class="summary-item"><div class="k">Margem por hectare</div><div class="v ${r.margem_conjunta_ha < 0 ? 'negativo' : ''}">${fmtBRL(r.margem_conjunta_ha)}</div></div>
@@ -1119,8 +1494,14 @@
         ${note}
       </div>`;
     }).join('');
-    el.t3Benchmark.innerHTML = tag + body +
-      `<p class="cmp-note">Em breve, vamos trazer também a média da sua <strong>região</strong> e da sua <strong>cidade</strong>.</p>`;
+
+    const cityNote = (S.city_benchmark && S.city_benchmark.avg_margem !== null)
+      ? `<p class="cmp-note" style="margin-top:1rem;border-top:1px solid #E8E5DA;padding-top:12px;color:var(--navy);">📍 <strong>Média municipal de ${escapeHtml(S.local.cidade)}/${r.uf} destravada!</strong> A margem média local para ${CULTURA_LABEL[r.headline.cultura] || r.headline.cultura} é de <strong>${fmtBRL(S.city_benchmark.avg_margem)}/ha</strong> (com base em ${S.city_benchmark.n} produtores da cidade).</p>`
+      : (S.local.cidade
+          ? `<p class="cmp-note" style="margin-top:1rem;border-top:1px solid #E8E5DA;padding-top:12px;">📍 <strong>Média de ${escapeHtml(S.local.cidade)}/${r.uf} em progresso:</strong> já temos ${S.n_cidade || 0} de 5 produtores cadastrados. Ajude a destravar compartilhando!</p>`
+          : `<p class="cmp-note" style="margin-top:1rem;border-top:1px solid #E8E5DA;padding-top:12px;">Em breve, vamos trazer também a média da sua <strong>região</strong> e da sua <strong>cidade</strong>.</p>`);
+
+    el.t3Benchmark.innerHTML = tag + body + cityNote;
   }
 
   // Semáforo de CUSTO (invertido: gastar menos que a média é bom).
@@ -1168,8 +1549,70 @@
             ${tag}
           </div>`;
       }).join('');
-      return `${head}<div class="cost-table" style="margin-bottom:${r.multi ? '1.25rem' : '0'}">${rows}</div>`;
+      const comercRow = it.comerc_ha > 0 ? `
+          <div class="cost-row">
+            <div class="cost-row-head"><span class="cat">${CATEGORIA_LABEL.comercializacao}</span><span class="cost-status status-neutro">fora da comparação</span></div>
+            <div class="cost-row-foot"><span>Você: <b>${fmtBRL(it.comerc_ha)}</b>/ha</span></div>
+            <div class="bench-tag">a referência pública não inclui comercialização — entra no seu resultado, mas não na comparação nem no percentil</div>
+          </div>` : '';
+      return `${head}<div class="cost-table" style="margin-bottom:${r.multi ? '1.25rem' : '0'}">${rows}${comercRow}</div>`;
     }).join('');
+  }
+
+  // ---------- Financeiro rápido: ponto de equilíbrio + custo por saca ----------
+  function renderEquilibrio(r) {
+    const blocks = r.itens.map((it) => {
+      const head = r.multi
+        ? `<div class="cult-bench-head"><span class="cbh-emoji" aria-hidden="true">${CULTURA_EMOJI[it.cultura] || ''}</span> ${CULTURA_LABEL[it.cultura] || it.cultura}</div>`
+        : '';
+      const sobra = it.margem_sc;
+      return `${head}
+        <div class="eq-grid">
+          <div class="eq-item"><div class="k">Preço de equilíbrio</div><div class="v">${fmtBRL(it.preco_equilibrio)}<small>/sc</small></div><div class="s">vendendo abaixo disso, a lavoura fica no vermelho</div></div>
+          <div class="eq-item"><div class="k">Produtividade de equilíbrio</div><div class="v">${fmtNum(it.prod_equilibrio)}<small> sc/ha</small></div><div class="s">o mínimo a colher para pagar o custo</div></div>
+        </div>
+        <p class="eq-note">Cada saca custa <b>${fmtBRL(it.preco_equilibrio)}</b> pra produzir e você vende a <b>${fmtBRL(it.preco)}</b> — sobra <b class="${(sobra || 0) < 0 ? 'negativo' : ''}">${fmtBRL(sobra)}</b> por saca.</p>`;
+    }).join('');
+    const cheio = (r.custo_sc_cheio !== null && (r.comerc_total > 0 || r.arrend_total > 0))
+      ? `<p class="eq-cheio">Contando comercialização e arrendamento, o custo médio da fazenda vai a <b>${fmtBRL(r.custo_sc_cheio)}</b> por saca.</p>`
+      : '';
+    el.t3Equilibrio.innerHTML = blocks + cheio;
+  }
+
+  // ---------- Composição: quanto cada categoria pesa no custo e consome da receita ----------
+  function renderComposicaoCustos(r) {
+    const blocks = r.itens.map((it) => {
+      const cats = CATEGORIAS.map((cat) => ({ cat, v: it.custosUsados[cat].valor, origem: it.custosUsados[cat].origem }))
+        .concat(it.comerc_ha > 0 ? [{ cat: 'comercializacao', v: it.comerc_ha, origem: 'usuario' }] : [])
+        .filter((x) => x.v > 0);
+      const total = cats.reduce((s, x) => s + x.v, 0);
+      if (!(total > 0)) return '';
+      cats.sort((a, b) => b.v - a.v);
+      const bar = cats.map((x) =>
+        `<span class="comp-seg" style="width:${((x.v / total) * 100).toFixed(1)}%;background:${CATEGORIA_COR[x.cat]}" title="${CATEGORIA_LABEL[x.cat]}"></span>`
+      ).join('');
+      const legend = cats.map((x) => {
+        const pctCusto = Math.round((x.v / total) * 100);
+        const pctRec = it.receita_ha > 0 ? Math.round((x.v / it.receita_ha) * 100) + '%' : '—';
+        const media = x.origem === 'benchmark' ? ' <span class="comp-media">(média do estado)</span>' : '';
+        return `<div class="comp-row">
+          <span class="comp-dot" style="background:${CATEGORIA_COR[x.cat]}"></span>
+          <span class="comp-cat">${CATEGORIA_LABEL[x.cat]}${media}</span>
+          <span class="comp-vals"><b>${fmtBRL(x.v)}</b>/ha · ${pctCusto}% do custo · ${pctRec} da receita</span>
+        </div>`;
+      }).join('');
+      const head = r.multi
+        ? `<div class="cult-bench-head"><span class="cbh-emoji" aria-hidden="true">${CULTURA_EMOJI[it.cultura] || ''}</span> ${CULTURA_LABEL[it.cultura] || it.cultura}</div>`
+        : '';
+      return `<div class="comp-block">${head}<div class="comp-bar">${bar}</div><div class="comp-legend">${legend}</div></div>`;
+    }).join('');
+    if (!blocks) { el.t3ComposicaoCard.hidden = true; return; }
+    el.t3ComposicaoCard.hidden = false;
+    const pctRec = r.receita_total > 0 ? Math.round((r.custo_total / r.receita_total) * 100) : null;
+    const sintese = pctRec !== null
+      ? `<p class="comp-sintese">No conjunto da fazenda, seus custos consomem <b>${pctRec}%</b> da receita — sobram <b class="${(r.margem_pct || 0) < 0 ? 'negativo' : ''}">${r.margem_pct === null ? '—' : r.margem_pct.toFixed(0) + '%'}</b> de margem.</p>`
+      : '';
+    el.t3Composicao.innerHTML = blocks + sintese;
   }
 
   function renderDivida(r) {
@@ -1283,15 +1726,59 @@
       </div>`;
   }
 
-  // Convite genérico — vende a ideia, cita que é gratuito, SEM dados do usuário.
+  // Convite dinâmico e personalizado — loop viral baseado no percentil ou progresso local.
   function buildConviteTexto() {
-    return 'Fiz o teste numa calculadora gratuita da Fluxo Rural: em 2 minutos ela mostra a margem por hectare da lavoura e compara com a média do seu estado. Vale fazer a sua: https://fluxorural.com.br/calculadora';
+    const r = S.resultado;
+    if (!r || !r.headline) {
+      return 'Fiz o teste no Benchmark da Safra da Fluxo Rural: em 2 minutos ele mostra a margem por hectare da lavoura e compara com a média do estado. Gratuito e anônimo. Vale fazer o seu: https://fluxorural.com.br/calculadora/';
+    }
+    const h = r.headline;
+    const cultura = CULTURA_LABEL[h.cultura] || h.cultura;
+    const cidade = S.local.cidade ? `${S.local.cidade}/${r.uf}` : r.uf;
+
+    if (S.n_cidade !== null && S.n_cidade < 5 && S.local.cidade) {
+      const falta = 5 - S.n_cidade;
+      return `Cara, fiz o teste no Benchmark da Safra da Fluxo Rural. Faltam só mais ${falta} ${falta === 1 ? 'produtor' : 'produtores'} de ${S.local.cidade} preencherem pra liberar a média de margem/ha real da nossa cidade no sistema. Faz a sua simulação rápida lá (é grátis e leva 2 min): https://fluxorural.com.br/calculadora/?utm_source=whatsapp&utm_campaign=cidade-unlock`;
+    }
+
+    if (h.percentil >= 75) {
+      return `Fiz o Benchmark da Safra na Fluxo Rural e o resultado da minha lavoura de ${cultura} ficou no Top 25% mais eficientes do estado de ${r.uf}! Ferramenta muito bacana pra ver o desempenho de custos. Faz a sua comparação pra ver como você está: https://fluxorural.com.br/calculadora/?utm_source=whatsapp&utm_campaign=share-flex`;
+    }
+
+    return `Participei do Benchmark da Safra da Fluxo Rural. O sistema mostra seus custos e margem por hectare comparados com a média do estado de ${r.uf}. Muito bom pra planejar a próxima safra. Veja o seu resultado: https://fluxorural.com.br/calculadora/?utm_source=whatsapp&utm_campaign=share-invitation`;
   }
+
   function renderCTAs(r) {
     const cidade = S.local.cidade ? `${S.local.cidade}, ${r.uf}` : `${r.uf}`;
-    el.ctaInviteNote.innerHTML = `As médias que você viu aqui ficam mais precisas a cada produtor que participa. Ajude a destravar a média de <strong>${escapeHtml(cidade)}</strong> — quanto mais gente da sua região usar a calculadora, mais rápido ela sai. <strong>É gratuito.</strong>`;
     el.avisarCidadeNome.textContent = cidade;
-    el.btnConvidar.onclick = () => window.open(`https://wa.me/?text=${encodeURIComponent(buildConviteTexto())}`, '_blank', 'noopener');
+
+    if (S.n_cidade !== null && S.local.cidade) {
+      if (S.n_cidade >= 5) {
+        el.ctaInviteNote.innerHTML = `🏆 <strong>Média municipal de ${escapeHtml(cidade)} destravada!</strong> Obrigado por participar. Convide seus vizinhos para tornar o comparativo ainda mais preciso.`;
+      } else {
+        const falta = 5 - S.n_cidade;
+        const progressPct = (S.n_cidade / 5) * 100;
+        el.ctaInviteNote.innerHTML = `
+          <div class="city-progress-container" style="margin-top:0.5rem;margin-bottom:1rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:0.3rem;font-weight:600;color:var(--navy);">
+              <span>Progresso de ${escapeHtml(cidade)}</span>
+              <span>${S.n_cidade} de 5 produtores</span>
+            </div>
+            <div style="background:#E8E5DA;height:10px;border-radius:5px;overflow:hidden;margin-bottom:0.5rem;">
+              <div style="background:#6AAF3D;width:${progressPct}%;height:100%;transition:width 0.6s ease;"></div>
+            </div>
+            <p style="font-size:0.875rem;color:#555;margin:0;">Faltam apenas <strong>${falta}</strong> ${falta === 1 ? 'produtor' : 'produtores'} para destravar a média municipal e comparar seus custos direto com ${escapeHtml(S.local.cidade)}.</p>
+          </div>
+        `;
+      }
+    } else {
+      el.ctaInviteNote.innerHTML = `As médias que você viu aqui ficam mais precisas a cada produtor que participa. Ajude a destravar a média de <strong>${escapeHtml(cidade)}</strong> — quanto mais gente da sua região usar o comparador, mais rápido ela sai. <strong>É gratuito.</strong>`;
+    }
+
+    el.btnConvidar.onclick = () => {
+      fireEvent('clicou_whatsapp', { origem: 'convite' });
+      window.open(`https://wa.me/?text=${encodeURIComponent(buildConviteTexto())}`, '_blank', 'noopener');
+    };
   }
   el.avisarCidade.addEventListener('change', () => { S.avisar_media_cidade = el.avisarCidade.checked; });
 
@@ -1328,7 +1815,7 @@
     ctx.fillText('FLUXO RURAL', center, 130);
     ctx.fillStyle = 'rgba(255,255,255,.6)';
     ctx.font = `600 30px ${body}`;
-    ctx.fillText('CALCULADORA DE MARGEM', center, 180);
+    ctx.fillText('BENCHMARK DA SAFRA', center, 180);
 
     // Painel claro
     const px = 90, pw = W - px * 2, py = 250, ph = 850;
@@ -1379,20 +1866,36 @@
     ctx.fillText('fluxorural.com.br/calculadora', center, py + ph + 145);
   }
 
-  const SHARE_TXT = 'Descobri minha margem por hectare na calculadora gratuita da Fluxo Rural. Faça a sua: https://fluxorural.com.br/calculadora';
+  function buildShareText() {
+    const r = S.resultado;
+    if (!r || !r.headline) {
+      return 'Descobri minha margem por hectare no Benchmark da Safra da Fluxo Rural. Faça a sua comparação gratuita: https://fluxorural.com.br/calculadora/';
+    }
+    const h = r.headline;
+    const cultura = CULTURA_LABEL[h.cultura] || h.cultura;
+    const cidade = S.local.cidade ? `${S.local.cidade}/${r.uf}` : r.uf;
+
+    if (h.percentil >= 75) {
+      return `Minha lavoura de ${cultura} em ${cidade} ficou no Top 25% mais eficientes do estado no Benchmark da Safra! Compare sua margem e seus custos aqui: https://fluxorural.com.br/calculadora/?utm_source=whatsapp&utm_campaign=card-top`;
+    }
+    return `Comparei os custos da minha lavoura no Benchmark da Safra da Fluxo Rural. Veja como está o seu desempenho em R$/ha: https://fluxorural.com.br/calculadora/?utm_source=whatsapp&utm_campaign=card-share`;
+  }
   function wireShareCard() {
     el.btnShareCard.onclick = () => {
+      fireEvent('compartilhou_card');
       const canvas = el.shareCanvas;
       canvas.toBlob(async (blob) => {
         if (!blob) return;
         const file = new File([blob], 'minha-margem-fluxo-rural.png', { type: 'image/png' });
+        const text = buildShareText();
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          try { await navigator.share({ files: [file], text: SHARE_TXT }); return; } catch (_) { /* cancelou → cai no fallback */ }
+          try { await navigator.share({ files: [file], text: text }); return; } catch (_) { /* cancelou → cai no fallback */ }
         }
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a'); a.href = url; a.download = 'minha-margem-fluxo-rural.png'; a.click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
-        window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_TXT)}`, '_blank', 'noopener');
+        fireEvent('clicou_whatsapp', { origem: 'share' });
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
       }, 'image/png');
     };
   }
@@ -1400,8 +1903,11 @@
   function renderTela3() {
     const r = S.resultado;
     const culturasNomes = r.itens.map((i) => CULTURA_LABEL[i.cultura] || i.cultura).join(' + ');
-    el.t3Subtitulo.textContent = `${culturasNomes} · ${S.local.cidade ? escapeHtml(S.local.cidade) + ', ' : ''}${r.uf} · safra ${S.safra}`;
+    const propTxt = S.local.propriedade ? `${escapeHtml(S.local.propriedade)} · ` : '';
+    el.t3Subtitulo.textContent = `${propTxt}${culturasNomes} · ${S.local.cidade ? escapeHtml(S.local.cidade) + ', ' : ''}${r.uf} · safra ${S.safra}`;
     renderResumoExecutivo(r);
+    renderEquilibrio(r);
+    renderComposicaoCustos(r);
     renderBenchmark(r);
     renderCompleteness(r);
     renderCostTable(r);
@@ -1442,11 +1948,20 @@
     if (!S.avaliacao.estrelas) { el.ratingStars.focus(); return; }
     S.avaliacao.comentario = el.ratingComentario.value.trim();
     el.btnEnviarAvaliacao.disabled = true;
+    fireEvent('avaliou_ferramenta', { estrelas: S.avaliacao.estrelas });
     await apiAvaliar(buildAvaliacaoPayload());
     el.ratingThanks.style.display = 'block';
   });
 
   el.btnPdf.addEventListener('click', () => window.print());
+
+  // ---------- Refazer: volta ao wizard com TUDO preenchido (o produtor só corrige o que esqueceu).
+  // S.calcId é preservado → o recálculo ATUALIZA a mesma linha no banco (vale sempre a última).
+  el.btnRefazer.addEventListener('click', () => {
+    fireEvent('refez_calculo');
+    showStep('fazenda');
+    goToScreen(1);
+  });
 
   // ============================================================
   // Cadastro submit — transição Tela 2 → Tela 3
@@ -1458,14 +1973,31 @@
       nome: el.regNome.value.trim(), email: el.regEmail.value.trim(),
       whatsapp: el.regWhats.value.trim(), lgpd: el.regLgpd.checked
     };
+    S.interesse_gestao = el.regInteresse.checked;
     el.btnVerDiagnostico.disabled = true;
     const res = await apiCadastrar(buildCadastroPayload());
-    if (res && res.id && !S.calcId) S.calcId = res.id;
+    if (res && res.id) S.calcId = res.id;
+    if (res && res.ranking) S.ranking = res.ranking;
+    if (res && res.n_cidade !== undefined) S.n_cidade = res.n_cidade;
+    if (res && res.city_benchmark !== undefined) S.city_benchmark = res.city_benchmark;
     fireGenerateLead(S.resultado);
+    if (res && res.emailProdutor) fireEvent('email_enviado', { diagnostico: (S.resultado && S.resultado.classe) || '' });
     renderTela3();
     goToScreen(3);
     animateRanking();
   });
+
+  // ============================================================
+  // Formatação de milhar on-blur nos campos numéricos (parseNum já lê "1.250.000" e "8,5")
+  // ============================================================
+  const fmtBlurCache = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 });
+  document.addEventListener('blur', (e) => {
+    const inp = e.target;
+    if (!(inp instanceof HTMLInputElement)) return;
+    if (inp.getAttribute('inputmode') !== 'decimal' || inp.readOnly) return;
+    const n = parseNum(inp.value);
+    if (!isNaN(n)) inp.value = fmtBlurCache.format(n);
+  }, true);
 
   // ============================================================
   // Modo embed + tracking

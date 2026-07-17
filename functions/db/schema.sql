@@ -31,7 +31,10 @@ CREATE TABLE IF NOT EXISTS calculadora_diagnosticos (
   custo_mao_obra        REAL,
   custo_manutencao      REAL,
   custo_admin           REAL,
+  custo_comercializacao REAL,           -- armazenagem + frete + taxas (fora da comparação com benchmark)
   custos_rateados       INTEGER NOT NULL DEFAULT 0,  -- 1 = custos "da lavoura" rateados por área
+  custo_modo            TEXT,           -- 'ha' | 'total' — como o produtor informou os custos
+  custos_detalhe        TEXT,           -- JSON: breakdown de subcategorias por cultura (só entradas do usuário)
 
   -- Arrendamento
   arrend_valor          REAL,
@@ -47,6 +50,7 @@ CREATE TABLE IF NOT EXISTS calculadora_diagnosticos (
   estado                TEXT,
   cidade                TEXT,
   microrregiao          TEXT,
+  propriedade           TEXT,           -- nome da fazenda (opcional) — permite 2+ propriedades por produtor
 
   -- Diversificação (JSON)
   culturas_extras       TEXT,           -- [{cultura,area_ha,produtividade_sc_ha,preco_sc}]
@@ -93,3 +97,11 @@ CREATE TABLE IF NOT EXISTS calculadora_avaliacoes (
 );
 
 CREATE INDEX IF NOT EXISTS idx_aval_diag ON calculadora_avaliacoes (diagnostico_id);
+
+-- ── Migração 2026-07 (rodada 2) ─────────────────────────────────────────────
+-- Aplicada em bancos existentes com os ALTERs abaixo (colunas já incluídas no
+-- CREATE TABLE acima para instalações limpas):
+--   ALTER TABLE calculadora_diagnosticos ADD COLUMN custo_comercializacao REAL;
+--   ALTER TABLE calculadora_diagnosticos ADD COLUMN custo_modo TEXT;
+--   ALTER TABLE calculadora_diagnosticos ADD COLUMN custos_detalhe TEXT;
+--   ALTER TABLE calculadora_diagnosticos ADD COLUMN propriedade TEXT;

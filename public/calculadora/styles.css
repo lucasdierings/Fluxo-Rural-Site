@@ -621,6 +621,59 @@ select.input{
 .share-canvas-wrap{max-width:20rem;margin:1rem auto 1.25rem;border-radius:1rem;overflow:hidden;box-shadow:var(--shadow-md)}
 .share-canvas-wrap canvas{display:block;width:100%;height:auto}
 
+/* ---------- Custos: grupos colapsáveis + subcategorias (rodada 2) ---------- */
+.cost-groups{display:flex;flex-direction:column;gap:.7rem;margin-top:.35rem}
+.cost-group{border:1px solid rgba(30,77,123,.14);border-radius:1rem;background:rgba(255,255,255,.6);overflow:hidden}
+.cost-group summary{display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;cursor:pointer;list-style:none;font-family:var(--font-head);font-weight:700;color:var(--navy);font-size:var(--fs-sm);user-select:none}
+.cost-group summary::-webkit-details-marker{display:none}
+.cost-group .cg-label{flex:1}
+.cost-group .cg-sum{font-family:var(--font-body);font-weight:700;font-size:var(--fs-xs);color:var(--verde-escuro);font-variant-numeric:tabular-nums}
+.cost-group .cg-chevron{width:.55rem;height:.55rem;border-right:2px solid var(--navy);border-bottom:2px solid var(--navy);transform:rotate(45deg);transition:transform .2s;flex:none;margin-top:-.2rem}
+.cost-group[open] .cg-chevron{transform:rotate(225deg);margin-top:.2rem}
+.cost-group .cg-body{padding:.25rem 1rem 1rem;display:flex;flex-direction:column;gap:.35rem}
+.cost-group .group-nota{font-size:var(--fs-xs);color:var(--text-muted);line-height:1.5;padding:.35rem 1rem .1rem;margin:0}
+.cost-group[open] .group-nota{padding:0 1rem .35rem}
+.cat-block .field{margin-bottom:.55rem}
+.cat-field label{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.btn-detalhar{margin-left:auto;background:none;border:0;color:var(--navy);font-size:var(--fs-xs);font-weight:700;cursor:pointer;padding:.15rem .35rem;border-radius:.5rem;text-decoration:underline;text-underline-offset:2px}
+.btn-detalhar:hover{background:rgba(30,77,123,.08)}
+.cat-parent-view{background:rgba(30,77,123,.06);color:var(--verde-escuro);font-weight:700;pointer-events:none}
+.cat-desc,.sub-desc{margin-top:.4rem;font-size:var(--fs-xs)}
+.subcats{border-left:3px solid rgba(30,77,123,.15);margin:0 0 .8rem .35rem;padding:.35rem 0 .1rem .8rem;display:flex;flex-direction:column;gap:.5rem}
+.subcat-row label{display:block;font-size:var(--fs-xs);font-weight:600;color:var(--text-muted);margin-bottom:.25rem}
+.subcat-meses .input{max-width:8rem}
+.subcat-hint{font-size:var(--fs-xs);color:var(--text-muted);margin:0;line-height:1.45}
+
+/* Chips de cultura clicáveis (editar) */
+.cult-chip-btn{width:100%;text-align:left;cursor:pointer;font:inherit;border:1px solid rgba(30,77,123,.16);position:relative}
+.cult-chip-btn:hover{border-color:var(--navy);box-shadow:var(--shadow-sm)}
+.cult-chip-btn .cc-edit{position:absolute;right:.75rem;bottom:.4rem;font-size:.68rem;color:var(--navy);font-weight:700;opacity:.75}
+
+/* Financeiro rápido (equilíbrio) */
+.eq-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.35rem 0 .6rem}
+@media(max-width:480px){.eq-grid{grid-template-columns:1fr}}
+.eq-item{background:rgba(30,77,123,.05);border-radius:.9rem;padding:.8rem .9rem}
+.eq-item .k{font-size:var(--fs-xs);font-weight:700;color:var(--text-muted);margin-bottom:.2rem}
+.eq-item .v{font-family:var(--font-head);font-weight:800;font-size:var(--fs-lg);color:var(--navy);font-variant-numeric:tabular-nums}
+.eq-item .v small{font-size:.65em;font-weight:700;color:var(--text-muted)}
+.eq-item .s{font-size:var(--fs-xs);color:var(--text-muted);line-height:1.4;margin-top:.2rem}
+.eq-note,.eq-cheio{font-size:var(--fs-sm);line-height:1.55;color:var(--carvao);margin:.35rem 0 .9rem}
+.eq-cheio{background:rgba(232,184,75,.14);border-radius:.75rem;padding:.65rem .85rem;margin-top:.5rem}
+
+/* Composição de custos (onde pesa) */
+.comp-block{margin-bottom:1rem}
+.comp-bar{display:flex;height:1rem;border-radius:999px;overflow:hidden;margin:.4rem 0 .7rem;background:rgba(30,77,123,.08)}
+.comp-seg{display:block;height:100%;min-width:2px}
+.comp-legend{display:flex;flex-direction:column;gap:.4rem}
+.comp-row{display:flex;align-items:baseline;gap:.5rem;font-size:var(--fs-xs);line-height:1.45}
+.comp-dot{width:.6rem;height:.6rem;border-radius:50%;flex:none;align-self:center}
+.comp-cat{font-weight:600;color:var(--carvao)}
+.comp-media{color:var(--text-muted);font-weight:400}
+.comp-vals{margin-left:auto;text-align:right;color:var(--text-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.comp-vals b{color:var(--carvao)}
+.comp-sintese{font-size:var(--fs-sm);line-height:1.55;margin-top:.75rem;background:rgba(122,182,72,.1);border-radius:.75rem;padding:.65rem .85rem}
+@media(max-width:440px){.comp-row{flex-wrap:wrap}.comp-vals{margin-left:1.1rem;text-align:left;white-space:normal;width:100%}}
+
 /* ---------- Impressão (PDF via window.print) ---------- */
 @media print{
   body{background:#fff}

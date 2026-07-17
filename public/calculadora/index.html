@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Calculadora de Margem por Hectare — Fluxo Rural</title>
-  <meta name="description" content="Descubra em minutos sua margem bruta por hectare e compare com produtores do seu estado. Gratuito, sem cadastro para começar." />
+  <title>Calculadora de Margem e Custos: Benchmark da Safra — Fluxo Rural</title>
+  <meta name="description" content="Substitua a planilha: use a nossa calculadora gratuita de margem de lucro por hectare e participe do Benchmark da Safra para comparar seus custos com o estado." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fluxorural.com.br/calculadora/" />
 
   <!-- Open Graph / WhatsApp Link Preview Metadata -->
-  <meta property="og:title" content="Calculadora de Margem por Hectare — Fluxo Rural" />
-  <meta property="og:description" content="Descubra sua margem por hectare em 2 minutos e compare com produtores do seu estado. Gratuito e anônimo." />
+  <meta property="og:title" content="Benchmark da Safra: Comparador de Custo e Margem por Hectare" />
+  <meta property="og:description" content="Compare sua margem por hectare e custos de produção de forma anônima e gratuita contra a média do seu estado." />
   <meta property="og:image" content="https://fluxorural.com.br/calculadora/og-image-calculadora.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -21,8 +21,8 @@
 
   <!-- Twitter Card Metadata -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Calculadora de Margem por Hectare — Fluxo Rural" />
-  <meta name="twitter:description" content="Descubra sua margem por hectare em 2 minutos e compare com produtores do seu estado. Gratuito e anônimo." />
+  <meta name="twitter:title" content="Benchmark da Safra: Comparador de Custo e Margem por Hectare" />
+  <meta name="twitter:description" content="Compare sua margem por hectare e custos de produção de forma anônima e gratuita contra a média do seu estado." />
   <meta name="twitter:image" content="https://fluxorural.com.br/calculadora/og-image-calculadora.jpg" />
 
   <!-- JSON-LD: Structured Data -->
@@ -53,8 +53,8 @@
   <link rel="preload" href="./banner-colheita.jpg" as="image" fetchpriority="high" />
 
   <!-- Preload CSS para renderização rápida -->
-  <link rel="preload" href="./styles.css" as="style" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preload" href="./styles.css?v=2" as="style" />
+  <link rel="stylesheet" href="./styles.css?v=2" />
 
   <!-- Google Fonts: carregamento não-bloqueante via preload -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -121,9 +121,9 @@
             <div class="intro-banner-wrap">
               <img src="./banner-colheita.jpg" alt="Colheita de soja no campo" class="intro-banner-img" width="800" height="447" loading="eager" decoding="async" fetchpriority="high" />
             </div>
-            <span class="intro-eyebrow">Calculadora de Margem · ~2 min</span>
-            <h1>Descubra sua margem por hectare</h1>
-            <p class="intro-lead">Responda algumas perguntas simples sobre a sua lavoura e veja onde você está — sem planilha, direto no celular.</p>
+            <span class="intro-eyebrow">Benchmark da Safra · ~2 min</span>
+            <h1>Participe do Benchmark da Safra</h1>
+            <p class="intro-lead">Insira seus números de lavoura, compare sua margem e seus custos com produtores do seu estado, e veja sua eficiência financeira — sem complicação.</p>
             <ul class="intro-bullets">
               <li>
                 <span class="bico"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -167,6 +167,11 @@
               </div>
               <p class="hint" id="lCidadeHint">Comece a digitar — no futuro isso libera a média da sua cidade.</p>
               <p class="error-msg">Selecione a cidade da lista.</p>
+            </div>
+            <div class="field">
+              <label for="lPropriedade">Nome da propriedade <span class="wz-optional">opcional</span></label>
+              <input id="lPropriedade" class="input" type="text" autocomplete="off" placeholder="Ex.: Fazenda Santa Maria" />
+              <p class="hint">Tem mais de uma área? Rode a calculadora uma vez pra cada propriedade.</p>
             </div>
             <div class="field">
               <label for="pSafra">Safra</label>
@@ -273,38 +278,16 @@
         <div class="wizard-step" id="wz-cultura_custos" data-step="cultura_custos" hidden>
           <div class="card">
             <h2 class="wz-title">Custos · <span id="wzCustosCultura">—</span> <span class="wz-area-tag" id="wzCustosArea"></span></h2>
-            <p class="wz-sub">Quanto você <strong>gastou no total</strong> nesta safra com cada item. A gente converte pra R$/ha. Deixe em branco o que não souber.</p>
+            <p class="wz-sub" id="wzCustosSub">Informe do jeito que você tem o número. Deixe em branco o que não souber — usamos a média do seu estado.</p>
 
-            <div class="custos-grid">
-              <div class="field">
-                <label for="cSementes">Sementes <span class="tip" tabindex="0" role="note" data-tip="Total gasto com sementes e tratamento de sementes.">?</span></label>
-                <input id="cSementes" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
-              </div>
-              <div class="field">
-                <label for="cDefensivos">Defensivos <span class="tip" tabindex="0" role="note" data-tip="Total gasto com herbicidas, fungicidas, inseticidas e adjuvantes.">?</span></label>
-                <input id="cDefensivos" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
-              </div>
-              <div class="field">
-                <label for="cFertilizantes">Fertilizantes <span class="tip" tabindex="0" role="note" data-tip="Total gasto com adubos, corretivos e fertilizantes foliares.">?</span></label>
-                <input id="cFertilizantes" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
-              </div>
-              <div class="field">
-                <label for="cDiesel">Diesel <span class="tip" tabindex="0" role="note" data-tip="Total gasto com combustível de máquinas e operações.">?</span></label>
-                <input id="cDiesel" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
-              </div>
-              <div class="field">
-                <label for="cMaoObra">Mão de obra <span class="tip" tabindex="0" role="note" data-tip="Total gasto com salários, diaristas e encargos da lavoura.">?</span></label>
-                <input id="cMaoObra" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
-              </div>
-              <div class="field">
-                <label for="cManutencao">Manutenção <span class="tip" tabindex="0" role="note" data-tip="Total gasto com manutenção e reparo de máquinas e implementos.">?</span></label>
-                <input id="cManutencao" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
-              </div>
-              <div class="field">
-                <label for="cAdmin">Administrativo <span class="tip" tabindex="0" role="note" data-tip="Total gasto com escritório, contador, energia e outras despesas fixas.">?</span></label>
-                <input id="cAdmin" class="input" type="text" inputmode="decimal" placeholder="Total gasto (R$)" />
+            <div class="field">
+              <div class="segmented" id="custoModo" role="group" aria-label="Como você prefere informar os custos">
+                <button type="button" data-val="total" aria-pressed="true">Total da safra (R$)</button>
+                <button type="button" data-val="ha" aria-pressed="false">Por hectare (R$/ha)</button>
               </div>
             </div>
+
+            <div class="cost-groups" id="custosGroups"></div>
 
             <div class="live-feedback empty" id="wzCustoLive" aria-live="polite">Preencha os custos para ver o total por hectare.</div>
           </div>
@@ -449,6 +432,11 @@
                   <p class="error-msg">Informe um WhatsApp válido com DDD.</p>
                 </div>
 
+                <label class="check-row" for="regInteresse" style="margin:1rem 0 0">
+                  <input type="checkbox" id="regInteresse" />
+                  <span class="check-label">Quero conhecer uma ferramenta de gestão completa (com depreciação, custo de oportunidade e inventário).</span>
+                </label>
+
                 <label class="check-row" for="regLgpd" style="margin:1rem 0 1.25rem">
                   <input type="checkbox" id="regLgpd" />
                   <span class="check-label">
@@ -479,6 +467,20 @@
           <h2>Resumo executivo</h2>
           <div class="summary-grid" id="t3ResumoGrid"></div>
           <div id="t3CulturasBlocks"></div>
+        </div>
+
+        <!-- 1b. Financeiro rápido -->
+        <div class="card" id="t3EquilibrioCard">
+          <h2>Financeiro rápido</h2>
+          <p class="card-sub">Ponto de equilíbrio e custo por saca — os números de bolso da sua lavoura.</p>
+          <div id="t3Equilibrio"></div>
+        </div>
+
+        <!-- 1c. Composição de custos -->
+        <div class="card" id="t3ComposicaoCard">
+          <h2>Onde seu custo pesa</h2>
+          <p class="card-sub">Quanto cada categoria representa do custo total e quanto ela consome da sua receita.</p>
+          <div id="t3Composicao"></div>
         </div>
 
         <!-- 2. Como você se compara -->
@@ -555,8 +557,9 @@
           <div class="cta-block">
             <button type="button" class="btn btn-primary btn-block" id="btnConvidar">Convidar outros produtores</button>
             <button type="button" class="btn btn-utility btn-block" id="btnPdf">Baixar meu diagnóstico em PDF</button>
+            <button type="button" class="btn btn-utility btn-block" id="btnRefazer">🔁 Refazer com outros números</button>
           </div>
-          <p class="safra-teaser">Guarde este resultado — na próxima safra, você vai poder comparar sua evolução aqui mesmo.</p>
+          <p class="safra-teaser">Esqueceu algum custo? Refaça sem perder nada — seus números continuam preenchidos. Guarde este resultado: na próxima safra, você vai poder comparar sua evolução aqui mesmo.</p>
         </div>
 
         <!-- 10. Avaliação -->
@@ -581,6 +584,6 @@
     </footer>
   </div>
 
-  <script src="./app.js" defer></script>
+  <script src="./app.js?v=2" defer></script>
 </body>
 </html>
