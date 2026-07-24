@@ -212,6 +212,9 @@ export async function onRequest(context) {
       cidade: dados.cidade || null,
       uf: dados.estado || null,
       empresa: dados.empresa || null,
+      // Frase curta pra Base de marketing: o que a pessoa pediu, com o produto
+      // já embutido — "Cotação Beweather" ou "Interesse: Palestra / Workshop".
+      interesse: beweather ? 'Cotação Beweather' : (interesse ? `Interesse: ${interesse}` : null),
       consent_marketing: dados.consent ? 1 : 0,
       consent_ts: dados.consent_ts,
       ...atribuicao(tracking),

@@ -195,6 +195,9 @@ async function empurrarParaCrm(env, data) {
       whatsapp: data.whatsapp || null,
       uf: data.estado || null,
       empresa: data.empresa || null,
+      interesse: parcial
+        ? 'Diagnóstico (contato, ainda sem responder)'
+        : `Diagnóstico ${data.perfil === 'empresa' ? 'empresa' : 'produtor'}${data.qualificationLevel ? ' — nível ' + data.qualificationLevel : ''}`,
       ...atribuicao(tracking),
     },
     // Lead parcial não vira negócio: o funil é pra quem respondeu.

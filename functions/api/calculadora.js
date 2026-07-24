@@ -218,6 +218,7 @@ async function empurrarCalcParaCrm(env, body, id, cols) {
       cidade: local.cidade || null,
       uf: local.uf || null,
       propriedade: local.propriedade || null,
+      interesse: `Calculadora — ${cols.cultura || 'cultura não informada'}${r.classe ? ' (' + r.classe + ')' : ''}`,
       consent_marketing: 1,               // o cadastro exige aceite LGPD
       consent_ts: new Date().toISOString(),
       ...atribuicao(tracking),
