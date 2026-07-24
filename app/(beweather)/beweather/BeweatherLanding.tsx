@@ -34,10 +34,11 @@ import { cn } from '@/lib/utils'
 const WHATSAPP_URL =
   'https://wa.me/5545991447004?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20uma%20cota%C3%A7%C3%A3o%20da%20Beweather'
 
-// TODO: criar um Google Apps Script dedicado para leads Beweather
-// (o atual é o do /diagnostico — trocar antes do go-live)
-const GAS_URL =
-  'https://script.google.com/macros/s/PLACEHOLDER_BEWEATHER_FORM/exec'
+// Pages Function própria (functions/api/contato.js): manda e-mail pelo Resend e
+// empurra o lead pro CRM com produto=beweather. Antes apontava para um Apps
+// Script PLACEHOLDER que nunca existiu, com `mode: 'no-cors'` — todo lead desta
+// landing era perdido em silêncio, com "Recebemos seu pedido!" na tela.
+const ENDPOINT = '/api/contato'
 
 // --- Lightweight UI Components ---
 const Button = React.forwardRef<
@@ -1047,22 +1048,28 @@ function ProposalForm() {
     setStatus('loading')
     const consentTimestamp = new Date().toISOString()
     try {
-      await fetch(GAS_URL, {
+      const resp = await fetch(ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           form: 'beweather-cotacao',
+          produto: 'beweather',
           ...form,
-          consent: String(form.consent),
+          consent: form.consent,
           consent_timestamp: consentTimestamp,
           consent_text:
             'Concordo em receber contato da Beweather (Fluxo Rural Consultoria) sobre minha cotação por WhatsApp, telefone e email. LGPD 13.709/18.',
           ...utms,
           page_url: typeof window !== 'undefined' ? window.location.href : '',
           submitted_at: consentTimestamp,
-        }).toString(),
+        }),
       })
+      // Sem `no-cors`: falha do backend agora aparece pro produtor em vez de
+      // virar falso "recebemos seu pedido".
+      if (!resp.ok) {
+        setStatus('error')
+        return
+      }
       {/* TODO-PIXEL: fbq('track', 'Lead') + gtag('event', 'generate_lead') */}
       setStatus('success')
     } catch (err) {

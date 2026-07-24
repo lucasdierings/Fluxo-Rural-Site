@@ -5,8 +5,11 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { trackLead, readAttribution } from '@/lib/track'
 
-// ↓ Preencher com a URL do Google Apps Script após o deploy
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf4afizws5cwq0vcPcc7LTaBxUERprs6Ahgy0QzwiYHOOakPWS9VdmBqM7YOHkiK0Iug/exec'
+// Pages Function própria (functions/api/contato.js): manda e-mail pelo Resend e
+// empurra o lead pro CRM. Substituiu o Google Apps Script, cuja planilha não
+// existia mais — com `mode: 'no-cors'` o fetch resolvia mesmo em 404 e o lead
+// sumia mostrando "Mensagem enviada!" na tela.
+const ENDPOINT = '/api/contato'
 
 const ESTADOS_BR = [
   'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA',
@@ -50,13 +53,22 @@ export function ContactForm() {
     setStatus('loading')
     const attr = readAttribution()
     try {
-      // mode: 'no-cors' necessário para Google Apps Script via site estático
-      await fetch(SCRIPT_URL, {
+      const resp = await fetch(ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, _tipo: 'contato', ...attr }),
+        body: JSON.stringify({
+          ...form,
+          form: 'contato',
+          ...attr,
+          page_url: typeof window !== 'undefined' ? window.location.href : '',
+        }),
       })
+      // Sem `no-cors`, erro volta a ser erro: só marca sucesso e só conta
+      // conversão no Ads quando o lead realmente entrou.
+      if (!resp.ok) {
+        setStatus('error')
+        return
+      }
       setStatus('success')
       // Lead quente — só params não-PII vão pro GA4/GTM (nome/email ficam no fetch)
       trackLead('generate_lead', { form_location: 'contato', interesse: form.interesse, origem: attr.origem })

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
 import AnalyticsGate from '@/components/analytics/AnalyticsGate'
+import AttributionCapture from '@/components/analytics/AttributionCapture'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp'
@@ -214,6 +215,8 @@ export default function RootLayout({
       <body className="font-body text-carvao antialiased">
         {/* GA4 + GTM do site principal, com guard de rota (não carrega em /beweather). */}
         <AnalyticsGate />
+        {/* Primeiro toque (UTM/gclid) em cookie de 90 dias — vale em todo o site. */}
+        <AttributionCapture />
         <Navbar />
         <main>{children}</main>
         <Footer />

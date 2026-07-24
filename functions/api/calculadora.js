@@ -7,6 +7,8 @@
 //   GET  ?cultura=&estado=    → benchmark/ranking agregado (dados próprios; sem PII)
 // PII vai só pro D1/e-mail — nunca pra query string. Todos os writes usam prepared statements (bind).
 
+import { pushCrm, atribuicao, canalOrigem } from '../_lib/crm.js'
+
 const TO = 'lucasdierings12@gmail.com'
 const FROM = 'Fluxo Rural <contato@fluxorural.com.br>'
 
@@ -195,7 +197,51 @@ async function findLinhaExistente(env, email, safra, propriedade) {
   } catch (_) { return null }
 }
 
-async function handleCadastrar(body, request, env) {
+// A calculadora é isca de topo de funil: o lead vai para a BASE DE MARKETING do
+// CRM, sem virar negócio. Quem pedir consultoria depois vira negócio na mesma
+// ficha (o dedup por e-mail junta os dois).
+// external_id = calculadora:<id> — o mesmo que o scripts/backfill.mjs do CRM usa,
+// então backfill e captura ao vivo nunca duplicam a mesma linha.
+async function empurrarCalcParaCrm(env, body, id, cols) {
+  const cad = body.cadastro || {}
+  const local = body.local || {}
+  const r = body.resultado || {}
+  const tracking = body.tracking || {}
+
+  return pushCrm(env, {
+    source: 'calculadora',
+    external_id: `calculadora:${id}`,
+    contato: {
+      nome: cad.nome,
+      email: cad.email || null,
+      whatsapp: cad.whatsapp || null,
+      cidade: local.cidade || null,
+      uf: local.uf || null,
+      propriedade: local.propriedade || null,
+      consent_marketing: 1,               // o cadastro exige aceite LGPD
+      consent_ts: new Date().toISOString(),
+      ...atribuicao(tracking),
+    },
+    // negocio ausente de propósito → base de marketing, não funil.
+    evento: {
+      tipo: 'form_submit',
+      meta: {
+        form: 'calculadora',
+        canal: canalOrigem(tracking, 'calculadora'),
+        cultura: cols.cultura || null,
+        safra: body.safra || null,
+        area_ha: cols.area_ha || null,
+        margem_bruta_ha: cols.margem_bruta_ha || null,
+        diagnostico: r.classe || null,
+        percentil: cols.percentil || null,
+        interesse_gestao: body.interesse_gestao ? 1 : 0,
+        lead_quality: cols.lead_quality || null,
+      },
+    },
+  })
+}
+
+async function handleCadastrar(body, request, env, ctx) {
   const cad = body.cadastro || {}
   if (!cad.nome || !cad.email) return json({ error: 'Dados incompletos' }, 400)
   const nowIso = new Date().toISOString()
@@ -220,6 +266,10 @@ async function handleCadastrar(body, request, env) {
       'UPDATE calculadora_diagnosticos SET nome=?, email=?, whatsapp=?, consent_lgpd=1, consent_at=?, interesse_gestao=?, updated_at=? WHERE id=?'
     ).bind(cad.nome, cad.email, cad.whatsapp || null, nowIso, body.interesse_gestao ? 1 : 0, nowIso, id).run()
   }
+
+  // CRM em waitUntil(): não atrasa a resposta do cálculo nem quebra a captura se
+  // o CRM estiver fora do ar.
+  if (id && ctx) ctx.waitUntil(empurrarCalcParaCrm(env, body, id, cols))
 
   // E-mails e audiência são best-effort (o lead já está no D1), mas cada um em seu próprio
   // try/catch: falha no e-mail interno não pode derrubar o e-mail do produtor, e vice-versa.
@@ -557,7 +607,7 @@ export async function onRequest(context) {
   try {
     switch (body.action) {
       case 'calcular': return await handleCalcular(body, request, env)
-      case 'cadastrar': return await handleCadastrar(body, request, env)
+      case 'cadastrar': return await handleCadastrar(body, request, env, context)
       case 'avaliar': return await handleAvaliar(body, env)
       case 'interesse': return await handleInteresse(body, env)
       default: return json({ error: 'Ação desconhecida' }, 400)

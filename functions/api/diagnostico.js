@@ -1,6 +1,9 @@
 // Cloudflare Pages Function — POST /api/diagnostico
-// Recebe o lead do diagnóstico (produtor OU empresa) e envia por e-mail via Resend.
+// Recebe o lead do diagnóstico (produtor OU empresa), empurra pro CRM e envia
+// por e-mail via Resend.
 // Requer a env var RESEND_API_KEY no Cloudflare Pages e o domínio do remetente verificado no Resend.
+
+import { pushCrm, atribuicao, canalOrigem, idEstavel } from '../_lib/crm.js'
 
 const TO = 'lucasdierings12@gmail.com'
 const FROM = 'Fluxo Rural <contato@fluxorural.com.br>'
@@ -154,6 +157,65 @@ function buildEmailParcial(data) {
     </div>`
 }
 
+// Empurra o lead do diagnóstico pro CRM. A etapa importa:
+//   etapa='contato'  → lead PARCIAL (só o contato, ainda não respondeu nada):
+//                      entra como pessoa na base, sem negócio no funil.
+//   diagnóstico completo → cria o negócio de consultoria, com score na observação.
+// Se a pessoa abandona no meio e volta dias depois, o dedup por e-mail junta os
+// dois toques na mesma ficha.
+async function empurrarParaCrm(env, data) {
+  const parcial = data.etapa === 'contato'
+  const tracking = {
+    utm_source: data.utm_source || null,
+    utm_medium: data.utm_medium || null,
+    utm_campaign: data.utm_campaign || null,
+    utm_term: data.utm_term || null,
+    utm_content: data.utm_content || null,
+    gclid: data.gclid || null,
+    fbclid: data.fbclid || null,
+    page_url: data.page_url || null,
+  }
+  const externalId = await idEstavel('diagnostico', [
+    parcial ? 'parcial' : 'completo', data.email, data.whatsapp, data.perfil,
+  ])
+  const obsPartes = [
+    data.perfil === 'empresa' ? 'Empresa do agro' : 'Produtor rural',
+    data.qualificationLevel ? `nível ${data.qualificationLevel}` : null,
+    data.score != null ? `score ${data.score}` : null,
+    data.urgencia ? `urgência: ${data.urgencia}` : null,
+    data.desafios ? `desafios: ${String(data.desafios).slice(0, 200)}` : null,
+  ].filter(Boolean)
+
+  return pushCrm(env, {
+    source: 'site-diagnostico',
+    external_id: externalId,
+    contato: {
+      nome: data.nome,
+      email: data.email || null,
+      whatsapp: data.whatsapp || null,
+      uf: data.estado || null,
+      empresa: data.empresa || null,
+      ...atribuicao(tracking),
+    },
+    // Lead parcial não vira negócio: o funil é pra quem respondeu.
+    negocio: parcial ? undefined : {
+      produto: 'consultoria',
+      etapa: 'novo',
+      origem: canalOrigem(tracking, 'diagnostico'),
+      obs: obsPartes.join(' · '),
+    },
+    evento: {
+      tipo: 'form_submit',
+      meta: {
+        form: parcial ? 'diagnostico-parcial' : 'diagnostico-completo',
+        perfil: data.perfil || null,
+        score: data.score ?? null,
+        nivel: data.qualificationLevel || null,
+      },
+    },
+  })
+}
+
 export async function onRequest(context) {
   const { request, env } = context
 
@@ -173,6 +235,10 @@ export async function onRequest(context) {
         headers: { 'Content-Type': 'application/json' },
       })
     }
+
+    // CRM antes do e-mail, e em waitUntil(): o push não atrasa a resposta ao
+    // produtor, e o lead entra no funil mesmo se o Resend estiver fora do ar.
+    context.waitUntil(empurrarParaCrm(env, data))
 
     if (!env.RESEND_API_KEY) {
       return new Response(JSON.stringify({ error: 'RESEND_API_KEY não configurada' }), {

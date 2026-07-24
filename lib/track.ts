@@ -43,26 +43,68 @@ export interface Attribution {
   origem: string
 }
 
-/** Lê a atribuição da query string atual (UTMs + click ids). Usada só para
- *  enriquecer o payload do lead (e-mail/planilha) — o dashboard GA4 já amarra
- *  source/medium/região automaticamente por sessão. */
-export function readAttribution(): Attribution {
-  const empty: Attribution = {
-    utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '',
-    utm_content: '', gclid: '', fbclid: '', origem: 'site',
-  }
-  if (typeof window === 'undefined') return empty
+const ATTR_COOKIE = 'fr_attr'
+const ATTR_DIAS = 90
+
+const ATTR_VAZIA: Attribution = {
+  utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '',
+  utm_content: '', gclid: '', fbclid: '', origem: 'site',
+}
+
+function daQueryString(): Attribution | null {
   const p = new URLSearchParams(window.location.search)
   const get = (k: string) => p.get(k) || ''
-  const utm_source = get('utm_source')
-  return {
-    utm_source,
+  const attr: Attribution = {
+    utm_source: get('utm_source'),
     utm_medium: get('utm_medium'),
     utm_campaign: get('utm_campaign'),
     utm_term: get('utm_term'),
     utm_content: get('utm_content'),
     gclid: get('gclid'),
     fbclid: get('fbclid'),
-    origem: utm_source ? `ads-${utm_source}` : 'site',
+    origem: get('utm_source') ? `ads-${get('utm_source')}` : 'site',
   }
+  const temAlgo = Object.entries(attr).some(([k, v]) => k !== 'origem' && v)
+  return temAlgo ? attr : null
+}
+
+function doCookie(): Attribution | null {
+  const bruto = document.cookie
+    .split('; ')
+    .find((c) => c.startsWith(`${ATTR_COOKIE}=`))
+    ?.slice(ATTR_COOKIE.length + 1)
+  if (!bruto) return null
+  try {
+    return { ...ATTR_VAZIA, ...JSON.parse(decodeURIComponent(bruto)) } as Attribution
+  } catch {
+    return null
+  }
+}
+
+/** Grava a atribuição do PRIMEIRO toque num cookie primário de 90 dias.
+ *
+ *  Sem isso, quem clica no anúncio e cai na home converte em /diagnostico ou
+ *  /contato sem query string nenhuma: o lead chega "orgânico" e a campanha que
+ *  pagou por ele não recebe crédito. Roda a cada pageview, mas só escreve na
+ *  primeira vez — primeiro toque não é sobrescrito por navegação interna.
+ *
+ *  Cookie primário (não é third-party), sem PII, só canal de origem. */
+export function captureAttribution() {
+  if (typeof window === 'undefined') return
+  const atual = daQueryString()
+  if (!atual) return
+  if (doCookie()) return
+  const expira = new Date(Date.now() + ATTR_DIAS * 864e5).toUTCString()
+  const seguro = window.location.protocol === 'https:' ? '; Secure' : ''
+  document.cookie =
+    `${ATTR_COOKIE}=${encodeURIComponent(JSON.stringify(atual))}` +
+    `; path=/; expires=${expira}; SameSite=Lax${seguro}`
+}
+
+/** Lê a atribuição do lead: query string da página atual quando existe, senão o
+ *  cookie de primeiro toque. Usada só para enriquecer o payload do lead
+ *  (e-mail/CRM) — o dashboard GA4 já amarra source/medium/região por sessão. */
+export function readAttribution(): Attribution {
+  if (typeof window === 'undefined') return ATTR_VAZIA
+  return daQueryString() || doCookie() || ATTR_VAZIA
 }
