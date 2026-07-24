@@ -47,3 +47,9 @@ wrangler.toml
 
 # Segredos locais do wrangler pages dev (nunca versionar)
 .dev.vars
+
+# local agent skills/plugins
+.agents/
+
+# test images
+/public/images/*-test.*

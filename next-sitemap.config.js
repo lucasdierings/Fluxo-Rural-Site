@@ -17,7 +17,7 @@ module.exports = {
     ],
     additionalSitemaps: [],
   },
-  exclude: ['/api/*', '/admin', '/beweather', '/beweather/', '/servicos/palestras', '/servicos/palestras/'],
+  exclude: ['/api/*', '/admin', '/dashboard', '/dashboard/', '/beweather', '/beweather/'],
   // Entrada manual do PDF (arquivo): sem trailing slash, que quebraria a URL do .pdf.
   additionalPaths: async () => [
     {
