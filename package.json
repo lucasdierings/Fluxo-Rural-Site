@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "next-sitemap && node scripts/generate-llms-full.mjs"
+    "postbuild": "next-sitemap && cp out/sitemap*.xml public/ 2>/dev/null || true && node scripts/generate-llms-full.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

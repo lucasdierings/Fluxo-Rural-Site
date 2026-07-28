@@ -17,7 +17,31 @@ module.exports = {
     ],
     additionalSitemaps: [],
   },
-  exclude: ['/api/*', '/admin', '/dashboard', '/dashboard/', '/beweather', '/beweather/'],
+  exclude: [
+    '/api/*',
+    '/admin',
+    '/dashboard',
+    '/dashboard/*',
+    '/beweather',
+    '/beweather/*',
+    '/apple-icon.png*',
+    '/icon.png*',
+    '/*.png*',
+    '/*icon*',
+  ],
+  transform: async (config, path) => {
+    // Filtrar rotas de imagens de ícones geradas pelo App Router
+    if (path.includes('icon.png') || path.includes('apple-icon') || path.endsWith('.png')) {
+      return null
+    }
+    return {
+      loc: path,
+      changefreq: config.changefreq,
+      priority: config.priority,
+      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      alternateRefs: config.alternateRefs || [],
+    }
+  },
   // Entrada manual do PDF (arquivo): sem trailing slash, que quebraria a URL do .pdf.
   additionalPaths: async () => [
     {
@@ -29,3 +53,4 @@ module.exports = {
     },
   ],
 }
+
