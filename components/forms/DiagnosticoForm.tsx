@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react'
-import { trackLead } from '@/lib/track'
+import { trackLead, readAttribution } from '@/lib/track'
 
 const ESTADOS_BR = [
   'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA',
@@ -354,18 +354,6 @@ export function DiagnosticoForm() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState<false | 'parcial' | 'completo'>(false)
   const [error, setError] = useState(false)
-  const [utmParams, setUtmParams] = useState({ utm_source: '', utm_medium: '', utm_campaign: '' })
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search)
-      setUtmParams({
-        utm_source: params.get('utm_source') || '',
-        utm_medium: params.get('utm_medium') || '',
-        utm_campaign: params.get('utm_campaign') || '',
-      })
-    }
-  }, [])
 
   const isEmpresa = form.perfil === 'empresa'
   const score = useMemo(() => (isEmpresa ? calculateScoreEmpresa(form) : calculateScore(form)), [form, isEmpresa])
@@ -405,7 +393,23 @@ export function DiagnosticoForm() {
     })
   }
 
-  const origem = utmParams.utm_source ? `ads-${utmParams.utm_source}` : 'diagnostico-gratis'
+  /* Atribuição do lead, lida no momento do envio (mesmo padrão do ContactForm).
+   *
+   * Antes daqui saía só `utm_source/medium/campaign` da query string da PÁGINA
+   * ATUAL. Quem entrava pelo anúncio ou pela bio e navegava uma página antes de
+   * chegar no diagnóstico perdia tudo: o GA4 segurava a origem (atribui por
+   * sessão) e o CRM recebia o lead como "Manual / direto". `readAttribution()`
+   * cai no cookie `fr_attr` de primeiro toque (90 dias, escrito em todo pageview
+   * por AttributionCapture) quando a URL vem limpa, e ainda traz gclid/fbclid/
+   * utm_term/utm_content — que o /api/diagnostico já sabia ler e nunca recebia. */
+  const atribuicao = () => {
+    const attr = readAttribution()
+    return {
+      attr,
+      // 'site' é o padrão genérico do helper; aqui o formulário tem nome próprio.
+      origem: attr.origem === 'site' ? 'diagnostico-gratis' : attr.origem,
+    }
+  }
 
   const contatoValido = !!(form.nome && form.whatsapp && form.email && form.empresa && form.estado)
   const perguntasValidas = isEmpresa
@@ -419,6 +423,7 @@ export function DiagnosticoForm() {
   const handleContato = async () => {
     if (!contatoValido) return
     setSubmitting(true)
+    const { attr, origem } = atribuicao()
     try {
       await fetch(SCRIPT_URL, {
         method: 'POST',
@@ -431,8 +436,9 @@ export function DiagnosticoForm() {
           whatsapp: form.whatsapp,
           empresa: form.empresa,
           estado: form.estado,
+          ...attr,
           origem,
-          ...utmParams,
+          page_url: typeof window !== 'undefined' ? window.location.href : '',
         }),
       })
     } catch {
@@ -450,6 +456,7 @@ export function DiagnosticoForm() {
     setSubmitting(true)
     setError(false)
 
+    const { attr, origem } = atribuicao()
     const common = {
       etapa: 'completo',
       perfil: form.perfil,
@@ -460,10 +467,11 @@ export function DiagnosticoForm() {
       estado: form.estado,
       desafios: form.desafios.join(', '),
       urgencia: form.urgencia,
-      origem,
       score,
       qualificationLevel: qualLevel,
-      ...utmParams,
+      ...attr,
+      origem,
+      page_url: typeof window !== 'undefined' ? window.location.href : '',
     }
 
     const payload = isEmpresa

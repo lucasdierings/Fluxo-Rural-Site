@@ -2039,11 +2039,54 @@
   // ============================================================
   const qs = new URLSearchParams(location.search);
   if (qs.get('embed') === 'true') document.body.classList.add('is-embed');
-  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'].forEach((k) => {
-    const v = qs.get(k);
+
+  const CAMPOS_ATRIB = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
+
+  /* Cookie de primeiro toque escrito pelo site Next (lib/track.ts →
+   * captureAttribution, 90 dias). Esta página é JS puro fora do Next e não
+   * consegue importar o helper, então lê o mesmo cookie na mão — mesmo nome,
+   * mesmo formato JSON. Sem isso a calculadora repetia o furo do diagnóstico:
+   * quem entrava por anúncio ou pela bio e navegava uma página antes de abrir
+   * /calculadora chegava no CRM sem origem nenhuma. */
+  function atribDoCookie() {
+    try {
+      const bruto = document.cookie.split('; ').find((c) => c.indexOf('fr_attr=') === 0);
+      if (!bruto) return {};
+      return JSON.parse(decodeURIComponent(bruto.slice('fr_attr='.length))) || {};
+    } catch (_) { return {}; }
+  }
+
+  // A query string da página atual VENCE o cookie (é o toque mais recente e
+  // mais específico); o cookie só preenche o que veio vazio.
+  const attrCookie = atribDoCookie();
+  CAMPOS_ATRIB.forEach((k) => {
+    const v = qs.get(k) || attrCookie[k];
     if (v) S.tracking[k] = v;
   });
-  S.tracking.origem = S.tracking.utm_source ? 'ads-' + S.tracking.utm_source : 'site';
+
+  /* Grava o cookie quando ele ainda não existe. Esta página é estática e fica
+   * FORA do layout do Next, então o AttributionCapture não roda aqui: quem cai
+   * direto no anúncio da calculadora e volta depois sem query string ficaria sem
+   * origem. Só escreve na primeira vez — primeiro toque não se sobrescreve. */
+  if (!Object.keys(attrCookie).length && CAMPOS_ATRIB.some((k) => qs.get(k))) {
+    try {
+      const novo = {};
+      CAMPOS_ATRIB.forEach((k) => { novo[k] = qs.get(k) || ''; });
+      const expira = new Date(Date.now() + 90 * 864e5).toUTCString();
+      const seguro = location.protocol === 'https:' ? '; Secure' : '';
+      document.cookie = 'fr_attr=' + encodeURIComponent(JSON.stringify(novo)) +
+        '; path=/; expires=' + expira + '; SameSite=Lax' + seguro;
+    } catch (_) { /* cookie bloqueado: segue sem persistir */ }
+  }
+
+  // `ads-` só quando é mídia PAGA de verdade. Antes qualquer utm_source virava
+  // "ads-*", e o link orgânico da bio entrava como anúncio.
+  var MEDIUM_PAGO = ['cpc', 'ppc', 'paid', 'ads', 'paidsocial', 'paid-social', 'display'];
+  var ehPago = !!S.tracking.gclid || !!S.tracking.fbclid ||
+    MEDIUM_PAGO.indexOf(String(S.tracking.utm_medium || '').toLowerCase()) !== -1;
+  S.tracking.origem = S.tracking.utm_source
+    ? (ehPago ? 'ads-' + S.tracking.utm_source : S.tracking.utm_source)
+    : 'site';
 
   // ============================================================
   // Benchmark — carga inicial

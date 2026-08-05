@@ -61,16 +61,40 @@ export function atribuicao(tr = {}, landingUrl = null) {
   }
 }
 
+/** Mediums que caracterizam mídia PAGA. `social` fica de fora de propósito: é o
+ *  medium do tráfego orgânico de rede social (post, story, link da bio). */
+const MEDIUM_PAGO = ['cpc', 'ppc', 'paid', 'ads', 'paidsocial', 'paid-social', 'display']
+
 /** Canal de origem (id de canais_origem). Mídia paga vence o canal do formulário:
  *  saber que o lead veio do Ads importa mais do que saber em qual form ele caiu —
- *  o formulário já aparece em negocios.produto e no evento. */
+ *  o formulário já aparece em negocios.produto e no evento.
+ *
+ *  A plataforma sozinha NÃO decide se é pago. Até 05/08/2026 qualquer
+ *  `utm_source` com "instagram" virava `meta-ads`, e o link da bio (orgânico)
+ *  entrava no CRM como anúncio — o score ainda somava +15 de "veio de anúncio"
+ *  pra lead que não custou nada. Agora só é pago com click id (gclid/fbclid/
+ *  ttclid) ou medium explicitamente pago. */
 export function canalOrigem(tr = {}, padrao = 'site') {
   if (tr.gclid) return 'google-ads'
   if (tr.fbclid) return 'meta-ads'
   if (tr.ttclid) return 'tiktok-ads'
   const s = String(tr.utm_source || '').toLowerCase()
+  const m = String(tr.utm_medium || '').toLowerCase()
+  const pago = MEDIUM_PAGO.includes(m)
+  if (!pago) {
+    // Orgânico: YouTube tem canal próprio no catálogo; o resto cai no padrão do
+    // formulário. NÃO inventar id aqui — `negocios.origem` é lido pelo <select>
+    // de canais do CRM (canais_origem), e id fora do catálogo apareceria vazio
+    // na ficha e seria sobrescrito no save seguinte. A plataforma exata não se
+    // perde: fica em primeiro_toque.utm e o canalDe() do CRM mostra
+    // "Instagram / Meta Orgânico" na coluna Canal a partir dela.
+    if (s.includes('youtube')) return 'youtube'
+    return padrao
+  }
   if (s.includes('google') || s.includes('gads') || s.includes('adwords')) return 'google-ads'
-  if (s.includes('facebook') || s.includes('instagram') || s.includes('meta')) return 'meta-ads'
+  if (s.includes('facebook') || s.includes('instagram') || s.includes('meta') || s === 'ig' || s === 'fb') {
+    return 'meta-ads'
+  }
   if (s.includes('tiktok')) return 'tiktok-ads'
   if (s.includes('youtube')) return 'youtube'
   return padrao

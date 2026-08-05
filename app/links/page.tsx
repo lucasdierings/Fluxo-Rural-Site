@@ -53,8 +53,21 @@ const profilePageJsonLd = {
   },
 }
 
-// utm para o GA4 atribuir o tráfego vindo da bio
-const U = '?utm_source=bio&utm_medium=social'
+// NÃO carimbar utm_* nos links INTERNOS desta página.
+//
+// Até 05/08/2026 cada botão levava `?utm_source=bio&utm_medium=social`. UTM em
+// link interno RESETA a atribuição da sessão no GA4: quem entrava pelo Instagram
+// virava "bio / social" no primeiro clique, e a origem verdadeira sumia do
+// relatório (era por isso que `ig / social` e `bio / social` apareciam como
+// coisas separadas, sendo em boa parte a mesma pessoa).
+//
+// O UTM vive no link da BIO do Instagram, que é a entrada:
+//   https://fluxorural.com.br/links/?utm_source=instagram&utm_medium=social&utm_campaign=bio
+// Daí o AttributionCapture grava o cookie `fr_attr` e a origem sobrevive à
+// navegação interna até o formulário (ver lib/track.ts).
+//
+// Qual botão foi clicado continua rastreado por EVENTO, não por UTM:
+// LinkButton dispara `bio_lead_click` / `cta_click` com o nome do botão.
 
 const MSG_WHATS =
   'Olá Lucas! Cheguei pelo seu link da bio e gostaria de falar com você.'
@@ -94,7 +107,7 @@ export default function LinksPage() {
         {/* Destaques */}
         <section className="space-y-3 mb-7">
           <LinkButton
-            href={`/diagnostico/${U}`}
+            href="/diagnostico/"
             label="Diagnóstico de Gestão (grátis)"
             sublabel="30 min para achar onde melhorar — sem compromisso"
             icon="sparkles"
@@ -127,11 +140,11 @@ export default function LinksPage() {
           Explore
         </h2>
         <section className="space-y-3 mb-7">
-          <LinkButton href={`/palestras/${U}`} label="Palestras" sublabel="Liderança, gestão, empreendedorismo e IA" icon="mic" cta="palestras" />
-          <LinkButton href={`/servicos/lideranca/${U}`} label="Liderança e Empreendedorismo" sublabel="Workshop, palestras e consultoria on-line" icon="sparkles" cta="lideranca" />
-          <LinkButton href={`/servicos/${U}`} label="Serviços e Consultoria" sublabel="Gestão, financeiro e liderança no agro" icon="briefcase" cta="servicos" />
-          <LinkButton href={`/sobre/${U}`} label="Sobre o Lucas" sublabel="Trajetória, prêmios e credenciais" icon="user" cta="sobre" />
-          <LinkButton href={`/blog/${U}`} label="Blog" sublabel="Artigos práticos de gestão no campo" icon="book" cta="blog" />
+          <LinkButton href="/palestras/" label="Palestras" sublabel="Liderança, gestão, empreendedorismo e IA" icon="mic" cta="palestras" />
+          <LinkButton href="/servicos/lideranca/" label="Liderança e Empreendedorismo" sublabel="Workshop, palestras e consultoria on-line" icon="sparkles" cta="lideranca" />
+          <LinkButton href="/servicos/" label="Serviços e Consultoria" sublabel="Gestão, financeiro e liderança no agro" icon="briefcase" cta="servicos" />
+          <LinkButton href="/sobre/" label="Sobre o Lucas" sublabel="Trajetória, prêmios e credenciais" icon="user" cta="sobre" />
+          <LinkButton href="/blog/" label="Blog" sublabel="Artigos práticos de gestão no campo" icon="book" cta="blog" />
         </section>
 
         {/* Conteúdo & Podcasts */}
@@ -171,7 +184,7 @@ export default function LinksPage() {
         {/* Rodapé */}
         <footer className="mt-9 text-center">
           <a
-            href={`https://fluxorural.com.br/${U}`}
+            href="https://fluxorural.com.br/"
             className="text-white/60 hover:text-dourado text-sm transition-colors"
           >
             Ver site completo →

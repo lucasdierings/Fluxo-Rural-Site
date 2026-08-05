@@ -39,8 +39,25 @@ export interface Attribution {
   utm_content: string
   gclid: string
   fbclid: string
-  /** ads-<utm_source> quando há utm_source, senão 'site'. */
+  /** Rótulo curto do canal: 'ads-<source>' só quando é mídia PAGA de verdade,
+   *  '<source>' quando é orgânico, 'site' quando não há atribuição nenhuma. */
   origem: string
+}
+
+/** Mediums que caracterizam mídia paga. `social` fica de fora: é o medium do
+ *  tráfego orgânico de rede social (post, story, link da bio). */
+const MEDIUM_PAGO = ['cpc', 'ppc', 'paid', 'ads', 'paidsocial', 'paid-social', 'display']
+
+/** Rótulo do canal a partir da atribuição crua.
+ *
+ *  Até 05/08/2026 qualquer `utm_source` virava `ads-<source>`, então o link
+ *  orgânico da bio chegava no e-mail interno como "ads-instagram" — o Lucas
+ *  lendo aquilo acharia que pagou pelo lead. Agora o prefixo `ads-` exige click
+ *  id (gclid/fbclid) ou medium explicitamente pago. */
+function rotuloOrigem(source: string, medium: string, gclid: string, fbclid: string): string {
+  if (!source) return gclid || fbclid ? 'ads-desconhecido' : 'site'
+  const pago = !!gclid || !!fbclid || MEDIUM_PAGO.includes(medium.toLowerCase())
+  return pago ? `ads-${source}` : source
 }
 
 const ATTR_COOKIE = 'fr_attr'
@@ -62,7 +79,7 @@ function daQueryString(): Attribution | null {
     utm_content: get('utm_content'),
     gclid: get('gclid'),
     fbclid: get('fbclid'),
-    origem: get('utm_source') ? `ads-${get('utm_source')}` : 'site',
+    origem: rotuloOrigem(get('utm_source'), get('utm_medium'), get('gclid'), get('fbclid')),
   }
   const temAlgo = Object.entries(attr).some(([k, v]) => k !== 'origem' && v)
   return temAlgo ? attr : null
@@ -75,7 +92,13 @@ function doCookie(): Attribution | null {
     ?.slice(ATTR_COOKIE.length + 1)
   if (!bruto) return null
   try {
-    return { ...ATTR_VAZIA, ...JSON.parse(decodeURIComponent(bruto)) } as Attribution
+    const attr = { ...ATTR_VAZIA, ...JSON.parse(decodeURIComponent(bruto)) } as Attribution
+    // `origem` é RECALCULADO, nunca lido do cookie: o cookie dura 90 dias, e os
+    // que foram gravados antes de 05/08/2026 têm o rótulo antigo (todo tráfego
+    // com utm_source virava "ads-*", inclusive orgânico). Recalcular faz o
+    // cookie velho se corrigir sozinho na próxima leitura.
+    attr.origem = rotuloOrigem(attr.utm_source, attr.utm_medium, attr.gclid, attr.fbclid)
+    return attr
   } catch {
     return null
   }
