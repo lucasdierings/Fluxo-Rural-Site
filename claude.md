@@ -388,3 +388,55 @@ Implementamos a estratégia "Benchmark da Safra" em substituição visual a "Cal
   - Integração com Contatos e Audiências do Resend (`addContactToResendAudience`) adicionando tags personalizadas de performance e segmentação (`margem_faixa`, `safra`, `interesse_gestao`, `percentil`, etc.).
   - Correção de recálculo (prevenção de linhas órfãs/duplicadas): atualiza dados anteriores se o ID for submetido novamente.
 
+---
+
+## Sessão 05 ago/2026 — Atribuição de leads (UTM/cookie) e calculadora só como captura
+
+**Atribuição do site até o CRM, corrigida ponta a ponta.** Motivador: lead do
+`/diagnostico` chegou no CRM como "Manual / direto" apesar de o GA4 mostrar
+`bio / social`. Causa raiz: `DiagnosticoForm.tsx` tinha leitor de UTM próprio,
+lendo só 3 campos da query string da PÁGINA ATUAL, ignorando o cookie de
+primeiro toque `fr_attr` que `lib/track.ts` já grava em todo pageview
+(`captureAttribution`/`readAttribution`). Corrigido para usar
+`readAttribution()`, igual ao `ContactForm.tsx` já fazia.
+
+- **UTM só na ENTRADA, nunca em link interno.** A página `/links` (linktree
+  caseiro) carimbava `utm_source=bio` em TODO botão interno, o que resetava a
+  atribuição de sessão no GA4 a cada clique. Removido; o UTM passa a viver só
+  no link da bio do Instagram.
+- **`canalOrigem()` (`functions/_lib/crm.js`) só marca pago com prova real**
+  (click id ou `utm_medium` explicitamente pago). Antes, qualquer
+  `utm_source` contendo "instagram" virava `meta-ads`, inflando o score de
+  leads orgânicos como se fossem anúncio.
+- **`utmDoToque` (CRM) passou a trafegar `utm_content` e `landing_url`**, que
+  eram descartados. É o `utm_content` que identifica QUAL landing converteu
+  (o Beweather já escreve `lp-b-navbar`/`lp-b-sticky` ali). Necessário pro CRM
+  separar canal de aquisição (como chegou) de ponto de captura (onde
+  converteu) — são duas dimensões que se cruzam, não uma.
+- Calculadora (`public/calculadora/app.js`, JS puro fora do Next) ganhou
+  leitor do mesmo cookie `fr_attr` na mão, com fallback pago só por click id
+  ou medium explícito.
+
+**Checkbox "Quero conhecer uma ferramenta de gestão completa" REMOVIDO da
+calculadora** (`public/calculadora/index.html`), por decisão do Lucas: a
+calculadora é isca de CAPTURA, e nada mais. O contato entra na Base de
+marketing do CRM e fica lá para disparo de e-mail/remarketing futuro — não
+vira oportunidade de venda mesmo cumprindo critérios de qualificação (área,
+margem, interesse). As 3 referências a `el.regInteresse` no `app.js` ficaram
+tolerantes à ausência do elemento (`if (el.regInteresse) {...}`), pois sem
+guarda o `addEventListener` num `null` derrubava o boot inteiro da
+calculadora. A coluna `interesse_gestao` do D1 `fluxo_calculadora` **não foi
+tocada** — schema aditivo, há dado histórico gravado nela, e o backend segue
+aceitando o campo caso volte um dia.
+
+**Pendência anotada, não implementada:** os campos ricos da calculadora
+(cultura, área, margem/ha, diagnóstico, dívida) vivem só no D1
+`fluxo_calculadora`; o CRM recebe apenas uma frase-resumo em
+`contatos.interesse`. Segmentar disparo de e-mail a partir do CRM hoje não dá;
+a partir do banco da calculadora ou do Resend, dá. Decisão de por onde fazer
+fica para quando o disparo entrar em pauta.
+
+Trabalho equivalente no lado do CRM (canal × página, caixa de entrada por
+fato, indicadores que não mentem com amostra pequena) está registrado no
+`CLAUDE.md` do repo `CRM Fluxo Rural`.
+
