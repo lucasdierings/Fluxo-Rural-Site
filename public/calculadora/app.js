@@ -1227,10 +1227,17 @@
     el.regWhats.setSelectionRange(pos, pos);
   });
   el.regLgpd.addEventListener('change', () => { el.btnVerDiagnostico.disabled = !el.regLgpd.checked; });
-  el.regInteresse.addEventListener('change', () => {
-    S.interesse_gestao = el.regInteresse.checked;
-    if (el.regInteresse.checked) fireEvent('interesse_gestao');
-  });
+  /* O checkbox de interesse em gestão saiu da tela (ver index.html). O código
+   * fica tolerante à ausência dele em vez de sumir de vez: a coluna
+   * `interesse_gestao` continua no D1 com dado histórico, e se um dia o campo
+   * voltar, volta funcionando. Sem esta guarda, `el.regInteresse` é null e o
+   * addEventListener derruba o boot inteiro da calculadora. */
+  if (el.regInteresse) {
+    el.regInteresse.addEventListener('change', () => {
+      S.interesse_gestao = el.regInteresse.checked;
+      if (el.regInteresse.checked) fireEvent('interesse_gestao');
+    });
+  }
 
   function validateCadastro() {
     let ok = true; let firstInvalid = null;
@@ -2008,7 +2015,7 @@
       nome: el.regNome.value.trim(), email: el.regEmail.value.trim(),
       whatsapp: el.regWhats.value.trim(), lgpd: el.regLgpd.checked
     };
-    S.interesse_gestao = el.regInteresse.checked;
+    S.interesse_gestao = el.regInteresse ? el.regInteresse.checked : false;
     el.btnVerDiagnostico.disabled = true;
     const res = await apiCadastrar(buildCadastroPayload());
     if (res && res.id) S.calcId = res.id;

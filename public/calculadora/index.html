@@ -432,10 +432,16 @@
                   <p class="error-msg">Informe um WhatsApp válido com DDD.</p>
                 </div>
 
-                <label class="check-row" for="regInteresse" style="margin:1rem 0 0">
-                  <input type="checkbox" id="regInteresse" />
-                  <span class="check-label">Quero conhecer uma ferramenta de gestão completa (com depreciação, custo de oportunidade e inventário).</span>
-                </label>
+<!-- Checkbox "Quero conhecer uma ferramenta de gestão completa" REMOVIDO em
+     05/08/2026, por decisão do Lucas: a calculadora é isca de CAPTURA, e
+     nada mais. Pedir intenção de compra na tela de cadastro mistura captura
+     com qualificação e cria expectativa de abordagem que não vem agora.
+     O contato entra na Base de marketing e fica lá, para disparo de e-mail
+     ou remarketing depois.
+
+     A coluna `interesse_gestao` do D1 CONTINUA existindo e não foi tocada
+     (schema é aditivo, e há dado histórico gravado nela). O backend segue
+     aceitando o campo: só nenhuma tela manda mais. -->
 
                 <label class="check-row" for="regLgpd" style="margin:1rem 0 1.25rem">
                   <input type="checkbox" id="regLgpd" />
@@ -607,6 +613,6 @@
     </footer>
   </div>
 
-  <script src="./app.js?v=5" defer></script>
+  <script src="./app.js?v=6" defer></script>
 </body>
 </html>
