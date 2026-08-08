@@ -7,7 +7,7 @@ import { DiagnosticoForm } from '@/components/forms/DiagnosticoForm'
 export const metadata: Metadata = {
   alternates: { canonical: '/diagnostico/' },
   title: 'Diagnóstico Gratuito para o Agro | Fluxo Rural',
-  description: '30 minutos para descobrir onde sua gestão, liderança e resultados perdem dinheiro — para produtores rurais e empresas do agro. Você sai com um plano de ação de 90 dias. Sem compromisso.',
+  description: '30 minutos para descobrir onde sua gestão, liderança e resultados perdem dinheiro - para produtores rurais e empresas do agro. Você sai com um plano de ação de 90 dias. Sem compromisso.',
   openGraph: {
     title: 'Diagnóstico Gratuito | Fluxo Rural Consultoria',
     description: 'Diagnóstico gratuito de 30 minutos para produtores rurais e empresas do agronegócio. Plano de ação de 90 dias, sem compromisso.',
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 }
 
 const benefits = [
-  { emoji: '📊', title: 'Análise personalizada', desc: 'Uma leitura da gestão do seu negócio no agro, feita sobre as suas respostas — não um modelo genérico' },
-  { emoji: '🎯', title: 'Gargalos identificados', desc: 'Onde você perde dinheiro, clientes ou eficiência — e por onde começar a corrigir' },
+  { emoji: '📊', title: 'Análise personalizada', desc: 'Uma leitura da gestão do seu negócio no agro, feita sobre as suas respostas - não um modelo genérico' },
+  { emoji: '🎯', title: 'Gargalos identificados', desc: 'Onde você perde dinheiro, clientes ou eficiência - e por onde começar a corrigir' },
   { emoji: '📅', title: 'Plano de ação de 90 dias', desc: 'Você sai da conversa com próximos passos concretos para os próximos 3 meses' },
   { emoji: '✨', title: 'Recomendações reais', desc: 'Baseadas em dados e em experiência de campo com produtores e empresas do agro' },
 ]
@@ -40,7 +40,7 @@ const credenciais = [
   'Engenheiro Agrônomo (CREA-PR 179906/D)',
   'MBA em Agronegócios pela USP/ESALQ e professor de MBA',
   'Top 5 nacional no CNA Jovem 2021 (entre 3.742 projetos)',
-  'Host do NHCast (New Holland) — 7 anos no mercado de gestão rural, em 24 estados',
+  'Host do NHCast (New Holland) - 7 anos no mercado de gestão rural, em 24 estados',
 ]
 
 const faqs = [
@@ -64,7 +64,7 @@ export default function DiagnosticoPage() {
             Descubra os Gargalos que Travam o Resultado do seu Agro
           </h1>
           <p className="text-white/80 text-lg md:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
-            Em 30 minutos, um diagnóstico gratuito da sua gestão, liderança e resultados — e você sai com um plano de ação de 90 dias. Seja produtor rural ou empresa do agro.
+            Em 30 minutos, um diagnóstico gratuito da sua gestão, liderança e resultados - e você sai com um plano de ação de 90 dias. Seja produtor rural ou empresa do agro.
           </p>
           <a
             href="#formulario"
@@ -76,7 +76,7 @@ export default function DiagnosticoPage() {
         </div>
       </section>
 
-      {/* Beneficios — VALOR primeiro */}
+      {/* Beneficios - VALOR primeiro */}
       <section className="bg-white py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy text-center mb-3">
@@ -101,14 +101,14 @@ export default function DiagnosticoPage() {
         </div>
       </section>
 
-      {/* Autoridade — quem faz o diagnóstico */}
+      {/* Autoridade - quem faz o diagnóstico */}
       <section className="bg-off-white py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 items-center">
             <div className="relative w-40 h-40 md:w-full md:h-56 rounded-2xl overflow-hidden mx-auto shrink-0">
               <Image
                 src="/images/lucas-agronomo.jpg"
-                alt="Lucas Dierings — Engenheiro Agrônomo e consultor no agronegócio"
+                alt="Lucas Dierings - Engenheiro Agrônomo e consultor no agronegócio"
                 fill
                 className="object-cover"
               />
@@ -118,7 +118,7 @@ export default function DiagnosticoPage() {
                 Quem Vai Fazer seu Diagnóstico
               </h2>
               <p className="text-carvao/70 mb-5 leading-relaxed">
-                <strong className="text-navy">Lucas Dierings</strong> conduz cada diagnóstico pessoalmente. Ele une a técnica do campo à gestão de negócios — e traduz os seus números em decisões práticas.
+                <strong className="text-navy">Lucas Dierings</strong> conduz cada diagnóstico pessoalmente. Ele une a técnica do campo à gestão de negócios - e traduz os seus números em decisões práticas.
               </p>
               <ul className="space-y-2">
                 {credenciais.map((c) => (
@@ -170,7 +170,7 @@ export default function DiagnosticoPage() {
         </div>
       </section>
 
-      {/* FAQ — objeções antes do formulário */}
+      {/* FAQ - objeções antes do formulário */}
       <section className="bg-white py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy text-center mb-3">
@@ -193,7 +193,7 @@ export default function DiagnosticoPage() {
         </div>
       </section>
 
-      {/* Formulario — fechamento */}
+      {/* Formulario - fechamento */}
       <section id="formulario" className="bg-off-white py-16 md:py-20 scroll-mt-24">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy text-center mb-4">

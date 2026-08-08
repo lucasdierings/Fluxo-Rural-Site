@@ -85,8 +85,8 @@ export default async function BlogPostPage({ params }: Props) {
       jobTitle: 'Engenheiro Agrônomo e Consultor Estratégico',
       description: 'Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e consultor em gestão financeira rural, inovação e sucessão familiar no agronegócio.',
       alumniOf: [
-        { '@type': 'CollegeOrUniversity', name: 'USP/ESALQ — MBA em Agronegócios' },
-        { '@type': 'CollegeOrUniversity', name: 'UFPR — Engenharia Agronômica' },
+        { '@type': 'CollegeOrUniversity', name: 'USP/ESALQ - MBA em Agronegócios' },
+        { '@type': 'CollegeOrUniversity', name: 'UFPR - Engenharia Agronômica' },
       ],
       knowsAbout: ['Gestão financeira rural', 'Agronegócio', 'Sucessão familiar rural', 'Inovação no agro', 'Crédito rural'],
       sameAs: [

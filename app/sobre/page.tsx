@@ -7,7 +7,7 @@ import { Award, HeartHandshake, ShieldCheck, ArrowRight, Trophy, GraduationCap, 
 export const metadata: Metadata = {
   alternates: { canonical: '/sobre/' },
   title: 'Sobre Lucas Dierings',
-  description: 'Conheça Lucas Dierings — destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
+  description: 'Conheça Lucas Dierings - destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
   openGraph: {
     title: 'Sobre Lucas Dierings | Fluxo Rural',
     description: 'Destaque nacional CNA/SENAR, professor de MBA, host do NHCast New Holland e fundador da Fluxo Rural Consultoria.',
@@ -19,43 +19,43 @@ const timeline = [
   {
     year: '2019',
     title: 'Graduação em Agronomia',
-    text: 'UFPR — Universidade Federal do Paraná, Campus Palotina',
+    text: 'UFPR - Universidade Federal do Paraná, Campus Palotina',
   },
   {
     year: '2018–2025',
     title: 'Analista de Negócios → Diretor de Marketing e Vendas',
-    text: 'Software de Gestão Rural — ERP para Propriedades Rurais. Atuação em 24 estados brasileiros.',
+    text: 'Software de Gestão Rural - ERP para Propriedades Rurais. Atuação em 24 estados brasileiros.',
   },
   {
     year: '2021',
-    title: 'Destaque Nacional — CNA Jovem / Sistema CNA-SENAR',
+    title: 'Destaque Nacional - CNA Jovem / Sistema CNA-SENAR',
     text: 'Um dos 5 vencedores nacionais entre 3.742 jovens inscritos. Projeto: Gestão Familiar Rural através de informação e tecnologia. Representou o Paraná na missão técnica pelas principais regiões do agronegócio brasileiro.',
     highlight: true,
   },
   {
     year: '2023',
     title: 'MBA em Agronegócios',
-    text: 'USP/ESALQ — Escola Superior de Agricultura Luiz de Queiroz',
+    text: 'USP/ESALQ - Escola Superior de Agricultura Luiz de Queiroz',
   },
   {
     year: '2023–2024',
-    title: 'Professor — Graduação em Agronomia',
-    text: 'ISEPE Rondon — Marechal Cândido Rondon/PR',
+    title: 'Professor - Graduação em Agronomia',
+    text: 'ISEPE Rondon - Marechal Cândido Rondon/PR',
   },
   {
     year: '2025',
-    title: 'Professor — MBA Executivo em Agronegócio',
-    text: 'PUCPR — Pontifícia Universidade Católica do Paraná',
+    title: 'Professor - MBA Executivo em Agronegócio',
+    text: 'PUCPR - Pontifícia Universidade Católica do Paraná',
   },
   {
     year: '2025–atual',
     title: 'Consultor Técnico e Gerencial',
-    text: 'SENAR/PR — Norte do Paraná',
+    text: 'SENAR/PR - Norte do Paraná',
   },
   {
     year: 'Atual',
     title: 'Fundador e Consultor Principal',
-    text: 'Fluxo Rural Consultoria — Londrina e Curitiba, PR',
+    text: 'Fluxo Rural Consultoria - Londrina e Curitiba, PR',
   },
 ]
 
@@ -72,7 +72,7 @@ const credentials = [
   },
   {
     icon: Radio,
-    title: 'Host NHCast — New Holland Brasil',
+    title: 'Host NHCast - New Holland Brasil',
     subtitle: 'Podcast oficial da maior fabricante de máquinas agro',
   },
   {
@@ -83,7 +83,7 @@ const credentials = [
   {
     icon: Smartphone,
     title: '7 anos em tecnologia rural',
-    subtitle: 'Gestão financeira e agronômica — 24 estados',
+    subtitle: 'Gestão financeira e agronômica - 24 estados',
   },
 ]
 
@@ -96,7 +96,7 @@ const values = [
   {
     icon: HeartHandshake,
     title: 'Respeito a quem é do campo',
-    description: 'Ninguém conhece a terra melhor que quem está nela. Bom trabalho soma à experiência do produtor — não passa por cima dela.',
+    description: 'Ninguém conhece a terra melhor que quem está nela. Bom trabalho soma à experiência do produtor - não passa por cima dela.',
   },
   {
     icon: ShieldCheck,
@@ -112,7 +112,7 @@ export default function SobrePage() {
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
         <Image
           src="/images/lucas-agronomo.jpg"
-          alt="Lucas Dierings na lavoura — vista aérea"
+          alt="Lucas Dierings na lavoura - vista aérea"
           fill
           className="object-cover object-[center_60%]"
           sizes="100vw"
@@ -124,7 +124,7 @@ export default function SobrePage() {
             Sobre Lucas Dierings
           </h1>
           <p className="text-white/80 text-xl">
-            Do campo para a estratégia — e de volta ao campo.
+            Do campo para a estratégia - e de volta ao campo.
           </p>
         </div>
       </section>
@@ -136,26 +136,26 @@ export default function SobrePage() {
             <div className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-apple-lg transition-smooth hover:shadow-apple-lg hover:scale-[1.02]">
               <Image
                 src="/images/lucas-hero.jpg"
-                alt="Lucas Dierings — Engenheiro Agrônomo"
+                alt="Lucas Dierings - Engenheiro Agrônomo"
                 fill
                 className="object-cover"
               />
             </div>
             <div className="space-y-5 md:space-y-6 text-carvao/80 leading-relaxed text-base md:text-lg font-light">
               <p>
-                Lucas Dierings é engenheiro agrônomo graduado pela UFPR, com MBA em Agronegócios pela USP/ESALQ — a mais reconhecida escola de agronegócio do Brasil.
+                Lucas Dierings é engenheiro agrônomo graduado pela UFPR, com MBA em Agronegócios pela USP/ESALQ - a mais reconhecida escola de agronegócio do Brasil.
               </p>
               <p>
                 Vencedor nacional do Programa CNA Jovem 2021, promovido pelo Sistema CNA/SENAR, foi selecionado entre 3.742 jovens de todo o Brasil pelo seu projeto de Gestão Familiar Rural com foco em informação e tecnologia.
               </p>
               <p>
-                Com 7 anos de experiência em software de gestão rural com atuação em 24 estados —, de analista à direção comercial, Lucas acumulou experiência única na intersecção entre tecnologia e gestão no campo.
+                Com 7 anos de experiência em software de gestão rural com atuação em 24 estados -, de analista à direção comercial, Lucas acumulou experiência única na intersecção entre tecnologia e gestão no campo.
               </p>
               <p>
                 Professor de MBA em Agronegócios na PUCPR e consultor do SENAR/PR, fundou a Fluxo Rural Consultoria com um propósito claro: levar gestão estratégica, clareza financeira e planejamento sucessório para propriedades e empresas rurais de todo o Brasil.
               </p>
               <p>
-                Palestrante nos estados do PR, MS, SC, RS e PI, é também host do Agrojovem Podcast e do NHCast — podcast oficial da New Holland Brasil.
+                Palestrante nos estados do PR, MS, SC, RS e PI, é também host do Agrojovem Podcast e do NHCast - podcast oficial da New Holland Brasil.
               </p>
             </div>
           </div>
@@ -256,14 +256,14 @@ export default function SobrePage() {
             >
               <Image
                 src="/images/lucas-posse.jpg"
-                alt="Lucas Dierings — Destaque Nacional CNA Jovem"
+                alt="Lucas Dierings - Destaque Nacional CNA Jovem"
                 fill
                 className="object-cover object-top group-hover:scale-110 transition-all duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 via-60% to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <span className="bg-dourado text-carvao text-xs md:text-sm font-semibold px-4 py-2 rounded-full inline-block">Destaque Nacional</span>
-                <h3 className="font-heading text-white font-bold text-lg md:text-xl mt-3">CNA Jovem — Sistema CNA/SENAR</h3>
+                <h3 className="font-heading text-white font-bold text-lg md:text-xl mt-3">CNA Jovem - Sistema CNA/SENAR</h3>
                 <p className="text-white/80 text-sm md:text-base font-light mt-1">Um dos 5 vencedores nacionais entre 3.742 jovens do agronegócio em 2021</p>
               </div>
             </a>
@@ -276,14 +276,14 @@ export default function SobrePage() {
             >
               <Image
                 src="/images/lucas-podcast.jpg"
-                alt="Lucas Dierings — Host do NHCast New Holland"
+                alt="Lucas Dierings - Host do NHCast New Holland"
                 fill
                 className="object-cover group-hover:scale-110 transition-all duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 via-60% to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <span className="bg-dourado text-carvao text-xs md:text-sm font-semibold px-4 py-2 rounded-full inline-block">Host</span>
-                <h3 className="font-heading text-white font-bold text-lg md:text-xl mt-3">NHCast — New Holland Brasil</h3>
+                <h3 className="font-heading text-white font-bold text-lg md:text-xl mt-3">NHCast - New Holland Brasil</h3>
                 <p className="text-white/80 text-sm md:text-base font-light mt-1">Podcast oficial da maior fabricante de máquinas agrícolas</p>
               </div>
             </a>

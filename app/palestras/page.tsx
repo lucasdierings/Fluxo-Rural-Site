@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   Trophy,
   GraduationCap,
@@ -8,17 +9,18 @@ import {
   CheckCircle2,
   Clock,
   Monitor,
-  Building2,
+  Users,
   MessageCircle,
   FileText,
 } from 'lucide-react'
-import { WhatsappCTA } from '@/components/palestras/WhatsappCTA'
-import { MidiaKitDownload } from '@/components/palestras/MidiaKitDownload'
+import { PedidoCTA } from '@/components/palestras/PedidoCTA'
+import { PortfolioDownload } from '@/components/palestras/PortfolioDownload'
+import { TEMAS_PALESTRA } from '@/lib/catalogo'
 
 export const metadata: Metadata = {
   title: 'Palestrante para Agronegócio | Gestão, Liderança e IA no Agro',
   description:
-    'Contrate Lucas Dierings — palestrante de gestão, finanças, liderança e IA no agronegócio. Host do NHCast (New Holland), Top 5 CNA Jovem do Brasil. Proposta em 24h.',
+    'Contrate Lucas Dierings, palestrante de gestão, finanças, liderança e IA no agronegócio. Host do NHCast (New Holland), Top 5 CNA Jovem do Brasil. Proposta em 24h.',
   alternates: { canonical: '/palestras/' },
   openGraph: {
     title: 'Palestrante para Agronegócio | Lucas Dierings',
@@ -27,72 +29,9 @@ export const metadata: Metadata = {
   },
 }
 
-// Mensagem genérica do CTA principal (hero / final)
-const MSG_GERAL =
-  'Olá Lucas! Quero levar uma palestra sua para o meu evento. Pode me enviar os temas e valores?'
-
-const temas = [
-  {
-    title: 'Gestão e Inovação no Agronegócio',
-    promise:
-      'Como aplicar gestão profissional e inovação para aumentar a eficiência e a rentabilidade no campo.',
-    bullets: [
-      'Os indicadores que todo gestor rural precisa acompanhar — e os que só dão trabalho',
-      'Como transformar os dados da fazenda em decisão, sem virar refém de planilha',
-      'Casos reais de propriedades que profissionalizaram a gestão e o que mudou no bolso',
-    ],
-  },
-  {
-    title: 'Gestão Financeira Rural na Prática',
-    promise:
-      'Fluxo de caixa, custo de produção e rentabilidade por safra explicados na linguagem do campo.',
-    bullets: [
-      'Como separar a conta da pessoa física da conta da fazenda — e por que isso muda tudo',
-      'Custo por hectare e por saca: como calcular e usar para negociar melhor',
-      'O ciclo financeiro do agro e como não apertar no vão entre safra e venda',
-    ],
-  },
-  {
-    title: 'Gestão como Ferramenta para a Sucessão Familiar',
-    promise:
-      'Como a gestão profissional destrava a transição entre gerações sem brigar a família.',
-    bullets: [
-      'Por que a maioria das sucessões trava na falta de gestão, não na falta de herdeiro',
-      'Combinados, papéis e governança: o mínimo para empresa e família não se misturarem',
-      'O caminho para a próxima geração assumir com número na mão, não no feeling',
-    ],
-  },
-  {
-    title: 'Inteligência Artificial no Agronegócio',
-    promise:
-      'O que já é realidade em IA no agro, quais ferramentas usar e como começar a aplicar amanhã.',
-    bullets: [
-      'O que a IA já faz hoje no agro — e o que ainda é promessa de palco',
-      'Ferramentas práticas que um produtor ou empresa pode usar essa semana',
-      'Como usar IA para ganhar tempo em gestão e decisão, sem ser técnico',
-    ],
-  },
-  {
-    title: 'Empreendedorismo e Inovação no Agronegócio',
-    promise:
-      'Mentalidade empreendedora aplicada ao campo: identificar oportunidades, tirar ideias do papel e inovar sem apostar a fazenda.',
-    bullets: [
-      'Como enxergar oportunidades onde a maioria só vê rotina de safra',
-      'Inovação de verdade: testar pequeno, errar barato e escalar o que funciona',
-      'Casos de quem empreendeu dentro da porteira — e o que dá pra copiar amanhã',
-    ],
-  },
-  {
-    title: 'Liderança Eficaz no Agronegócio',
-    promise:
-      'O novo modelo de liderança do agro: por que o comando-e-controle da porteira não segura mais ninguém — e o que fazer no lugar.',
-    bullets: [
-      'Não é apagão de mão de obra, é apagão de liderança: como atrair e manter gente boa',
-      'Comunicação, propósito e inteligência emocional na linguagem do campo',
-      'Se nem os filhos querem ficar na propriedade, imagina os funcionários: liderança e sucessão',
-    ],
-  },
-]
+// Os temas vivem em lib/catalogo.ts porque a página de treinamentos e os
+// formulários de captação precisam da mesma lista.
+const temas = TEMAS_PALESTRA
 
 const credenciais = [
   { icon: Trophy, title: 'Top 5 CNA Jovem 2021', subtitle: 'Entre os 5 melhores de 3.742 do Brasil' },
@@ -101,38 +40,43 @@ const credenciais = [
   { icon: MapPin, title: 'Palestras em 5 estados', subtitle: 'PR, MS, SC, RS e PI' },
 ]
 
+// Três eventos diferentes de propósito. A galeria antiga tinha três ângulos da
+// mesma sala, o que passava a impressão de uma agenda de um dia só.
 const galeria = [
   {
-    src: '/palestra-plateia.jpg',
-    alt: 'Lucas Dierings palestrando para plateia no Fórum Jovens Líderes Rurais, em Londrina/PR',
+    src: '/palestra-somave.jpg',
+    alt: 'Lucas Dierings palestrando sobre gestão em palco de evento do agronegócio',
   },
   {
-    src: '/palestra-palco.jpg',
-    alt: 'Lucas Dierings no palco durante palestra sobre empreendedorismo no agronegócio',
+    src: '/palestra-sindicato-mcr.jpg',
+    alt: 'Lucas Dierings ao microfone durante palestra em sindicato rural',
   },
   {
-    src: '/palestra-painel.jpg',
-    alt: 'Lucas Dierings em painel de debate sobre o futuro do agronegócio',
+    src: '/palestra-teixeira-soares.jpg',
+    alt: 'Lucas Dierings apresentando números de gestão financeira para produtores em sindicato rural',
   },
 ]
 
 const formatos = [
-  { icon: Clock, title: 'Keynote (45–60 min)', desc: 'Palestra principal para abrir ou fechar o seu evento com energia.' },
-  { icon: Building2, title: 'Workshop / Imersão', desc: 'Meio período de conteúdo aplicado, com exercícios e discussão.' },
+  { icon: Clock, title: 'Palestra principal (45 a 60 min)', desc: 'Para abrir ou fechar o seu evento com energia.' },
+  { icon: Users, title: 'Painel ou mesa redonda', desc: 'Participação em debate ou mediação de painel com outros convidados.' },
   { icon: Monitor, title: 'Presencial ou online', desc: 'Atendimento em todo o Brasil presencialmente ou por chamada de vídeo.' },
 ]
 
-const paraQuem = [
-  'Cooperativas agropecuárias',
-  'Sindicatos rurais e associações',
-  'Revendas e indústrias de insumos',
-  'Agtechs e empresas do agro',
-  'Organizadores de eventos e feiras',
-  'Universidades e instituições de ensino',
+// PÚBLICO-ALVO. Quem CONTRATA não entra no front de propósito: quem quer
+// contratar contrata, e a lista de instituições vive no llms.txt, onde serve
+// para buscador e para IA encontrarem a página.
+const plateias = [
+  'Produtores rurais e famílias',
+  'Empresários e lideranças do setor',
+  'Equipes técnicas e comerciais',
+  'Jovens sucessores',
+  'Estudantes de ciências agrárias',
+  'Público misto de feira e congresso',
 ]
 
 const passos = [
-  { num: 1, title: 'Chame no WhatsApp', desc: 'Conte o evento, o público-alvo e o tema de interesse.' },
+  { num: 1, title: 'Preencha o pedido', desc: 'Conte o evento, quem vai assistir e o tema de interesse.' },
   { num: 2, title: 'Receba proposta em 24h', desc: 'Formato, duração e investimento adaptados ao seu evento.' },
   { num: 3, title: 'Confirme e prepare-se', desc: 'Alinhamos o conteúdo ao perfil da sua plateia.' },
 ]
@@ -140,7 +84,7 @@ const passos = [
 const faqs = [
   {
     q: 'Quais são os formatos de palestra?',
-    a: 'Keynote de 45 a 60 minutos, workshop de meio período ou participação em painel. Tudo presencial ou online, conforme o seu evento.',
+    a: 'Palestra principal de 45 a 60 minutos, ou participação em painel e mesa redonda, presencial ou online. Para conteúdo aplicado de meio período ou dia inteiro, com exercícios e material de trabalho, o formato é treinamento.',
   },
   {
     q: 'Atende em todo o Brasil?',
@@ -148,11 +92,11 @@ const faqs = [
   },
   {
     q: 'Como funciona o investimento?',
-    a: 'Varia conforme formato, duração e deslocamento. Após o primeiro contato pelo WhatsApp, você recebe uma proposta personalizada em até 24h.',
+    a: 'Varia conforme formato, duração e deslocamento. Depois que você preenche o pedido aqui no site, o retorno com a proposta personalizada vem em até 24h.',
   },
   {
     q: 'Dá para adaptar o tema ao meu público?',
-    a: 'Sim. Todo o conteúdo é adaptado ao perfil da plateia — produtores, cooperativa, empresa, evento ou universidade.',
+    a: 'Sim. Todo o conteúdo é adaptado ao perfil da plateia, seja ela de produtores, de equipe interna, de estudantes ou mista, como costuma ser em feira e congresso.',
   },
   {
     q: 'Com quanto tempo de antecedência preciso contratar?',
@@ -163,10 +107,10 @@ const faqs = [
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'Palestras e workshops sobre agronegócio',
+  serviceType: 'Palestras sobre agronegócio',
   name: 'Palestras de Lucas Dierings sobre Agronegócio',
   description:
-    'Palestras e workshops sobre gestão, finanças, liderança, empreendedorismo e inteligência artificial no agronegócio, para cooperativas, sindicatos, empresas e eventos do agro.',
+    'Palestras e painéis sobre gestão, finanças, sucessão, liderança, empreendedorismo e inteligência artificial no agronegócio, para cooperativas, sindicatos, empresas e eventos do agro.',
   url: 'https://fluxorural.com.br/palestras',
   areaServed: { '@type': 'Country', name: 'Brasil' },
   provider: {
@@ -208,24 +152,20 @@ export default function PalestrasPage() {
             Palestrante para Agronegócio
           </span>
           <h1 className="font-heading text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-4 max-w-3xl">
-            Palestras de Gestão, Finanças e IA no Agro
+            Palestras para o Agronegócio
           </h1>
-          <p className="text-white/85 text-lg md:text-xl font-light mb-3 max-w-2xl">
-            Conteúdo aplicado, linguagem do campo e resultado na prática — para cooperativas,
-            sindicatos, empresas e eventos do agronegócio.
-          </p>
-          <p className="text-dourado font-medium text-base md:text-lg mb-8 max-w-2xl">
-            Nada de palco motivacional vazio: quem sobe ao palco vive o que ensina.
+          <p className="text-white/85 text-lg md:text-xl font-light mb-8 max-w-2xl">
+            Conteúdo aplicado de gestão, finanças, liderança e inovação para convenções corporativas, empresas, cooperativas e eventos do setor.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-            <WhatsappCTA message={MSG_GERAL} label="Levar essa palestra ao meu evento" origem="hero" />
+            <PedidoCTA label="Levar uma palestra ao meu evento" servico="palestra" origem="hero" />
             <a
               href="#temas"
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white text-white h-14 px-8 text-base font-medium hover:bg-white/10 backdrop-blur-sm transition-all"
             >
               Ver os temas
             </a>
-            <MidiaKitDownload variant="outline" label="Baixar mídia kit (PDF)" origem="hero" />
+            <PortfolioDownload variant="outline" label="Baixar portfólio" origem="hero" />
           </div>
         </div>
       </section>
@@ -251,8 +191,8 @@ export default function PalestrasPage() {
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy mb-3">Momentos no Palco</h2>
             <p className="text-carvao/70">
-              Palestra recente: “Empreendedorismo e Inovação no Agronegócio” — Fórum Jovens Líderes
-              Rurais, Londrina/PR.
+              Palco de evento, plenária de sindicato e sala cheia de produtor. O conteúdo é o mesmo,
+              a linguagem se ajusta a quem está na frente.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -264,7 +204,7 @@ export default function PalestrasPage() {
                   fill
                   loading="lazy"
                   sizes="(max-width: 640px) 100vw, 33vw"
-                  className="object-cover"
+                  className={`object-cover ${g.src === '/palestra-somave.jpg' ? 'scale-125 origin-center' : ''}`}
                 />
               </div>
             ))}
@@ -297,21 +237,30 @@ export default function PalestrasPage() {
                     </li>
                   ))}
                 </ul>
-                <WhatsappCTA
-                  message={`Olá Lucas! Tenho interesse na palestra "${tema.title}" para o meu evento. Pode me passar formato e valores?`}
+                <PedidoCTA
                   label="Quero esta palestra"
+                  servico="palestra"
+                  tema={tema.title}
                   variant="secondary"
                   size="default"
                   origem={tema.title}
                   className="w-full"
                 />
+                {tema.paginaPropria && (
+                  <Link
+                    href={tema.paginaPropria.href}
+                    className="text-navy/70 hover:text-dourado text-xs font-medium text-center mt-3 underline underline-offset-2"
+                  >
+                    {tema.paginaPropria.label}
+                  </Link>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Mídia Kit — material para apresentar à diretoria */}
+      {/* Portfólio em PDF. Peça única: cobre palestras e treinamentos. */}
       <section className="py-16 md:py-20 bg-navy">
         <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
           <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
@@ -320,11 +269,12 @@ export default function PalestrasPage() {
                 Material para download
               </span>
               <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
-                Precisa apresentar para a diretoria?
+                Quer o material completo em mãos?
               </h2>
               <p className="text-white/75 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-                Baixe o mídia kit completo em PDF — bio, credenciais, os temas de palestra e
-                formatos. Pronto para enviar à comissão, cooperativa ou patrocinador do seu evento.
+                Baixe o portfólio em PDF com bio, credenciais, os temas de palestra, os formatos e
+                também os treinamentos. Serve para decidir sozinho ou para levar à comissão, ao
+                sindicato ou ao patrocinador do evento.
               </p>
               <ul className="flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-2 mb-8">
                 {temas.map((t) => (
@@ -335,14 +285,16 @@ export default function PalestrasPage() {
                 ))}
               </ul>
               <div className="flex justify-center lg:justify-start">
-                <MidiaKitDownload label="Baixar mídia kit (PDF)" origem="banda-temas" />
+                <PortfolioDownload label="Baixar portfólio" origem="banda-temas" />
               </div>
             </div>
             <div className="shrink-0">
               <div className="bg-dourado/10 border border-dourado/20 rounded-2xl w-40 h-52 md:w-48 md:h-64 flex flex-col items-center justify-center text-center px-4">
                 <FileText className="text-dourado mb-3" size={44} />
-                <p className="font-heading font-bold text-white text-sm leading-tight">Mídia Kit</p>
-                <p className="text-white/60 text-xs mt-1">Palestras · PDF · 5 páginas</p>
+                <p className="font-heading font-bold text-white text-sm leading-tight">
+                  Portfólio Fluxo Rural
+                </p>
+                <p className="text-white/60 text-xs mt-1">Palestras e treinamentos</p>
               </div>
             </div>
           </div>
@@ -364,15 +316,29 @@ export default function PalestrasPage() {
               </div>
             ))}
           </div>
+          <p className="text-carvao/60 text-sm text-center mt-12 max-w-2xl mx-auto">
+            Precisa capacitar uma equipe, e não falar para uma plateia? Isso é treinamento
+            in-company: meio período ou dia inteiro, com oficina prática e material de trabalho.{' '}
+            <Link
+              href="/servicos/treinamentos"
+              className="text-navy font-semibold hover:text-dourado underline"
+            >
+              Veja os 7 treinamentos
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
-      {/* Para quem */}
+      {/* Público-alvo */}
       <section className="py-20 bg-off-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-4xl text-center">
-          <h2 className="font-heading text-3xl font-bold text-navy mb-10">Para quem são as palestras</h2>
+        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
+          <h2 className="font-heading text-3xl font-bold text-navy mb-4">Quem está na plateia</h2>
+          <p className="text-carvao/70 max-w-2xl mx-auto mb-10">
+            A contratação do evento é B2B, mas o conteúdo é feito para quem senta na cadeira. As palestras são construídas com exemplos e vivência real, sendo ajustadas a cada perfil de público.
+          </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {paraQuem.map((p) => (
+            {plateias.map((p) => (
               <span
                 key={p}
                 className="bg-white border border-navy/10 text-navy text-sm font-medium px-5 py-2.5 rounded-full shadow-sm"
@@ -403,7 +369,7 @@ export default function PalestrasPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-off-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
           <h2 className="font-heading text-3xl font-bold text-navy text-center mb-12">Perguntas Frequentes</h2>
           <div className="space-y-4">
@@ -428,10 +394,10 @@ export default function PalestrasPage() {
             Leve uma palestra de verdade ao seu evento
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Fale comigo no WhatsApp e receba uma proposta personalizada em até 24h. Sem compromisso.
+            Preencha o pedido e receba uma proposta personalizada em até 24h. Sem compromisso.
           </p>
           <div className="flex justify-center">
-            <WhatsappCTA message={MSG_GERAL} label="Solicitar proposta no WhatsApp" origem="cta-final" />
+            <PedidoCTA label="Solicitar proposta" servico="palestra" origem="cta-final" />
           </div>
         </div>
       </section>

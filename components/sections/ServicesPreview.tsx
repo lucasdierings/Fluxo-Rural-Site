@@ -2,32 +2,32 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { BarChart2, DollarSign, Users, Mic2, ArrowRight } from 'lucide-react'
+import { BarChart2, GraduationCap, Mic2, Headphones, ArrowRight } from 'lucide-react'
 
 const services = [
   {
     icon: BarChart2,
-    title: 'Consultoria em Gestão e Inovação',
-    description: 'Diagnóstico, planejamento estratégico e acompanhamento para propriedades e empresas do agronegócio.',
+    title: 'Consultoria em Gestão Rural',
+    description: 'Diagnóstico, planejamento, gestão financeira, rentabilidade e projetos de custeio e investimento para a sua propriedade.',
     href: '/servicos/consultoria',
   },
   {
-    icon: DollarSign,
-    title: 'Gestão Financeira Rural',
-    description: 'Controle de fluxo de caixa, custos operacionais e análise de rentabilidade de safra para maximizar seus resultados.',
-    href: '/servicos/financeiro',
-  },
-  {
-    icon: Users,
-    title: 'Liderança e Empreendedorismo',
-    description: 'Workshop de liderança, palestras de empreendedorismo e inovação no agro e consultoria individual on-line para produtores.',
-    href: '/servicos/lideranca',
+    icon: GraduationCap,
+    title: 'Treinamentos',
+    description: 'Sete cursos in-company de 4h ou 8h para equipes de cooperativas, empresas e associações do agro.',
+    href: '/servicos/treinamentos',
   },
   {
     icon: Mic2,
-    title: 'Palestras e Workshops',
-    description: 'Conteúdo aplicado sobre gestão, finanças, liderança e inteligência artificial no agronegócio.',
-    href: '/servicos/palestras',
+    title: 'Palestras',
+    description: 'Seis temas de palco sobre gestão, finanças, sucessão, liderança e IA, na linguagem do campo.',
+    href: '/palestras',
+  },
+  {
+    icon: Headphones,
+    title: 'Agro Jovem Podcast',
+    description: 'Gestão, liderança e inovação na linguagem de quem está na propriedade. Indique convidados ou patrocine.',
+    href: '/agrojovem',
   },
 ]
 
@@ -46,7 +46,7 @@ export default function ServicesPreview() {
             Como Posso Ajudar
           </h2>
           <p className="text-white/80 text-base md:text-lg lg:text-xl font-light max-w-2xl mx-auto">
-            O resultado da sua terra não é refém do clima nem do mercado: começa nas suas decisões. Meu trabalho é fortalecer cada uma delas.
+            O resultado da sua terra não é refém do clima nem do mercado: começa nas suas decisões. São quatro frentes de trabalho para fortalecer cada uma delas, na propriedade, na equipe e no palco.
           </p>
         </motion.div>
 

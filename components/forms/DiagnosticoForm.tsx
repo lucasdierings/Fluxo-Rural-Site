@@ -235,7 +235,7 @@ interface FormData {
 
 type QualLevel = 'verde' | 'amarelo' | 'laranja' | 'vermelho'
 
-// Scoring do PRODUTOR — inalterado
+// Scoring do PRODUTOR - inalterado
 function calculateScore(d: FormData): number {
   let score = 0
 
@@ -279,7 +279,7 @@ function calculateScore(d: FormData): number {
   return score
 }
 
-// Scoring da EMPRESA (B2B) — prioriza dor de liderança/pessoas + porte + urgência
+// Scoring da EMPRESA (B2B) - prioriza dor de liderança/pessoas + porte + urgência
 function calculateScoreEmpresa(d: FormData): number {
   let score = 0
 
@@ -401,7 +401,7 @@ export function DiagnosticoForm() {
    * sessão) e o CRM recebia o lead como "Manual / direto". `readAttribution()`
    * cai no cookie `fr_attr` de primeiro toque (90 dias, escrito em todo pageview
    * por AttributionCapture) quando a URL vem limpa, e ainda traz gclid/fbclid/
-   * utm_term/utm_content — que o /api/diagnostico já sabia ler e nunca recebia. */
+   * utm_term/utm_content - que o /api/diagnostico já sabia ler e nunca recebia. */
   const atribuicao = () => {
     const attr = readAttribution()
     return {
@@ -442,7 +442,7 @@ export function DiagnosticoForm() {
         }),
       })
     } catch {
-      // segue mesmo se falhar — o envio completo no fim é o backup
+      // segue mesmo se falhar - o envio completo no fim é o backup
     }
     trackLead('diagnostico_contato', { form_location: 'diagnostico', perfil: form.perfil, origem })
     setSubmitting(false)
@@ -661,7 +661,7 @@ export function DiagnosticoForm() {
       {/* ── ETAPA 4: PERGUNTAS (diagnóstico completo) ── */}
       {etapa === 'perguntas' && (
         <form onSubmit={handleSubmit} className="space-y-6">
-          <p className="text-sm text-carvao/50">Responda com calma — leva cerca de 3 minutos</p>
+          <p className="text-sm text-carvao/50">Responda com calma - leva cerca de 3 minutos</p>
 
           {isEmpresa ? (
             /* ===== EMPRESA DO AGRO ===== */

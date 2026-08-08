@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     default: 'Lucas Dierings | Fluxo Rural Consultoria',
     template: '%s | Fluxo Rural',
   },
-  description: 'Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem. Referência em gestão financeira rural, inovação e estratégia no agronegócio brasileiro. Consultoria, liderança e palestras. Londrina, PR.',
+  description: 'Lucas Dierings - Engenheiro Agrônomo, MBA USP/ESALQ, vencedor nacional CNA Jovem. Referência em gestão financeira rural, inovação e estratégia no agronegócio brasileiro. Consultoria, liderança e palestras. Londrina, PR.',
   keywords: [
     'Lucas Dierings',
     'Lucas Dierings agrônomo',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: 'https://fluxorural.com.br',
-    siteName: 'Fluxo Rural Consultoria — Lucas Dierings',
+    siteName: 'Fluxo Rural Consultoria - Lucas Dierings',
     title: 'Lucas Dierings | Consultoria, Liderança e Palestras no Agronegócio',
     description: 'Engenheiro Agrônomo e consultor estratégico. Referência em gestão, inovação e estratégia no agronegócio brasileiro. Conheça os serviços de Lucas Dierings.',
     images: [
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Lucas Dierings — Fluxo Rural Consultoria',
+        alt: 'Lucas Dierings - Fluxo Rural Consultoria',
       },
     ],
   },
@@ -176,7 +176,7 @@ const localBusinessJsonLd = {
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Fluxo Rural Consultoria — Lucas Dierings',
+  name: 'Fluxo Rural Consultoria - Lucas Dierings',
   url: 'https://fluxorural.com.br',
   description: 'Site oficial de Lucas Dierings, engenheiro agrônomo e consultor referência em gestão, inovação e estratégia no agronegócio brasileiro.',
   author: {
@@ -215,7 +215,7 @@ export default function RootLayout({
       <body className="font-body text-carvao antialiased">
         {/* GA4 + GTM do site principal, com guard de rota (não carrega em /beweather). */}
         <AnalyticsGate />
-        {/* Primeiro toque (UTM/gclid) em cookie de 90 dias — vale em todo o site. */}
+        {/* Primeiro toque (UTM/gclid) em cookie de 90 dias - vale em todo o site. */}
         <AttributionCapture />
         <Navbar />
         <main>{children}</main>

@@ -7,7 +7,7 @@ import { trackLead } from '@/lib/track'
 import type { VariantProps } from 'class-variance-authority'
 
 // Número oficial Fluxo Rural (Lucas). Mantido em um só lugar.
-const WHATSAPP_NUMERO = '5545991447004'
+const WHATSAPP_NUMERO = '5544991447004'
 
 type Variant = NonNullable<VariantProps<typeof buttonVariants>['variant']>
 type Size = NonNullable<VariantProps<typeof buttonVariants>['size']>

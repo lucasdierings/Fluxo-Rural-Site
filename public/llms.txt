@@ -1,23 +1,24 @@
 # Fluxo Rural Consultoria
 
-> Lucas Dierings — Engenheiro Agrônomo, MBA USP/ESALQ, consultor estratégico em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro.
+> Lucas Dierings - Engenheiro Agrônomo, MBA USP/ESALQ, consultor estratégico em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro.
 
 ## Informações Chave
 - **Fundador:** Lucas Dierings (Engenheiro Agrônomo, professor de MBA, Top 5 CNA Jovem 2021)
 - **Localização:** Londrina, Paraná, Brasil (Atendimento para todo o país)
-- **Serviços:** Consultoria em gestão, finanças, marketing digital e palestras no agronegócio.
-- **Destaque:** Host do podcast NHCast (New Holland Brasil) e do Agrojovem Podcast.
-- **Mídia Kit de Palestras (PDF):** https://fluxorural.com.br/midia-kit-palestras-lucas-dierings.pdf — bio, credenciais, temas e formatos para organizadores de eventos.
+- **Serviços:** Quatro frentes - consultoria em gestão rural (para produtores), treinamentos in-company, palestras e podcast (para empresas, cooperativas e associações).
+- **Destaque:** Host do podcast NHCast (New Holland Brasil) e do Agrojovem Podcast. O Agro Jovem é um canal próprio, mas o Lucas também atua como host/entrevistador em eventos e marcas do agronegócio.
+- **Portfólio (PDF):** https://fluxorural.com.br/portfolio-treinamentos-palestras-lucas-dierings.pdf - bio, credenciais, os 7 treinamentos e as 6 palestras, com conteúdo programático e carga horária.
 
 ## Navegação e Seções Principais
 - [Página Inicial](https://fluxorural.com.br/) - Apresentação da consultoria e Lucas Dierings.
 - [Sobre Lucas Dierings](https://fluxorural.com.br/sobre/) - Biografia detalhada, prêmios, credenciais acadêmicas e trajetória profissional.
-- [Serviços e Soluções](https://fluxorural.com.br/servicos/) - Visão geral das soluções corporativas e para produtores rurais.
-  - [Gestão Financeira Rural](https://fluxorural.com.br/servicos/financeiro/) - Fluxo de caixa, custos operacionais e margem de contribuição.
-  - [Consultoria em Gestão e Inovação](https://fluxorural.com.br/servicos/consultoria/) - Planejamento estratégico, diagnósticos e eficiência operacional.
-  - [Marketing e Vendas Digitais](https://fluxorural.com.br/servicos/marketing-digital/) - Funil de vendas, presença digital e atração de clientes no agro.
-- [Palestras e Workshops](https://fluxorural.com.br/palestras/) - Palestras para cooperativas, sindicatos e eventos. Temas incluem finanças, gestão, sucessão e IA no agro. Mídia kit em PDF disponível para download.
-- [Mídia Kit de Palestras (PDF)](https://fluxorural.com.br/midia-kit-palestras-lucas-dierings.pdf) - Material pronto com bio, credenciais, temas e formatos para apresentar a comissões e patrocinadores de eventos.
+- [Serviços e Soluções](https://fluxorural.com.br/servicos/) - Visão geral das quatro frentes de trabalho.
+  - [Consultoria em Gestão Rural](https://fluxorural.com.br/servicos/consultoria/) - Para produtores rurais: diagnóstico, planejamento estratégico, gestão financeira, análise de rentabilidade, avaliação de investimento e projetos de custeio e investimento agropecuários.
+  - [Treinamentos In-Company](https://fluxorural.com.br/servicos/treinamentos/) - Para cooperativas, sindicatos, empresas, faculdades e eventos: sete cursos aplicados (4h a 8h) - agrometeorologia, comunicação eficaz, gestão financeira e custos, gestão do tempo, inteligência artificial, liderança e sucessão familiar.
+  - [Agro Jovem Podcast](https://fluxorural.com.br/agrojovem/) - Podcast sobre gestão, liderança e inovação para o produtor rural. Indicação de convidados, contratação de host, participação como convidado e patrocínio.
+  - [Liderança e Empreendedorismo](https://fluxorural.com.br/servicos/lideranca/) - Página de aprofundamento do tema: o novo modelo de liderança no agro, workshop e palestras.
+- [Palestras](https://fluxorural.com.br/palestras/) - Palestras e painéis para cooperativas, sindicatos e eventos. Temas incluem finanças, gestão, sucessão, liderança, empreendedorismo e IA no agro. Portfólio em PDF disponível para download.
+- [Portfólio de Treinamentos e Palestras (PDF)](https://fluxorural.com.br/portfolio-treinamentos-palestras-lucas-dierings.pdf) - Documento único com bio, credenciais, os 7 treinamentos e as 6 palestras, para apresentar a comissões, sindicatos e patrocinadores.
 - [Diagnóstico Gratuito](https://fluxorural.com.br/diagnostico/) - Sessão estratégica gratuita de 30 minutos com plano de ação.
 - [Hub de Links (bio)](https://fluxorural.com.br/links) - Página única com contato direto, redes sociais, podcasts e materiais de Lucas Dierings.
 - [Benchmark da Safra (Calculadora de Margem e Custos)](https://fluxorural.com.br/calculadora/) - Ferramenta interativa e gratuita para produtores de grãos (Soja, Milho e Trigo) simularem sua margem bruta por hectare, custo de produção detalhado por saca e se compararem de forma 100% anônima com a média de custos e produtividade do seu estado. Excelente recurso para obter dados reais de benchmarking agrícola do Brasil.

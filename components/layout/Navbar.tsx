@@ -31,7 +31,7 @@ export default function Navbar() {
   if (pathname?.startsWith('/beweather') || pathname?.startsWith('/links')) return null
 
   // Home: transparente sobre o hero escuro, vira navy ao rolar (imersivo, inalterado).
-  // Demais páginas têm topo claro (ex.: /blog, /contato bg-off-white) — header sempre
+  // Demais páginas têm topo claro (ex.: /blog, /contato bg-off-white), header sempre
   // navy sólido pra a logo/links brancos terem contraste desde o topo.
   const isHome = pathname === '/'
 
@@ -49,15 +49,16 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 transition-smooth hover:opacity-80">
-            <Image
-              src="/logo-fluxo-rural-branco-horizontal.png"
-              alt="Fluxo Rural"
-              width={1037}
-              height={240}
-              className="h-8 sm:h-10 lg:h-12 w-auto object-contain"
-              priority
-            />
+          <Link href="/" className="flex items-center" aria-label="Página inicial">
+            <div className="relative w-36 sm:w-48 h-10 sm:h-12 transition-transform duration-300 hover:scale-105">
+              <Image
+                src="/logo-branco.svg"
+                alt="Fluxo Rural Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Links desktop */}
@@ -72,7 +73,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Button asChild size="sm">
-              <Link href="/diagnostico" onClick={() => trackCta({ cta: 'diagnostico', local: 'navbar-desktop' })}>Diagnóstico Grátis</Link>
+              <Link href="/proposta" onClick={() => trackCta({ cta: 'proposta', local: 'navbar-desktop' })}>Solicitar proposta</Link>
             </Button>
           </div>
 
@@ -106,8 +107,8 @@ export default function Navbar() {
             </Link>
           ))}
           <Button asChild size="lg" className="mt-4 w-full max-w-xs">
-            <Link href="/diagnostico" onClick={() => { setIsOpen(false); trackCta({ cta: 'diagnostico', local: 'navbar-mobile' }) }}>
-              Diagnóstico Grátis
+            <Link href="/proposta" onClick={() => { setIsOpen(false); trackCta({ cta: 'proposta', local: 'navbar-mobile' }) }}>
+              Solicitar proposta
             </Link>
           </Button>
         </div>

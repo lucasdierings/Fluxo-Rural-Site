@@ -46,11 +46,11 @@ export default function Hero() {
             </p>
 
             <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6">
-              Inovação e Gestão Estratégica no Agronegócio
+              Gestão e Inovação no Agronegócio
             </h1>
 
             <p className="text-white/90 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Consultoria, Liderança e Palestras para quem transforma o campo em resultado.
+              Consultoria, Treinamentos e Palestras.
             </p>
 
             <motion.div
@@ -60,10 +60,14 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <Button asChild size="lg">
-                <Link href="/servicos">Conheça os Serviços</Link>
+                <Link href="/servicos" onClick={() => trackCta({ cta: 'servicos', local: 'hero' })}>
+                  Conheça os Serviços
+                </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/diagnostico" onClick={() => trackCta({ cta: 'diagnostico', local: 'hero' })}>Diagnóstico Grátis</Link>
+                <Link href="/proposta" onClick={() => trackCta({ cta: 'proposta', local: 'hero' })}>
+                  Solicitar proposta
+                </Link>
               </Button>
             </motion.div>
           </motion.div>
@@ -79,7 +83,7 @@ export default function Hero() {
               <div className="absolute inset-0 rounded-full border-4 border-dourado/60 shadow-apple-lg overflow-hidden transition-smooth hover:scale-105">
                 <Image
                   src="/images/lucas-hero.jpg"
-                  alt="Lucas Dierings — Engenheiro Agrônomo e Consultor"
+                  alt="Lucas Dierings, engenheiro agrônomo e consultor"
                   fill
                   className="object-cover"
                   priority

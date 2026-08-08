@@ -19,7 +19,7 @@ import {
 import { cn } from '@/lib/utils'
 import { trackCta, trackLead } from '@/lib/track'
 
-// Registro de ícones — server components não podem passar funções (componentes)
+// Registro de ícones - server components não podem passar funções (componentes)
 // como prop para client components, então o nome chega como string e é resolvido aqui.
 const icons = {
   sparkles: Sparkles,

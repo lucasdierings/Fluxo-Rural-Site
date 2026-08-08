@@ -16,7 +16,7 @@ const credentials = [
   },
   {
     icon: Radio,
-    title: 'Host NHCast — New Holland Brasil',
+    title: 'Host NHCast - New Holland Brasil',
     subtitle: 'Podcast oficial da maior fabricante de máquinas agro',
   },
   {
@@ -27,7 +27,7 @@ const credentials = [
   {
     icon: Smartphone,
     title: '7 anos em tecnologia rural',
-    subtitle: 'Gestão financeira e agronômica — 24 estados',
+    subtitle: 'Gestão financeira e agronômica - 24 estados',
   },
 ]
 

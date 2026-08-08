@@ -35,7 +35,7 @@ export default function NaMidia() {
             <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
                 src="/images/cna-jovem-senar.jpeg"
-                alt="Lucas Dierings — Destaque Nacional CNA Jovem 2021"
+                alt="Lucas Dierings - Destaque Nacional CNA Jovem 2021"
                 fill
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
               />
@@ -45,7 +45,7 @@ export default function NaMidia() {
                 Destaque Nacional
               </span>
               <h3 className="font-heading text-navy font-bold text-lg mt-2">
-                CNA Jovem — Sistema CNA/SENAR
+                CNA Jovem - Sistema CNA/SENAR
               </h3>
               <p className="text-carvao/70 text-sm">
                 Um dos 5 vencedores nacionais entre 3.742 jovens do agronegócio em 2021
@@ -67,7 +67,7 @@ export default function NaMidia() {
             <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
                 src="/images/lucas-nhcast.jpg"
-                alt="Lucas Dierings — Host do NHCast, podcast da New Holland Brasil"
+                alt="Lucas Dierings - Host do NHCast, podcast da New Holland Brasil"
                 fill
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
@@ -77,7 +77,7 @@ export default function NaMidia() {
                 Host
               </span>
               <h3 className="font-heading text-navy font-bold text-lg mt-2">
-                NHCast — New Holland Brasil
+                NHCast - New Holland Brasil
               </h3>
               <p className="text-carvao/70 text-sm">
                 Podcast oficial da maior fabricante de máquinas agrícolas
@@ -137,7 +137,7 @@ export default function NaMidia() {
             <div className="relative h-48 overflow-hidden flex-shrink-0">
               <Image
                 src="/images/lucas-discurso-jci.jpg"
-                alt="Lucas Dierings — JCI"
+                alt="Lucas Dierings - JCI"
                 fill
                 className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500"
               />
@@ -147,7 +147,7 @@ export default function NaMidia() {
                 Liderança
               </span>
               <h3 className="font-heading text-navy font-bold text-lg mt-2">
-                JCI — Junior Chamber International
+                JCI - Junior Chamber International
               </h3>
               <p className="text-carvao/70 text-sm">
                 Membro da JCI, organização presente em mais de 120 países para desenvolvimento de jovens líderes.

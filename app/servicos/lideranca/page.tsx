@@ -20,31 +20,32 @@ import {
   Video,
 } from 'lucide-react'
 import Breadcrumbs from '@/components/ui/breadcrumbs'
+import { PortfolioDownload } from '@/components/palestras/PortfolioDownload'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/servicos/lideranca/' },
   title: 'Liderança e Empreendedorismo no Agronegócio',
   description:
-    'Workshop de liderança, palestras de empreendedorismo e inovação no agronegócio e consultoria individual on-line para produtores. Um novo modelo de liderança para o agro — com Lucas Dierings, Destaque Nacional CNA Jovem.',
+    'Workshop de liderança, palestras de empreendedorismo e inovação no agronegócio e consultoria individual on-line para produtores. Um novo modelo de liderança para o agro - com Lucas Dierings, Destaque Nacional CNA Jovem.',
   openGraph: {
     title: 'Liderança e Empreendedorismo no Agro | Fluxo Rural',
     description:
-      'Se nem os filhos querem ficar na propriedade, imagina os funcionários. O modelo antigo de liderança acabou — forme o novo.',
+      'Se nem os filhos querem ficar na propriedade, imagina os funcionários. O modelo antigo de liderança acabou - forme o novo.',
     images: [{ url: '/images/lucas-discurso-jci.jpg' }],
   },
 }
 
-// O novo modelo de liderança — tese proprietária da página (GEO)
+// O novo modelo de liderança - tese proprietária da página (GEO)
 const novoModelo = [
-  { icon: MessageSquare, title: 'Comunicação', description: 'Falar de um jeito que a equipe e a família entendem — e escutam.' },
+  { icon: MessageSquare, title: 'Comunicação', description: 'Falar de um jeito que a equipe e a família entendem - e escutam.' },
   { icon: Rocket, title: 'Empreendedorismo', description: 'Mentalidade de dono: enxergar e agarrar oportunidades antes dos outros.' },
-  { icon: Lightbulb, title: 'Inovação', description: 'Testar, errar barato e adotar o que funciona — sem modismo.' },
+  { icon: Lightbulb, title: 'Inovação', description: 'Testar, errar barato e adotar o que funciona - sem modismo.' },
   { icon: LineChart, title: 'Visão de negócios', description: 'A fazenda como empresa: gestão, administração e números na mesa.' },
   { icon: GraduationCap, title: 'Aprender a aprender', description: 'O agro muda rápido. Quem aprende mais rápido, lidera.' },
-  { icon: Compass, title: 'Propósito', description: 'Gente boa fica onde existe um porquê — não só um salário.' },
+  { icon: Compass, title: 'Propósito', description: 'Gente boa fica onde existe um porquê - não só um salário.' },
   { icon: Users, title: 'Sucessão e dinâmicas de poder', description: 'Preparar a próxima geração e dividir o poder sem rachar a família.' },
   { icon: Brain, title: 'Inteligência emocional', description: 'Liderar sob pressão de safra, clima e mercado sem queimar as pessoas.' },
-  { icon: Globe, title: 'Visão global, ação local', description: 'Entender o mundo que move os preços — e agir na sua porteira.' },
+  { icon: Globe, title: 'Visão global, ação local', description: 'Entender o mundo que move os preços - e agir na sua porteira.' },
 ]
 
 const oferta = [
@@ -67,13 +68,13 @@ const oferta = [
     tipo: 'Palestra',
     title: 'Liderança Eficaz no Agronegócio',
     description:
-      'O novo modelo de liderança: por que o comando-e-controle da porteira não segura mais ninguém — e o que fazer no lugar para atrair e manter gente boa.',
+      'O novo modelo de liderança: por que o comando-e-controle da porteira não segura mais ninguém - e o que fazer no lugar para atrair e manter gente boa.',
   },
 ]
 
 const deliverables = [
   'Diagnóstico prévio do público e do evento',
-  'Conteúdo sob medida — dores reais da sua região e cultura',
+  'Conteúdo sob medida - dores reais da sua região e cultura',
   'Dinâmicas práticas de aprendizado pela ação',
   'Material de apoio pós-evento',
   'Plano de ação individual dos participantes',
@@ -83,19 +84,19 @@ const deliverables = [
 const faqs = [
   {
     q: 'Para quem são as palestras e o workshop?',
-    a: 'Cooperativas, sindicatos rurais, associações, eventos do agro, empresas do setor e famílias rurais que querem preparar líderes — da porteira pra dentro e pra fora. O conteúdo é adaptado ao público de cada evento.',
+    a: 'Cooperativas, sindicatos rurais, associações, eventos do agro, empresas do setor e famílias rurais que querem preparar líderes - da porteira pra dentro e pra fora. O conteúdo é adaptado ao público de cada evento.',
   },
   {
     q: 'Qual a diferença para um treinamento corporativo genérico?',
-    a: 'O modelo antigo de liderança do agro não funciona mais — e as metodologias corporativas batidas também não. O conteúdo nasce da vivência real: formação na JCI (escola global de líderes), Destaque Nacional CNA Jovem e anos de consultoria dentro de propriedades rurais. É liderança falada na língua do agro, com os números da fazenda na mesa.',
+    a: 'O modelo antigo de liderança do agro não funciona mais - e as metodologias corporativas batidas também não. O conteúdo nasce da vivência real: formação na JCI (escola global de líderes), Destaque Nacional CNA Jovem e anos de consultoria dentro de propriedades rurais. É liderança falada na língua do agro, com os números da fazenda na mesa.',
   },
   {
     q: 'Como isso ajuda na sucessão familiar?',
-    a: 'Sucessão é, antes de tudo, um problema de liderança: menos de 7% das propriedades chegam à terceira geração. O trabalho aborda dinâmicas de poder, comunicação entre gerações e preparação do sucessor para liderar — não só para herdar.',
+    a: 'Sucessão é, antes de tudo, um problema de liderança: menos de 7% das propriedades chegam à terceira geração. O trabalho aborda dinâmicas de poder, comunicação entre gerações e preparação do sucessor para liderar - não só para herdar.',
   },
   {
     q: 'Como contratar para meu evento? E a consultoria individual?',
-    a: 'Para palestras e workshops, entre em contato pelo formulário ou WhatsApp e solicite o mídia kit — proposta em até 24h. Para produtores que querem aplicar o conteúdo na própria propriedade, há consultoria individual 100% on-line, de onde você estiver.',
+    a: 'Para palestras e workshops, entre em contato pelo formulário ou WhatsApp e solicite o mídia kit - proposta em até 24h. Para produtores que querem aplicar o conteúdo na própria propriedade, há consultoria individual 100% on-line, de onde você estiver.',
   },
 ]
 
@@ -132,7 +133,7 @@ export default function LiderancaPage() {
       <section className="relative h-[50vh] min-h-[400px] flex items-end">
         <Image
           src="/images/lucas-discurso-jci.jpg"
-          alt="Lucas Dierings discursando na JCI — liderança e empreendedorismo no agronegócio"
+          alt="Lucas Dierings discursando na JCI - liderança e empreendedorismo no agronegócio"
           fill
           className="object-cover object-[center_25%]"
           priority
@@ -143,7 +144,7 @@ export default function LiderancaPage() {
             Liderança e Empreendedorismo no Agro
           </h1>
           <p className="text-white/80 text-xl max-w-3xl">
-            Se nem os filhos querem ficar na propriedade, imagina os funcionários. O modelo antigo de liderança acabou — forme o novo.
+            Se nem os filhos querem ficar na propriedade, imagina os funcionários. O modelo antigo de liderança acabou - forme o novo.
           </p>
         </div>
       </section>
@@ -155,7 +156,7 @@ export default function LiderancaPage() {
             Não é apagão de mão de obra. É apagão de liderança.
           </p>
           <p className="text-carvao/70 text-lg leading-relaxed">
-            As pessoas não desapareceram — elas só não aceitam mais trabalhar em ambientes mal liderados.
+            As pessoas não desapareceram - elas só não aceitam mais trabalhar em ambientes mal liderados.
             O grito da porteira não segura equipe, e o corporativês batido de treinamento genérico não convence o campo.
             Não é só política que determina o futuro da propriedade: é a liderança de quem está à frente dela.
           </p>
@@ -167,7 +168,7 @@ export default function LiderancaPage() {
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-navy text-center mb-4">O Novo Modelo de Liderança no Agro</h2>
           <p className="text-carvao/60 text-center max-w-2xl mx-auto mb-14">
-            Liderar no agro de hoje exige um conjunto novo de competências — e todas se aprendem na prática.
+            Liderar no agro de hoje exige um conjunto novo de competências - e todas se aprendem na prática.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {novoModelo.map((item) => (
@@ -201,6 +202,20 @@ export default function LiderancaPage() {
               </div>
             ))}
           </div>
+          <p className="text-carvao/60 text-sm text-center mt-12 max-w-2xl mx-auto">
+            As duas palestras acima estão no catálogo completo de{' '}
+            <Link href="/palestras" className="text-navy font-semibold hover:text-dourado underline">
+              temas de palco
+            </Link>
+            , e o workshop é um dos{' '}
+            <Link
+              href="/servicos/treinamentos"
+              className="text-navy font-semibold hover:text-dourado underline"
+            >
+              treinamentos in-company
+            </Link>
+            , disponível em 4h ou 8h.
+          </p>
         </div>
       </section>
 
@@ -209,17 +224,17 @@ export default function LiderancaPage() {
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
           <h2 className="font-heading text-3xl font-bold text-white text-center mb-4">Quem Ensina Viveu Isso</h2>
           <p className="text-white/70 text-center max-w-2xl mx-auto mb-12">
-            Liderança não se aprende em slide — se aprende liderando. As credenciais por trás do conteúdo:
+            Liderança não se aprende em slide - se aprende liderando. As credenciais por trás do conteúdo:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
               <div className="bg-dourado/20 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
                 <Globe className="text-dourado" size={24} />
               </div>
-              <h3 className="font-heading font-bold text-white text-xl mb-3">JCI — Junior Chamber International</h3>
+              <h3 className="font-heading font-bold text-white text-xl mb-3">JCI - Junior Chamber International</h3>
               <p className="text-white/70 leading-relaxed">
                 Escola global de líderes presente em mais de 100 países, onde jovens de 18 a 40 anos se formam liderando
-                na prática — a metodologia do aprendizado pela ação, nas áreas individual, negócios, comunidade e
+                na prática - a metodologia do aprendizado pela ação, nas áreas individual, negócios, comunidade e
                 cooperação internacional. É a base das dinâmicas usadas nos workshops.
               </p>
             </div>
@@ -230,7 +245,7 @@ export default function LiderancaPage() {
               <h3 className="font-heading font-bold text-white text-xl mb-3">Destaque Nacional CNA Jovem</h3>
               <p className="text-white/70 leading-relaxed">
                 Programa nacional de formação de jovens líderes do agro do Sistema CNA/SENAR. Lucas foi um dos 5
-                vencedores nacionais entre 3.742 jovens do agronegócio em 2021 — reconhecimento de quem lidera
+                vencedores nacionais entre 3.742 jovens do agronegócio em 2021 - reconhecimento de quem lidera
                 dentro do setor, não de fora dele.
               </p>
             </div>
@@ -266,7 +281,7 @@ export default function LiderancaPage() {
               <h2 className="font-heading text-2xl font-bold text-navy mb-2">Quer aplicar isso na sua propriedade?</h2>
               <p className="text-carvao/60">
                 Para produtores e sucessores que querem desenvolver a própria liderança e a visão de negócio:
-                consultoria individual <strong>100% on-line</strong> — de onde você estiver.
+                consultoria individual <strong>100% on-line</strong> - de onde você estiver.
               </p>
             </div>
             <Button asChild size="lg" className="flex-shrink-0">
@@ -302,11 +317,13 @@ export default function LiderancaPage() {
             <Button asChild size="lg" className="bg-dourado text-carvao hover:bg-dourado/90">
               <Link href="/contato">Falar com o Lucas <ArrowRight className="ml-2" size={18} /></Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
-              <a href="/midia-kit-palestras-lucas-dierings.pdf" download target="_blank" rel="noopener noreferrer">
-                Baixar Mídia Kit (PDF)
-              </a>
-            </Button>
+            <PortfolioDownload
+              variant="outline"
+              label="Baixar portfólio"
+              origem="lideranca"
+              formLocation="lideranca"
+              className="border-white/30 text-white hover:bg-white/10"
+            />
           </div>
         </div>
       </section>

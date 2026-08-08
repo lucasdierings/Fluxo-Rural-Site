@@ -45,7 +45,7 @@ module.exports = {
   // Entrada manual do PDF (arquivo): sem trailing slash, que quebraria a URL do .pdf.
   additionalPaths: async () => [
     {
-      loc: 'https://fluxorural.com.br/midia-kit-palestras-lucas-dierings.pdf',
+      loc: 'https://fluxorural.com.br/portfolio-treinamentos-palestras-lucas-dierings.pdf',
       changefreq: 'monthly',
       priority: 0.7,
       lastmod: new Date().toISOString(),

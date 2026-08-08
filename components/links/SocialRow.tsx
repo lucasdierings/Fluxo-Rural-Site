@@ -18,12 +18,12 @@ const socials = [
   },
   {
     href: 'https://www.youtube.com/@agrojovempodcast',
-    label: 'YouTube — Agro Jovem Podcast',
+    label: 'YouTube - Agro Jovem Podcast',
     cta: 'social_youtube',
     Icon: Youtube,
   },
   {
-    href: 'https://wa.me/5545991447004',
+    href: 'https://wa.me/5544991447004',
     label: 'WhatsApp de Lucas Dierings',
     cta: 'social_whatsapp',
     Icon: MessageCircle,

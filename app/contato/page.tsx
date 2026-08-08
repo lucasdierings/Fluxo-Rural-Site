@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Entre em contato com a Fluxo Rural Consultoria. Consultoria, mentoria e palestras para o agronegócio. Resposta em até 24 horas.',
   openGraph: {
     title: 'Contato | Fluxo Rural Consultoria',
-    description: 'Fale com a Fluxo Rural Consultoria — resposta em até 24 horas.',
+    description: 'Fale com a Fluxo Rural Consultoria - resposta em até 24 horas.',
   },
 }
 
@@ -50,7 +50,7 @@ export default function ContatoPage() {
                   <MapPin className="text-navy mt-0.5" size={20} />
                   <div>
                     <p className="font-semibold text-navy">Localização</p>
-                    <p className="text-carvao/70 text-sm">Curitiba, Paraná — Brasil</p>
+                    <p className="text-carvao/70 text-sm">Curitiba, Paraná - Brasil</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

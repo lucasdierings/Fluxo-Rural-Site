@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Links de Lucas Dierings | Fluxo Rural',
     description:
-      'WhatsApp, diagnóstico gratuito, mídia kit de palestras, podcasts e redes de Lucas Dierings — engenheiro agrônomo, consultor e palestrante do agronegócio.',
+      'WhatsApp, diagnóstico gratuito, mídia kit de palestras, podcasts e redes de Lucas Dierings - engenheiro agrônomo, consultor e palestrante do agronegócio.',
     url: 'https://fluxorural.com.br/links',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Lucas Dierings — Fluxo Rural' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Lucas Dierings - Fluxo Rural' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -37,7 +37,7 @@ const profilePageJsonLd = {
     image: 'https://fluxorural.com.br/images/lucas-hero.jpg',
     url: 'https://fluxorural.com.br',
     email: 'lucas@fluxorural.com.br',
-    telephone: '+5545991447004',
+    telephone: '+5544991447004',
     worksFor: { '@type': 'Organization', name: 'Fluxo Rural Consultoria' },
     address: {
       '@type': 'PostalAddress',
@@ -86,7 +86,7 @@ export default function LinksPage() {
           <div className="relative mx-auto w-28 h-28 rounded-full overflow-hidden ring-4 ring-dourado/30 shadow-xl">
             <Image
               src="/images/lucas-hero.jpg"
-              alt="Lucas Dierings — Engenheiro Agrônomo, consultor e palestrante"
+              alt="Lucas Dierings - Engenheiro Agrônomo, consultor e palestrante"
               fill
               sizes="112px"
               className="object-cover"
@@ -97,7 +97,7 @@ export default function LinksPage() {
           <p className="text-white/75 text-sm mt-1">
             Eng. Agrônomo · Consultor · Palestrante
           </p>
-          <p className="text-white/50 text-xs mt-1">Londrina / Curitiba · PR — atende todo o Brasil</p>
+          <p className="text-white/50 text-xs mt-1">Londrina / Curitiba · PR - atende todo o Brasil</p>
           <div className="inline-flex items-center gap-2 mt-4 bg-white/10 border border-white/15 rounded-full px-4 py-1.5">
             <Sparkles size={14} className="text-dourado" />
             <span className="text-xs font-medium text-white/85">Top 5 CNA Jovem · Host do NHCast</span>
@@ -107,16 +107,16 @@ export default function LinksPage() {
         {/* Destaques */}
         <section className="space-y-3 mb-7">
           <LinkButton
-            href="/diagnostico/"
-            label="Diagnóstico de Gestão (grátis)"
-            sublabel="30 min para achar onde melhorar — sem compromisso"
+            href="/servicos/consultoria/"
+            label="Consultoria em Gestão Rural"
+            sublabel="Diagnóstico, planejamento e os números da propriedade"
             icon="sparkles"
             tone="gold"
             lead
-            cta="diagnostico"
+            cta="consultoria"
           />
           <LinkButton
-            href={`https://wa.me/5545991447004?text=${encodeURIComponent(MSG_WHATS)}`}
+            href={`https://wa.me/5544991447004?text=${encodeURIComponent(MSG_WHATS)}`}
             label="Falar no WhatsApp"
             sublabel="Resposta rápida, direto comigo"
             icon="whatsapp"
@@ -125,13 +125,12 @@ export default function LinksPage() {
             cta="whatsapp"
           />
           <LinkButton
-            href="/midia-kit-palestras-lucas-dierings.pdf"
-            label="Mídia Kit de Palestras (PDF)"
-            sublabel="Temas, bio e formatos para o seu evento"
+            href="/servicos/treinamentos/"
+            label="Portfólio"
+            sublabel="Palestras, treinamentos, bio e credenciais"
             icon="download"
             tone="navy"
-            download
-            cta="midia_kit"
+            cta="portfolio"
           />
         </section>
 
@@ -141,8 +140,8 @@ export default function LinksPage() {
         </h2>
         <section className="space-y-3 mb-7">
           <LinkButton href="/palestras/" label="Palestras" sublabel="Liderança, gestão, empreendedorismo e IA" icon="mic" cta="palestras" />
-          <LinkButton href="/servicos/lideranca/" label="Liderança e Empreendedorismo" sublabel="Workshop, palestras e consultoria on-line" icon="sparkles" cta="lideranca" />
-          <LinkButton href="/servicos/" label="Serviços e Consultoria" sublabel="Gestão, financeiro e liderança no agro" icon="briefcase" cta="servicos" />
+          <LinkButton href="/servicos/treinamentos/" label="Treinamentos" sublabel="Sete cursos in-company de 4h ou 8h" icon="sparkles" cta="treinamentos" />
+          <LinkButton href="/servicos/" label="Serviços e Consultoria" sublabel="Consultoria, treinamentos, palestras e podcast" icon="briefcase" cta="servicos" />
           <LinkButton href="/sobre/" label="Sobre o Lucas" sublabel="Trajetória, prêmios e credenciais" icon="user" cta="sobre" />
           <LinkButton href="/blog/" label="Blog" sublabel="Artigos práticos de gestão no campo" icon="book" cta="blog" />
         </section>
@@ -154,7 +153,7 @@ export default function LinksPage() {
         <section className="space-y-3 mb-7">
           <LinkButton
             href="https://www.youtube.com/playlist?list=PLdv5Ps8k7ij8UDT_9aOTuzs_G5uo6lNva"
-            label="NHCast — New Holland"
+            label="NHCast - New Holland"
             sublabel="Host do podcast oficial da New Holland Brasil"
             icon="radio"
             cta="nhcast"
@@ -174,7 +173,7 @@ export default function LinksPage() {
         </h2>
         <section className="space-y-3 mb-9">
           <LinkButton href="mailto:lucas@fluxorural.com.br" label="E-mail" sublabel="lucas@fluxorural.com.br" icon="mail" cta="email" />
-          <LinkButton href="tel:+5545991447004" label="Telefone" sublabel="(45) 99144-7004" icon="phone" cta="telefone" />
+          <LinkButton href="tel:+5544991447004" label="Telefone" sublabel="(44) 99144-7004" icon="phone" cta="telefone" />
           <LinkButton href="/contato-lucas-dierings.vcf" label="Salvar contato" sublabel="Baixe o cartão e adicione na agenda" icon="contact" download cta="vcard" />
         </section>
 

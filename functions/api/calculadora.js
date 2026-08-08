@@ -523,7 +523,7 @@ async function sendEmailProdutor(env, body) {
         </div>
 
         <div style="text-align:center;margin:32px 0 12px;">
-          <a href="https://wa.me/5545991447004?text=Ola%20Lucas,%20fiz%20o%20Benchmark%20da%20Safra%20e%20gostaria%20de%20conversar%20sobre%20meu%20diagnostico%20de%20${esc(r.classe)}" style="background:#6AAF3D;color:#ffffff;padding:12px 24px;border-radius:6px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block;box-shadow:0 2px 4px rgba(0,0,0,0.1);">Conversar com Lucas pelo WhatsApp</a>
+          <a href="https://wa.me/5544991447004?text=Ola%20Lucas,%20fiz%20o%20Benchmark%20da%20Safra%20e%20gostaria%20de%20conversar%20sobre%20meu%20diagnostico%20de%20${esc(r.classe)}" style="background:#6AAF3D;color:#ffffff;padding:12px 24px;border-radius:6px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block;box-shadow:0 2px 4px rgba(0,0,0,0.1);">Conversar com Lucas pelo WhatsApp</a>
           <p style="margin:14px 0 0;font-size:13px;"><a href="https://fluxorural.com.br/calculadora/?utm_source=resend&utm_medium=email&utm_campaign=calc-resultado" style="color:#1B4F7A;font-weight:600;">Refazer meu cálculo ou calcular outra propriedade →</a></p>
         </div>
       </div>

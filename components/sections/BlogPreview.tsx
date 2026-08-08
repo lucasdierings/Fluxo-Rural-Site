@@ -6,31 +6,24 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-const posts = [
-  {
-    title: '5 Indicadores Financeiros que Todo Produtor Rural Precisa Monitorar',
-    slug: '5-indicadores-financeiros-produtor-rural',
-    category: 'Finanças',
-    image: '/images/gestao-rural-blog.jpg',
-    readingTime: 7,
-  },
-  {
-    title: 'Sucessão Familiar no Agronegócio: Por que Planejar Agora?',
-    slug: 'sucessao-familiar-agronegocio-por-que-planejar-agora',
-    category: 'Sucessão Familiar',
-    image: '/images/sucessao-rural-blog.jpg',
-    readingTime: 8,
-  },
-  {
-    title: 'Inteligência Artificial no Campo: O que Já É Realidade',
-    slug: 'inteligencia-artificial-no-campo-o-que-ja-e-realidade',
-    category: 'IA no Agro',
-    image: '/images/ia-agricultura-blog.jpg',
-    readingTime: 7,
-  },
-]
+// Os artigos chegam por prop da página, que os lê do content/blog com
+// getAllPosts(). Antes era um array fixo aqui dentro: os três posts de junho
+// continuaram na home meses depois, enquanto o blog já tinha outros mais novos.
+export interface PostPreview {
+  slug: string
+  title: string
+  category: string
+  coverImage: string
+  readingTime: number
+}
 
-export default function BlogPreview() {
+interface BlogPreviewProps {
+  posts: PostPreview[]
+}
+
+export default function BlogPreview({ posts }: BlogPreviewProps) {
+  if (!posts.length) return null
+
   return (
     <section className="bg-off-white py-20 lg:py-28">
       <div className="container mx-auto px-4 lg:px-8">
@@ -60,7 +53,7 @@ export default function BlogPreview() {
               <Link href={`/blog/${post.slug}`} className="group block">
                 <div className="relative h-52 rounded-xl overflow-hidden mb-4">
                   <Image
-                    src={post.image}
+                    src={post.coverImage}
                     alt={post.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"

@@ -1,9 +1,22 @@
 # Serviços renomeados: Mentoria -> Marketing Digital -> Liderança e Empreendedorismo
+# A página de liderança CONTINUA ATIVA — é a página de apoio da palestra de
+# liderança, não uma das 4 frentes da vitrine /servicos.
 /servicos/mentoria/  /servicos/lideranca/  301
 /servicos/mentoria   /servicos/lideranca   301
 /servicos/marketing-digital/  /servicos/lideranca/  301
 /servicos/marketing-digital   /servicos/lideranca   301
 
-# Palestras
+# Reestruturação das 4 frentes (ago/2026).
+# Gestão Financeira Rural deixou de ser serviço próprio: virou uma das frentes
+# da consultoria (e também tema de curso e de palestra).
+/servicos/financeiro/  /servicos/consultoria/  301
+/servicos/financeiro   /servicos/consultoria   301
+
+# Palestras. A página estática que existia aqui foi apagada: era ela que vencia
+# este 301 na Cloudflare e mostrava o flash "Redirecionando...".
 /servicos/palestras/  /palestras/  301
 /servicos/palestras   /palestras   301
+
+# Mídia kit aposentado. Virou uma peça só com os treinamentos, o portfólio.
+# A URL antiga está indexada e circula em e-mail antigo, então não pode dar 404.
+/midia-kit-palestras-lucas-dierings.pdf  /portfolio-treinamentos-palestras-lucas-dierings.pdf  301

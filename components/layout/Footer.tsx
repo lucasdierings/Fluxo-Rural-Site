@@ -9,7 +9,7 @@ import { trackLead } from '@/lib/track'
 export default function Footer() {
   const pathname = usePathname()
   if (pathname?.startsWith('/beweather') || pathname?.startsWith('/links')) return null
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5545991447004'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5544991447004'
 
   return (
     <footer className="bg-navy text-white">
@@ -18,7 +18,7 @@ export default function Footer() {
           {/* Logo e tagline */}
           <div className="lg:col-span-1">
             <Image
-              src="/logo_fluxo_rural_branco.png"
+              src="/logo-branco.svg"
               alt="Fluxo Rural Consultoria"
               width={160}
               height={48}
@@ -27,7 +27,7 @@ export default function Footer() {
               loading="lazy"
             />
             <p className="text-white/70 text-sm leading-relaxed">
-              Inovação e Gestão Estratégica no Agronegócio. Consultoria, Liderança e Palestras para quem transforma o campo em resultado.
+              Gestão e Inovação no Agronegócio. Consultoria, treinamentos e palestras.
             </p>
             <div className="flex gap-4 mt-6">
               <a
@@ -65,10 +65,10 @@ export default function Footer() {
           <div>
             <h3 className="font-heading font-bold text-lg mb-4">Serviços</h3>
             <ul className="space-y-3 text-sm text-white/70">
-              <li><Link href="/servicos/consultoria" className="hover:text-dourado transition-colors">Consultoria em Gestão</Link></li>
-              <li><Link href="/servicos/financeiro" className="hover:text-dourado transition-colors">Gestão Financeira Rural</Link></li>
-              <li><Link href="/servicos/lideranca" className="hover:text-dourado transition-colors">Liderança e Empreendedorismo</Link></li>
-              <li><Link href="/servicos/palestras" className="hover:text-dourado transition-colors">Palestras e Workshops</Link></li>
+              <li><Link href="/servicos/consultoria" className="hover:text-dourado transition-colors">Consultoria em Gestão Rural</Link></li>
+              <li><Link href="/servicos/treinamentos" className="hover:text-dourado transition-colors">Treinamentos</Link></li>
+              <li><Link href="/palestras" className="hover:text-dourado transition-colors">Palestras</Link></li>
+              <li><Link href="/agrojovem" className="hover:text-dourado transition-colors">Agro Jovem Podcast</Link></li>
             </ul>
           </div>
 
@@ -77,27 +77,19 @@ export default function Footer() {
             <h3 className="font-heading font-bold text-lg mb-4">Conteúdo</h3>
             <ul className="space-y-3 text-sm text-white/70">
               <li><Link href="/blog" className="hover:text-dourado transition-colors">Blog</Link></li>
-              <li><Link href="/palestras" className="hover:text-dourado transition-colors">Palestras</Link></li>
               <li>
-                <a
-                  href="/midia-kit-palestras-lucas-dierings.pdf"
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-dourado transition-colors"
-                >
-                  Mídia Kit (PDF)
-                </a>
+                <Link href="/servicos/treinamentos" className="hover:text-dourado transition-colors">
+                  Portfólio
+                </Link>
               </li>
               <li><Link href="/sobre" className="hover:text-dourado transition-colors">Sobre Lucas</Link></li>
-              <li><Link href="/diagnostico" className="hover:text-dourado transition-colors">Diagnóstico Gratuito</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/50 text-sm">
-            &copy; 2026 Fluxo Rural Consultoria | Curitiba, PR — Brasil
+            &copy; 2026 Fluxo Rural Consultoria | Curitiba, PR - Brasil
           </p>
           <Link
             href="/politica-de-privacidade"

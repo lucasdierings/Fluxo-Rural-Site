@@ -32,11 +32,11 @@ import { cn } from '@/lib/utils'
 // TODO: trocar por WhatsApp oficial da Beweather quando definido.
 // Hoje usa o número do Lucas (compartilhado com Fluxo Rural).
 const WHATSAPP_URL =
-  'https://wa.me/5545991447004?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20uma%20cota%C3%A7%C3%A3o%20da%20Beweather'
+  'https://wa.me/5544991447004?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20uma%20cota%C3%A7%C3%A3o%20da%20Beweather'
 
 // Pages Function própria (functions/api/contato.js): manda e-mail pelo Resend e
 // empurra o lead pro CRM com produto=beweather. Antes apontava para um Apps
-// Script PLACEHOLDER que nunca existiu, com `mode: 'no-cors'` — todo lead desta
+// Script PLACEHOLDER que nunca existiu, com `mode: 'no-cors'` - todo lead desta
 // landing era perdido em silêncio, com "Recebemos seu pedido!" na tela.
 const ENDPOINT = '/api/contato'
 
@@ -394,7 +394,7 @@ export default function BeweatherLanding() {
         <section className="py-12 border-y border-black/5 bg-white">
           <div className="container mx-auto px-4 text-center">
             <p className="text-sm md:text-base font-semibold text-beweather-grafite/75 mb-8 max-w-3xl mx-auto">
-              Estação Beweather B2K — 12 sensores, tecnologia B2K Technology Solutions, suporte técnico com engenheiro agrônomo.
+              Estação Beweather B2K - 12 sensores, tecnologia B2K Technology Solutions, suporte técnico com engenheiro agrônomo.
             </p>
             <div className="flex flex-wrap justify-center gap-4 md:gap-10">
               <div className="inline-flex items-center gap-2 bg-beweather-offwhite border border-black/5 rounded-full px-4 py-2 text-sm md:text-base font-semibold text-beweather-grafite">
@@ -572,7 +572,7 @@ export default function BeweatherLanding() {
                   O defensivo certo, na hora errada, vira dinheiro no lixo.
                 </h2>
                 <p className="text-base md:text-lg text-beweather-grafite/75 mb-8">
-                  Vento forte leva o produto embora. Umidade baixa evapora a calda antes de agir. Temperatura alta queima a folha. A Beweather te avisa <strong>em tempo real</strong> quando a sua lavoura está dentro da janela ideal para aplicar — e quando é melhor esperar.
+                  Vento forte leva o produto embora. Umidade baixa evapora a calda antes de agir. Temperatura alta queima a folha. A Beweather te avisa <strong>em tempo real</strong> quando a sua lavoura está dentro da janela ideal para aplicar - e quando é melhor esperar.
                 </p>
 
                 <div className="space-y-4">
@@ -695,7 +695,7 @@ export default function BeweatherLanding() {
           </div>
         </section>
 
-        {/* 8. VÍDEOS — Veja a Beweather em ação */}
+        {/* 8. VÍDEOS - Veja a Beweather em ação */}
         <section id="videos" className="py-20 md:py-24 bg-beweather-offwhite">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12 md:mb-16 max-w-2xl mx-auto">
@@ -819,13 +819,13 @@ export default function BeweatherLanding() {
 
             <div className="space-y-4">
               {[
-                { q: 'Funciona em fazenda sem energia elétrica?', a: 'Sim. A Beweather tem painel solar integrado e bateria de longa duração — é totalmente autônoma e instala em qualquer ponto da fazenda.' },
+                { q: 'Funciona em fazenda sem energia elétrica?', a: 'Sim. A Beweather tem painel solar integrado e bateria de longa duração - é totalmente autônoma e instala em qualquer ponto da fazenda.' },
                 { q: 'Precisa de internet para funcionar?', a: 'A estação conecta via WiFi. Basta um roteador próximo ou um repetidor no campo para transmitir os dados continuamente para o aplicativo.' },
                 { q: 'É difícil instalar?', a: 'Não. Você mesmo instala em cerca de 8 minutos seguindo o vídeo passo a passo. A estação já vem com tudo que você precisa na caixa.' },
                 { q: 'Tem mensalidade ou taxa oculta?', a: 'Não. A plataforma e o aplicativo já estão inclusos no preço da estação. Sem taxas mensais, sem surpresa.' },
                 { q: 'Quais as formas de pagamento?', a: 'Cartão de crédito em até 12x sem juros ou PIX à vista com desconto.' },
                 { q: 'Os dados são meus?', a: '100% seus. Você pode exportar todo o histórico de clima da sua lavoura em Excel ou CSV a qualquer momento.' },
-                { q: 'Tem garantia?', a: 'Sim — 12 meses de garantia de fábrica contra defeitos de fabricação, com suporte técnico especializado em agronomia.' },
+                { q: 'Tem garantia?', a: 'Sim - 12 meses de garantia de fábrica contra defeitos de fabricação, com suporte técnico especializado em agronomia.' },
               ].map((item, i) => (
                 <details key={i} className="group border rounded-xl overflow-hidden bg-white hover:bg-beweather-offwhite transition-colors">
                   <summary className="flex justify-between items-center font-medium cursor-pointer list-none p-5 md:p-6 text-base md:text-lg min-h-[56px]">
@@ -1148,7 +1148,7 @@ function ProposalForm() {
             onChange={(e) => update('uf', e.target.value)}
             required
           >
-            <option value="">—</option>
+            <option value="">-</option>
             {UFS.map((uf) => (
               <option key={uf} value={uf}>
                 {uf}

@@ -7,7 +7,7 @@ import { trackLead, readAttribution } from '@/lib/track'
 
 // Pages Function própria (functions/api/contato.js): manda e-mail pelo Resend e
 // empurra o lead pro CRM. Substituiu o Google Apps Script, cuja planilha não
-// existia mais — com `mode: 'no-cors'` o fetch resolvia mesmo em 404 e o lead
+// existia mais - com `mode: 'no-cors'` o fetch resolvia mesmo em 404 e o lead
 // sumia mostrando "Mensagem enviada!" na tela.
 const ENDPOINT = '/api/contato'
 
@@ -70,7 +70,7 @@ export function ContactForm() {
         return
       }
       setStatus('success')
-      // Lead quente — só params não-PII vão pro GA4/GTM (nome/email ficam no fetch)
+      // Lead quente - só params não-PII vão pro GA4/GTM (nome/email ficam no fetch)
       trackLead('generate_lead', { form_location: 'contato', interesse: form.interesse, origem: attr.origem })
     } catch {
       setStatus('error')

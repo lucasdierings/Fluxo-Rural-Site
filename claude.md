@@ -117,7 +117,7 @@ Stubs já estão no código como comentários `{/* TODO-PIXEL: fbq('track', 'Lea
 
 ### WhatsApp — número dedicado pra Beweather
 
-Hoje `WHATSAPP_URL` em `BeweatherLanding.tsx` aponta pro número pessoal do Lucas (5545991447004). Antes de ligar ads:
+Hoje `WHATSAPP_URL` em `BeweatherLanding.tsx` aponta pro número pessoal do Lucas (5544991447004). Antes de ligar ads:
 
 1. Comprar chip/linha nova dedicada à Beweather (recomendado — evita ban + separa lead tracking)
 2. Ativar WhatsApp Business API via Evolution API (já previsto na `estrategia-n8n.md`)
@@ -176,7 +176,7 @@ Hoje `WHATSAPP_URL` em `BeweatherLanding.tsx` aponta pro número pessoal do Luca
 - **Empresa (Fluxo Rural Consultoria):** Sede em Curitiba, PR (documentos, contratos, termos de uso)
 - Email pessoal: <lucas@fluxorural.com.br>
 - Email empresa/contato: <contato@fluxorural.com.br>
-- WhatsApp: 5545991447004
+- WhatsApp: 5544991447004
 
 ---
 

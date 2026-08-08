@@ -6,7 +6,7 @@ const PAGE_URL = `${SITE_URL}/beweather`
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Beweather B2K — Estação Meteorológica Agrícola | 12 Sensores',
+    absolute: 'Beweather B2K - Estação Meteorológica Agrícola | 12 Sensores',
   },
   description:
     'Estação meteorológica profissional com 12 sensores, WiFi e painel solar. Dados em tempo real da sua lavoura. R$ 9.900, 12x sem juros, frete grátis.',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: PAGE_URL,
     siteName: 'Beweather B2K',
-    title: 'Beweather B2K — Estação Meteorológica Agrícola | 12 Sensores',
+    title: 'Beweather B2K - Estação Meteorológica Agrícola | 12 Sensores',
     description:
       '12 sensores, WiFi e painel solar. Clima da sua lavoura em tempo real no celular. R$ 9.900, 12x sem juros, frete grátis.',
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Beweather B2K — Estação Meteorológica Agrícola',
+    title: 'Beweather B2K - Estação Meteorológica Agrícola',
     description:
       '12 sensores + WiFi + painel solar. Dados da sua lavoura em tempo real. R$ 9.900, 12x sem juros.',
     images: [`${SITE_URL}/beweather/og-image.jpg`],
@@ -150,7 +150,7 @@ const faqJsonLd = {
       name: 'Funciona em fazenda sem energia elétrica?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Sim. A Beweather tem painel solar integrado e bateria de longa duração — é totalmente autônoma e instala em qualquer ponto da fazenda.',
+        text: 'Sim. A Beweather tem painel solar integrado e bateria de longa duração - é totalmente autônoma e instala em qualquer ponto da fazenda.',
       },
     },
     {
@@ -198,13 +198,13 @@ const faqJsonLd = {
       name: 'Tem garantia?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Sim — 12 meses de garantia de fábrica contra defeitos de fabricação, com suporte técnico especializado em agronomia.',
+        text: 'Sim - 12 meses de garantia de fábrica contra defeitos de fabricação, com suporte técnico especializado em agronomia.',
       },
     },
   ],
 }
 
-// BreadcrumbList removido — a landing não tem breadcrumb visível e o
+// BreadcrumbList removido - a landing não tem breadcrumb visível e o
 // Google marca como mismatch. Se adicionarmos um breadcrumb visual no
 // header da Beweather, reintroduzir o schema.
 
@@ -216,7 +216,7 @@ export default function BeweatherPage() {
         rel="alternate"
         type="text/plain"
         href={`${SITE_URL}/beweather/llms.txt`}
-        title="Beweather B2K — Informações para LLMs"
+        title="Beweather B2K - Informações para LLMs"
       />
       <script
         type="application/ld+json"

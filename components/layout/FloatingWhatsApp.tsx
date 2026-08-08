@@ -8,11 +8,11 @@ import { cn } from '@/lib/utils'
 export default function FloatingWhatsApp() {
   const pathname = usePathname()
   if (pathname?.startsWith('/beweather') || pathname?.startsWith('/links')) return null
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5545991447004'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5544991447004'
   const message = encodeURIComponent(
     'Olá Lucas! Vim pelo site fluxorural.com.br e gostaria de saber mais sobre seus serviços.'
   )
-  // No mobile o botão sobrepõe o texto durante a leitura do artigo — some só ali,
+  // No mobile o botão sobrepõe o texto durante a leitura do artigo - some só ali,
   // continua disponível no desktop e em todas as outras páginas do site.
   const isArticlePage = pathname?.startsWith('/blog/')
 

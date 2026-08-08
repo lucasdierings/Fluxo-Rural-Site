@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   alternates: { canonical: '/politica-de-privacidade/' },
   title: 'Política de Privacidade',
-  description: 'Política de Privacidade da Fluxo Rural Consultoria — como tratamos seus dados pessoais em conformidade com a LGPD.',
+  description: 'Política de Privacidade da Fluxo Rural Consultoria - como tratamos seus dados pessoais em conformidade com a LGPD.',
 }
 
 export default function PoliticaPage() {
@@ -16,7 +16,7 @@ export default function PoliticaPage() {
 
           <h2>1. Responsável pelo Tratamento</h2>
           <p>
-            Fluxo Rural Consultoria, CNPJ a definir, com sede em Curitiba, Paraná — Brasil, representada por Lucas Dierings, é responsável pelo tratamento dos dados pessoais coletados neste site.
+            Fluxo Rural Consultoria, CNPJ a definir, com sede em Curitiba, Paraná - Brasil, representada por Lucas Dierings, é responsável pelo tratamento dos dados pessoais coletados neste site.
           </p>
 
           <h2>2. Dados Coletados</h2>
@@ -51,7 +51,7 @@ export default function PoliticaPage() {
           <h2>8. Contato</h2>
           <p>Para dúvidas sobre esta política, entre em contato:<br />
             E-mail: contato@fluxorural.com.br<br />
-            Localização: Curitiba, PR — Brasil</p>
+            Localização: Curitiba, PR - Brasil</p>
         </div>
       </div>
     </section>
