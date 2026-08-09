@@ -11,7 +11,7 @@
 
   <!-- Open Graph / WhatsApp Link Preview Metadata -->
   <meta property="og:title" content="Benchmark da Safra: Seus custos estão acima ou abaixo da média?" />
-  <meta property="og:description" content="Compare sua margem por hectare e custos de produção (sementes, defensivos, adubo, diesel) de forma 100% anônima e gratuita com a média do seu estado." />
+  <meta property="og:description" content="Compare sua margem por hectare e custos de produção com médias agregadas do seu estado e do Brasil." />
   <meta property="og:image" content="https://fluxorural.com.br/calculadora/og-image-calculadora.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -22,7 +22,7 @@
   <!-- Twitter Card Metadata -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Benchmark da Safra: Seus custos estão acima ou abaixo da média?" />
-  <meta name="twitter:description" content="Compare sua margem por hectare e custos de produção (sementes, defensivos, adubo, diesel) de forma 100% anônima e gratuita com a média do seu estado." />
+  <meta name="twitter:description" content="Compare sua margem por hectare e custos de produção com médias agregadas do seu estado e do Brasil." />
   <meta name="twitter:image" content="https://fluxorural.com.br/calculadora/og-image-calculadora.jpg" />
 
   <!-- JSON-LD: Structured Data -->
@@ -355,6 +355,7 @@
           </div>
           <div class="wz-footer wz-footer-col">
             <button type="button" class="btn btn-primary btn-block" data-action="next" id="btnVerMargem">Ver minha margem →</button>
+            <p class="error-msg" id="resultadoErro" role="alert" style="display:none">Não foi possível registrar o uso agora. Confira sua conexão e tente novamente.</p>
             <button type="button" class="btn btn-ghost btn-block" data-action="back">Voltar</button>
           </div>
         </div>
@@ -401,10 +402,10 @@
           <div class="gate-overlay">
             <div class="gate-card">
               <div class="gate-badge-wrap">
-                <img src="./selo-seguranca-sm.jpg" alt="Dados 100% Anônimos - Segurança Fluxo Rural" width="80" height="80" class="gate-seal-img" loading="lazy" decoding="async" />
+                <img src="./selo-seguranca-sm.jpg" alt="Comparação agregada e dados individuais protegidos" width="80" height="80" class="gate-seal-img" loading="lazy" decoding="async" />
               </div>
               <h2>Quer ver como você se compara?</h2>
-              <p class="card-sub">Seu resultado está pronto. Para liberar a comparação, compartilhe seus dados de forma <strong>anônima</strong> — é assim que as médias existem: cada produtor que participa deixa o comparativo mais preciso para todos.</p>
+              <p class="card-sub">Seu resultado inicial está pronto. Para liberar a comparação completa, identifique seu cadastro — cada participação deixa as médias mais precisas para todos.</p>
               <ul class="gate-unlocks">
                 <li>Compare <strong>margem/ha, produtividade e custos</strong> com a média do <strong>seu estado</strong> e do <strong>Brasil</strong></li>
                 <li>Veja <strong>sua posição</strong> entre os produtores da sua cultura</li>
@@ -412,7 +413,7 @@
               </ul>
               <p class="lock-line">
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 9V7a5 5 0 0110 0v2M4 9h12v8a1 1 0 01-1 1H5a1 1 0 01-1-1V9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-                O ranking é anônimo — seus dados individuais nunca aparecem. O cadastro serve só para organizar os dados e evitar duplicações.
+                Seus dados individuais não são publicados. O ranking usa resultados agregados, e o cadastro ajuda a evitar duplicações e acompanhar a evolução da sua cidade.
               </p>
 
               <form id="formCadastro" novalidate>
@@ -446,11 +447,18 @@
                 <label class="check-row" for="regLgpd" style="margin:1rem 0 1.25rem">
                   <input type="checkbox" id="regLgpd" />
                   <span class="check-label">
-                    Autorizo o Fluxo Rural a usar meus dados para gerar o diagnóstico e enviar conteúdos relevantes.
-                    Meus dados individuais nunca serão compartilhados.
+                    Autorizo o Fluxo Rural a processar meus dados para gerar o diagnóstico, calcular comparações agregadas e evitar cadastros duplicados.
+                    Meus resultados individuais não serão publicados.
                     Veja a <a href="/politica-de-privacidade" target="_blank" rel="noopener">política de privacidade</a>.
                   </span>
                 </label>
+
+                <label class="check-row" for="regConteudos" style="margin:0 0 1.25rem">
+                  <input type="checkbox" id="regConteudos" />
+                  <span class="check-label">Também quero receber conteúdos úteis sobre gestão rural. Posso cancelar quando quiser.</span>
+                </label>
+
+                <p class="error-msg" id="cadastroErro" role="alert" style="display:none;margin-bottom:1rem">Não foi possível salvar seu cadastro. Confira sua conexão e tente novamente.</p>
 
                 <button type="submit" class="btn btn-primary btn-block" id="btnVerDiagnostico" disabled>VER MINHA COMPARAÇÃO →</button>
               </form>
@@ -526,7 +534,7 @@
         <!-- 7. Sua posição -->
         <div class="card">
           <h2>Sua posição entre os produtores</h2>
-          <p class="card-sub">Comparação anônima — ninguém vê os dados de ninguém.</p>
+          <p class="card-sub">Comparação agregada — os dados individuais de cada produtor não são publicados.</p>
 
           <div class="rank-gauge-wrap">
             <svg class="rank-gauge" viewBox="0 0 220 128" aria-hidden="true">
@@ -583,6 +591,7 @@
             <input type="checkbox" id="avisarCidade" />
             <span class="check-label">Me avise no WhatsApp quando a média de <strong id="avisarCidadeNome"></strong> sair.</span>
           </label>
+          <p class="error-msg" id="avisarCidadeStatus" role="status" style="display:none;margin:-.6rem 0 1rem"></p>
           <div class="cta-block">
             <button type="button" class="btn btn-primary btn-block" id="btnConvidar">Convidar outros produtores</button>
             <button type="button" class="btn btn-utility btn-block" id="btnPdf">Baixar meu diagnóstico em PDF</button>

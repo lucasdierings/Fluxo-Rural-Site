@@ -89,6 +89,9 @@ export default function PropostaForm({ servicoInicial, temaInicial }: PropostaFo
   const perguntas = useMemo(() => (servico ? perguntasDe(servico) : []), [servico])
   const total = perguntas.length + 1 // perguntas + tela de contato
   const naContato = passo >= perguntas.length
+  const precisaOrganizacao = !!servico && pedeOrganizacao(servico)
+  const precisaLocalEvento = servico === 'palestra' || servico === 'treinamento'
+  const precisaDataEvento = precisaLocalEvento && respostas.quando === 'Já tenho uma data definida'
 
   // O serviço e o tema chegam pela query string (?servico=treinamento&tema=...),
   // porque o site é static export e a página não consegue ler isso no servidor.
@@ -125,7 +128,12 @@ export default function PropostaForm({ servicoInicial, temaInicial }: PropostaFo
   const voltar = () => setPasso((p) => p - 1)
 
   const contatoValido =
-    contato.nome.trim() !== '' && contato.email.trim() !== '' && contato.whatsapp.trim() !== ''
+    contato.nome.trim() !== '' &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contato.email.trim()) &&
+    contato.whatsapp.replace(/\D/g, '').length >= 10 &&
+    (!precisaOrganizacao || contato.organizacao.trim() !== '') &&
+    (!precisaLocalEvento || (contato.cidade.trim() !== '' && contato.uf !== '')) &&
+    (!precisaDataEvento || !!respostas.data)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -300,7 +308,7 @@ export default function PropostaForm({ servicoInicial, temaInicial }: PropostaFo
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-navy mb-2">
               Só falta saber quem é você
             </h2>
-            <p className="text-carvao/60 text-sm">Retorno em até 24h, no canal que preferir.</p>
+            <p className="text-carvao/60 text-sm">Retorno em até 24h por WhatsApp ou e-mail.</p>
           </div>
 
           <div>
@@ -329,9 +337,9 @@ export default function PropostaForm({ servicoInicial, temaInicial }: PropostaFo
               placeholder="seu@email.com"
             />
           </div>
-          {pedeOrganizacao(servico) && (
+          {precisaOrganizacao && (
             <div>
-              <label className={labelClass}>Organização</label>
+              <label className={labelClass}>Organização *</label>
               <Input
                 value={contato.organizacao}
                 onChange={(e) => setContato({ ...contato, organizacao: e.target.value })}
@@ -339,9 +347,19 @@ export default function PropostaForm({ servicoInicial, temaInicial }: PropostaFo
               />
             </div>
           )}
+          {precisaDataEvento && (
+            <div>
+              <label className={labelClass}>Data do evento *</label>
+              <Input
+                type="date"
+                value={respostas.data || ''}
+                onChange={(e) => setRespostas({ ...respostas, data: e.target.value })}
+              />
+            </div>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="sm:col-span-2">
-              <label className={labelClass}>Cidade</label>
+              <label className={labelClass}>Cidade{precisaLocalEvento ? ' *' : ''}</label>
               <Input
                 value={contato.cidade}
                 onChange={(e) => setContato({ ...contato, cidade: e.target.value })}
@@ -349,7 +367,7 @@ export default function PropostaForm({ servicoInicial, temaInicial }: PropostaFo
               />
             </div>
             <div>
-              <label className={labelClass}>UF</label>
+              <label className={labelClass}>UF{precisaLocalEvento ? ' *' : ''}</label>
               <select
                 value={contato.uf}
                 onChange={(e) => setContato({ ...contato, uf: e.target.value })}

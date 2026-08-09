@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS calculadora_diagnosticos (
   whatsapp              TEXT,
   consent_lgpd          INTEGER NOT NULL DEFAULT 0,
   consent_at            TEXT,
+  avisar_media_cidade   INTEGER NOT NULL DEFAULT 0,
+  consent_conteudos     INTEGER NOT NULL DEFAULT 0,
 
   -- Produção (cultura principal)
   cultura               TEXT,           -- soja | milho | trigo

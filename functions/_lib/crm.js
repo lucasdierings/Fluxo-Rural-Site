@@ -1,16 +1,16 @@
 // Push de leads do site para o CRM (banco fluxo_crm, projeto fluxo-rural-crm).
 //
-// Best-effort por princípio: o CRM fora do ar não pode quebrar a captura do lead
-// nem atrasar a resposta ao produtor. Por isso pushCrm() NUNCA lança, e todo
-// chamador envolve a chamada em ctx.waitUntil() — o fetch sobrevive à resposta
-// que já foi entregue ao navegador.
+// pushCrm() nunca lança: devolve {ok:false, motivo} e cada formulário decide se
+// o CRM é confirmação obrigatória ou sincronização em segundo plano. Nos fluxos
+// de contato atuais ele é confirmação obrigatória; a calculadora preserva antes
+// o cálculo anônimo no D1 e confirma o CRM quando há cadastro.
 //
 // Variáveis no Cloudflare Pages (Settings → Environment variables):
 //   FLUXO_INGEST_TOKEN  segredo — mesmo valor do projeto fluxo-rural-crm
 //   CRM_INGEST_URL      opcional — trocar quando crm.fluxorural.com.br subir
 //
-// Sem FLUXO_INGEST_TOKEN configurado o push vira no-op silencioso (o lead segue
-// pelo e-mail/D1 de sempre): preview e local não precisam do segredo pra rodar.
+// Sem FLUXO_INGEST_TOKEN configurado o push retorna {ok:false}; preview e testes
+// devem fornecer um token de teste quando precisarem validar o fluxo completo.
 
 const CRM_INGEST_PADRAO = 'https://fluxo-rural-crm.pages.dev/api/ingest'
 

@@ -128,7 +128,7 @@
     editIndex: -1,      // índice da cultura sendo editada no loop
     divida: { tem: false, total: 0, parcela: 0, taxa: null },
     atividades: [],
-    cadastro: { nome: '', email: '', whatsapp: '', lgpd: false },
+    cadastro: { nome: '', email: '', whatsapp: '', lgpd: false, receber_conteudos: false },
     interesse_gestao: false,
     avisar_media_cidade: false,
     avaliacao: { estrelas: 0, comentario: '' },
@@ -466,16 +466,16 @@
     'wzCustosCultura', 'wzCustosArea', 'wzCustosSub', 'wzCustoLive', 'custoModo', 'custosGroups',
     'culturasResumo', 'btnAddOutra',
     'dividaToggle', 'dividaCampos', 'dTotal', 'dParcela', 'dTaxa',
-    'atividadesList', 'btnAddAtividade', 'btnVerMargem',
+    'atividadesList', 'btnAddAtividade', 'btnVerMargem', 'resultadoErro',
     't2Margem', 't2MargemHa', 't2Metrics',
-    'formCadastro', 'regNome', 'regEmail', 'regWhats', 'regInteresse', 'regLgpd', 'btnVerDiagnostico',
+    'formCadastro', 'regNome', 'regEmail', 'regWhats', 'regInteresse', 'regLgpd', 'regConteudos', 'cadastroErro', 'btnVerDiagnostico',
     't3Subtitulo', 't3ResumoGrid', 't3CulturasBlocks', 't3Benchmark', 't3Completeness', 't3CostTable',
     't3EquilibrioCard', 't3Equilibrio', 't3ComposicaoCard', 't3Composicao',
     't3Tier', 't3ShareCard', 'shareCanvas', 'btnShareCard',
     't3DividaCard', 't3DividaExplain', 't3DividaGrid', 't3Alavancagem', 't3DividaCallout',
     't3DiversifCard', 't3DiversifNote', 't3DiagCard',
     't3RankingTexto', 't3RankStats', 't3RankNext', 't3GaugeNeedle', 't3RankPct',
-    'btnPdf', 'btnConvidar', 'btnRefazer', 'ctaInviteNote', 'avisarCidade', 'avisarCidadeNome',
+    'btnPdf', 'btnConvidar', 'btnRefazer', 'ctaInviteNote', 'avisarCidade', 'avisarCidadeNome', 'avisarCidadeStatus',
     'ratingStars', 'ratingComentario', 'btnEnviarAvaliacao', 'ratingThanks'
   ].forEach(grab);
 
@@ -497,6 +497,7 @@
   function apiCalcular(payload) { return postAPI('calcular', payload); }
   function apiCadastrar(payload) { return postAPI('cadastrar', payload); }
   function apiAvaliar(payload) { return postAPI('avaliar', payload); }
+  function apiPreferencias(payload) { return postAPI('preferencias', payload); }
 
   // Evento GA4 genérico (nomes em português, ASCII). gtag (GA4) + dataLayer (GTM), SEM PII.
   // Garante que o analytics lazy já carregou antes de disparar (elimina corrida do 1º clique).
@@ -866,18 +867,24 @@
   async function finishWizard() {
     S.resultado = calcularTudo();
     const r = S.resultado;
+    el.btnVerMargem.disabled = true;
+    el.resultadoErro.style.display = 'none';
+    const res = await apiCalcular(buildCalcPayload());
+    if (!res.ok || !res.success || !res.id) {
+      el.btnVerMargem.disabled = false;
+      el.resultadoErro.style.display = 'block';
+      return;
+    }
+    if (res.id) S.calcId = res.id;
+    if (res.ranking) S.ranking = res.ranking;
+    if (res.n_cidade !== undefined) S.n_cidade = res.n_cidade;
+    if (res.city_benchmark !== undefined) S.city_benchmark = res.city_benchmark;
     fireEvent('calculadora_resultado', {
       cultura: (r.headline && r.headline.cultura) || '',
       estado: S.local.uf || '',
       faixa_area: faixaAreaLabel(r.area_total),
       diagnostico: r.classe || ''
     });
-    el.btnVerMargem.disabled = true;
-    const res = await apiCalcular(buildCalcPayload());
-    if (res.id) S.calcId = res.id;
-    if (res.ranking) S.ranking = res.ranking;
-    if (res.n_cidade !== undefined) S.n_cidade = res.n_cidade;
-    if (res.city_benchmark !== undefined) S.city_benchmark = res.city_benchmark;
     el.btnVerMargem.disabled = false;
     renderTela2();
     goToScreen(2);
@@ -1307,6 +1314,7 @@
     return {
       calcId: S.calcId, cadastro: S.cadastro, interesse_gestao: S.interesse_gestao,
       avisar_media_cidade: S.avisar_media_cidade,
+      receber_conteudos: !!S.cadastro.receber_conteudos,
       safra: S.safra, local: S.local, terra: S.terra, culturas: S.culturas,
       divida: S.divida, atividades: S.atividades,
       custos_detalhe: buildCustosDetalhe(),
@@ -1770,7 +1778,7 @@
   function buildConviteTexto() {
     const r = S.resultado;
     if (!r || !r.headline) {
-      return 'Fiz o teste no Benchmark da Safra da Fluxo Rural: em 2 minutos ele mostra a margem por hectare da lavoura e compara com a média do estado. Gratuito e anônimo. Vale fazer o seu: https://fluxorural.com.br/calculadora/';
+      return 'Fiz o teste no Benchmark da Safra da Fluxo Rural: em 2 minutos ele mostra a margem por hectare da lavoura e compara com médias agregadas. Gratuito e com resultados individuais protegidos. Vale fazer o seu: https://fluxorural.com.br/calculadora/';
     }
     const h = r.headline;
     const cultura = CULTURA_LABEL[h.cultura] || h.cultura;
@@ -1820,7 +1828,20 @@
       window.open(`https://wa.me/?text=${encodeURIComponent(buildConviteTexto())}`, '_blank', 'noopener');
     };
   }
-  el.avisarCidade.addEventListener('change', () => { S.avisar_media_cidade = el.avisarCidade.checked; });
+  el.avisarCidade.addEventListener('change', async () => {
+    const novoValor = el.avisarCidade.checked;
+    S.avisar_media_cidade = novoValor;
+    el.avisarCidade.disabled = true;
+    el.avisarCidadeStatus.style.display = 'none';
+    const res = await apiPreferencias({ calcId: S.calcId, avisar_media_cidade: novoValor });
+    el.avisarCidade.disabled = false;
+    if (!res.ok || !res.success) {
+      S.avisar_media_cidade = !novoValor;
+      el.avisarCidade.checked = !novoValor;
+      el.avisarCidadeStatus.textContent = 'Não foi possível salvar essa preferência. Tente novamente.';
+      el.avisarCidadeStatus.style.display = 'block';
+    }
+  });
 
   // ---------- Card compartilhável (orgulho) — PNG desenhado em canvas ----------
   function roundRectPath(ctx, x, y, w, h, rad) {
@@ -2013,11 +2034,18 @@
     if (!validateCadastro()) return;
     S.cadastro = {
       nome: el.regNome.value.trim(), email: el.regEmail.value.trim(),
-      whatsapp: el.regWhats.value.trim(), lgpd: el.regLgpd.checked
+      whatsapp: el.regWhats.value.trim(), lgpd: el.regLgpd.checked,
+      receber_conteudos: !!(el.regConteudos && el.regConteudos.checked)
     };
     S.interesse_gestao = el.regInteresse ? el.regInteresse.checked : false;
     el.btnVerDiagnostico.disabled = true;
+    el.cadastroErro.style.display = 'none';
     const res = await apiCadastrar(buildCadastroPayload());
+    if (!res.ok || !res.success || !res.id) {
+      el.btnVerDiagnostico.disabled = false;
+      el.cadastroErro.style.display = 'block';
+      return;
+    }
     if (res && res.id) S.calcId = res.id;
     if (res && res.ranking) S.ranking = res.ranking;
     if (res && res.n_cidade !== undefined) S.n_cidade = res.n_cidade;

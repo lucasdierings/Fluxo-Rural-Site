@@ -160,11 +160,24 @@ export async function onRequest(context) {
   const nome = String(body.nome || '').trim()
   const email = String(body.email || '').trim().toLowerCase()
   const whatsapp = String(body.whatsapp || body.telefone || '').trim()
-  if (!nome || !email || !whatsapp) {
+  if (!nome || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || whatsapp.replace(/\D/g, '').length < 10) {
     return json({ error: 'Informe nome, e-mail e WhatsApp.' }, 400, headers)
   }
 
   const parcial = body.etapa === 'contato'
+  const tipoPedido = String(body.tipo || '').trim()
+  if (!Object.prototype.hasOwnProperty.call(TIPOS, tipoPedido)) {
+    return json({ error: 'Tipo de pedido inválido.' }, 400, headers)
+  }
+  if (!parcial && (tipoPedido === 'palestra' || tipoPedido === 'treinamento')) {
+    const camposEvento = [body.formato, body.contratante, body.quando, body.organizacao, body.cidade, body.uf]
+    if (camposEvento.some((valor) => !String(valor || '').trim())) {
+      return json({ error: 'Complete formato, contratante, prazo, organização e local do evento.' }, 400, headers)
+    }
+    if (body.quando === 'Já tenho uma data definida' && !String(body.data || '').trim()) {
+      return json({ error: 'Informe a data do evento.' }, 400, headers)
+    }
+  }
 
   const tracking = {
     utm_source: body.utm_source || null,
@@ -183,7 +196,7 @@ export async function onRequest(context) {
     email,
     whatsapp,
     organizacao: String(body.organizacao || body.empresa || '').trim(),
-    tipo: String(body.tipo || '').trim(),
+    tipo: tipoPedido,
     tema: String(body.tema || '').trim(),
     formato: String(body.formato || '').trim(),
     contratante: String(body.contratante || '').trim(),
@@ -203,47 +216,13 @@ export async function onRequest(context) {
     tracking,
   }
 
-  // 1. E-mail interno. Se falhar, o lead ainda vai pro CRM, então a resposta
-  //    continua sendo sucesso: o front não pode travar por causa do Resend.
-  let emailOk = false
-  if (env.RESEND_API_KEY) {
-    try {
-      const primeiroNome = nome.split(' ')[0]
-      const rotulo = TIPOS[d.tipo] || 'Contato'
-      const assunto = parcial
-        ? d.tipo === 'portfolio'
-          ? `📄 Baixou o portfólio: ${primeiroNome}${d.organizacao ? ' - ' + d.organizacao : ''}`
-          : `📝 Contato parcial: ${primeiroNome}${d.organizacao ? ' - ' + d.organizacao : ''}`
-        : `🎤 Novo pedido de ${rotulo}: ${primeiroNome}${d.organizacao ? ' — ' + d.organizacao : ''}`
-      const resp = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${env.RESEND_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: FROM,
-          to: TO,
-          reply_to: email,
-          subject: assunto,
-          html: parcial ? emailParcial(d) : emailCompleto(d),
-        }),
-      })
-      emailOk = resp.ok
-      if (!resp.ok) {
-        console.error('Resend recusou:', resp.status, await resp.text().catch(() => ''))
-      }
-    } catch (err) {
-      console.error('Resend falhou:', String(err))
-    }
-  } else {
-    console.error('RESEND_API_KEY ausente — e-mail de palestra não enviado')
-  }
-
-  // 2. CRM. waitUntil: a resposta sai agora, o push termina depois.
-  //    O external_id é o mesmo nas duas etapas (nome+email+whatsapp), então a
-  //    etapa 2 ATUALIZA o contato parcial em vez de criar um lead duplicado.
-  const externalId = await idEstavel('proposta', [email, whatsapp, nome])
+  // 1. CRM. Etapa, tipo e contexto comercial entram no identificador para que
+  //    um download de portfólio nunca bloqueie uma proposta posterior. Reenvio
+  //    idêntico no mesmo dia continua idempotente.
+  const externalId = await idEstavel('proposta', [
+    parcial ? 'parcial' : 'completo', d.tipo, email, whatsapp, nome,
+    d.tema, d.organizacao, d.quando, d.data,
+  ])
 
   const payload = {
     source: 'site-proposta',
@@ -284,7 +263,45 @@ export async function onRequest(context) {
     },
   }
 
-  context.waitUntil(pushCrm(env, payload))
+  const crm = await pushCrm(env, payload)
+  if (!crm.ok) {
+    return json({ error: 'Não foi possível registrar o pedido. Tente novamente.', crm: crm.motivo }, 502, headers)
+  }
 
-  return json({ success: true, email: emailOk }, 200, headers)
+  // 2. E-mail interno é notificação best-effort. O CRM já confirmou a captura,
+  //    então falha do Resend não trava o formulário nem induz envio duplicado.
+  let emailOk = false
+  if (env.RESEND_API_KEY) {
+    try {
+      const primeiroNome = nome.split(' ')[0]
+      const rotulo = TIPOS[d.tipo] || 'Contato'
+      const assunto = parcial
+        ? d.tipo === 'portfolio'
+          ? `📄 Baixou o portfólio: ${primeiroNome}${d.organizacao ? ' - ' + d.organizacao : ''}`
+          : `📝 Contato parcial: ${primeiroNome}${d.organizacao ? ' - ' + d.organizacao : ''}`
+        : `🎤 Novo pedido de ${rotulo}: ${primeiroNome}${d.organizacao ? ' — ' + d.organizacao : ''}`
+      const resp = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: FROM,
+          to: TO,
+          reply_to: email,
+          subject: assunto,
+          html: parcial ? emailParcial(d) : emailCompleto(d),
+        }),
+      })
+      emailOk = resp.ok
+      if (!resp.ok) console.error('Resend recusou:', resp.status, await resp.text().catch(() => ''))
+    } catch (err) {
+      console.error('Resend falhou:', String(err))
+    }
+  } else {
+    console.error('RESEND_API_KEY ausente — e-mail de proposta não enviado')
+  }
+
+  return json({ success: true, email: emailOk, crm: true, submissionId: externalId }, 200, headers)
 }

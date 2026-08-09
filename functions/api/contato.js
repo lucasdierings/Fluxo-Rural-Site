@@ -6,7 +6,7 @@
 // enviada!" na tela e o lead no lixo. Agora:
 //   1. valida o payload (erro volta a ser erro, com status HTTP de verdade)
 //   2. avisa o Lucas por e-mail (Resend), igual ao /api/diagnostico
-//   3. empurra o lead pro CRM via ctx.waitUntil() — não atrasa a resposta
+//   3. confirma o lead no CRM antes de responder sucesso ao formulário
 //
 // O front só marca sucesso (e só dispara generate_lead no Ads) quando esta
 // Function responde 200. Nada de conversão fantasma.
@@ -121,15 +121,20 @@ export async function onRequest(context) {
   let body
   try { body = await request.json() } catch (_) { return json({ error: 'JSON inválido' }, 400, headers) }
 
-  const nome = String(body.nome || '').trim()
-  const email = String(body.email || '').trim().toLowerCase()
-  const telefone = String(body.telefone || body.whatsapp || '').trim()
-  if (!nome || (!email && !telefone)) {
+  const nome = String(body.nome || '').trim().slice(0, 120)
+  const email = String(body.email || '').trim().toLowerCase().slice(0, 180)
+  const telefone = String(body.telefone || body.whatsapp || '').trim().slice(0, 30)
+  const emailValido = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  const telefoneValido = !telefone || telefone.replace(/\D/g, '').length >= 10
+  if (!nome || (!email && !telefone) || !emailValido || !telefoneValido) {
     return json({ error: 'Informe nome e ao menos e-mail ou telefone.' }, 400, headers)
   }
 
   const formOrigem = String(body.form || body._tipo || 'contato')
   const beweather = formOrigem.includes('beweather') || body.produto === 'beweather'
+  if (beweather && !(body.consent === true || body.consent === 'true' || body.consent === 1)) {
+    return json({ error: 'O consentimento é obrigatório para solicitar a cotação.' }, 400, headers)
+  }
   const interesse = String(body.interesse || (beweather ? 'Cotação Beweather' : '')).trim()
 
   const produtoPedido = String(body.produto || '').toLowerCase()
@@ -167,8 +172,43 @@ export async function onRequest(context) {
     tracking,
   }
 
-  // 1. E-mail interno. É o caminho que o Lucas já usa hoje; se ele falhar, o
-  //    lead ainda vai pro CRM, então a resposta continua sendo sucesso.
+  // 1. CRM é a confirmação primária: é a fonte de verdade da operação.
+  //    Só depois dele confirmar tentamos o e-mail, evitando sucesso falso.
+  const externalId = await idEstavel(beweather ? 'beweather-lp' : 'contato', [
+    email, telefone, interesse, dados.detalhes.slice(0, 120),
+  ])
+  const obs = [interesse, dados.detalhes].filter(Boolean).join(' — ') || null
+  const crm = await pushCrm(env, {
+    source: beweather ? 'site-beweather' : 'site-contato',
+    external_id: externalId,
+    contato: {
+      nome,
+      email: email || null,
+      whatsapp: telefone || null,
+      cidade: dados.cidade || null,
+      uf: dados.estado || null,
+      empresa: dados.empresa || null,
+      interesse: beweather ? 'Cotação Beweather' : (interesse ? `Interesse: ${interesse}` : null),
+      consent_marketing: dados.consent ? 1 : 0,
+      consent_ts: dados.consent_ts,
+      ...atribuicao(tracking),
+    },
+    negocio: {
+      produto,
+      etapa: 'novo',
+      origem: dados.canal,
+      obs,
+    },
+    evento: {
+      tipo: 'form_submit',
+      meta: { form: formOrigem, interesse: interesse || null, hectares: dados.hectares || null },
+    },
+  })
+  if (!crm.ok) {
+    return json({ error: 'Não foi possível registrar o contato. Tente novamente.', crm: crm.motivo }, 502, headers)
+  }
+
+  // 2. E-mail interno é notificação. Se falhar, o contato continua seguro no CRM.
   let emailOk = false
   if (env.RESEND_API_KEY) {
     try {
@@ -196,40 +236,5 @@ export async function onRequest(context) {
     console.error('RESEND_API_KEY ausente — e-mail de contato não enviado')
   }
 
-  // 2. CRM. waitUntil: a resposta sai agora, o push termina depois.
-  const externalId = await idEstavel(beweather ? 'beweather-lp' : 'contato', [
-    email, telefone, interesse, dados.detalhes.slice(0, 120),
-  ])
-  const obs = [interesse, dados.detalhes].filter(Boolean).join(' — ') || null
-
-  context.waitUntil(pushCrm(env, {
-    source: beweather ? 'site-beweather' : 'site-contato',
-    external_id: externalId,
-    contato: {
-      nome,
-      email: email || null,
-      whatsapp: telefone || null,
-      cidade: dados.cidade || null,
-      uf: dados.estado || null,
-      empresa: dados.empresa || null,
-      // Frase curta pra Base de marketing: o que a pessoa pediu, com o produto
-      // já embutido — "Cotação Beweather" ou "Interesse: Palestra / Workshop".
-      interesse: beweather ? 'Cotação Beweather' : (interesse ? `Interesse: ${interesse}` : null),
-      consent_marketing: dados.consent ? 1 : 0,
-      consent_ts: dados.consent_ts,
-      ...atribuicao(tracking),
-    },
-    negocio: {
-      produto,
-      etapa: 'novo',
-      origem: dados.canal,
-      obs,
-    },
-    evento: {
-      tipo: 'form_submit',
-      meta: { form: formOrigem, interesse: interesse || null, hectares: dados.hectares || null },
-    },
-  }))
-
-  return json({ success: true, email: emailOk }, 200, headers)
+  return json({ success: true, email: emailOk, crm: true, submissionId: externalId }, 200, headers)
 }

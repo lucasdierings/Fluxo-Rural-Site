@@ -219,7 +219,7 @@ async function empurrarCalcParaCrm(env, body, id, cols) {
       uf: local.uf || null,
       propriedade: local.propriedade || null,
       interesse: `Calculadora — ${cols.cultura || 'cultura não informada'}${r.classe ? ' (' + r.classe + ')' : ''}`,
-      consent_marketing: 1,               // o cadastro exige aceite LGPD
+      consent_marketing: body.receber_conteudos ? 1 : 0,
       consent_ts: new Date().toISOString(),
       ...atribuicao(tracking),
     },
@@ -242,15 +242,21 @@ async function empurrarCalcParaCrm(env, body, id, cols) {
   })
 }
 
-async function handleCadastrar(body, request, env, ctx) {
+async function handleCadastrar(body, request, env) {
   const cad = body.cadastro || {}
-  if (!cad.nome || !cad.email) return json({ error: 'Dados incompletos' }, 400)
+  const email = String(cad.email || '').trim().toLowerCase()
+  const telefone = String(cad.whatsapp || '').replace(/\D/g, '')
+  if (!cad.nome || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || telefone.length < 10 || cad.lgpd !== true) {
+    return json({ error: 'Dados ou consentimento incompletos' }, 400)
+  }
   const nowIso = new Date().toISOString()
   const propVal = body.local ? body.local.propriedade : null
 
   const idExistente = await findLinhaExistente(env, cad.email, body.safra, propVal)
   const isReturning = !!idExistente
-  let id = idExistente || body.calcId || null
+  // A linha anônima criada nesta sessão tem prioridade. Assim o cadastro
+  // completa exatamente aquele uso, sem deixar uma amostra órfã no ranking.
+  let id = body.calcId || idExistente || null
 
   const cols = await payloadToCols(body, request, env)
 
@@ -264,13 +270,19 @@ async function handleCadastrar(body, request, env, ctx) {
 
   if (id) {
     await env.DB.prepare(
-      'UPDATE calculadora_diagnosticos SET nome=?, email=?, whatsapp=?, consent_lgpd=1, consent_at=?, interesse_gestao=?, updated_at=? WHERE id=?'
-    ).bind(cad.nome, cad.email, cad.whatsapp || null, nowIso, body.interesse_gestao ? 1 : 0, nowIso, id).run()
+      'UPDATE calculadora_diagnosticos SET nome=?, email=?, whatsapp=?, consent_lgpd=1, consent_at=?, interesse_gestao=?, avisar_media_cidade=?, consent_conteudos=?, updated_at=? WHERE id=?'
+    ).bind(
+      cad.nome, email, cad.whatsapp || null, nowIso, body.interesse_gestao ? 1 : 0,
+      body.avisar_media_cidade ? 1 : 0, body.receber_conteudos ? 1 : 0, nowIso, id
+    ).run()
   }
 
-  // CRM em waitUntil(): não atrasa a resposta do cálculo nem quebra a captura se
-  // o CRM estiver fora do ar.
-  if (id && ctx) ctx.waitUntil(empurrarCalcParaCrm(env, body, id, cols))
+  if (!id) return json({ error: 'Não foi possível registrar o cálculo' }, 500)
+
+  // D1 mantém o cálculo; o cadastro só confirma sucesso quando a base interna
+  // também recebeu o contato. Retry reaproveita o mesmo calcId.
+  const crm = await empurrarCalcParaCrm(env, body, id, cols)
+  if (!crm.ok) return json({ error: 'Cadastro salvo, mas a base interna não confirmou. Tente novamente.' }, 502)
 
   // E-mails e audiência são best-effort (o lead já está no D1), mas cada um em seu próprio
   // try/catch: falha no e-mail interno não pode derrubar o e-mail do produtor, e vice-versa.
@@ -278,7 +290,7 @@ async function handleCadastrar(body, request, env, ctx) {
   if (env.RESEND_API_KEY) {
     try { await sendEmail(env, body, isReturning) } catch (err) { console.error('email interno falhou:', err) }
     try { emailProdutorEnviado = await sendEmailProdutor(env, body) } catch (err) { console.error('email produtor falhou:', err) }
-    if (env.RESEND_AUDIENCE_ID) {
+    if (env.RESEND_AUDIENCE_ID && body.receber_conteudos) {
       try { await addContactToResendAudience(env, cad, cols, body.safra) } catch (err) { console.error('audiencia falhou:', err) }
     }
   }
@@ -288,7 +300,7 @@ async function handleCadastrar(body, request, env, ctx) {
   const nCidade = await countCityLeads(env, (r.headline && r.headline.cultura) || null, (body.local && body.local.uf) || null, (body.local && body.local.cidade) || null)
   const cityBench = await getCityBenchmark(env, (r.headline && r.headline.cultura) || null, (body.local && body.local.uf) || null, (body.local && body.local.cidade) || null)
 
-  return json({ success: true, id, isReturning, ranking, n_cidade: nCidade, city_benchmark: cityBench, emailProdutor: emailProdutorEnviado })
+  return json({ success: true, id, isReturning, crm: true, ranking, n_cidade: nCidade, city_benchmark: cityBench, emailProdutor: emailProdutorEnviado })
 }
 
 async function handleAvaliar(body, env) {
@@ -304,6 +316,15 @@ async function handleInteresse(body, env) {
   if (!body.calcId) return json({ success: false })
   await env.DB.prepare('UPDATE calculadora_diagnosticos SET interesse_gestao=?, updated_at=? WHERE id=?')
     .bind(body.interesse_gestao ? 1 : 0, new Date().toISOString(), body.calcId).run()
+  return json({ success: true })
+}
+
+async function handlePreferencias(body, env) {
+  if (!body.calcId) return json({ error: 'Cadastro não encontrado' }, 400)
+  const resultado = await env.DB.prepare(
+    'UPDATE calculadora_diagnosticos SET avisar_media_cidade=?, updated_at=? WHERE id=?'
+  ).bind(body.avisar_media_cidade ? 1 : 0, new Date().toISOString(), body.calcId).run()
+  if (!resultado.meta || resultado.meta.changes < 1) return json({ error: 'Cadastro não encontrado' }, 404)
   return json({ success: true })
 }
 
@@ -611,6 +632,7 @@ export async function onRequest(context) {
       case 'cadastrar': return await handleCadastrar(body, request, env, context)
       case 'avaliar': return await handleAvaliar(body, env)
       case 'interesse': return await handleInteresse(body, env)
+      case 'preferencias': return await handlePreferencias(body, env)
       default: return json({ error: 'Ação desconhecida' }, 400)
     }
   } catch (err) {

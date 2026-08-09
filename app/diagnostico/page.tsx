@@ -7,31 +7,31 @@ import { DiagnosticoForm } from '@/components/forms/DiagnosticoForm'
 export const metadata: Metadata = {
   alternates: { canonical: '/diagnostico/' },
   title: 'Diagnóstico Gratuito para o Agro | Fluxo Rural',
-  description: '30 minutos para descobrir onde sua gestão, liderança e resultados perdem dinheiro - para produtores rurais e empresas do agro. Você sai com um plano de ação de 90 dias. Sem compromisso.',
+  description: 'Diagnóstico gratuito de gestão para produtores rurais. Identifique o principal gargalo da propriedade e os próximos passos para agir com mais clareza.',
   openGraph: {
     title: 'Diagnóstico Gratuito | Fluxo Rural Consultoria',
-    description: 'Diagnóstico gratuito de 30 minutos para produtores rurais e empresas do agronegócio. Plano de ação de 90 dias, sem compromisso.',
+    description: 'Diagnóstico gratuito de gestão para produtores rurais, com perguntas objetivas e uma conversa de 30 minutos.',
     images: [{ url: '/og-image.png' }],
   },
 }
 
 const benefits = [
-  { emoji: '📊', title: 'Análise personalizada', desc: 'Uma leitura da gestão do seu negócio no agro, feita sobre as suas respostas - não um modelo genérico' },
-  { emoji: '🎯', title: 'Gargalos identificados', desc: 'Onde você perde dinheiro, clientes ou eficiência - e por onde começar a corrigir' },
+  { emoji: '📊', title: 'Análise personalizada', desc: 'Uma leitura da gestão da propriedade feita sobre as suas respostas - não um modelo genérico' },
+  { emoji: '🎯', title: 'Gargalo principal identificado', desc: 'Onde a gestão mais pressiona o resultado e por onde vale começar' },
   { emoji: '📅', title: 'Plano de ação de 90 dias', desc: 'Você sai da conversa com próximos passos concretos para os próximos 3 meses' },
-  { emoji: '✨', title: 'Recomendações reais', desc: 'Baseadas em dados e em experiência de campo com produtores e empresas do agro' },
+  { emoji: '✨', title: 'Recomendações aplicáveis', desc: 'Baseadas em dados, gestão rural e experiência de campo com produtores' },
 ]
 
 const audience = [
   'Produtores rurais que querem organizar as finanças',
   'Famílias em processo de sucessão',
-  'Revendas, cooperativas e empresas do agro que querem vender mais',
-  'Negócios do agro que querem desenvolver liderança e formar equipe que fica',
-  'Quem sente que poderia ter mais resultado com o que já tem',
+  'Propriedades pressionadas por caixa ou dívidas',
+  'Produtores avaliando crescimento, investimento ou inovação',
+  'Quem sente que poderia ter mais resultado com a estrutura que já tem',
 ]
 
 const steps = [
-  { num: '1', title: 'Preencha o diagnóstico', desc: 'Leva menos de 3 minutos', icon: FileText },
+  { num: '1', title: 'Preencha o diagnóstico', desc: 'De 6 a 7 perguntas objetivas', icon: FileText },
   { num: '2', title: 'Agendamos a sua sessão', desc: 'Entramos em contato em até 24h', icon: Clock },
   { num: '3', title: 'Receba seu plano de ação', desc: 'Na sessão de 30 minutos', icon: CalendarCheck },
 ]
@@ -48,7 +48,7 @@ const faqs = [
   { q: 'Preciso contratar algo depois?', a: 'Não. O diagnóstico é 100% independente. Se fizer sentido, podemos conversar sobre consultoria, mas não há obrigação.' },
   { q: 'Quanto tempo leva a sessão?', a: '30 minutos focados e objetivos. Você sai com um plano claro.' },
   { q: 'Como funciona o agendamento?', a: 'Você preenche o formulário e nós entramos em contato em até 24h para marcar o melhor dia e horário. A conversa é por vídeo, de onde você estiver.' },
-  { q: 'Funciona pra empresa, não só produtor?', a: 'Sim. Você escolhe no início se é produtor rural ou empresa do agro, e as perguntas se adaptam ao seu caso.' },
+  { q: 'Sou uma empresa ou organizo um evento. Este formulário é para mim?', a: 'Este diagnóstico é voltado ao produtor rural. Empresas, cooperativas e eventos podem usar o formulário de proposta para palestra, treinamento, podcast ou parceria.' },
 ]
 
 export default function DiagnosticoPage() {
@@ -64,7 +64,7 @@ export default function DiagnosticoPage() {
             Descubra os Gargalos que Travam o Resultado do seu Agro
           </h1>
           <p className="text-white/80 text-lg md:text-xl font-light leading-relaxed mb-8 max-w-2xl mx-auto">
-            Em 30 minutos, um diagnóstico gratuito da sua gestão, liderança e resultados - e você sai com um plano de ação de 90 dias. Seja produtor rural ou empresa do agro.
+            Em 30 minutos, uma leitura objetiva da gestão da sua propriedade para identificar o principal gargalo e definir os próximos passos.
           </p>
           <a
             href="#formulario"
@@ -72,7 +72,7 @@ export default function DiagnosticoPage() {
           >
             Fazer meu diagnóstico gratuito <ArrowRight size={20} />
           </a>
-          <p className="text-white/50 text-sm mt-4">Leva menos de 3 minutos para preencher.</p>
+          <p className="text-white/50 text-sm mt-4">De 6 a 7 perguntas objetivas para preencher.</p>
         </div>
       </section>
 
@@ -200,7 +200,7 @@ export default function DiagnosticoPage() {
             Comece seu Diagnóstico Gratuito
           </h2>
           <p className="text-carvao/60 text-center mb-10 max-w-xl mx-auto">
-            Responda as perguntas abaixo. Assim que recebermos seu perfil, entramos em contato em até 24h para marcar sua sessão.
+            Primeiro salvamos seu contato. Depois, você responde apenas as perguntas necessárias para a sua situação.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
@@ -266,7 +266,7 @@ export default function DiagnosticoPage() {
               name: 'Lucas Dierings',
               jobTitle: 'Engenheiro Agrônomo e Consultor',
             },
-            description: 'Diagnóstico gratuito de 30 minutos para avaliar gestão, liderança e resultados de produtores rurais e empresas do agronegócio.',
+            description: 'Diagnóstico gratuito de 30 minutos para avaliar a gestão e os resultados de produtores rurais.',
             offers: {
               '@type': 'Offer',
               price: '0',

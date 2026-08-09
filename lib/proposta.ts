@@ -140,6 +140,27 @@ export const PERGUNTAS: Pergunta[] = [
     ],
   },
   {
+    campo: 'formato',
+    titulo: 'Qual formato você imagina?',
+    ajuda: 'Isso ajuda a avaliar deslocamento e desenho da entrega.',
+    servicos: B2B,
+    opcoes: ['Presencial', 'Online', 'Híbrido', 'Ainda não definido'],
+  },
+  {
+    campo: 'contratante',
+    titulo: 'Quem está organizando ou contratando?',
+    servicos: B2B,
+    colunas: 1,
+    opcoes: [
+      'Cooperativa ou sindicato',
+      'Empresa privada',
+      'Feira ou evento aberto',
+      'Instituição de ensino',
+      'Órgão público',
+      'Outro tipo de organização',
+    ],
+  },
+  {
     campo: 'objetivo',
     titulo: 'O que essa turma precisa levar de lá?',
     ajuda: 'É o que define a ênfase do conteúdo.',
@@ -163,7 +184,7 @@ export const PERGUNTAS: Pergunta[] = [
     campo: 'quando',
     titulo: 'Para quando?',
     servicos: B2B,
-    opcoes: ['Nos próximos 30 dias', 'Em 2 a 3 meses', 'Mais para frente', 'Ainda definindo'],
+    opcoes: ['Já tenho uma data definida', 'Nos próximos 30 dias', 'Em 2 a 3 meses', 'Mais para frente', 'Ainda definindo'],
   },
 
   // ── Podcast e parceria ───────────────────────────────────────────────────
@@ -191,6 +212,12 @@ export const PERGUNTAS: Pergunta[] = [
       'Presença em evento',
       'Outra ideia (conto na observação)',
     ],
+  },
+  {
+    campo: 'quando',
+    titulo: 'Em que momento você quer tirar isso do papel?',
+    servicos: ['podcast', 'parceria'],
+    opcoes: ['Nos próximos 30 dias', 'Em 2 a 3 meses', 'Mais para frente', 'Ainda definindo'],
   },
 ]
 

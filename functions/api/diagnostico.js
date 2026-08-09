@@ -186,7 +186,7 @@ async function empurrarParaCrm(env, data) {
     data.desafios ? `desafios: ${String(data.desafios).slice(0, 200)}` : null,
   ].filter(Boolean)
 
-  return pushCrm(env, {
+  const resultado = await pushCrm(env, {
     source: 'site-diagnostico',
     external_id: externalId,
     contato: {
@@ -217,6 +217,7 @@ async function empurrarParaCrm(env, data) {
       },
     },
   })
+  return { ...resultado, externalId }
 }
 
 export async function onRequest(context) {
@@ -232,20 +233,42 @@ export async function onRequest(context) {
   try {
     const data = await request.json()
 
-    if (!data || !data.nome || !data.email) {
+    if (!data || !data.nome || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.email).trim()) || String(data.whatsapp || '').replace(/\D/g, '').length < 10) {
       return new Response(JSON.stringify({ error: 'Dados incompletos' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       })
     }
 
-    // CRM antes do e-mail, e em waitUntil(): o push não atrasa a resposta ao
-    // produtor, e o lead entra no funil mesmo se o Resend estiver fora do ar.
-    context.waitUntil(empurrarParaCrm(env, data))
+    if (data.perfil !== 'produtor') {
+      return new Response(JSON.stringify({ error: 'Este diagnóstico é destinado a produtores rurais.' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+    if (data.etapa !== 'contato') {
+      const obrigatorios = [data.atividade, data.faturamento, data.hectares, data.desafios, data.gestao, data.urgencia]
+      if (obrigatorios.some((valor) => !String(valor || '').trim())) {
+        return new Response(JSON.stringify({ error: 'Complete as perguntas obrigatórias.' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      }
+    }
+
+    // O CRM é a fonte de verdade. Só confirmamos o formulário depois que ele
+    // aceitou o contato ou o diagnóstico completo.
+    const crm = await empurrarParaCrm(env, data)
+    if (!crm.ok) {
+      return new Response(JSON.stringify({ error: 'Não foi possível registrar o diagnóstico. Tente novamente.', crm: crm.motivo }), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
 
     if (!env.RESEND_API_KEY) {
-      return new Response(JSON.stringify({ error: 'RESEND_API_KEY não configurada' }), {
-        status: 500,
+      return new Response(JSON.stringify({ success: true, crm: true, email: false, submissionId: crm.externalId }), {
+        status: 200,
         headers: { 'Content-Type': 'application/json' },
       })
     }
@@ -266,30 +289,40 @@ export async function onRequest(context) {
       html = buildEmail(data)
     }
 
-    const resp = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: FROM,
-        to: TO,
-        reply_to: data.email,
-        subject,
-        html,
-      }),
-    })
-
-    if (!resp.ok) {
-      const detail = await resp.text()
-      return new Response(JSON.stringify({ error: 'Falha no envio do e-mail', detail }), {
-        status: 502,
+    let resp
+    try {
+      resp = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: FROM,
+          to: TO,
+          reply_to: data.email,
+          subject,
+          html,
+        }),
+      })
+    } catch (err) {
+      console.error('Resend indisponível no diagnóstico:', String(err))
+      return new Response(JSON.stringify({ success: true, crm: true, email: false, submissionId: crm.externalId }), {
+        status: 200,
         headers: { 'Content-Type': 'application/json' },
       })
     }
 
-    return new Response(JSON.stringify({ success: true }), {
+    if (!resp.ok) {
+      const detail = await resp.text()
+      console.error('Resend recusou diagnóstico:', resp.status, detail)
+      return new Response(JSON.stringify({ success: true, crm: true, email: false, submissionId: crm.externalId }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+
+    return new Response(JSON.stringify({ success: true, crm: true, email: true, submissionId: crm.externalId }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     })
