@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'
+import ScrollWorldJourney from '@/components/sections/ScrollWorldJourney'
 import ServicesPreview from '@/components/sections/ServicesPreview'
 import Credentials from '@/components/sections/Credentials'
 import BlogPreview from '@/components/sections/BlogPreview'
@@ -45,6 +46,7 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustBar />
+      <ScrollWorldJourney />
       <ServicesPreview />
       <Credentials />
       <BlogPreview posts={recentes} />

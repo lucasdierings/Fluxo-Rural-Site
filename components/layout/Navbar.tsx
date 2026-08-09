@@ -28,6 +28,17 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    if (!isOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isOpen])
+
   if (pathname?.startsWith('/beweather') || pathname?.startsWith('/links')) return null
 
   // Home: transparente sobre o hero escuro, vira navy ao rolar (imersivo, inalterado).
@@ -46,7 +57,7 @@ export default function Navbar() {
           : 'bg-navy/90 backdrop-blur-2xl shadow-apple-md border-b border-white/10'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container relative z-50 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Página inicial">
@@ -82,6 +93,8 @@ export default function Navbar() {
             className="md:hidden text-white p-2 hover:bg-white/10 rounded-full transition-all duration-300"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -90,9 +103,13 @@ export default function Navbar() {
 
       {/* Drawer mobile */}
       <div
+        id="mobile-navigation"
+        aria-hidden={!isOpen}
         className={cn(
-          'md:hidden fixed inset-0 top-20 bg-navy/95 backdrop-blur-2xl transition-all duration-500 ease-out z-40',
-          isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+          'absolute left-0 right-0 top-full z-40 h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain bg-navy/95 pb-[calc(2rem+env(safe-area-inset-bottom))] backdrop-blur-2xl transition-all duration-300 ease-out md:hidden',
+          isOpen
+            ? 'visible translate-y-0 opacity-100'
+            : 'invisible pointer-events-none -translate-y-2 opacity-0'
         )}
       >
         <div className="flex flex-col items-center gap-8 pt-16 px-6">

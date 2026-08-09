@@ -64,11 +64,6 @@ export default function Hero() {
                   Conheça os Serviços
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/proposta" onClick={() => trackCta({ cta: 'proposta', local: 'hero' })}>
-                  Solicitar proposta
-                </Link>
-              </Button>
             </motion.div>
           </motion.div>
 
