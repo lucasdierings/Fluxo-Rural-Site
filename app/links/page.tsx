@@ -37,7 +37,7 @@ const profilePageJsonLd = {
     image: 'https://fluxorural.com.br/images/lucas-hero.jpg',
     url: 'https://fluxorural.com.br',
     email: 'lucas@fluxorural.com.br',
-    telephone: '+5544991447004',
+    telephone: '+5545991447004',
     worksFor: { '@type': 'Organization', name: 'Fluxo Rural Consultoria' },
     address: {
       '@type': 'PostalAddress',
@@ -116,7 +116,7 @@ export default function LinksPage() {
             cta="consultoria"
           />
           <LinkButton
-            href={`https://wa.me/5544991447004?text=${encodeURIComponent(MSG_WHATS)}`}
+            href={`https://wa.me/5545991447004?text=${encodeURIComponent(MSG_WHATS)}`}
             label="Falar no WhatsApp"
             sublabel="Resposta rápida, direto comigo"
             icon="whatsapp"
@@ -173,7 +173,7 @@ export default function LinksPage() {
         </h2>
         <section className="space-y-3 mb-9">
           <LinkButton href="mailto:lucas@fluxorural.com.br" label="E-mail" sublabel="lucas@fluxorural.com.br" icon="mail" cta="email" />
-          <LinkButton href="tel:+5544991447004" label="Telefone" sublabel="(44) 99144-7004" icon="phone" cta="telefone" />
+          <LinkButton href="tel:+5545991447004" label="Telefone" sublabel="(45) 99144-7004" icon="phone" cta="telefone" />
           <LinkButton href="/contato-lucas-dierings.vcf" label="Salvar contato" sublabel="Baixe o cartão e adicione na agenda" icon="contact" download cta="vcard" />
         </section>
 

@@ -6,10 +6,10 @@ const PAGE_URL = `${SITE_URL}/beweather`
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Beweather B2K - Estação Meteorológica Agrícola | 12 Sensores',
+    absolute: 'Beweather - Estação Meteorológica Agrícola | 12 Parâmetros',
   },
   description:
-    'Estação meteorológica profissional com 12 sensores, WiFi e painel solar. Dados em tempo real da sua lavoura. R$ 9.900, 12x sem juros, frete grátis.',
+    'Estação meteorológica agrícola com 12 parâmetros, WiFi e painel solar. Dados da sua lavoura no celular. R$ 9.990, 12x sem juros, frete grátis.',
   keywords: [
     'estação meteorológica',
     'estação meteorológica agrícola',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     'clima fazenda',
     'janela de pulverização',
     'sensores climáticos lavoura',
-    'Beweather B2K',
+    'Beweather',
     'estação meteorológica solar wifi',
     'monitoramento climático rural',
     'dados meteorológicos fazenda',
@@ -33,24 +33,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: PAGE_URL,
-    siteName: 'Beweather B2K',
-    title: 'Beweather B2K - Estação Meteorológica Agrícola | 12 Sensores',
+    siteName: 'Beweather',
+    title: 'Beweather - Estação Meteorológica Agrícola | 12 Parâmetros',
     description:
-      '12 sensores, WiFi e painel solar. Clima da sua lavoura em tempo real no celular. R$ 9.900, 12x sem juros, frete grátis.',
+      '12 parâmetros, WiFi e painel solar. Clima da sua lavoura no celular. R$ 9.990, 12x sem juros, frete grátis.',
     images: [
       {
         url: `${SITE_URL}/beweather/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Estação Meteorológica Beweather B2K em campo ao pôr do sol',
+        alt: 'Estação Meteorológica Beweather em campo ao pôr do sol',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Beweather B2K - Estação Meteorológica Agrícola',
+    title: 'Beweather - Estação Meteorológica Agrícola',
     description:
-      '12 sensores + WiFi + painel solar. Dados da sua lavoura em tempo real. R$ 9.900, 12x sem juros.',
+      '12 parâmetros + WiFi + painel solar. Dados da sua lavoura no celular. R$ 9.990, 12x sem juros.',
     images: [`${SITE_URL}/beweather/og-image.jpg`],
   },
   robots: {
@@ -72,7 +72,7 @@ const organizationJsonLd = {
   url: PAGE_URL,
   logo: `${SITE_URL}/beweather/logo-beweather.jpeg`,
   description:
-    'Beweather é uma linha de estações meteorológicas agrícolas profissionais com 12 sensores de precisão, desenvolvida pela B2K Technology Solutions e distribuída no Brasil pela Fluxo Rural Consultoria.',
+    'Beweather é uma estação meteorológica agrícola com 12 parâmetros, desenvolvida pela E-Aware Technologies e comercializada pela Fluxo Rural Consultoria.',
   sameAs: [
     'https://eprodutor.com.br',
     'https://www.beweather.eprodutor.com.br',
@@ -82,22 +82,21 @@ const organizationJsonLd = {
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'Beweather B2K',
-  sku: 'BEWEATHER-B2K',
-  mpn: 'B2K',
+  name: 'Beweather',
+  sku: 'BEWEATHER-ESTACAO',
   description:
-    'Estação meteorológica agrícola profissional com 12 sensores de precisão, conectividade WiFi, Bluetooth, painel solar integrado, bateria de longa duração e GPS. Monitora temperatura, umidade, precipitação, vento, pressão, radiação solar, UV, evapotranspiração e mais. Dados em tempo real no celular, com alerta de janela ideal de pulverização.',
+    'Estação meteorológica agrícola com 12 parâmetros, conectividade WiFi e Bluetooth, painel solar e GPS. Monitora temperatura, umidade, precipitação, vento, pressão, luminosidade, índice UV e radiação solar; calcula ponto de orvalho e evapotranspiração. Dados no celular para apoiar pulverização, irrigação e manejo.',
   image: `${SITE_URL}/beweather/estacao-produto-packshot.jpg`,
   brand: { '@type': 'Brand', name: 'Beweather' },
   manufacturer: {
     '@type': 'Organization',
-    name: 'B2K Technology Solutions',
+    name: 'E-Aware Technologies',
   },
   category: 'Estação Meteorológica Agrícola',
   inLanguage: 'pt-BR',
   offers: {
     '@type': 'Offer',
-    price: '9900.00',
+    price: '9990.00',
     priceCurrency: 'BRL',
     availability: 'https://schema.org/InStock',
     url: PAGE_URL,
@@ -190,7 +189,7 @@ const faqJsonLd = {
       name: 'Os dados são meus?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '100% seus. Você pode exportar todo o histórico de clima da sua lavoura em Excel ou CSV a qualquer momento.',
+        text: 'Os dados ficam vinculados à sua estação. Exportação de histórico e integrações são recursos opcionais, disponíveis sob consulta.',
       },
     },
     {
@@ -216,7 +215,7 @@ export default function BeweatherPage() {
         rel="alternate"
         type="text/plain"
         href={`${SITE_URL}/beweather/llms.txt`}
-        title="Beweather B2K - Informações para LLMs"
+        title="Beweather - Informações para LLMs"
       />
       <script
         type="application/ld+json"

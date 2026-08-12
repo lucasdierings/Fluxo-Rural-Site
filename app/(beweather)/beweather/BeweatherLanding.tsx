@@ -28,11 +28,24 @@ import {
 } from 'lucide-react'
 import { z } from 'zod'
 import { cn } from '@/lib/utils'
+import { readAttribution, trackCta, trackLead } from '@/lib/track'
 
-// TODO: trocar por WhatsApp oficial da Beweather quando definido.
-// Hoje usa o número do Lucas (compartilhado com Fluxo Rural).
+// WhatsApp comercial do Lucas, representante Beweather.
 const WHATSAPP_URL =
-  'https://wa.me/5544991447004?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20uma%20cota%C3%A7%C3%A3o%20da%20Beweather'
+  'https://wa.me/5545991447004?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20uma%20cota%C3%A7%C3%A3o%20da%20Beweather'
+
+function attributedWhatsAppUrl() {
+  if (typeof window === 'undefined') return WHATSAPP_URL
+  const attr = readAttribution()
+  const url = new URL(WHATSAPP_URL)
+  let message = url.searchParams.get('text') || 'Olá, quero saber mais sobre a Beweather.'
+  if (attr.utm_source || attr.utm_campaign) {
+    message += `\n\n(origem: ${[attr.utm_source, attr.utm_campaign].filter(Boolean).join(' / ')})`
+  }
+  if (attr.gclid) message += `\nRef. Google Ads: ${attr.gclid}`
+  url.searchParams.set('text', message)
+  return url.toString()
+}
 
 // Pages Function própria (functions/api/contato.js): manda e-mail pelo Resend e
 // empurra o lead pro CRM com produto=beweather. Antes apontava para um Apps
@@ -314,7 +327,7 @@ export default function BeweatherLanding() {
                   O clima da sua lavoura, na palma da sua mão.
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-beweather-grafite/70 mb-8 font-medium">
-                  12 sensores de precisão, dados em tempo real via WiFi e painel solar integrado. Decisões mais rápidas no campo, safras mais lucrativas no fim da colheita.
+                  12 parâmetros meteorológicos, dados via WiFi e painel solar integrado. Decisões de pulverização, irrigação e manejo apoiadas por dados da sua área.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Button
@@ -394,7 +407,7 @@ export default function BeweatherLanding() {
         <section className="py-12 border-y border-black/5 bg-white">
           <div className="container mx-auto px-4 text-center">
             <p className="text-sm md:text-base font-semibold text-beweather-grafite/75 mb-8 max-w-3xl mx-auto">
-              Estação Beweather B2K - 12 sensores, tecnologia B2K Technology Solutions, suporte técnico com engenheiro agrônomo.
+              Estação Beweather — 12 parâmetros meteorológicos, tecnologia E-Aware Technologies e suporte técnico especializado.
             </p>
             <div className="flex flex-wrap justify-center gap-4 md:gap-10">
               <div className="inline-flex items-center gap-2 bg-beweather-offwhite border border-black/5 rounded-full px-4 py-2 text-sm md:text-base font-semibold text-beweather-grafite">
@@ -461,7 +474,7 @@ export default function BeweatherLanding() {
                 <div className="absolute inset-0 bg-beweather-accent/20 rounded-3xl blur-2xl transform -rotate-6" />
                 <img
                   src="/beweather/estacao-produto-packshot.jpg"
-                  alt="Estação Beweather B2K"
+                  alt="Estação meteorológica Beweather"
                   width={600}
                   height={600}
                   loading="lazy"
@@ -472,7 +485,7 @@ export default function BeweatherLanding() {
                 <Card className="relative md:absolute md:-bottom-8 md:-right-8 mt-6 md:mt-0 p-5 md:p-6 shadow-xl border-beweather-accent/20 bg-white/95 backdrop-blur">
                   <div className="text-xs md:text-sm font-semibold text-beweather-grafite/75 mb-1">A partir de</div>
                   <div className="text-4xl md:text-5xl font-extrabold text-beweather-grafite font-heading mb-2 tracking-tight">
-                    R$ 9.900
+                    R$ 9.990
                   </div>
                   <div className="text-xs md:text-sm font-semibold text-beweather-primary flex flex-col gap-1">
                     <span className="flex items-center">
@@ -490,7 +503,7 @@ export default function BeweatherLanding() {
 
               <div>
                 <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-heading mb-6">
-                  Conheça a Beweather B2K
+                  Conheça a Beweather
                 </h2>
                 <p className="text-base md:text-lg text-beweather-grafite/75 mb-8">
                   Nossa estação top de linha projetada para o rigor do campo brasileiro. Sem fios, sem complicação, dados direto no seu celular.
@@ -824,7 +837,7 @@ export default function BeweatherLanding() {
                 { q: 'É difícil instalar?', a: 'Não. Você mesmo instala em cerca de 8 minutos seguindo o vídeo passo a passo. A estação já vem com tudo que você precisa na caixa.' },
                 { q: 'Tem mensalidade ou taxa oculta?', a: 'Não. A plataforma e o aplicativo já estão inclusos no preço da estação. Sem taxas mensais, sem surpresa.' },
                 { q: 'Quais as formas de pagamento?', a: 'Cartão de crédito em até 12x sem juros ou PIX à vista com desconto.' },
-                { q: 'Os dados são meus?', a: '100% seus. Você pode exportar todo o histórico de clima da sua lavoura em Excel ou CSV a qualquer momento.' },
+                { q: 'Os dados são meus?', a: 'Os dados ficam vinculados à sua estação. Exportação de histórico e integrações são recursos opcionais, disponíveis sob consulta.' },
                 { q: 'Tem garantia?', a: 'Sim - 12 meses de garantia de fábrica contra defeitos de fabricação, com suporte técnico especializado em agronomia.' },
               ].map((item, i) => (
                 <details key={i} className="group border rounded-xl overflow-hidden bg-white hover:bg-beweather-offwhite transition-colors">
@@ -886,6 +899,10 @@ export default function BeweatherLanding() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(event) => {
+                  event.currentTarget.href = attributedWhatsAppUrl()
+                  trackCta({ cta: 'whatsapp', local: 'beweather-final', page: '/beweather' })
+                }}
                 className="inline-flex items-center justify-center h-12 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 text-white px-8 text-base font-medium transition-colors"
               >
                 Falar no WhatsApp
@@ -914,9 +931,6 @@ export default function BeweatherLanding() {
                 Tecnologia para o agronegócio inteligente. Dados precisos para safras mais lucrativas e sustentáveis.
               </p>
               <div className="flex gap-3 items-center">
-                <div className="bg-white rounded-lg px-2 py-2 flex items-center justify-center">
-                  <img src="/beweather/logo-b2k-mini.jpeg" alt="B2K Technology" className="h-8 w-auto" />
-                </div>
                 <div className="bg-white rounded-lg px-3 py-2 flex items-center justify-center">
                   <img
                     src="/beweather/logo-e-aware-technologies.jpeg"
@@ -932,7 +946,7 @@ export default function BeweatherLanding() {
               <ul className="space-y-2">
                 <li>
                   <a href="#tecnologia" className="hover:text-white transition-colors">
-                    Estação B2K
+                    Estação Beweather
                   </a>
                 </li>
                 <li>
@@ -957,7 +971,16 @@ export default function BeweatherLanding() {
                   </a>
                 </li>
                 <li>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(event) => {
+                      event.currentTarget.href = attributedWhatsAppUrl()
+                      trackCta({ cta: 'whatsapp', local: 'beweather-footer', page: '/beweather' })
+                    }}
+                    className="hover:text-white transition-colors"
+                  >
                     WhatsApp
                   </a>
                 </li>
@@ -971,18 +994,21 @@ export default function BeweatherLanding() {
           </div>
 
           <div className="flex flex-col md:flex-row justify-between pt-8 border-t border-white/10 text-xs">
-            <p>© {new Date().getFullYear()} Beweather B2K. Todos os direitos reservados.</p>
+            <p>© {new Date().getFullYear()} Beweather. Todos os direitos reservados.</p>
             <p className="mt-2 md:mt-0">Distribuído por eProdutor</p>
           </div>
         </div>
       </footer>
 
       {/* Floating WhatsApp */}
-      {/* TODO-PIXEL: fbq('track', 'Contact') */}
       <a
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={(event) => {
+          event.currentTarget.href = attributedWhatsAppUrl()
+          trackCta({ cta: 'whatsapp', local: 'beweather-floating', page: '/beweather' })
+        }}
         aria-label="Falar com a Beweather no WhatsApp (abre em nova aba)"
         className="fixed bottom-5 right-5 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl p-4 transition-transform hover:scale-105 motion-reduce:hover:scale-100 motion-reduce:transition-none min-h-[56px] min-w-[56px] flex items-center justify-center"
       >
@@ -1018,13 +1044,17 @@ function ProposalForm() {
 
   const utms = useMemo(() => {
     if (typeof window === 'undefined') return {}
-    const params = new URLSearchParams(window.location.search)
-    const out: Record<string, string> = {}
-    ;['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'source'].forEach((k) => {
-      const v = params.get(k)
-      if (v) out[k] = v
-    })
-    return out
+    const attr = readAttribution()
+    return {
+      utm_source: attr.utm_source,
+      utm_medium: attr.utm_medium,
+      utm_campaign: attr.utm_campaign,
+      utm_term: attr.utm_term,
+      utm_content: attr.utm_content || 'lp-preco-formulario',
+      gclid: attr.gclid,
+      fbclid: attr.fbclid,
+      source: attr.origem,
+    }
   }, [])
 
   const update = (k: keyof ProposalData, v: string | boolean) => {
@@ -1070,7 +1100,13 @@ function ProposalForm() {
         setStatus('error')
         return
       }
-      {/* TODO-PIXEL: fbq('track', 'Lead') + gtag('event', 'generate_lead') */}
+      trackLead('generate_lead', {
+        form_location: 'beweather-price-page',
+        produto: 'beweather',
+        currency: 'BRL',
+        value: 200,
+        value_basis: 'expected_commission',
+      })
       setStatus('success')
     } catch (err) {
       setStatus('error')

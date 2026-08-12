@@ -196,6 +196,7 @@ export async function onRequest(context) {
     negocio: {
       produto,
       etapa: 'novo',
+      valor: beweather ? 9990 : 0,
       origem: dados.canal,
       obs,
     },

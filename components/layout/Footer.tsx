@@ -9,7 +9,7 @@ import { trackLead } from '@/lib/track'
 export default function Footer() {
   const pathname = usePathname()
   if (pathname?.startsWith('/beweather') || pathname?.startsWith('/links')) return null
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5544991447004'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5545991447004'
 
   return (
     <footer className="bg-navy text-white">
