@@ -556,8 +556,8 @@ export default function BeweatherLanding() {
                 { name: 'Intensidade lum.', range: '0-200.000 lux', icon: Sun },
                 { name: 'Índice UV', range: 'Nível de Radiação', icon: Sun },
                 { name: 'Radiação solar', range: 'W/m²', icon: Sun },
-                { name: 'Ponto de orvalho', range: 'Temperatura °C', icon: Droplets },
-                { name: 'Evapotranspiração', range: "Perda d'água", icon: Sprout },
+                { name: 'Ponto de orvalho', range: 'Calculado', icon: Droplets },
+                { name: 'Evapotranspiração', range: 'Calculada', icon: Sprout },
               ].map((sensor, i) => (
                 <motion.div
                   key={i}
@@ -570,6 +570,9 @@ export default function BeweatherLanding() {
                 </motion.div>
               ))}
             </div>
+            <p className="mt-8 text-center text-sm text-white/70">
+              A plataforma também acompanha o tempo de molhamento foliar por cálculo.
+            </p>
           </div>
         </section>
 

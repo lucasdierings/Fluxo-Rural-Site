@@ -85,7 +85,7 @@ const productJsonLd = {
   name: 'Beweather',
   sku: 'BEWEATHER-ESTACAO',
   description:
-    'Estação meteorológica agrícola com 12 parâmetros, conectividade WiFi e Bluetooth, painel solar e GPS. Monitora temperatura, umidade, precipitação, vento, pressão, luminosidade, índice UV e radiação solar; calcula ponto de orvalho e evapotranspiração. Dados no celular para apoiar pulverização, irrigação e manejo.',
+    'Estação meteorológica agrícola com 12 parâmetros, conectividade WiFi e Bluetooth, painel solar e GPS. Monitora temperatura, umidade, precipitação, vento, pressão, luminosidade, índice UV e radiação solar; calcula ponto de orvalho e evapotranspiração. A plataforma também acompanha o tempo de molhamento foliar por cálculo. Dados no celular para apoiar pulverização, irrigação e manejo.',
   image: `${SITE_URL}/beweather/estacao-produto-packshot.jpg`,
   brand: { '@type': 'Brand', name: 'Beweather' },
   manufacturer: {

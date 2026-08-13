@@ -30,7 +30,7 @@ o produtor rural decidir com precisão sobre pulverização, irrigação, planti
 11. Ponto de orvalho — calculado
 12. Evapotranspiração — calculada
 
-Não há sensor dedicado de molhamento foliar nem de temperatura do solo.
+A plataforma também acompanha o tempo de molhamento foliar por cálculo, sem sensor dedicado. A estação não mede umidade nem temperatura do solo.
 
 ## Conectividade e energia
 - Conexão WiFi (basta um roteador ou repetidor próximo à estação)
