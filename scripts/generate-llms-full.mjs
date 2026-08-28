@@ -15,7 +15,7 @@ const base = fs.readFileSync(basePath, 'utf8').trimEnd()
 
 const posts = fs
   .readdirSync(blogDir)
-  .filter((f) => f.endsWith('.mdx'))
+  .filter((f) => f.endsWith('.mdx') && !f.startsWith('_'))
   .map((file) => {
     const slug = file.replace(/\.mdx$/, '')
     const { data, content } = matter(fs.readFileSync(path.join(blogDir, file), 'utf8'))
