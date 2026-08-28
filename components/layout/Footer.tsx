@@ -20,10 +20,10 @@ export default function Footer() {
             <Image
               src="/logo-fluxo-rural-horizontal-novo.png"
               alt="Fluxo Rural Consultoria"
-              width={160}
-              height={48}
-              className="h-12 w-auto mb-4"
-              sizes="160px"
+              width={240}
+              height={52}
+              className="h-10 sm:h-12 w-auto mb-4"
+              sizes="240px"
               loading="lazy"
             />
             <p className="text-white/70 text-sm leading-relaxed">

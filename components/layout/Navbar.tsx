@@ -61,7 +61,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Página inicial">
-            <div className="relative w-36 sm:w-48 h-10 sm:h-12 transition-transform duration-300 hover:scale-105">
+            <div className="relative w-48 sm:w-64 h-10 sm:h-12 transition-transform duration-300 hover:scale-105">
               <Image
                 src="/logo-fluxo-rural-horizontal-novo.png"
                 alt="Fluxo Rural Logo"
