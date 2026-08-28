@@ -45,7 +45,7 @@ export default function PortfolioPdfGenerator() {
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
         <div className="relative z-10 w-full">
           <div className="w-40 mb-8">
-            <Image src="/logo-colorido.svg" alt="Fluxo Rural" width={160} height={60} />
+            <Image src="/logo-fluxo-rural-horizontal-novo.png" alt="Fluxo Rural" width={160} height={60} />
           </div>
           <span className="text-dourado uppercase tracking-widest text-sm font-semibold mb-2 block">
             Portfólio Oficial
