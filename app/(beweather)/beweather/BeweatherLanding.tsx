@@ -1003,7 +1003,7 @@ export default function BeweatherLanding() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp */}
+      {/* Floating WhatsApp Mobile/Desktop */}
       <a
         href={WHATSAPP_URL}
         target="_blank"
@@ -1013,9 +1013,10 @@ export default function BeweatherLanding() {
           trackCta({ cta: 'whatsapp', local: 'beweather-floating', page: '/beweather' })
         }}
         aria-label="Falar com a Beweather no WhatsApp (abre em nova aba)"
-        className="fixed bottom-5 right-5 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl p-4 transition-transform hover:scale-105 motion-reduce:hover:scale-100 motion-reduce:transition-none min-h-[56px] min-w-[56px] flex items-center justify-center"
+        className="fixed bottom-5 right-5 z-50 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full shadow-2xl px-4 py-3.5 md:p-4 transition-transform hover:scale-105 motion-reduce:hover:scale-100 motion-reduce:transition-none min-h-[52px] flex items-center justify-center gap-2 font-medium text-sm"
       >
-        <MessageCircle className="w-6 h-6" />
+        <MessageCircle className="w-6 h-6 flex-shrink-0" />
+        <span className="inline md:hidden font-semibold">Tirar dúvidas no WhatsApp</span>
       </a>
     </div>
   )

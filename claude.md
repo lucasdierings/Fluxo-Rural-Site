@@ -204,7 +204,7 @@ Hoje `WHATSAPP_URL` em `BeweatherLanding.tsx` aponta pro número pessoal do Luca
 - Commits direto no GitHub, Cloudflare rebuilda automaticamente
 - **OAuth:** Cloudflare Functions em `functions/api/auth.js` + `functions/api/callback.js`
 - **REQUER:** Variaveis de ambiente no Cloudflare Pages: `GITHUB_CLIENT_ID` e `GITHUB_CLIENT_SECRET`
-- **REQUER:** GitHub OAuth App criada em github.com/settings/developers (Homepage URL + Callback URL = <https://fluxorural.com.br>)
+- **REQUER:** GitHub OAuth App criada em github.com/settings/developers (Homepage URL + Callback URL = [https://fluxorural.com.br](https://fluxorural.com.br))
 - `_routes.json` em public/ limita Functions apenas a `/api/*` (preserva static requests gratuitos)
 - **IMPORTANTE:** O script `decap-cms.js` DEVE ficar no `<body>`, NAO no `<head>`. No `<head>` causa erro `appendChild null` porque o DOM ainda nao existe
 - Schema: titulo, data, categoria, imagem, readingTime, excerpt, FAQs opcionais, conteudo markdown
@@ -373,7 +373,8 @@ Concluímos o planejamento estratégico de marketing e efetuamos a criação e a
 
 Implementamos a estratégia "Benchmark da Safra" em substituição visual a "Calculadora de Margem" para maior valor percebido e viralidade, além de mecânicas de Growth Hacking ("Destravar Cidade").
 
-### Principais Alterações:
+### Principais Alterações
+
 - **Estratégia Dual de Naming:**
   - **SEO/Metadados:** Mantido os termos de busca de alto volume no título da página e meta tags (como "Calculadora de Margem e Custos").
   - **Visual/UX:** Ajustado H1, textos e onboarding para destacar a marca premium **"Benchmark da Safra"**.
@@ -439,4 +440,3 @@ fica para quando o disparo entrar em pauta.
 Trabalho equivalente no lado do CRM (canal × página, caixa de entrada por
 fato, indicadores que não mentem com amostra pequena) está registrado no
 `CLAUDE.md` do repo `CRM Fluxo Rural`.
-
