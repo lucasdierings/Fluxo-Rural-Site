@@ -37,9 +37,9 @@ const steps = [
 ]
 
 const credenciais = [
-  'Engenheiro Agrônomo (CREA-PR 179906/D)',
+  'Engenheiro Agrônomo',
   'MBA em Agronegócios pela USP/ESALQ e professor de MBA',
-  'Top 5 nacional no CNA Jovem 2021 (entre 3.742 projetos)',
+  'Top 5 nacional no CNA Jovem 2021',
   'Host do NHCast (New Holland) - 7 anos no mercado de gestão rural, em 24 estados',
 ]
 

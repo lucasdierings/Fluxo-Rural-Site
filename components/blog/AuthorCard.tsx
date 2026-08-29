@@ -15,10 +15,10 @@ export default function AuthorCard() {
       <div>
         <h4 className="font-heading font-bold text-navy text-lg">Lucas Dierings</h4>
         <p className="text-carvao/60 text-sm">
-          Engenheiro Agrônomo (CREA-PR 179906/D) | MBA em Agronegócios USP/ESALQ
+          Engenheiro Agrônomo | MBA em Agronegócios USP/ESALQ
         </p>
         <p className="text-carvao/50 text-sm mt-1">
-          Fundador da Fluxo Rural Consultoria, consultor credenciado do SENAR-PR e professor de MBA. Destaque Nacional do Programa Jovens Líderes do Agro (CNA Jovem 2021), entre os 5 melhores de 3.742 participantes. Membro ativo da JCI (Junior Chamber International), organização mundial de formação de líderes presente em mais de 100 países. Coautor do livro <em>Os Jovens, o Brasil e o Agro</em>.
+          Fundador da Fluxo Rural Consultoria, consultor credenciado do SENAR-PR e professor de MBA. Destaque Nacional do Programa Jovens Líderes do Agro (CNA Jovem 2021). Membro ativo da JCI (Junior Chamber International), organização mundial de formação de líderes presente em mais de 100 países. Coautor do livro <em>Os Jovens, o Brasil e o Agro</em>.
         </p>
         <Link href="/sobre" className="text-navy text-sm font-medium hover:text-dourado transition-colors mt-2 inline-block">
           Saiba mais →

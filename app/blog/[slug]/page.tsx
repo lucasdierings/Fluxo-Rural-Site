@@ -83,7 +83,7 @@ export default async function BlogPostPage({ params }: Props) {
       name: 'Lucas Dierings',
       url: `${siteUrl}/sobre/`,
       jobTitle: 'Engenheiro Agrônomo e Consultor Estratégico',
-      description: 'Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e consultor em gestão financeira rural, inovação e sucessão familiar no agronegócio.',
+      description: 'Engenheiro Agrônomo, MBA em Agronegócios pela USP/ESALQ, professor de MBA e consultor em gestão financeira rural, inovação e sucessão familiar no agronegócio.',
       alumniOf: [
         { '@type': 'CollegeOrUniversity', name: 'USP/ESALQ - MBA em Agronegócios' },
         { '@type': 'CollegeOrUniversity', name: 'UFPR - Engenharia Agronômica' },

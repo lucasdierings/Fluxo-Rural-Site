@@ -29,7 +29,7 @@ const timeline = [
   {
     year: '2021',
     title: 'Destaque Nacional - CNA Jovem / Sistema CNA-SENAR',
-    text: 'Um dos 5 vencedores nacionais entre 3.742 jovens inscritos. Projeto: Gestão Familiar Rural através de informação e tecnologia. Representou o Paraná na missão técnica pelas principais regiões do agronegócio brasileiro.',
+    text: 'Um dos 5 vencedores nacionais. Projeto: Gestão Familiar Rural através de informação e tecnologia. Representou o Paraná na missão técnica pelas principais regiões do agronegócio brasileiro.',
     highlight: true,
   },
   {
@@ -63,7 +63,7 @@ const credentials = [
   {
     icon: Trophy,
     title: 'Destaque Nacional CNA Jovem 2021',
-    subtitle: 'Entre os 5 melhores de 3.742 jovens do Brasil',
+    subtitle: 'Destaque Nacional em Liderança',
   },
   {
     icon: GraduationCap,
@@ -146,7 +146,7 @@ export default function SobrePage() {
                 Lucas Dierings é engenheiro agrônomo graduado pela UFPR, com MBA em Agronegócios pela USP/ESALQ - a mais reconhecida escola de agronegócio do Brasil.
               </p>
               <p>
-                Vencedor nacional do Programa CNA Jovem 2021, promovido pelo Sistema CNA/SENAR, foi selecionado entre 3.742 jovens de todo o Brasil pelo seu projeto de Gestão Familiar Rural com foco em informação e tecnologia.
+                Vencedor nacional do Programa CNA Jovem 2021, promovido pelo Sistema CNA/SENAR, pelo seu projeto de Gestão Familiar Rural com foco em informação e tecnologia.
               </p>
               <p>
                 Com 7 anos de experiência em software de gestão rural com atuação em 24 estados -, de analista à direção comercial, Lucas acumulou experiência única na intersecção entre tecnologia e gestão no campo.
@@ -264,7 +264,7 @@ export default function SobrePage() {
               <div className="absolute bottom-6 left-6 right-6">
                 <span className="bg-dourado text-carvao text-xs md:text-sm font-semibold px-4 py-2 rounded-full inline-block">Destaque Nacional</span>
                 <h3 className="font-heading text-white font-bold text-lg md:text-xl mt-3">CNA Jovem - Sistema CNA/SENAR</h3>
-                <p className="text-white/80 text-sm md:text-base font-light mt-1">Um dos 5 vencedores nacionais entre 3.742 jovens do agronegócio em 2021</p>
+                <p className="text-white/80 text-sm md:text-base font-light mt-1">Um dos 5 vencedores nacionais em 2021</p>
               </div>
             </a>
             {/* NHCast */}

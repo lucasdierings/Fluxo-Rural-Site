@@ -245,7 +245,7 @@ export default function LiderancaPage() {
               <h3 className="font-heading font-bold text-white text-xl mb-3">Destaque Nacional CNA Jovem</h3>
               <p className="text-white/70 leading-relaxed">
                 Programa nacional de formação de jovens líderes do agro do Sistema CNA/SENAR. Lucas foi um dos 5
-                vencedores nacionais entre 3.742 jovens do agronegócio em 2021 - reconhecimento de quem lidera
+                vencedores nacionais em 2021 - reconhecimento de quem lidera
                 dentro do setor, não de fora dele.
               </p>
             </div>

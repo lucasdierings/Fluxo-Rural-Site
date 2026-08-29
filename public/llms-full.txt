@@ -137,7 +137,7 @@ A Fluxo Rural trabalha em QUATRO FRENTES, divididas por público: **consultoria 
 
 ### 3.1. Gestão Financeira Rural: os 5 Indicadores da Fazenda Lucrativa
 - **URL:** https://fluxorural.com.br/blog/5-indicadores-financeiros-produtor-rural/
-- **Data:** 2026-03-01 | **Categoria:** Finanças
+- **Data:** 2026-03-01 | **Categoria:** Gestão
 - **Resumo:** Fluxo de caixa, custo por hectare, margem de contribuição, ponto de equilíbrio e rentabilidade: os 5 indicadores da gestão financeira rural, mais os indicadores avançados (EBITDA e ROA) que o banco e o investidor olham.
 - **Texto do Artigo:**
 Você sabe exatamente quanto custa produzir um hectare de soja na sua propriedade? Sabe qual foi a rentabilidade líquida da última safra? Se a resposta for "mais ou menos" ou "não tenho certeza", você não está sozinho, mas está correndo um risco desnecessário.
@@ -222,9 +222,16 @@ Se você quer ver como estão seus custos operacionais (insumos, diesel, manuten
 - **Pró-labore:** retirada mensal fixa da família, registrada como custo da empresa rural.
 - **Regime de competência:** registrar receitas e despesas no período em que aconteceram, não quando o dinheiro entrou ou saiu.
 
----
 
-*Escrito por **Lucas Dierings** — Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e fundador da Fluxo Rural Consultoria. Autor de pesquisa sobre indicadores econômico-financeiros de propriedades rurais no Oeste do Paraná.*
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
+
+---
 #### Perguntas Frequentes
 **P: Quais são os indicadores financeiros mais importantes para o produtor rural?**
 R: Os 5 fundamentais são: Fluxo de Caixa Operacional, Custo por Hectare, Margem de Contribuição por Cultura, Ponto de Equilíbrio da Safra e Rentabilidade Líquida sobre o Capital. Para propriedades mais estruturadas, somam-se EBITDA, Margem EBITDA e Retorno sobre Ativos (ROA).
@@ -248,7 +255,7 @@ R: EBITDA é o lucro antes de juros, impostos, depreciação e amortização. Mo
 
 ### 3.2. Como Calcular a Rentabilidade da Soja por Hectare (Passo a Passo com Exemplo)
 - **URL:** https://fluxorural.com.br/blog/rentabilidade-safra-soja-como-calcular/
-- **Data:** 2026-03-08 | **Categoria:** Finanças
+- **Data:** 2026-03-08 | **Categoria:** Gestão
 - **Resumo:** Como calcular a rentabilidade real da soja por hectare, passo a passo: custo de produção, custo por saca, COE x COT e ponto de equilíbrio, com exemplo numérico completo e tabela de três cenários.
 - **Texto do Artigo:**
 Produzir 60 sacas por hectare é um bom resultado? Depende. Se o custo de produção foi equivalente a 55 sacas, sobram 5 sacas de margem, e qualquer imprevisto come o lucro inteiro. Esse é o problema de olhar só para a produtividade e esquecer da **rentabilidade real**.
@@ -355,9 +362,16 @@ Se você quer pular a planilha e calcular seus números agora mesmo, nós estrut
 Calcule sua margem bruta por hectare e compare seus custos de produção (sementes, defensivos, adubo, diesel) com a média dos produtores do seu estado de forma gratuita e 100% anônima.
 👉 **[Participar do Benchmark da Safra](/calculadora/)**
 
----
 
-*Escrito por **Lucas Dierings** — Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e fundador da Fluxo Rural Consultoria. Autor de pesquisa sobre indicadores econômico-financeiros de propriedades rurais no Oeste do Paraná.*
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
+
+---
 #### Perguntas Frequentes
 **P: Como calcular a rentabilidade real da safra de soja?**
 R: Levante o custo total por hectare (variáveis + fixos rateados + financeiros), calcule o lucro líquido (receita bruta menos custo total) e divida pelo custo total, multiplicando por 100. Exemplo: receita de R$ 7.800/ha com custo de R$ 6.200/ha gera lucro de R$ 1.600/ha e rentabilidade de 25,8%.
@@ -381,7 +395,7 @@ R: Não. No ponto de equilíbrio a receita apenas cobre os custos: o lucro é ze
 
 ### 3.3. Sucessão Familiar Rural: Por que Planejar Antes do Inventário
 - **URL:** https://fluxorural.com.br/blog/sucessao-familiar-agronegocio-por-que-planejar-agora/
-- **Data:** 2026-03-15 | **Categoria:** Sucessão Familiar
+- **Data:** 2026-03-15 | **Categoria:** Governança
 - **Resumo:** Sucessão familiar rural na prática: por que a maioria das fazendas não chega à terceira geração, o que é holding rural e quando vale a pena, quanto custa um inventário e como o ITCMD progressivo muda a conta.
 - **Texto do Artigo:**
 Existe uma estatística que deveria tirar o sono de toda família rural brasileira: **estudos internacionais sobre empresas familiares estimam que cerca de 70% não sobrevivem à transição para a segunda geração, e menos de 15% chegam à terceira**. Não é porque falta terra nem produtividade. Na maioria dos casos, faltou planejamento.
@@ -453,9 +467,16 @@ Não existe momento perfeito para planejar a sucessão. Existe o momento em que 
 
 O pior cenário é quando o planejamento já não é mais uma opção, e o que sobra é o inventário.
 
----
 
-*Escrito por **Lucas Dierings** — Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e fundador da Fluxo Rural Consultoria. Atua com gestão e sucessão em propriedades familiares no Paraná. Este artigo tem caráter informativo e não substitui assessoria jurídica e contábil especializada.*
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
+
+---
 #### Perguntas Frequentes
 **P: O que é sucessão familiar rural?**
 R: É o processo planejado de transferência da gestão e do patrimônio da propriedade rural para a próxima geração, envolvendo governança familiar (regras e diálogo), estrutura jurídica e patrimonial (holding, testamento, doações) e preparação do sucessor para gerir o negócio, não apenas herdá-lo.
@@ -479,7 +500,7 @@ R: Quando todos estão saudáveis, a propriedade vai bem e há tempo para prepar
 
 ### 3.4. IA na Agricultura: o que Já É Realidade na Fazenda Brasileira
 - **URL:** https://fluxorural.com.br/blog/inteligencia-artificial-no-campo-o-que-ja-e-realidade/
-- **Data:** 2026-03-22 | **Categoria:** IA no Agro
+- **Data:** 2026-03-22 | **Categoria:** Inovação
 - **Resumo:** Inteligência artificial na agricultura sem futurologia: as aplicações reais no Brasil, do drone à decisão de venda, as ferramentas disponíveis, o gargalo da conectividade e por onde o produtor deve começar.
 - **Texto do Artigo:**
 Quando se fala em inteligência artificial na agricultura, muitos produtores imaginam algo distante: robôs colhendo frutas ou sistemas espaciais monitorando lavouras. Mas a realidade é que **a IA já está no campo brasileiro**, e muitas vezes o produtor já usa sem saber.
@@ -558,9 +579,16 @@ Antes de contratar qualquer plataforma, pergunte como ela se comporta sem sinal.
 
 A inteligência artificial não é tendência futura no agro: é realidade presente. Mas a vantagem competitiva não está em "ter IA". Está em ter **dados organizados e gestão estruturada** para que a IA tenha o que potencializar. Produtores que arrumarem a casa agora vão colher essa vantagem na próxima década; os demais vão pagar por ferramentas que não conseguem usar.
 
----
 
-*Escrito por **Lucas Dierings** — Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e fundador da Fluxo Rural Consultoria. Palestrante sobre inovação e inteligência artificial no agronegócio.*
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
+
+---
 #### Perguntas Frequentes
 **P: Como a inteligência artificial é aplicada na agricultura hoje?**
 R: As aplicações já em uso no Brasil incluem: drones com visão computacional para detectar falhas, pragas e plantas daninhas; análise de solo com machine learning para aplicação em taxa variável; previsão de produtividade combinando clima, NDVI e histórico; e assistentes de IA que apoiam decisões de manejo, gestão e comercialização.
@@ -584,7 +612,7 @@ R: Não. As ferramentas modernas são feitas para o produtor e sua equipe, com i
 
 ### 3.5. Plano Safra 2026/2027: Taxas de Juros, Mudanças e Como Proteger sua Margem
 - **URL:** https://fluxorural.com.br/blog/plano-safra-2026-2027-margem-seguranca/
-- **Data:** 2026-07-01 | **Categoria:** Finanças
+- **Data:** 2026-07-01 | **Categoria:** Gestão
 - **Resumo:** Guia prático do Plano Safra 2026/2027: taxas de juros por linha (Pronamp, PCA, Moderfrota), o que mudou nos subsídios e como calcular a margem de segurança da fazenda.
 - **Texto do Artigo:**
 O governo federal lançou oficialmente o novo **Plano Safra 2026/2027**, destinando **R$ 525,1 bilhões** em crédito para a agricultura empresarial (médios e grandes produtores). Embora o anúncio oficial destaque cifras recordes, o produtor rural brasileiro, que enfrenta margens apertadas e um endividamento setorial que ultrapassa **R$ 800 bilhões**, precisa analisar este cenário de maneira estratégica e racional.
@@ -686,6 +714,15 @@ A equipe da **Fluxo Rural Consultoria** está pronta para desenhar o planejament
 Fale com os nossos especialistas e garanta a eficiência financeira da sua propriedade na safra 2026/2027.
 
 👉 **[Agende um Diagnóstico Gratuito](/diagnostico/)**
+
+
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
 #### Perguntas Frequentes
 **P: O que mudou no Plano Safra 2026/2027 em relação ao anterior?**
 R: O custeio e comercialização encolheu 7,2% (de R$ 414,7 bi para R$ 384,9 bi), enquanto as linhas de investimento cresceram 38,1% (de R$ 101,5 bi para R$ 140,2 bi). O volume de recursos equalizados pelo governo caiu de R$ 113,8 bi para R$ 97 bi, forçando o produtor a captar mais crédito a juros livres de mercado.
@@ -703,7 +740,7 @@ R: Não. A Resolução CMN nº 5.314/2026 tornou a prorrogação opcional para b
 
 ### 3.6. Tributação do Produtor Rural 2026: o Guia para Não Cair na Malha Fina
 - **URL:** https://fluxorural.com.br/blog/tributacao-produtor-rural-guia-malha-fina/
-- **Data:** 2026-07-01 | **Categoria:** Finanças
+- **Data:** 2026-07-01 | **Categoria:** Gestão
 - **Resumo:** Imposto de renda no regime de caixa, LCDPR, Funrural (com as novas alíquotas de 2026), crédito de ICMS do diesel, arrendamento x parceria e condomínio rural: o guia completo da tributação do produtor rural e o que a Receita Federal cruza na sua declaração.
 - **Texto do Artigo:**
 O produtor rural passou décadas fora do radar da fiscalização, e esse tempo acabou. Desde 2019, a Receita Federal conduz operações específicas sobre a atividade rural que começaram como piloto no Rio Grande do Sul, encontraram valores expressivos e se espalharam por Paraná, Santa Catarina, Minas Gerais e São Paulo. O motivo é simples: com NF-e obrigatória, e-Financeira e o Livro Caixa Digital, **a Receita já tem quase todos os seus números antes de você declarar**. A pergunta não é se ela vai cruzar. É se as suas pontas vão fechar.
@@ -835,9 +872,16 @@ Este artigo nasceu de uma conversa de quase uma hora no podcast, com casos reais
 
 👉 **[Assista no YouTube: Tributação para o Produtor Rural — o que a Receita está cruzando](https://www.youtube.com/watch?v=JFCrS5_Aa9c)**
 
----
 
-*Escrito por **Lucas Dierings** — Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de MBA e fundador da Fluxo Rural Consultoria. Este artigo é informativo e não substitui a assessoria de contador especializado em atividade rural.*
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
+
+---
 #### Perguntas Frequentes
 **P: Quem é obrigado a declarar imposto de renda como produtor rural?**
 R: Está obrigado quem obteve receita bruta da atividade rural acima de R$ 153.199,50 no ano, além de quem se enquadra nas regras gerais do IRPF (rendimentos tributáveis acima do limite, bens acima do teto etc.). Mesmo abaixo disso, quem quer compensar prejuízos da atividade rural precisa manter o livro caixa em dia.
@@ -864,7 +908,7 @@ R: Pode reduzir: no regime de caixa da pessoa física, o investimento em máquin
 
 ### 3.7. Apagão de Liderança no Agro: Por Que Está Tão Difícil Encontrar (e Manter) Gente Boa na Fazenda
 - **URL:** https://fluxorural.com.br/blog/apagao-de-lideranca-no-agro/
-- **Data:** 2026-07-09 | **Categoria:** Liderança
+- **Data:** 2026-07-09 | **Categoria:** Governança
 - **Resumo:** Todo mundo fala em falta de mão de obra no agro. Mas talvez o diagnóstico esteja errado. As pessoas não desapareceram; elas não aceitam mais trabalhar em ambientes mal liderados. Veja o que muda quando o produtor troca o grito da porteira por um novo jeito de liderar.
 - **Texto do Artigo:**
 Em toda roda de produtor, cooperativa e grupo de WhatsApp do agro, a queixa se repete: **"não acho gente pra trabalhar"**. Operador de máquina, encarregado, alguém de confiança pra tocar o dia a dia. As vagas ficam abertas por meses. E quando alguém entra, não fica.
@@ -946,6 +990,15 @@ Se boa parte disso soou familiar, uma boa notícia: na maioria das vezes o probl
 Se quiser trocar uma ideia sobre a sua realidade, dá pra começar por uma [conversa de diagnóstico, sem compromisso](/diagnostico/). E se a sua vontade é levar esse tema pra um grupo maior, seja uma equipe, uma cooperativa ou um evento, é disso que trata o trabalho de [liderança e empreendedorismo no agro](/servicos/lideranca/).
 
 O agro brasileiro nunca produziu tanto, e nunca dependeu tanto de gente. Tecnologia se compra. Liderança se constrói. E ela começa na próxima conversa que você tiver com a sua equipe.
+
+
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
 #### Perguntas Frequentes
 **P: Existe mesmo falta de mão de obra no agronegócio?**
 R: A escassez existe, mas ela tem duas camadas: falta gente qualificada para um campo cada vez mais tecnológico, e falta ambiente que faça a gente boa querer ficar. Especialistas do setor têm apontado que boa parte do problema não é apagão de mão de obra, e sim apagão de liderança: as pessoas não aceitam mais trabalhar em lugares mal estruturados, sem gestão e sem perspectiva.
@@ -966,7 +1019,7 @@ R: Se aprende, e se aprende liderando. Metodologias de aprendizado pela ação, 
 
 ### 3.8. El Niño 2026 no Brasil: o que muda na safra 2026/27 e como se preparar
 - **URL:** https://fluxorural.com.br/blog/el-nino-2026-safra-brasil/
-- **Data:** 2026-07-16 | **Categoria:** Clima
+- **Data:** 2026-07-16 | **Categoria:** Mercado
 - **Resumo:** O El Niño 2026 está se formando e pode ser um dos mais fortes já registrados. Veja a previsão de NOAA, INMET e INPE, o impacto por região na safra 2026/27 e como se preparar no campo.
 - **Texto do Artigo:**
 O ano de 2026 entrou no radar de todo produtor por um motivo: um **El Niño forte, possivelmente um dos maiores já registrados**, está se formando no Oceano Pacífico bem em cima do ciclo da safra 2026/27. Nas buscas do Google, "El Niño 2026" disparou. Nos grupos de WhatsApp, sobra boato e previsão de fim do mundo.
@@ -1083,6 +1136,15 @@ Para esse monitoramento local existem estações meteorológicas agrícolas prof
 O El Niño 2026 é um dos eventos climáticos mais bem previstos da história recente, e isso é uma vantagem, não uma ameaça. Quem sabe que vem chuva no Sul, veranico no Cerrado e seca no Nordeste tem **meses** para ajustar cultivar, calendário, manejo de doença e planejamento de água.
 
 O fenômeno é o mesmo para todo mundo. O que separa a fazenda que perde da que se protege não é a sorte com o clima. É a **qualidade da informação** com que cada decisão é tomada. E, num ano assim, informação boa começa no seu próprio talhão.
+
+
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
 #### Perguntas Frequentes
 **P: O El Niño 2026 é verdade?**
 R: Sim. Em 9 de julho de 2026, o NOAA/CPC emitiu um Aviso de El Niño, com 97% de chance de o fenômeno persistir até o início de 2027. INMET e INPE também apontam probabilidade acima de 90%. O que circula como boato é o exagero nos efeitos: o fenômeno é real, mas seus impactos variam muito de uma região para outra.
@@ -1112,7 +1174,7 @@ R: Ajuste o calendário de plantio à janela real da sua região, reforce o mane
 
 ### 3.9. Aegro vs eProdutor: Qual o Melhor Software de Gestão Rural para sua Fazenda?
 - **URL:** https://fluxorural.com.br/blog/eprodutor-vs-aegro-qual-o-melhor-software-de-gestao-rural/
-- **Data:** 2026-08-03 | **Categoria:** Tecnologia
+- **Data:** 2026-08-03 | **Categoria:** Inovação
 - **Resumo:** Análise comparativa imparcial entre Aegro e eProdutor, dois dos principais softwares de gestão rural do Brasil. Veja recursos técnicos, telemetria de máquinas, pecuária, silvicultura e automação fiscal para cada perfil de fazenda.
 - **Texto do Artigo:**
 A migração de anotações em papel e planilhas desconectadas para um sistema digital é um passo decisivo na busca por eficiência e previsibilidade financeira no agronegócio. Diante das diversas opções de sistemas disponíveis no mercado, duas ferramentas se destacam frequentemente entre produtores e gestores rurais: o [Aegro](https://aegro.com.br) e o [eProdutor](https://eprodutor.fluxorural.com.br?utm_source=blog&utm_medium=artigo&utm_campaign=aegro-vs-eprodutor). Quando surge a necessidade de profissionalizar a gestão da fazenda, a dúvida sobre qual deles escolher passa a fazer parte da rotina de decisão.
@@ -1239,6 +1301,15 @@ A decisão entre o [Aegro](https://aegro.com.br) e o [eProdutor](https://eprodut
 * **O eProdutor atende com eficiência**: Fazendas **multiatividade** (unindo grãos, silvicultura, pecuária, avicultura, suinocultura ou piscicultura) ou produtores de grãos que **planejam diversificar suas operações no futuro** e priorizam uma plataforma capaz de incorporar novos módulos sem trocar de sistema. Também é indicado para quem busca automação de notas fiscais na SEFAZ com pré-lançamento, mapas de variabilidade de solo, controle de manutenção de frota e conectividade com sensores de campo.
 
 Para analisar os módulos técnicos e entender como cada solução se aplica ao seu modelo de negócio, visite a [página oficial do eProdutor](https://eprodutor.fluxorural.com.br?utm_source=blog&utm_medium=artigo&utm_campaign=aegro-vs-eprodutor) e solicite uma demonstração detalhada.
+
+
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
 #### Perguntas Frequentes
 **P: Qual a diferença entre Aegro e eProdutor?**
 R: O Aegro é um software nascido no Rio Grande do Sul focado na agricultura de grãos, com telemetria via Climate FieldView, soluções de crédito rural e cobrança por hectare. O eProdutor, atuando desde 2015, é um sistema completo para fazendas agrícolas e multiatividade, integrando grãos, silvicultura, pecuária de corte/leite, avicultura e suinocultura com automação fiscal SEFAZ e suporte dedicado no onboarding.
@@ -1259,7 +1330,7 @@ R: O Aegro cobra por assinatura anual ou mensal com base na área em hectares (a
 
 ### 3.10. O Fim da Era do Volume: 5 Transformações que Vão Redefinir a Soja Brasileira até 2030
 - **URL:** https://fluxorural.com.br/blog/fim-da-era-do-volume-soja-2030/
-- **Data:** 2026-08-28 | **Categoria:** Gestão
+- **Data:** 2026-08-28 | **Categoria:** Mercado
 - **Resumo:** A China mudou sua estratégia com o 15º Plano Quinquenal e a Europa exige rastreabilidade geoespacial. Conheça as 5 transformações que redefinem o mercado da soja até 2030 e como proteger a rentabilidade dentro da porteira.
 - **Texto do Artigo:**
 Durante décadas, o sucesso da produção agrícola brasileira foi medido por uma régua simples e direta: o número de sacas colhidas por hectare. No mercado internacional, o agronegócio nacional operou sob a lógica do volume bruto, em um ambiente no qual bastava produzir em escala para encontrar compradores vorazes no mercado externo.
@@ -1271,6 +1342,8 @@ O sinal mais emblemático dessa reconfiguração vem do Oriente. A consolidaçã
 ---
 
 #### 1. O Cliente Mudou: A China e a Doutrina de Segurança Nacional
+
+![Muda de soja germinando com hologramas digitais, representando a segurança alimentar e edição genética na China](/images/artigo-soja-china-seguranca.jpg)
 
 A China, principal parceiro comercial do agronegócio brasileiro, redefiniu integralmente as suas diretrizes econômicas. Ao estruturar o 15º Plano Quinquenal (2026 a 2030), o governo em Pequim substituiu as metas históricas de expansão do PIB ancoradas em volume bruto pelo conceito de Novas Forças Produtivas de Alta Qualidade. Nesse novo modelo, o abastecimento agroalimentar foi elevado ao mesmo patamar estratégico que a soberania energética e o sistema financeiro nacional.
 
@@ -1298,6 +1371,8 @@ Especialistas do setor convergem na análise de que as relações comerciais ent
 
 #### 2. A Revolução na Ração: A Dieta de Baixa Proteína e a Biomanufatura
 
+![Laboratório moderno de biomanufatura desenvolvendo aminoácidos sintéticos para nutrição animal](/images/artigo-soja-biomanufatura.jpg)
+
 A transformação mais profunda no consumo de grãos ocorre na nutrição animal. O Ministério da Agricultura e Assuntos Rurais da China colocou em execução a política nacional de Dieta de Baixa Proteína, cujo objetivo é reduzir a participação do farelo de soja nas rações de suínos e aves do patamar histórico de 14,5% para menos de 10% até o ano de 2030.
 
 Essa substituição não decorre de racionamento forçado, mas de uma revolução na indústria de biomanufatura e biotecnologia chinesa:
@@ -1315,6 +1390,8 @@ Para quem produz no Brasil, o recado é categórico: o investimento focado em ex
 
 #### 3. Rastreabilidade Geoespacial: O Mapa Digital como Passaporte de Liquidez
 
+![Lavoura de soja vista de cima com polígonos geoespaciais em destaque, simbolizando a rastreabilidade EUDR](/images/artigo-soja-rastreabilidade.jpg)
+
 Enquanto a Ásia reestrutura suas rações, o bloco europeu redesenha os padrões de acesso comercial. A aplicação provisória do Acordo de Livre Comércio Mercosul-União Europeia avança de forma paralela ao **Regulamento Europeu para Produtos Livres de Desmatamento (EUDR)**.
 
 A legislação europeia estabelece que commodities importadas (como soja, carne bovina, café e cacau) devem comprovar formalmente que não são originárias de áreas que tenham sofrido qualquer desmatamento após a data de corte de **31 de dezembro de 2020**, independentemente de a supressão de vegetação ter sido autorizada ou não pelo Código Florestal brasileiro.
@@ -1330,6 +1407,8 @@ Dentro da fazenda, o Cadastro Ambiental Rural (CAR) e a vetorização digital do
 ---
 
 #### 4. A Vitória da Biologia Tropical: A Vantagem Química da Soja Brasileira
+
+![Vagem de soja aberta sob o sol tropical, mostrando grãos ricos em óleo e proteína bruta](/images/artigo-soja-biologia-tropical.jpg)
 
 Apesar das pressões de compradores internacionais, a agricultura tropical brasileira detém um ativo biológico natural que os laboratórios industriais ainda não conseguiram suplantar: a qualidade intrínseca do grão colhido sob sol tropical.
 
@@ -1375,13 +1454,7 @@ Essa transformação é acompanhada pela reorganização da agroindústria no pa
 
 A transição da cadeia de grãos desdobra-se em três etapas bem definidas de maturidade:
 
-```mermaid
-timeline
-    title Transição da Cadeia da Soja (2026-2036)
-    2026-2028 (Curto Prazo) : Entrada em vigor do EUDR : Início da dieta chinesa de baixa proteína : Pressão de custos (diesel e juros) : Restrição do Zarc em 1.474 municípios
-    2029-2031 (Médio Prazo) : Queda de até 25% nas importações chinesas : Expansão de usinas de esmagamento no Brasil : Consolidação de CPRs e Fiagros (B3) : IA e sensores na gestão operacional
-    2032-2036 (Longo Prazo) : Estabilização do consumo chinês : Avanço de proteínas alternativas : Soja alto oleico e química verde : Revalorização de terras com carbono auditado
-```
+> **Resumo das Fases:** A transição ocorrerá em 3 ciclos claros: Curto Prazo (2026-2028), focando em EUDR e juros; Médio Prazo (2029-2031), marcado pela queda na demanda chinesa por grão bruto; e Longo Prazo (2032-2036), com a consolidação da química verde.
 
 ##### Detalhamento da Matriz de Impactos
 
@@ -1418,20 +1491,7 @@ Para os pequenos produtores dedicados exclusivamente a grãos como commodity bru
 
 Para atravessar a década com rentabilidade protegida, o produtor precisa agir em cinco frentes operacionais imediatas:
 
-```mermaid
-graph TD
-    A[Gestão Estratégica Dentro da Porteira] --> B[1. Adequação Geoespacial do CAR]
-    A --> C[2. Gestão de Margem e Custos COE/COT]
-    A --> D[3. Inteligência Artificial e Precisão]
-    A --> E[4. Diversificação e Bioinsumos]
-    A --> F[5. Financiamento via Mercado de Capitais]
-    
-    B --> B1[Delimitação precisa de polígonos por talhão no TRACES NT]
-    C --> C1[Trocar foco de sacas/ha por custo por saca e margem de segurança]
-    D --> D1[Taxa variável e telemetria para conter o diesel]
-    E --> E1[Soja alto oleico e bioinsumos pela Lei 15.070/2024]
-    F --> F1[Captação por CPRs e parcerias com cooperativas]
-```
+
 
 ##### 1. Adequação Geoespacial Completa do CAR
 Faça o levantamento topográfico digital e a vetorização precisa de todos os talhões da fazenda (em arquivos Shapefile ou GeoJSON). Essa documentação é o requisito que libera o grão para contratos de exportação e garante taxas de juros bonificadas em linhas de financiamento.
@@ -1468,9 +1528,16 @@ Descubra como os seus custos de produção e a sua margem líquida por hectare s
 
 Precisa de uma análise estratégica completa da governança, dos custos e do planejamento da sua propriedade? Conheça os serviços da nossa [Consultoria em Gestão Rural](/servicos/consultoria/) ou leve as palestras sobre o futuro do agro para a sua cooperativa e evento corporativo através da nossa página de [Palestras Estratégicas](/palestras/).
 
----
 
-*Escrito por **Lucas Dierings** — Engenheiro Agrônomo (CREA-PR 179906/D), MBA em Agronegócios pela USP/ESALQ, professor de pós-graduação e fundador da Fluxo Rural Consultoria. Atua como consultor em gestão financeira, inovação e governança para produtores rurais e empresas do agronegócio.*
+#### Fontes e Referências
+
+Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasada na prática de campo e nos dados dos seguintes órgãos oficiais do agronegócio:
+
+1. [CONAB - Companhia Nacional de Abastecimento](https://www.conab.gov.br/)
+2. [EMBRAPA - Empresa Brasileira de Pesquisa Agropecuária](https://www.embrapa.br/)
+3. [IBGE - Instituto Brasileiro de Geografia e Estatística](https://www.ibge.gov.br/)
+
+---
 #### Perguntas Frequentes
 **P: Como o 15º Plano Quinquenal da China impacta a exportação de soja brasileira?**
 R: O 15º Plano Quinquenal (2026 a 2030) eleva a segurança alimentar chinesa ao nível de segurança nacional. Ao investir em autossuficiência de sementes (meta de 85% até 2030) e adotar a Dieta de Baixa Proteína na ração de aves e suínos, a China projeta reduzir suas importações de soja bruta em até 25% (cerca de 23,5 milhões de toneladas) até 2030, priorizando a compra de grãos com maior teor de proteína e óleo.

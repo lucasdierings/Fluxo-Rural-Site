@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 const temas = TEMAS_PALESTRA
 
 const credenciais = [
-  { icon: Trophy, title: 'Top 5 CNA Jovem 2021', subtitle: 'Entre os 5 melhores de 3.742 do Brasil' },
+  { icon: Trophy, title: 'Top 5 CNA Jovem 2021', subtitle: 'Destaque Nacional em Liderança' },
   { icon: Radio, title: 'Host do NHCast', subtitle: 'Podcast oficial da New Holland Brasil' },
   { icon: GraduationCap, title: 'MBA USP/ESALQ', subtitle: 'A melhor escola de agro do país' },
   { icon: MapPin, title: 'Palestras em 5 estados', subtitle: 'PR, MS, SC, RS e PI' },

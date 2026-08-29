@@ -7,7 +7,7 @@ const credentials = [
   {
     icon: Trophy,
     title: 'Destaque Nacional CNA Jovem 2021',
-    subtitle: 'Entre os 5 melhores de 3.742 jovens do Brasil',
+    subtitle: 'Destaque Nacional em Liderança',
   },
   {
     icon: GraduationCap,

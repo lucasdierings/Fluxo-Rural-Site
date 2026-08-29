@@ -48,7 +48,7 @@ export default function NaMidia() {
                 CNA Jovem - Sistema CNA/SENAR
               </h3>
               <p className="text-carvao/70 text-sm">
-                Um dos 5 vencedores nacionais entre 3.742 jovens do agronegócio em 2021
+                Um dos 5 vencedores nacionais em 2021
               </p>
             </div>
           </motion.a>
