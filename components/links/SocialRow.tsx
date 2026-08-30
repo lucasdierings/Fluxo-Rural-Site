@@ -41,7 +41,7 @@ export function SocialRow() {
           rel="noopener noreferrer"
           aria-label={label}
           onClick={() => trackCta({ cta, local: 'bio' })}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/10 border border-white/15 text-white hover:bg-dourado/20 hover:text-dourado transition-colors"
+          className="flex items-center justify-center w-12 h-12 min-w-[44px] min-h-[44px] rounded-xl bg-[#112240] border border-white/15 text-white hover:border-[#E8B84B]/60 hover:bg-[#162a4d] hover:text-[#E8B84B] transition-all duration-300 shadow-sm"
         >
           <Icon size={20} />
         </a>

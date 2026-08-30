@@ -19,8 +19,6 @@ import {
 import { cn } from '@/lib/utils'
 import { trackCta, trackLead } from '@/lib/track'
 
-// Registro de ícones - server components não podem passar funções (componentes)
-// como prop para client components, então o nome chega como string e é resolvido aqui.
 const icons = {
   sparkles: Sparkles,
   whatsapp: MessageCircle,
@@ -56,17 +54,17 @@ interface LinkButtonProps {
 }
 
 const toneClass: Record<Tone, string> = {
-  gold: 'bg-dourado text-carvao border-transparent hover:bg-dourado/90',
-  green: 'bg-verde-folha text-white border-transparent hover:bg-verde-folha/90',
-  navy: 'bg-white/10 text-white border-white/15 hover:bg-white/15',
-  plain: 'bg-white/[0.06] text-white border-white/10 hover:bg-white/10',
+  gold: 'bg-[#E8B84B] text-[#202522] border-[#E8B84B]/40 hover:bg-[#F0CD7A] shadow-[0_0_20px_rgba(232,184,75,0.15)]',
+  green: 'bg-[#6AAF3D] text-white border-[#6AAF3D]/40 hover:bg-[#78BF45] shadow-[0_0_20px_rgba(106,175,61,0.2)]',
+  navy: 'bg-[#112240]/90 text-white border-white/15 hover:border-[#4ADE80]/50 hover:bg-[#162a4d] shadow-md',
+  plain: 'bg-[#112240]/75 text-white border-white/10 hover:border-[#4ADE80]/40 hover:bg-[#162a4d] shadow-sm',
 }
 
 const iconWrapClass: Record<Tone, string> = {
-  gold: 'bg-carvao/10 text-carvao',
+  gold: 'bg-[#202522]/15 text-[#202522]',
   green: 'bg-white/20 text-white',
-  navy: 'bg-dourado/20 text-dourado',
-  plain: 'bg-dourado/15 text-dourado',
+  navy: 'bg-[#4ADE80]/15 text-[#4ADE80]',
+  plain: 'bg-[#E8B84B]/15 text-[#E8B84B]',
 }
 
 export function LinkButton({
@@ -97,13 +95,13 @@ export function LinkButton({
       {...(download ? { download: true } : {})}
       {...(isExternal || download ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className={cn(
-        'group flex items-center gap-4 w-full rounded-2xl border px-4 py-3.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] shadow-sm',
+        'group flex items-center gap-4 w-full rounded-2xl border px-4 py-3.5 min-h-[54px] transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] cursor-pointer',
         toneClass[tone]
       )}
     >
       <span
         className={cn(
-          'flex items-center justify-center w-10 h-10 rounded-xl shrink-0',
+          'flex items-center justify-center w-11 h-11 rounded-xl shrink-0 transition-transform duration-300 group-hover:scale-105',
           iconWrapClass[tone]
         )}
       >
@@ -116,8 +114,8 @@ export function LinkButton({
         {sublabel && (
           <span
             className={cn(
-              'block text-xs leading-tight truncate mt-0.5',
-              tone === 'gold' ? 'text-carvao/60' : tone === 'green' ? 'text-white/80' : 'text-white/55'
+              'block text-xs leading-tight truncate mt-1',
+              tone === 'gold' ? 'text-[#202522]/70' : tone === 'green' ? 'text-white/85' : 'text-slate-300'
             )}
           >
             {sublabel}
@@ -127,8 +125,8 @@ export function LinkButton({
       <ChevronRight
         size={18}
         className={cn(
-          'shrink-0 transition-transform group-hover:translate-x-0.5',
-          tone === 'gold' ? 'text-carvao/40' : 'text-white/40'
+          'shrink-0 transition-transform duration-300 group-hover:translate-x-1',
+          tone === 'gold' ? 'text-[#202522]/50' : 'text-white/40'
         )}
       />
     </a>

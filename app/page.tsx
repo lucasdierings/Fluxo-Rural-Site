@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Hero from '@/components/sections/Hero'
 import TrustBar from '@/components/sections/TrustBar'
-import ScrollWorldJourney from '@/components/sections/ScrollWorldJourney'
 import ServicesPreview from '@/components/sections/ServicesPreview'
 import Credentials from '@/components/sections/Credentials'
 import BlogPreview from '@/components/sections/BlogPreview'
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
     absolute: 'Lucas Dierings | Gestão e Inovação no Agronegócio',
   },
   description:
-    'Consultoria em gestão rural, treinamentos e palestras sobre gestão financeira, sucessão familiar, liderança e inovação no agronegócio. Com Lucas Dierings, fundador da Fluxo Rural.',
+    'Consultoria em gestão rural, treinamentos e palestras sobre gestão financeira, sucessão familiar, liderança e inovação no agronegócio. Com Lucas Dierings, engenheiro agrônomo (CREA-PR 179906/D) e fundador da Fluxo Rural.',
   openGraph: {
     title: 'Lucas Dierings | Gestão e Inovação no Agronegócio',
     description:
@@ -23,15 +22,8 @@ export const metadata: Metadata = {
   },
 }
 
-// Seções removidas em ago/2026:
-//   ContentCTA ("Leia Grátis") apontava para um único artigo fixo, competindo
-//   com a própria seção de blog logo abaixo.
-//   Testimonials trazia três depoimentos INVENTADOS. Melhor não ter prova
-//   social do que ter prova social falsa; volta quando houver depoimento real.
 export default function HomePage() {
-  // Os 3 artigos mais recentes de verdade. getAllPosts já devolve ordenado por
-  // data decrescente, e antes esta lista era um array fixo que envelhecia sem
-  // ninguém perceber.
+  // Os 3 artigos mais recentes de verdade, ordenados por data decrescente
   const recentes = getAllPosts()
     .slice(0, 3)
     .map(({ slug, title, category, coverImage, readingTime }) => ({
@@ -46,7 +38,6 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustBar />
-      <ScrollWorldJourney />
       <ServicesPreview />
       <Credentials />
       <BlogPreview posts={recentes} />
@@ -55,3 +46,4 @@ export default function HomePage() {
     </>
   )
 }
+

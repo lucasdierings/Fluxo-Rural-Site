@@ -62,7 +62,7 @@ A Fluxo Rural trabalha em QUATRO FRENTES, divididas por público: **consultoria 
   - *Serve para pequeno produtor?* Sim, a gestão financeira é adaptável a qualquer tamanho de propriedade.
   - *Como começar?* Pelo diagnóstico gratuito em https://fluxorural.com.br/diagnostico/.
 
-### 2.2. Treinamentos In-Company
+### 2.2. Capacitação Corporativa
 - **Página de Referência:** https://fluxorural.com.br/servicos/treinamentos/
 - **Público:** Equipes de cooperativas agropecuárias, empresas e indústrias do agro, revendas de insumos, sindicatos rurais, associações e instituições de ensino.
 - **Formatos:** A versão de 4h é a mais enxuta. A de 8h é o mesmo conteúdo com oficinas e exercícios práticos. Nem todo curso tem as duas: Maestria do Tempo, Inteligência Artificial e Liderança Eficaz rodam só em 4h. Presencial ou online.
@@ -113,7 +113,7 @@ A Fluxo Rural trabalha em QUATRO FRENTES, divididas por público: **consultoria 
   - *Keynote (45-60 min):* Palestra técnica para abertura ou encerramento de eventos.
   - *Painel / mesa redonda:* Participação em debate ou mediação de painel com outros convidados.
   - *Modalidades:* Presencial ou online via vídeo-chamada.
-- **Distinção importante:** conteúdo aplicado de meio período ou dia inteiro, com oficina e material de trabalho, NÃO é palestra — é treinamento in-company (ver seção 2.2).
+- **Distinção importante:** conteúdo aplicado de meio período ou dia inteiro, com oficina e material de trabalho, NÃO é palestra — é capacitação corporativa (ver seção 2.2).
 - **Temas Principais:**
   1. *Gestão e Inovação no Agronegócio:* Indicadores essenciais de desempenho e transformação de dados em lucro real no campo.
   2. *Gestão Financeira Rural na Prática:* Custo por saca, fluxo de caixa simplificado e separação de contas (pessoal vs. fazenda).

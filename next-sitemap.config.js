@@ -46,8 +46,14 @@ module.exports = {
       alternateRefs: config.alternateRefs || [],
     }
   },
-  // Entrada manual do PDF (arquivo): sem trailing slash, que quebraria a URL do .pdf.
   additionalPaths: async () => [
+    {
+      loc: 'https://fluxorural.com.br/calculadora/',
+      changefreq: 'weekly',
+      priority: 0.9,
+      lastmod: new Date().toISOString(),
+      trailingSlash: true,
+    },
     {
       loc: 'https://fluxorural.com.br/portfolio-treinamentos-palestras-lucas-dierings.pdf',
       changefreq: 'monthly',

@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 11%;
-    --primary: 209 60% 30%;
+    --background: 216 65% 11%;    /* #0A192F - Deep Agro-Tech Navy */
+    --foreground: 210 40% 98%;    /* #F8FAFC - Crisp Slate White */
+    --card: 218 58% 16%;          /* #112240 - Surface Card Navy */
+    --card-foreground: 210 40% 98%;
+    --popover: 217 64% 14%;       /* #0D1F3C - Midnight Navy Popover */
+    --popover-foreground: 210 40% 98%;
+    --primary: 96 48% 46%;        /* #6AAF3D - Action Green */
     --primary-foreground: 0 0% 100%;
-    --secondary: 96 46% 50%;
+    --secondary: 207 64% 29%;     /* #1B4F7A - Institutional Navy */
     --secondary-foreground: 0 0% 100%;
-    --muted: 40 25% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 39 77% 60%;
-    --accent-foreground: 0 0% 11%;
+    --muted: 217 33% 17%;         /* #1E293B - Slate Muted Surface */
+    --muted-foreground: 215 20% 65%; /* #94A3B8 - Slate Muted Text */
+    --accent: 42 77% 60%;         /* #E8B84B - Harvest Gold */
+    --accent-foreground: 147 6% 13%; /* #202522 - Charcoal */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 209 60% 30%;
-    --radius: 1.5rem;
+    --border: 217 33% 22%;        /* Border 1E293B */
+    --input: 217 33% 22%;
+    --ring: 96 48% 46%;           /* #6AAF3D */
+    --radius: 0.75rem;            /* 12px - Sleek Agro-Tech Radius */
   }
 }
 
@@ -32,75 +32,103 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-[#0A192F] text-slate-100 font-body antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
 }
 
-/* Scrollbar suave */
+/* Scrollbar suave & seleção */
 html {
   scroll-behavior: smooth;
 }
 
-/* Animação do WhatsApp flutuante */
-@keyframes whatsapp-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+::selection {
+  background: rgba(74, 222, 128, 0.25);
+  color: #ffffff;
+}
+
+/* Animações contínuas com guards de acessibilidade (prefers-reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes whatsapp-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 0 15px rgba(74, 222, 128, 0);
+    }
   }
-  50% {
-    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+
+  .whatsapp-pulse {
+    animation: whatsapp-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce-down {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+
+  .animate-bounce-down {
+    animation: bounce-down 2s ease-in-out infinite;
   }
 }
 
-.whatsapp-pulse {
-  animation: whatsapp-pulse 2s ease-in-out infinite;
-}
-
-/* Seta de scroll animada */
-@keyframes bounce-down {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-pulse,
+  .animate-bounce-down {
+    animation: none !important;
   }
 }
 
-.animate-bounce-down {
-  animation: bounce-down 2s ease-in-out infinite;
+/* Agro-Tech sleek dark surfaces (substituindo glassmorphism excessivo) */
+.glass-card,
+.surface-card {
+  background: rgba(17, 34, 64, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
 }
 
-/* Apple-style glass morphism */
-.glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.glass-card-dark {
-  background: rgba(30, 77, 123, 0.1);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.glass-card-dark,
+.surface-card-dark {
+  background: rgba(13, 31, 60, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
 }
 
 /* Smooth transitions */
 .transition-smooth {
-  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Apple-style shadows */
-.shadow-apple-sm {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+/* Elevações e sombras dark sutis */
+.shadow-apple-sm,
+.shadow-dark-sm {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
-.shadow-apple-md {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+.shadow-apple-md,
+.shadow-dark-md {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
-.shadow-apple-lg {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+.shadow-apple-lg,
+.shadow-dark-lg {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.glow-green {
+  box-shadow: 0 0 25px rgba(74, 222, 128, 0.2);
+}
+
+.glow-gold {
+  box-shadow: 0 0 25px rgba(232, 184, 75, 0.2);
 }

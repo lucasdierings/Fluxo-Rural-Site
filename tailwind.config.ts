@@ -18,28 +18,72 @@ const config: Config = {
     },
     extend: {
       colors: {
-        navy: '#1E4D7B',
-        'verde-folha': '#7AB648',
+        // Agro-Tech Dark Navy Hierarchy
+        navy: {
+          950: '#0A192F', // Deep background
+          900: '#0D1F3C', // Midnight sections
+          800: '#112240', // Surface cards
+          700: '#1E293B', // Slate borders / muted
+          600: '#1B4F7A', // Institutional navy
+          DEFAULT: '#1B4F7A',
+        },
+        'navy-deep': '#0A192F',
+        'navy-midnight': '#0D1F3C',
+        'navy-surface': '#112240',
+
+        // Agro Green (Action & Neon Tech Accents)
+        'agro-green': {
+          neon: '#4ADE80',
+          electric: '#00E676',
+          action: '#6AAF3D',
+          dark: '#153C24',
+          DEFAULT: '#6AAF3D',
+        },
+        'verde-tech': '#4ADE80',
+        'verde-neon': '#00E676',
+        'verde-folha': '#6AAF3D',
+        'verde-escuro': '#153C24',
+
+        // Gold & Accents
+        gold: {
+          DEFAULT: '#E8B84B',
+          glow: 'rgba(232, 184, 75, 0.15)',
+          light: '#F0CD7A',
+          dark: '#C9982E',
+        },
         dourado: '#E8B84B',
-        'verde-escuro': '#1B4332',
-        'off-white': '#F8F6F1',
-        carvao: '#1C1C1C',
+        'dourado-glow': 'rgba(232, 184, 75, 0.15)',
+
+        // Neutrals & Editorial
+        carvao: '#202522',
+        'off-white': '#F7F5EF',
+        'tech-slate': {
+          100: '#F1F5F9',
+          200: '#E2E8F0',
+          300: '#CBD5E1',
+          400: '#94A3B8',
+          700: '#334155',
+          800: '#1E293B',
+          900: '#0F172A',
+        },
+
+        // shadcn/ui dynamic tokens
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#1E4D7B',
+          DEFAULT: '#6AAF3D',
           foreground: '#FFFFFF',
         },
         secondary: {
-          DEFAULT: '#7AB648',
+          DEFAULT: '#1B4F7A',
           foreground: '#FFFFFF',
         },
         accent: {
           DEFAULT: '#E8B84B',
-          foreground: '#1C1C1C',
+          foreground: '#202522',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',

@@ -90,7 +90,7 @@ export default function PortfolioPdfGenerator() {
       {/* TREINAMENTOS */}
       <div className="w-[210mm] min-h-[297mm] mx-auto bg-white px-16 py-16 page-break-after shadow-xl print:shadow-none">
         <div className="mb-12 border-b-2 border-verde-folha inline-block pb-2">
-          <h2 className="text-navy font-heading text-3xl font-bold">Treinamentos In-Company</h2>
+          <h2 className="text-navy font-heading text-3xl font-bold">Capacitação Corporativa</h2>
           <p className="text-carvao/60 mt-1">Imersões práticas de 4h ou 8h de duração.</p>
         </div>
         

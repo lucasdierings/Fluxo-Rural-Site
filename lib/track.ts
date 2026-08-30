@@ -14,13 +14,87 @@ type AnalyticsWindow = {
   dataLayer?: Record<string, unknown>[]
 }
 
-/** Lead/conversão: dispara no GA4 (gtag) e no GTM (dataLayer) de uma vez. */
+const PII_KEYS = new Set([
+  'nome',
+  'name',
+  'first_name',
+  'last_name',
+  'email',
+  'mail',
+  'whatsapp',
+  'telefone',
+  'phone',
+  'celular',
+  'cpf',
+  'cnpj',
+  'rg',
+  'endereco',
+  'address',
+  'rua',
+  'street',
+  'cep',
+  'zip',
+])
+
+function sanitizeParams(params: Record<string, unknown>): Record<string, unknown> {
+  const clean: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(params)) {
+    if (!PII_KEYS.has(key.toLowerCase())) {
+      clean[key] = value
+    }
+  }
+  return clean
+}
+
+/** Lead/conversão: dispara no GA4 (gtag) e no GTM (dataLayer) de uma vez.
+ *  Garante estritamente ZERO PII enviado para analytics. */
 export function trackLead(event: string, params: Record<string, unknown> = {}) {
   if (typeof window === 'undefined') return
+  const safeParams = sanitizeParams(params)
   const w = window as unknown as AnalyticsWindow
-  w.gtag?.('event', event, params)
+  w.gtag?.('event', event, safeParams)
   w.dataLayer = w.dataLayer || []
-  w.dataLayer.push({ event, ...params })
+  w.dataLayer.push({ event, ...safeParams })
+}
+
+/** Rastreia visualização de etapa no diagnóstico interativo (Zero PII). */
+export function trackDiagnosticoStepView(stepNumber: number, stepName: string) {
+  trackLead('diagnostico_step_view', {
+    form_location: 'diagnostico',
+    step_number: stepNumber,
+    step_name: stepName,
+  })
+}
+
+/** Rastreia conclusão e avanço de etapa no diagnóstico interativo (Zero PII). */
+export function trackDiagnosticoStepComplete(stepNumber: number, stepName: string) {
+  trackLead('diagnostico_step_complete', {
+    form_location: 'diagnostico',
+    step_number: stepNumber,
+    step_name: stepName,
+  })
+}
+
+/** Rastreia envio com sucesso do diagnóstico completo (Zero PII). */
+export function trackDiagnosticoSubmit(params: {
+  score: number
+  qualificationLevel: string
+  origem?: string
+}) {
+  trackLead('diagnostico_submit', {
+    form_location: 'diagnostico',
+    perfil: 'produtor',
+    score: params.score,
+    nivel: params.qualificationLevel,
+    origem: params.origem || 'site',
+  })
+}
+
+/** Rastreia clique no CTA direto do WhatsApp na tela de sucesso (Zero PII). */
+export function trackDiagnosticoWhatsAppDirect() {
+  trackLead('diagnostico_whatsapp_direct', {
+    form_location: 'diagnostico_sucesso',
+  })
 }
 
 /** Micro-conversão de clique em CTA de navegação: SÓ GA4 (sem dataLayer, pra não

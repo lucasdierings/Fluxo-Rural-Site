@@ -27,9 +27,9 @@ const fronts = [
   },
   {
     icon: GraduationCap,
-    eyebrow: 'Treinamentos in-company',
+    eyebrow: 'Capacitação Corporativa',
     title: 'Conhecimento que sai da sala e chega à prática.',
-    body: 'Cursos e workshops in-company sobre gestão, liderança, inovação e tecnologia no agro.',
+    body: 'Cursos e programas de capacitação sobre gestão, liderança, inovação e tecnologia no agro.',
     image: '/treinamento-workshop.jpg',
     href: '/servicos/treinamentos',
     cta: 'Ver treinamentos',
@@ -65,7 +65,7 @@ export default function ScrollWorldJourney() {
   return (
     <section
       ref={containerRef}
-      className="relative isolate overflow-x-clip bg-[#102D49] text-white lg:h-[300vh]"
+      className="relative isolate overflow-x-clip bg-navy-950 text-white lg:h-[240vh]"
       aria-labelledby="scroll-world-title"
     >
       <div className="relative min-h-[76svh] overflow-hidden lg:sticky lg:top-0 lg:min-h-screen">
@@ -75,7 +75,7 @@ export default function ScrollWorldJourney() {
             alt=""
             fill
             sizes="100vw"
-            className="object-cover object-[58%_center]"
+            className="object-cover object-[58%_center] opacity-30"
           />
         </div>
 
@@ -90,15 +90,15 @@ export default function ScrollWorldJourney() {
                 src={front.image}
                 alt=""
                 fill
-                sizes="54vw"
-                className="object-cover opacity-55"
+                sizes="(min-width: 1024px) 54vw, 100vw"
+                className="object-cover opacity-35"
               />
-              <div className="absolute inset-0 bg-[#102D49]/55" />
+              <div className="absolute inset-0 bg-navy-950/75" />
             </div>
           ))}
         </motion.div>
 
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,45,73,0.34)_0%,rgba(16,45,73,0.78)_48%,rgba(16,45,73,1)_100%)] lg:bg-[linear-gradient(90deg,rgba(16,45,73,0.98)_0%,rgba(16,45,73,0.82)_38%,rgba(16,45,73,0.42)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,25,47,0.4)_0%,rgba(10,25,47,0.85)_48%,rgba(10,25,47,1)_100%)] lg:bg-[linear-gradient(90deg,rgba(10,25,47,0.98)_0%,rgba(10,25,47,0.85)_38%,rgba(10,25,47,0.45)_100%)]" />
 
         <div className="relative z-10 flex min-h-[76svh] items-end pb-9 pt-28 lg:min-h-screen lg:items-center lg:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,22 +110,22 @@ export default function ScrollWorldJourney() {
                 transition={{ duration: 0.7, ease: 'easeOut' }}
                 className="max-w-2xl"
               >
-                <span className="mb-4 inline-flex items-center gap-2 rounded-[8px] border border-dourado/35 bg-dourado/10 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-dourado sm:mb-5 sm:text-xs lg:tracking-[0.18em]">
-                  <Route size={16} />
-                  Ecossistema Fluxo Rural
+                <span className="mb-4 inline-flex items-center gap-2 rounded-xl border border-gold/35 bg-gold/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-gold sm:mb-5">
+                  <Route size={16} className="text-gold" />
+                  Ecossistema Integrado
                 </span>
                 <h2
                   id="scroll-world-title"
-                  className="font-heading text-3xl font-bold leading-tight md:text-5xl lg:text-6xl"
+                  className="font-heading text-3xl font-extrabold leading-tight text-slate-50 md:text-5xl lg:text-6xl"
                 >
                   Gestão, conhecimento e inovação em movimento.
                 </h2>
-                <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base md:mt-6 md:text-lg">
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base md:mt-6 md:text-lg">
                   Consultoria, treinamentos, palestras e conteúdo com aplicação prática no
                   agronegócio.
                 </p>
                 <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
-                  <Button asChild size="lg" className="w-full sm:w-auto">
+                  <Button asChild size="lg" className="w-full sm:w-auto min-h-[48px] bg-agro-green-action hover:bg-agro-green-action/90 text-white font-semibold shadow-dark-md border border-agro-green-neon/30">
                     <Link
                       href="/servicos"
                       onClick={() => trackCta({ cta: 'servicos', local: 'scroll_world_journey' })}
@@ -134,13 +134,13 @@ export default function ScrollWorldJourney() {
                     </Link>
                   </Button>
                 </div>
-                <div className="mt-7 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/65 lg:hidden">
+                <div className="mt-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-slate-400 lg:hidden">
                   <span>4 frentes Fluxo Rural</span>
-                  <span className="h-px flex-1 bg-white/25" aria-hidden="true" />
+                  <span className="h-px flex-1 bg-white/20" aria-hidden="true" />
                 </div>
               </motion.div>
 
-              <div className="hidden grid-cols-2 gap-3 lg:grid">
+              <div className="hidden grid-cols-2 gap-4 lg:grid">
                 {fronts.map((front, index) => (
                   <motion.article
                     key={front.title}
@@ -149,18 +149,18 @@ export default function ScrollWorldJourney() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ delay: index * 0.08, duration: 0.55, ease: 'easeOut' }}
-                    className="group flex min-h-[190px] flex-col rounded-[8px] border border-white/10 bg-white/[0.07] p-4 backdrop-blur-xl transition-colors hover:bg-white/[0.12]"
+                    className="group flex min-h-[190px] flex-col rounded-2xl border border-white/10 bg-navy-800/80 p-5 backdrop-blur-xl transition-all hover:bg-navy-800 hover:border-agro-green-neon/30 shadow-dark-md"
                   >
-                    <div className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-dourado text-carvao">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 border border-gold/30 text-gold">
                       <front.icon size={20} aria-hidden="true" />
                     </div>
-                    <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.13em] text-dourado/90">
+                    <p className="mt-3.5 text-xs font-semibold uppercase tracking-wider text-gold">
                       {front.eyebrow}
                     </p>
-                    <h3 className="mt-1.5 font-heading text-lg font-bold leading-tight text-white">
+                    <h3 className="mt-1 font-heading text-lg font-bold leading-tight text-slate-50">
                       {front.title}
                     </h3>
-                    <p className="mt-2 hidden text-sm leading-relaxed text-white/68 xl:block">
+                    <p className="mt-2 hidden text-xs leading-relaxed text-slate-400 xl:block">
                       {front.body}
                     </p>
                     <Link
@@ -168,9 +168,9 @@ export default function ScrollWorldJourney() {
                       onClick={() =>
                         trackCta({ cta: front.href.replace('/', ''), local: 'scroll_world_front' })
                       }
-                      className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-semibold text-dourado transition-all group-hover:gap-3"
+                      className="mt-auto inline-flex items-center gap-2 pt-3 text-xs font-semibold text-gold hover:text-agro-green-neon transition-colors group-hover:gap-2.5 min-h-[44px]"
                     >
-                      {front.cta} <ArrowRight size={16} aria-hidden="true" />
+                      {front.cta} <ArrowRight size={15} aria-hidden="true" />
                     </Link>
                   </motion.article>
                 ))}
@@ -180,14 +180,14 @@ export default function ScrollWorldJourney() {
         </div>
       </div>
 
-      <div className="relative z-10 bg-[#102D49] lg:hidden">
+      <div className="relative z-10 bg-navy-950 lg:hidden">
         <div className="container mx-auto px-4 pb-16 pt-8">
           <ul className="m-0 grid list-none gap-5 p-0">
             {fronts.map((front, index) => (
               <li key={front.title}>
                 <article
                   data-scroll-front-mobile={index}
-                  className="overflow-hidden rounded-[8px] border border-white/12 bg-white/[0.07] shadow-[0_16px_40px_rgba(0,0,0,0.16)]"
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-navy-800/80 shadow-dark-md"
                 >
                   <div className="relative aspect-[16/9]">
                     <Image
@@ -195,27 +195,27 @@ export default function ScrollWorldJourney() {
                       alt=""
                       fill
                       sizes="(max-width: 640px) calc(100vw - 2rem), 608px"
-                      className="object-cover"
+                      className="object-cover opacity-60"
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,45,73,0.08)_35%,rgba(16,45,73,0.82)_100%)]" />
-                    <div className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-[8px] bg-dourado text-carvao shadow-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gold text-carvao shadow-lg">
                       <front.icon size={21} aria-hidden="true" />
                     </div>
                   </div>
                   <div className="p-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-dourado">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-gold">
                       {front.eyebrow}
                     </p>
-                    <h3 className="mt-2 font-heading text-xl font-bold leading-tight">
+                    <h3 className="mt-1.5 font-heading text-xl font-bold leading-tight text-slate-50">
                       {front.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/75">{front.body}</p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-slate-300">{front.body}</p>
                     <Link
                       href={front.href}
                       onClick={() =>
                         trackCta({ cta: front.href.replace('/', ''), local: 'scroll_world_front_mobile' })
                       }
-                      className="mt-5 flex min-h-11 w-full items-center justify-between border-t border-white/12 pt-4 text-sm font-semibold text-dourado transition-colors active:text-white"
+                      className="mt-4 flex min-h-[44px] w-full items-center justify-between border-t border-white/10 pt-3 text-sm font-semibold text-gold hover:text-agro-green-neon transition-colors"
                     >
                       {front.cta} <ArrowRight size={18} aria-hidden="true" />
                     </Link>
@@ -229,3 +229,4 @@ export default function ScrollWorldJourney() {
     </section>
   )
 }
+

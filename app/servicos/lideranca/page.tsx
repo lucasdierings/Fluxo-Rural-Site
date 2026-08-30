@@ -212,7 +212,7 @@ export default function LiderancaPage() {
               href="/servicos/treinamentos"
               className="text-navy font-semibold hover:text-dourado underline"
             >
-              treinamentos in-company
+              programas de capacitação corporativa
             </Link>
             , disponível em 4h ou 8h.
           </p>

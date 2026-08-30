@@ -3,10 +3,10 @@
 > Lucas Dierings - Engenheiro Agrônomo, MBA USP/ESALQ, consultor estratégico em gestão financeira rural, inovação e sucessão familiar no agronegócio brasileiro.
 
 ## Informações Chave
-- **Fundador:** Lucas Dierings (Engenheiro Agrônomo, professor de MBA, Top 5 CNA Jovem 2021)
-- **Localização:** Londrina, Paraná, Brasil (Atendimento para todo o país)
-- **Serviços:** Quatro frentes - consultoria em gestão rural (para produtores), treinamentos in-company, palestras e podcast (para empresas, cooperativas e associações).
-- **Destaque:** Host do podcast NHCast (New Holland Brasil) e do Agrojovem Podcast. O Agro Jovem é um canal próprio, mas o Lucas também atua como host/entrevistador em eventos e marcas do agronegócio.
+- **Fundador:** Lucas Dierings (Engenheiro Agrônomo, CREA-PR 179906/D, MBA USP/ESALQ, professor e consultor credenciado Senar e Sebrae)
+- **Localização:** Atendimento em todo o Brasil (consultoria presencial em campo e online)
+- **Serviços:** Quatro frentes - consultoria em gestão rural (para produtores), capacitação corporativa, palestras e podcast (para empresas, cooperativas e associações).
+- **Destaque:** Especialista em gestão técnica e gerencial de propriedades rurais em 24 estados e host do podcast NHCast (New Holland Brasil).
 - **Portfólio (PDF):** https://fluxorural.com.br/portfolio-treinamentos-palestras-lucas-dierings.pdf - bio, credenciais, os 7 treinamentos e as 6 palestras, com conteúdo programático e carga horária.
 
 ## Navegação e Seções Principais
@@ -14,7 +14,7 @@
 - [Sobre Lucas Dierings](https://fluxorural.com.br/sobre/) - Biografia detalhada, prêmios, credenciais acadêmicas e trajetória profissional.
 - [Serviços e Soluções](https://fluxorural.com.br/servicos/) - Visão geral das quatro frentes de trabalho.
   - [Consultoria em Gestão Rural](https://fluxorural.com.br/servicos/consultoria/) - Para produtores rurais: diagnóstico, planejamento estratégico, gestão financeira, análise de rentabilidade, avaliação de investimento e projetos de custeio e investimento agropecuários.
-  - [Treinamentos In-Company](https://fluxorural.com.br/servicos/treinamentos/) - Para cooperativas, sindicatos, empresas, faculdades e eventos: sete cursos aplicados (4h a 8h) - agrometeorologia, comunicação eficaz, gestão financeira e custos, gestão do tempo, inteligência artificial, liderança e sucessão familiar.
+  - [Capacitação Corporativa](https://fluxorural.com.br/servicos/treinamentos/) - Para cooperativas, sindicatos, empresas, faculdades e eventos: sete cursos aplicados (4h a 8h) - agrometeorologia, comunicação eficaz, gestão financeira e custos, gestão do tempo, inteligência artificial, liderança e sucessão familiar.
   - [Agro Jovem Podcast](https://fluxorural.com.br/agrojovem/) - Podcast sobre gestão, liderança e inovação para o produtor rural. Indicação de convidados, contratação de host, participação como convidado e patrocínio.
   - [Liderança e Empreendedorismo](https://fluxorural.com.br/servicos/lideranca/) - Página de aprofundamento do tema: o novo modelo de liderança no agro, workshop e palestras.
 - [Palestras](https://fluxorural.com.br/palestras/) - Palestras e painéis para cooperativas, sindicatos e eventos. Temas incluem finanças, gestão, sucessão, liderança, empreendedorismo e IA no agro. Portfólio em PDF disponível para download.
@@ -29,7 +29,7 @@
 - [llms-full.txt](https://fluxorural.com.br/llms-full.txt) - Documento detalhado contendo a descrição completa de todos os serviços, biografia na íntegra e o texto completo dos artigos do blog para indexação profunda.
 
 ## Contato e Redes Sociais
-- Email: lucas@fluxorural.com.br
+- Email: contato@fluxorural.com.br
 - LinkedIn: https://linkedin.com/in/lucasdierings
 - Instagram: https://www.instagram.com/lucasdierings.agro/
 

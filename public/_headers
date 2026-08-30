@@ -2,15 +2,38 @@
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-/calculadora/*.jpg
-  Cache-Control: public, max-age=2592000, immutable
+# Assets estáticos versionados do Next.js (imutáveis por 1 ano)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
 
-/calculadora/styles.css
-  Cache-Control: public, max-age=2592000, immutable
+/_next/static/media/*
+  Cache-Control: public, max-age=31536000, immutable
 
-/calculadora/app.js
-  Cache-Control: public, max-age=2592000, immutable
-
+# Assets públicos estáticos (cacheados por 30 dias)
 /images/*
   Cache-Control: public, max-age=2592000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=2592000, immutable
+
+/*.png
+  Cache-Control: public, max-age=2592000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=2592000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=2592000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=2592000, immutable
+
+/*.pdf
+  Cache-Control: public, max-age=2592000, immutable
+
+/calculadora/*
+  Cache-Control: public, max-age=2592000, immutable
+

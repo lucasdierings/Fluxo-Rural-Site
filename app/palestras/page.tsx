@@ -12,9 +12,14 @@ import {
   Users,
   MessageCircle,
   FileText,
+  Sparkles,
+  ArrowRight,
+  ChevronDown,
 } from 'lucide-react'
 import { PedidoCTA } from '@/components/palestras/PedidoCTA'
 import { PortfolioDownload } from '@/components/palestras/PortfolioDownload'
+import { WhatsappCTA } from '@/components/palestras/WhatsappCTA'
+import Breadcrumbs from '@/components/ui/breadcrumbs'
 import { TEMAS_PALESTRA } from '@/lib/catalogo'
 
 export const metadata: Metadata = {
@@ -26,22 +31,20 @@ export const metadata: Metadata = {
     title: 'Palestrante para Agronegócio | Lucas Dierings',
     description:
       'Palestras de gestão, finanças, liderança e IA no agro. Conteúdo aplicado, linguagem do campo. Para cooperativas, sindicatos, empresas e eventos.',
+    url: 'https://fluxorural.com.br/palestras/',
+    images: [{ url: '/lucas-palestrante-chapeu.jpg', width: 1200, height: 630, alt: 'Lucas Dierings palestrando no agronegócio' }],
   },
 }
 
-// Os temas vivem em lib/catalogo.ts porque a página de treinamentos e os
-// formulários de captação precisam da mesma lista.
 const temas = TEMAS_PALESTRA
 
 const credenciais = [
   { icon: Trophy, title: 'Top 5 CNA Jovem 2021', subtitle: 'Destaque Nacional em Liderança' },
   { icon: Radio, title: 'Host do NHCast', subtitle: 'Podcast oficial da New Holland Brasil' },
-  { icon: GraduationCap, title: 'MBA USP/ESALQ', subtitle: 'A melhor escola de agro do país' },
-  { icon: MapPin, title: 'Palestras em 5 estados', subtitle: 'PR, MS, SC, RS e PI' },
+  { icon: GraduationCap, title: 'MBA USP/ESALQ', subtitle: 'Engenheiro Agrônomo CREA-PR' },
+  { icon: MapPin, title: 'Palestras em 5 Estados', subtitle: 'PR, MS, SC, RS e PI' },
 ]
 
-// Três eventos diferentes de propósito. A galeria antiga tinha três ângulos da
-// mesma sala, o que passava a impressão de uma agenda de um dia só.
 const galeria = [
   {
     src: '/palestra-somave.jpg',
@@ -58,66 +61,76 @@ const galeria = [
 ]
 
 const formatos = [
-  { icon: Clock, title: 'Palestra principal (45 a 60 min)', desc: 'Para abrir ou fechar o seu evento com energia.' },
-  { icon: Users, title: 'Painel ou mesa redonda', desc: 'Participação em debate ou mediação de painel com outros convidados.' },
-  { icon: Monitor, title: 'Presencial ou online', desc: 'Atendimento em todo o Brasil presencialmente ou por chamada de vídeo.' },
+  {
+    icon: Clock,
+    title: 'Palestra Principal (45 a 60 min)',
+    desc: 'Para abrir ou fechar o seu evento com energia, dados reais e insights práticos.',
+  },
+  {
+    icon: Users,
+    title: 'Painel ou Mesa Redonda',
+    desc: 'Participação estratégica em debates ou mediação especializada de painéis com convidados.',
+  },
+  {
+    icon: Monitor,
+    title: 'Presencial ou Online',
+    desc: 'Atendimento presencial em todo o Brasil ou transmissão digital ao vivo em alta definição.',
+  },
 ]
 
-// PÚBLICO-ALVO. Quem CONTRATA não entra no front de propósito: quem quer
-// contratar contrata, e a lista de instituições vive no llms.txt, onde serve
-// para buscador e para IA encontrarem a página.
 const plateias = [
   'Produtores rurais e famílias',
   'Empresários e lideranças do setor',
   'Equipes técnicas e comerciais',
-  'Jovens sucessores',
-  'Estudantes de ciências agrárias',
-  'Público misto de feira e congresso',
+  'Jovens sucessores e novas gerações',
+  'Público de feiras, sindicatos e eventos do setor',
 ]
 
 const passos = [
-  { num: 1, title: 'Preencha o pedido', desc: 'Conte o evento, quem vai assistir e o tema de interesse.' },
-  { num: 2, title: 'Receba proposta em 24h', desc: 'Formato, duração e investimento adaptados ao seu evento.' },
-  { num: 3, title: 'Confirme e prepare-se', desc: 'Alinhamos o conteúdo ao perfil da sua plateia.' },
+  { num: '1', title: 'Preencha o pedido', desc: 'Conte o objetivo do evento, perfil do público e o tema de interesse.' },
+  { num: '2', title: 'Receba a proposta em 24h', desc: 'Formato, duração e investimento alinhados às necessidades da sua programação.' },
+  { num: '3', title: 'Alinhamento & Apresentação', desc: 'Alinhamos a linguagem e os exemplos diretamente com a comissão organizadora.' },
 ]
 
 const faqs = [
   {
-    q: 'Quais são os formatos de palestra?',
-    a: 'Palestra principal de 45 a 60 minutos, ou participação em painel e mesa redonda, presencial ou online. Para conteúdo aplicado de meio período ou dia inteiro, com exercícios e material de trabalho, o formato é treinamento.',
+    q: 'Quais são os formatos disponíveis de palestra?',
+    a: 'Palestra principal de 45 a 60 minutos, ou participação em painéis e mesas redondas, tanto presencialmente quanto online. Para programas de imersão de meio período ou dia inteiro com exercícios práticos e ferramentas de trabalho, consulte o formato de capacitação corporativa.',
   },
   {
-    q: 'Atende em todo o Brasil?',
-    a: 'Sim. As palestras já passaram por 5 estados (PR, MS, SC, RS e PI) presencialmente, e também são realizadas online por chamada de vídeo.',
+    q: 'Lucas Dierings atende em todo o Brasil?',
+    a: 'Sim. Lucas já realizou apresentações em 5 estados (PR, MS, SC, RS e PI) presencialmente, além de convenções corporativas e transmissões online para todo o território nacional.',
   },
   {
-    q: 'Como funciona o investimento?',
-    a: 'Varia conforme formato, duração e deslocamento. Depois que você preenche o pedido aqui no site, o retorno com a proposta personalizada vem em até 24h.',
+    q: 'Como funciona o investimento e prazos?',
+    a: 'O investimento varia conforme o formato, duração e logística de deslocamento. Ao preencher o formulário no site, a equipe da Fluxo Rural envia uma proposta personalizada detalhada em até 24 horas úteis.',
   },
   {
-    q: 'Dá para adaptar o tema ao meu público?',
-    a: 'Sim. Todo o conteúdo é adaptado ao perfil da plateia, seja ela de produtores, de equipe interna, de estudantes ou mista, como costuma ser em feira e congresso.',
+    q: 'É possível adaptar os exemplos ao perfil da minha plateia?',
+    a: 'Sim, 100%. Toda apresentação passa por um alinhamento prévio para incorporar a realidade da região, o segmento dos participantes (cooperados, revendas, consultores ou produtores) e os objetivos do evento.',
   },
   {
-    q: 'Com quanto tempo de antecedência preciso contratar?',
-    a: 'Quanto antes melhor para garantir a agenda, mas também organizamos palestras com prazos curtos quando há disponibilidade.',
+    q: 'Com quanto tempo de antecedência é necessário solicitar a data?',
+    a: 'Recomenda-se reservar a data com a maior antecedência possível para garantir a agenda de safra, mas pedidos com prazos mais curtos também são atendidos conforme a disponibilidade.',
   },
 ]
 
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  serviceType: 'Palestras sobre agronegócio',
+  '@id': 'https://fluxorural.com.br/palestras/#service',
+  serviceType: 'Palestras sobre Agronegócio',
   name: 'Palestras de Lucas Dierings sobre Agronegócio',
   description:
-    'Palestras e painéis sobre gestão, finanças, sucessão, liderança, empreendedorismo e inteligência artificial no agronegócio, para cooperativas, sindicatos, empresas e eventos do agro.',
-  url: 'https://fluxorural.com.br/palestras',
+    'Palestras e painéis sobre gestão, finanças, sucessão familiar, liderança, empreendedorismo e inteligência artificial no agronegócio, para cooperativas, sindicatos, empresas e eventos do agro.',
+  url: 'https://fluxorural.com.br/palestras/',
   areaServed: { '@type': 'Country', name: 'Brasil' },
   provider: {
     '@type': 'Person',
+    '@id': 'https://fluxorural.com.br/#lucas-dierings',
     name: 'Lucas Dierings',
     jobTitle: 'Engenheiro Agrônomo, Consultor e Palestrante',
-    url: 'https://fluxorural.com.br/sobre',
+    url: 'https://fluxorural.com.br/sobre/',
   },
 }
 
@@ -133,215 +146,299 @@ const faqJsonLd = {
 
 export default function PalestrasPage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+    <div className="bg-[#0A192F] text-slate-100 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
 
-      {/* Hero */}
-      <section className="relative min-h-[88vh] flex items-end">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Palestras' }]} />
+
+      {/* Hero Section */}
+      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
           src="/lucas-palestrante-chapeu.jpg"
-          alt="Lucas Dierings palestrando para uma plateia do agronegócio"
+          alt="Lucas Dierings no palco palestrando para evento de agronegócio"
           fill
           className="object-cover object-[center_25%]"
+          sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/60 to-navy/30" />
-        <div className="container mx-auto px-4 lg:px-8 relative z-10 pb-14 md:pb-20">
-          <span className="inline-block bg-verde-folha/90 text-white text-xs sm:text-sm font-medium px-4 py-2 rounded-full mb-5 backdrop-blur-sm">
-            Palestrante para Agronegócio
-          </span>
-          <h1 className="font-heading text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-4 max-w-3xl">
-            Palestras para o Agronegócio
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/70 to-[#0A192F]/30" />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#0A192F]/30 to-[#0A192F]/80 pointer-events-none" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-16 sm:pb-20 max-w-6xl">
+          <div className="inline-flex items-center gap-2 bg-[#112240]/90 border border-[#E8B84B]/40 text-[#E8B84B] text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full mb-5 backdrop-blur-md shadow-sm">
+            <Sparkles size={16} className="text-[#E8B84B]" />
+            <span>Speaker Kit Oficial · Proposta em até 24h</span>
+          </div>
+
+          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-5 max-w-3xl">
+            Palestras de Alto Impacto para o Agronegócio
           </h1>
-          <p className="text-white/85 text-lg md:text-xl font-light mb-8 max-w-2xl">
-            Conteúdo aplicado de gestão, finanças, liderança e inovação para convenções corporativas, empresas, cooperativas e eventos do setor.
+
+          <p className="text-slate-200 text-lg sm:text-xl font-light mb-8 max-w-2xl leading-relaxed">
+            Conteúdo técnico e inspirador sobre gestão financeira, sucessão familiar, liderança e inteligência artificial para convenções corporativas, cooperativas, sindicatos e grandes eventos do setor.
           </p>
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-            <PedidoCTA label="Levar uma palestra ao meu evento" servico="palestra" origem="hero" />
+
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-stretch sm:items-center">
+            <PedidoCTA
+              label="Solicitar Proposta para meu Evento"
+              servico="palestra"
+              origem="hero"
+              className="bg-[#6AAF3D] hover:bg-[#6AAF3D]/90 text-white min-h-[48px] h-12 px-6 rounded-xl font-semibold shadow-lg"
+            />
+            <PortfolioDownload
+              variant="outline"
+              label="Baixar Speaker Kit (PDF)"
+              origem="hero"
+              className="border-white/30 text-white hover:bg-white/10 min-h-[48px] h-12 px-6 rounded-xl"
+            />
             <a
               href="#temas"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white text-white h-14 px-8 text-base font-medium hover:bg-white/10 backdrop-blur-sm transition-all"
+              className="inline-flex items-center justify-center rounded-xl border border-white/20 text-white hover:bg-white/10 min-h-[48px] h-12 px-6 text-sm font-medium transition-colors"
             >
-              Ver os temas
+              Ver os 6 Temas
             </a>
-            <PortfolioDownload variant="outline" label="Baixar portfólio" origem="hero" />
           </div>
         </div>
       </section>
 
-      {/* Credenciais / prova social real */}
-      <section className="bg-navy py-12">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+      {/* Credenciais / Autoridade */}
+      <section className="bg-[#0D1F3C] py-12 border-y border-white/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {credenciais.map((c) => (
-              <div key={c.title} className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
-                <c.icon className="mx-auto text-dourado mb-3" size={26} />
-                <h3 className="font-heading font-bold text-white text-sm mb-1 leading-tight">{c.title}</h3>
-                <p className="text-white/60 text-xs">{c.subtitle}</p>
+              <div
+                key={c.title}
+                className="bg-[#112240]/90 border border-white/10 rounded-2xl p-5 text-center hover:border-[#E8B84B]/40 transition-all duration-300 shadow-md"
+              >
+                <div className="w-10 h-10 rounded-xl bg-[#E8B84B]/10 border border-[#E8B84B]/20 flex items-center justify-center mx-auto mb-3">
+                  <c.icon className="text-[#E8B84B]" size={22} />
+                </div>
+                <h3 className="font-heading font-bold text-white text-sm sm:text-base mb-1 leading-tight">
+                  {c.title}
+                </h3>
+                <p className="text-slate-400 text-xs">{c.subtitle}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Momentos no palco */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
-          <div className="text-center mb-12 max-w-2xl mx-auto">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy mb-3">Momentos no Palco</h2>
-            <p className="text-carvao/70">
-              Palco de evento, plenária de sindicato e sala cheia de produtor. O conteúdo é o mesmo,
-              a linguagem se ajusta a quem está na frente.
+      {/* Momentos no Palco (Galeria) */}
+      <section className="py-20 sm:py-28 bg-[#0A192F]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="text-center mb-14 max-w-2xl mx-auto">
+            <span className="text-[#4ADE80] text-xs uppercase font-semibold tracking-widest">
+              Presença e Conexão
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mt-1 mb-3">
+              Momentos no Palco
+            </h2>
+            <p className="text-slate-300 text-sm sm:text-base">
+              Palcos de feiras, plenárias de cooperativas, sindicatos rurais e empresas do agro. A mesma profundidade técnica, modulada para o tom exato de cada público.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {galeria.map((g) => (
-              <div key={g.src} className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-sm">
+              <div
+                key={g.src}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#112240] group"
+              >
                 <Image
                   src={g.src}
                   alt={g.alt}
                   fill
                   loading="lazy"
                   sizes="(max-width: 640px) 100vw, 33vw"
-                  className={`object-cover ${g.src === '/palestra-somave.jpg' ? 'scale-125 origin-center' : ''}`}
+                  className={`object-cover group-hover:scale-105 transition-transform duration-700 ease-out ${
+                    g.src === '/palestra-somave.jpg' ? 'scale-110 origin-center' : ''
+                  }`}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <p className="text-white text-xs font-medium leading-snug">{g.alt}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Temas detalhados */}
-      <section id="temas" className="py-20 bg-off-white scroll-mt-24">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-14 max-w-2xl mx-auto">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy mb-4">Temas Disponíveis</h2>
-            <p className="text-carvao/70">
-              Cada palestra é adaptada ao seu público. Veja o que a plateia leva de cada tema.
+      {/* Temas Detalhados */}
+      <section id="temas" className="py-20 sm:py-28 bg-[#0D1F3C] border-y border-white/10 scroll-mt-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <span className="text-[#E8B84B] text-xs uppercase font-semibold tracking-widest">
+              Catálogo Estratégico
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mt-1 mb-3">
+              Temas Disponíveis
+            </h2>
+            <p className="text-slate-300 text-sm sm:text-base">
+              Palestras construídas com metodologia própria, dados de mercado e foco em aplicabilidade prática.
             </p>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {temas.map((tema) => (
               <div
-                key={tema.title}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow p-7 flex flex-col"
+                key={tema.id || tema.title}
+                className="bg-[#112240]/90 border border-white/10 rounded-2xl p-7 sm:p-8 flex flex-col justify-between hover:border-[#4ADE80]/40 transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(74,222,128,0.08)]"
               >
-                <h3 className="font-heading font-bold text-navy text-xl mb-2">{tema.title}</h3>
-                <p className="text-carvao/70 text-sm leading-relaxed mb-5">{tema.promise}</p>
-                <ul className="space-y-3 mb-7 flex-1">
-                  {tema.bullets.map((b) => (
-                    <li key={b} className="flex gap-3 text-sm text-carvao/80">
-                      <CheckCircle2 className="text-verde-folha shrink-0 mt-0.5" size={18} />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                <PedidoCTA
-                  label="Quero esta palestra"
-                  servico="palestra"
-                  tema={tema.title}
-                  variant="secondary"
-                  size="default"
-                  origem={tema.title}
-                  className="w-full"
-                />
-                {tema.paginaPropria && (
-                  <Link
-                    href={tema.paginaPropria.href}
-                    className="text-navy/70 hover:text-dourado text-xs font-medium text-center mt-3 underline underline-offset-2"
-                  >
-                    {tema.paginaPropria.label}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <div>
+                  <div className="inline-flex items-center gap-1.5 text-[#E8B84B] text-xs font-semibold uppercase tracking-wider mb-2">
+                    <Sparkles size={14} /> Tema de Palco
+                  </div>
+                  <h3 className="font-heading font-bold text-white text-xl sm:text-2xl mb-3">
+                    {tema.title}
+                  </h3>
+                  <p className="text-slate-300 text-sm leading-relaxed mb-6 font-light">
+                    {tema.promise}
+                  </p>
 
-      {/* Portfólio em PDF. Peça única: cobre palestras e treinamentos. */}
-      <section className="py-16 md:py-20 bg-navy">
-        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            <div className="flex-1 text-center lg:text-left">
-              <span className="inline-block bg-dourado/15 text-dourado text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
-                Material para download
-              </span>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
-                Quer o material completo em mãos?
-              </h2>
-              <p className="text-white/75 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-                Baixe o portfólio em PDF com bio, credenciais, os temas de palestra, os formatos e
-                também os treinamentos. Serve para decidir sozinho ou para levar à comissão, ao
-                sindicato ou ao patrocinador do evento.
-              </p>
-              <ul className="flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-2 mb-8">
-                {temas.map((t) => (
-                  <li key={t.title} className="flex items-center gap-2 text-white/70 text-sm">
-                    <CheckCircle2 className="text-verde-folha shrink-0" size={16} />
-                    {t.title}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex justify-center lg:justify-start">
-                <PortfolioDownload label="Baixar portfólio" origem="banda-temas" />
-              </div>
-            </div>
-            <div className="shrink-0">
-              <div className="bg-dourado/10 border border-dourado/20 rounded-2xl w-40 h-52 md:w-48 md:h-64 flex flex-col items-center justify-center text-center px-4">
-                <FileText className="text-dourado mb-3" size={44} />
-                <p className="font-heading font-bold text-white text-sm leading-tight">
-                  Portfólio Fluxo Rural
-                </p>
-                <p className="text-white/60 text-xs mt-1">Palestras e treinamentos</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Formatos */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
-          <h2 className="font-heading text-3xl font-bold text-navy text-center mb-14">Formatos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {formatos.map((f) => (
-              <div key={f.title} className="text-center">
-                <div className="bg-dourado/10 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <f.icon className="text-dourado" size={28} />
+                  <ul className="space-y-3 mb-8">
+                    {tema.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-3 text-sm text-slate-200">
+                        <CheckCircle2 className="text-[#4ADE80] shrink-0 mt-0.5" size={18} />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="font-heading font-bold text-navy text-lg mb-2">{f.title}</h3>
-                <p className="text-carvao/60 text-sm">{f.desc}</p>
+
+                <div className="space-y-3 pt-2">
+                  <PedidoCTA
+                    label="Quero esta palestra"
+                    servico="palestra"
+                    tema={tema.title}
+                    variant="secondary"
+                    size="default"
+                    origem={tema.title}
+                    className="w-full bg-[#6AAF3D] hover:bg-[#6AAF3D]/90 text-white min-h-[48px] h-12 rounded-xl font-semibold justify-center"
+                  />
+                  {tema.paginaPropria && (
+                    <Link
+                      href={tema.paginaPropria.href}
+                      className="block text-[#E8B84B] hover:text-[#F0CD7A] text-xs font-medium text-center underline underline-offset-4 transition-colors"
+                    >
+                      {tema.paginaPropria.label} →
+                    </Link>
+                  )}
+                </div>
               </div>
             ))}
           </div>
-          <p className="text-carvao/60 text-sm text-center mt-12 max-w-2xl mx-auto">
-            Precisa capacitar uma equipe, e não falar para uma plateia? Isso é treinamento
-            in-company: meio período ou dia inteiro, com oficina prática e material de trabalho.{' '}
-            <Link
-              href="/servicos/treinamentos"
-              className="text-navy font-semibold hover:text-dourado underline"
-            >
-              Veja os 7 treinamentos
-            </Link>
-            .
-          </p>
         </div>
       </section>
 
-      {/* Público-alvo */}
-      <section className="py-20 bg-off-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
-          <h2 className="font-heading text-3xl font-bold text-navy mb-4">Quem está na plateia</h2>
-          <p className="text-carvao/70 max-w-2xl mx-auto mb-10">
-            A contratação do evento é B2B, mas o conteúdo é feito para quem senta na cadeira. As palestras são construídas com exemplos e vivência real, sendo ajustadas a cada perfil de público.
+      {/* Portfólio / Speaker Kit em PDF */}
+      <section className="py-20 bg-[#0A192F]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+          <div className="bg-[#112240]/90 border border-white/10 rounded-2xl p-8 sm:p-12 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 shadow-2xl">
+            <div className="flex-1 text-center lg:text-left">
+              <span className="inline-block bg-[#E8B84B]/15 text-[#E8B84B] border border-[#E8B84B]/30 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+                Material para Download Imediato
+              </span>
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-3">
+                Deseja o Speaker Kit completo para a comissão?
+              </h2>
+              <p className="text-slate-300 text-base leading-relaxed mb-6 max-w-xl font-light">
+                Baixe o portfólio em PDF com biografia completa, credenciais, grade curricular dos 6 temas de palestra, 7 treinamentos e requisitos técnicos de palco. Ideal para reuniões de diretoria e alinhamento de patrocínio.
+              </p>
+
+              <div className="flex justify-center lg:justify-start">
+                <PortfolioDownload
+                  label="Baixar Portfólio em PDF"
+                  origem="banda-temas"
+                  className="bg-[#6AAF3D] hover:bg-[#6AAF3D]/90 text-white min-h-[48px] h-12 px-6 rounded-xl font-semibold shadow-lg"
+                />
+              </div>
+            </div>
+
+            <div className="shrink-0">
+              <div className="bg-[#0D1F3C] border border-[#E8B84B]/30 rounded-2xl w-44 h-56 sm:w-52 sm:h-64 flex flex-col items-center justify-center text-center p-5 shadow-xl group hover:border-[#E8B84B] transition-colors">
+                <FileText className="text-[#E8B84B] mb-3 group-hover:scale-110 transition-transform" size={48} />
+                <p className="font-heading font-bold text-white text-sm leading-tight">
+                  Speaker Kit Oficial
+                </p>
+                <p className="text-[#4ADE80] text-xs font-semibold mt-1">Fluxo Rural · 2026</p>
+                <p className="text-slate-400 text-[11px] mt-2">Palestras e Treinamentos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Formatos de Apresentação */}
+      <section className="py-20 sm:py-28 bg-[#0D1F3C] border-y border-white/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+          <div className="text-center mb-14">
+            <span className="text-[#4ADE80] text-xs uppercase font-semibold tracking-widest">
+              Modalidades
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mt-1">
+              Formatos de Apresentação
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {formatos.map((f) => (
+              <div
+                key={f.title}
+                className="bg-[#112240]/90 border border-white/10 rounded-2xl p-7 text-center hover:border-white/20 transition-all duration-300 shadow-lg"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#E8B84B]/10 border border-[#E8B84B]/20 flex items-center justify-center mx-auto mb-4">
+                  <f.icon className="text-[#E8B84B]" size={28} />
+                </div>
+                <h3 className="font-heading font-bold text-white text-lg mb-2">
+                  {f.title}
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed font-light">
+                  {f.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 bg-[#112240]/60 border border-white/10 rounded-2xl p-6 text-center max-w-2xl mx-auto">
+            <p className="text-slate-300 text-sm">
+              Precisa capacitar equipes com oficinas práticas em formato intensivo? Conheça nossos programas de capacitação corporativa.{' '}
+              <Link
+                href="/servicos/treinamentos"
+                className="text-[#E8B84B] hover:text-[#F0CD7A] font-semibold underline underline-offset-4 ml-1 transition-colors"
+              >
+                Conheça os 7 treinamentos
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Público-Alvo */}
+      <section className="py-20 bg-[#0A192F]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+          <span className="text-[#E8B84B] text-xs uppercase font-semibold tracking-widest">
+            Aderência e Conexão
+          </span>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mt-1 mb-4">
+            Quem Está na Plateia
+          </h2>
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-10 max-w-2xl mx-auto font-light">
+            A contratação é corporativa, mas a mensagem é construída para quem senta na cadeira. Cada exemplo é fundamentado na vivência de quem entende o dia a dia da porteira.
           </p>
+
           <div className="flex flex-wrap justify-center gap-3">
             {plateias.map((p) => (
               <span
                 key={p}
-                className="bg-white border border-navy/10 text-navy text-sm font-medium px-5 py-2.5 rounded-full shadow-sm"
+                className="bg-[#112240] border border-white/15 text-slate-200 text-sm font-medium px-5 py-2.5 rounded-full shadow-sm hover:border-[#4ADE80]/40 transition-colors"
               >
                 {p}
               </span>
@@ -350,18 +447,33 @@ export default function PalestrasPage() {
         </div>
       </section>
 
-      {/* Como contratar */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
-          <h2 className="font-heading text-3xl font-bold text-navy text-center mb-14">Como Contratar</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Como Contratar */}
+      <section className="py-20 sm:py-28 bg-[#0D1F3C] border-y border-white/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+          <div className="text-center mb-16">
+            <span className="text-[#4ADE80] text-xs uppercase font-semibold tracking-widest">
+              Processo Simples
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mt-1">
+              Como Contratar para seu Evento
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {passos.map((p) => (
-              <div key={p.num} className="text-center">
-                <div className="bg-navy w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-heading font-bold">
+              <div
+                key={p.num}
+                className="bg-[#112240]/90 border border-white/10 rounded-2xl p-7 text-center shadow-lg"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#6AAF3D] text-white flex items-center justify-center mx-auto mb-4 font-heading font-bold text-xl shadow-md">
                   {p.num}
                 </div>
-                <h3 className="font-heading font-bold text-navy text-lg mb-2">{p.title}</h3>
-                <p className="text-carvao/60 text-sm">{p.desc}</p>
+                <h3 className="font-heading font-bold text-white text-lg mb-2">
+                  {p.title}
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed font-light">
+                  {p.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -369,38 +481,69 @@ export default function PalestrasPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-          <h2 className="font-heading text-3xl font-bold text-navy text-center mb-12">Perguntas Frequentes</h2>
+      <section className="py-20 bg-[#0A192F]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+          <div className="text-center mb-12">
+            <span className="text-[#E8B84B] text-xs uppercase font-semibold tracking-widest">
+              Tire suas Dúvidas
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mt-1">
+              Perguntas Frequentes
+            </h2>
+          </div>
+
           <div className="space-y-4">
             {faqs.map((f) => (
-              <details key={f.q} className="group bg-white rounded-xl p-5 shadow-sm">
-                <summary className="font-heading font-semibold text-navy cursor-pointer list-none flex justify-between items-center gap-4">
-                  {f.q}
-                  <span className="text-dourado text-xl group-open:rotate-45 transition-transform">+</span>
+              <details
+                key={f.q}
+                className="group bg-[#112240]/90 border border-white/10 rounded-2xl p-6 shadow-md transition-all duration-300"
+              >
+                <summary className="font-heading font-semibold text-white cursor-pointer list-none flex justify-between items-center gap-4 text-base sm:text-lg">
+                  <span>{f.q}</span>
+                  <span className="text-[#E8B84B] text-2xl group-open:rotate-45 transition-transform shrink-0">
+                    +
+                  </span>
                 </summary>
-                <p className="text-carvao/70 text-sm leading-relaxed mt-3">{f.a}</p>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed mt-4 pt-4 border-t border-white/10 font-light">
+                  {f.a}
+                </p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="bg-navy py-20">
-        <div className="container mx-auto px-4 text-center">
-          <MessageCircle className="mx-auto text-dourado mb-5" size={40} />
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+      {/* CTA Final com WhatsApp & Proposta */}
+      <section className="py-20 sm:py-24 bg-gradient-to-br from-[#1B4F7A] via-[#0D1F3C] to-[#153C24] border-t border-white/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+          <div className="w-16 h-16 rounded-2xl bg-[#E8B84B]/15 border border-[#E8B84B]/30 flex items-center justify-center mx-auto mb-6">
+            <MessageCircle className="text-[#E8B84B]" size={36} />
+          </div>
+
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
             Leve uma palestra de verdade ao seu evento
           </h2>
-          <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-            Preencha o pedido e receba uma proposta personalizada em até 24h. Sem compromisso.
+
+          <p className="text-slate-200 text-base sm:text-lg font-light mb-8 max-w-xl mx-auto leading-relaxed">
+            Solicite sua proposta detalhada em até 24h ou tire dúvidas diretamente com o palestrante pelo WhatsApp.
           </p>
-          <div className="flex justify-center">
-            <PedidoCTA label="Solicitar proposta" servico="palestra" origem="cta-final" />
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <PedidoCTA
+              label="Solicitar Proposta (24h)"
+              servico="palestra"
+              origem="cta-final"
+              className="bg-[#6AAF3D] hover:bg-[#6AAF3D]/90 text-white min-h-[48px] h-12 px-8 rounded-xl font-semibold shadow-lg"
+            />
+            <WhatsappCTA
+              message="Olá Lucas! Gostaria de verificar disponibilidade para uma palestra no meu evento."
+              label="Conversar pelo WhatsApp"
+              origem="cta-final-palestras"
+              className="bg-[#112240] border border-white/20 text-white hover:bg-[#162a4d] min-h-[48px] h-12 px-8 rounded-xl font-medium"
+            />
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

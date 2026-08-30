@@ -95,15 +95,40 @@ const personJsonLd = {
   name: 'Lucas Dierings',
   givenName: 'Lucas',
   familyName: 'Dierings',
-  jobTitle: 'Engenheiro Agrônomo, Consultor Estratégico e Palestrante',
-  description: 'Lucas Dierings é engenheiro agrônomo com MBA USP/ESALQ, vencedor nacional do prêmio CNA Jovem 2021, host do podcast NHCast New Holland e professor de MBA na PUCPR. Referência nacional em gestão financeira rural, inovação tecnológica e gestão estratégica no agronegócio brasileiro. Consultor credenciado do SENAR/PR.',
+  jobTitle: 'Engenheiro Agrônomo (CREA-PR 179906/D), Consultor Estratégico e Palestrante',
+  description: 'Lucas Dierings é Engenheiro Agrônomo (CREA-PR 179906/D) formado pela UFPR com MBA em Agronegócios pela ESALQ/USP, vencedor nacional do prêmio CNA Jovem 2021, host do podcast NHCast New Holland e professor de MBA na PUCPR. Referência nacional em gestão financeira rural, inovação tecnológica e gestão estratégica no agronegócio brasileiro.',
   url: 'https://fluxorural.com.br',
   image: 'https://fluxorural.com.br/images/lucas-hero.jpg',
   email: 'lucas@fluxorural.com.br',
+  telephone: '+5545991447004',
   sameAs: [
     'https://www.linkedin.com/in/lucas-dierings/',
     'https://www.instagram.com/lucasdierings.agro/',
     'https://fluxorural.com.br',
+  ],
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      name: 'Engenheiro Agrônomo',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'CREA-PR',
+      },
+      identifier: 'CREA-PR 179906/D',
+    },
+  ],
+  alumniOf: [
+    {
+      '@type': 'EducationalOrganization',
+      name: 'Universidade Federal do Paraná (UFPR)',
+      description: 'Engenharia Agronômica',
+    },
+    {
+      '@type': 'EducationalOrganization',
+      name: 'ESALQ-USP',
+      description: 'MBA em Agronegócios',
+    },
   ],
   knowsAbout: [
     'Gestão financeira rural',
@@ -127,22 +152,15 @@ const personJsonLd = {
     addressRegion: 'PR',
     addressCountry: 'BR',
   },
-  alumniOf: [
-    {
-      '@type': 'Organization',
-      name: 'ESALQ-USP',
-      description: 'MBA em Agronegócios',
-    },
-  ],
 }
 
 const localBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: 'Fluxo Rural Consultoria',
-  description: 'Consultoria estratégica em gestão financeira, inovação e liderança no agronegócio brasileiro. Consultoria e palestras com Lucas Dierings.',
+  description: 'Consultoria estratégica em gestão financeira, inovação e liderança no agronegócio brasileiro. Consultoria e palestras com Lucas Dierings, Engenheiro Agrônomo CREA-PR 179906/D.',
   url: 'https://fluxorural.com.br',
-  telephone: '',
+  telephone: '+5545991447004',
   email: 'lucas@fluxorural.com.br',
   image: 'https://fluxorural.com.br/og-image.png',
   logo: 'https://fluxorural.com.br/logo-fluxo-rural.png',
@@ -178,7 +196,7 @@ const websiteJsonLd = {
   '@type': 'WebSite',
   name: 'Fluxo Rural Consultoria - Lucas Dierings',
   url: 'https://fluxorural.com.br',
-  description: 'Site oficial de Lucas Dierings, engenheiro agrônomo e consultor referência em gestão, inovação e estratégia no agronegócio brasileiro.',
+  description: 'Site oficial de Lucas Dierings, engenheiro agrônomo CREA-PR 179906/D e consultor referência em gestão, inovação e estratégia no agronegócio brasileiro.',
   author: {
     '@type': 'Person',
     name: 'Lucas Dierings',
@@ -212,7 +230,7 @@ export default function RootLayout({
         />
         <link rel="alternate" type="text/plain" href="https://fluxorural.com.br/llms.txt" title="LLMs.txt" />
       </head>
-      <body className="font-body text-carvao antialiased">
+      <body className="font-body bg-[#0A192F] text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-white">
         {/* GA4 + GTM do site principal, com guard de rota (não carrega em /beweather). */}
         <AnalyticsGate />
         {/* Primeiro toque (UTM/gclid) em cookie de 90 dias - vale em todo o site. */}

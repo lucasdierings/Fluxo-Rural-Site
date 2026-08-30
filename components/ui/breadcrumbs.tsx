@@ -14,16 +14,17 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      item: {
-        '@id': item.href
-          ? `https://fluxorural.com.br${item.href}`
-          : undefined,
+    itemListElement: items.map((item, i) => {
+      const href = item.href
+        ? (item.href.endsWith('/') ? item.href : `${item.href}/`)
+        : undefined
+      return {
+        '@type': 'ListItem',
+        position: i + 1,
         name: item.label,
-      },
-    })),
+        ...(href ? { item: `https://fluxorural.com.br${href}` } : {}),
+      }
+    }),
   }
 
   return (
