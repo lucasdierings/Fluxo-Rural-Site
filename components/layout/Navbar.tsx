@@ -102,8 +102,8 @@ export default function Navbar() {
               size="sm"
               className="bg-verde-folha hover:bg-verde-folha/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all min-h-[44px] px-5"
             >
-              <Link href="/proposta" onClick={() => trackCta({ cta: 'proposta', local: 'navbar-desktop' })}>
-                Solicitar proposta
+              <Link href="/proposta" onClick={() => trackCta({ cta: 'falar-consultor', local: 'navbar-desktop' })}>
+                Falar com Consultor
               </Link>
             </Button>
           </div>
@@ -169,10 +169,10 @@ export default function Navbar() {
               href="/proposta"
               onClick={() => {
                 setIsOpen(false)
-                trackCta({ cta: 'proposta', local: 'navbar-mobile' })
+                trackCta({ cta: 'falar-consultor', local: 'navbar-mobile' })
               }}
             >
-              Solicitar proposta
+              Falar com Consultor
             </Link>
           </Button>
         </div>

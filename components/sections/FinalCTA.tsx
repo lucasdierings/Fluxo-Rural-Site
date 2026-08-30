@@ -73,7 +73,7 @@ export default function FinalCTA() {
                 href="/proposta"
                 onClick={() => trackCta({ cta: 'proposta', local: 'final-cta-home' })}
               >
-                <PhoneCall className="mr-2" size={18} /> Solicitar Proposta Comercial
+                <PhoneCall className="mr-2" size={18} /> Falar com a Equipe
               </Link>
             </Button>
           </div>
