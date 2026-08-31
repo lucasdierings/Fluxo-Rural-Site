@@ -1790,6 +1790,18 @@ Para solucionar essas dores estruturais, a plataforma **[Field Machine](https://
 3. **Privacidade e Segurança Patrimonial (*Privacy-First*):** As coordenadas geográficas exatas das propriedades e os telefones de contato permanecem protegidos e ocultos na busca pública, sendo revelados apenas após o aceite mútuo de ambas as partes.
 4. **Multimodalidade Completa do Agro:** O ecossistema abrange desde o aluguel de implementos avulsos (plantadeiras, grades, carretas graneleiras) até operações completas de colheita, frotas de drones de pulverização e transporte especializado em prancha rodoviária.
 
+##### Contornando as 5 Maiores Objeções do Produtor ao Prestar Serviços
+
+Mesmo reconhecendo o potencial de renda extra, muitos produtores hesitam em ofertar suas máquinas. Veja como a governança do [Field Machine](https://fieldmachine.com.br) neutraliza cada um desses receios:
+
+![As 5 maiores objeções do produtor rural ao prestar serviços de máquinas agrícolas e como o Field Machine resolve](/images/quebra-objecoes-prestacao-servicos-maquinas-field-machine.jpg)
+
+1. **"Tenho medo de estragarem minha máquina":** Na plataforma, você pode optar por prestar o serviço **exclusivamente com o seu próprio operador de confiança**, garantindo que ninguém de fora assuma o volante. Para o aluguel de implementos avulsos, o checklist digital de entrada e saída registra o estado exato de entrega e devolução do implemento.
+2. **"E se o contratante der calote ou atrasar o pagamento?":** Como a negociação é 100% direta, você define os termos comerciais com segurança — por exemplo, 30% a 50% de sinal no início do talhão e o restante na conclusão da área. Além disso, o pilar de *Confiabilidade do Contratante* no sistema 4D expõe o histórico de pontualidade de pagamento de quem está contratando.
+3. **"Vou expor a localização das minhas máquinas e da minha fazenda?":** O sistema adota privacidade rigorosa. Na busca pública, produtores vizinhos visualizam apenas a microrregião aproximada e as especificações técnicas da máquina. Seu nome, telefone e localização GPS exata permanecem 100% ocultos até que ambas as partes confirmem interesse no match.
+4. **"Não quero pagar taxas e comissões abusivas para intermediários":** O modelo do Field Machine elimina a intermediação financeira predatória. Na fase de lançamento, o cadastro e o uso são **totalmente gratuitos e com 0% de taxa sobre o valor do serviço contratado**. O valor combinado entre vocês é 100% repassado a quem trabalhou.
+5. **"O desgaste mecânico vai acelerar a perda de valor do meu equipamento":** A máquina parada no barracão já sofre depreciação por idade e custo de capital todos os dias. O cálculo do custo horário (com a margem de manutenção TMR embutida) assegura que o faturamento da prestação de serviços não apenas pague o desgaste, mas gere **lucro líquido real para renovar a frota muito antes** do que ocorreria com a máquina ociosa.
+
 ---
 
 #### 7. Conclusão e Próximos Passos
