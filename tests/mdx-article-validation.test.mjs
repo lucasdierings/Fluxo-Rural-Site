@@ -126,19 +126,17 @@ test('Markdown Tables Syntax and Column Alignment Validation', () => {
   }
 })
 
-test('Code Fences / ASCII Diagrams Validity', () => {
+test('Didactic Images and Code Fences Validity', () => {
   const raw = fs.readFileSync(mdxFilePath, 'utf8')
   const { content } = matter(raw)
   const lines = content.split('\n')
 
   let openFence = false
-  let fenceCount = 0
   let openLine = 0
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
     if (line.trim().startsWith('```')) {
-      fenceCount++
       if (!openFence) {
         openFence = true
         openLine = i + 1
@@ -149,7 +147,22 @@ test('Code Fences / ASCII Diagrams Validity', () => {
   }
 
   assert.strictEqual(openFence, false, `Unclosed code fence starting at line ${openLine}`)
-  assert.ok(fenceCount >= 4, `Expected at least 2 code blocks (4 fence tags), found ${fenceCount}`)
+
+  // Validate didactic images existence
+  const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
+  let match
+  const images = []
+  while ((match = imageRegex.exec(content)) !== null) {
+    images.push(match[2])
+  }
+
+  console.log(`Found ${images.length} embedded didactic images in MDX`)
+  assert.ok(images.length >= 3, `Expected at least 3 embedded images, found ${images.length}`)
+
+  for (const imgUrl of images) {
+    const localImgPath = path.join(process.cwd(), 'public', imgUrl)
+    assert.ok(fs.existsSync(localImgPath), `Image file must exist at ${localImgPath}`)
+  }
 })
 
 test('Unescaped JSX Characters Check outside Code Fences', () => {
