@@ -279,10 +279,10 @@ test('Static Export HTML Content and Headings Inspection', () => {
   console.log(`Rendered <table> tags in HTML: ${tableCount}`)
   assert.ok(tableCount >= 3, `Expected at least 3 HTML tables, found ${tableCount}`)
 
-  // Check pre/code blocks rendered in HTML
-  const preCount = (html.match(/<pre\b/g) || []).length
-  console.log(`Rendered <pre> code blocks in HTML: ${preCount}`)
-  assert.ok(preCount >= 3, `Expected at least 3 <pre> blocks for ASCII diagrams, found ${preCount}`)
+  // Check img tags rendered in HTML
+  const imgCount = (html.match(/<img\b/g) || []).length
+  console.log(`Rendered <img> tags in HTML: ${imgCount}`)
+  assert.ok(imgCount >= 3, `Expected at least 3 <img> tags for didactic graphics, found ${imgCount}`)
 
   // Check blockquote tags in HTML
   const bqCount = (html.match(/<blockquote\b/g) || []).length

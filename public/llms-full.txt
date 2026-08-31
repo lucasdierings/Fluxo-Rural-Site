@@ -1582,7 +1582,7 @@ O custo operacional horário total divide-se rigorosamente em dois grandes grupo
 
 **Custo Horário Total (R$/h) = Custos Fixos Horários (R$/h) + Custos Variáveis Horários (R$/h)**
 
-![Estrutura do custo operacional horário de máquinas agrícolas conforme metodologias Conab e ASABE](/images/infografico-custo-horario-maquinas-agricolas.jpg)
+![Infográfico do custo operacional horário de máquinas agrícolas conforme metodologias Conab e ASABE](/images/custo-operacional-horario-maquinas-agricolas-conab.jpg)
 
 ##### 1.1. Custos Fixos Horários: O Peso da Imobilização
 
@@ -1706,7 +1706,7 @@ A melhor forma de compreender o impacto devastador da ociosidade — e o ganho e
 
 Ao colher 1.600 hectares para vizinhos e parceiros regionais (ao valor padrão de 3,2 sacas de soja/ha ou R$ 400,00/ha), a colheitadeira gera uma receita bruta de **R$ 640.000,00**, gera margem de contribuição operacional de **R$ 409.360,00** e proporciona um alívio financeiro direto de **R$ 309.170,00** nos custos de colheita da própria fazenda do proprietário. Esse ganho é a chave para transformar [os indicadores financeiros da propriedade](/blog/5-indicadores-financeiros-produtor-rural/) e maximizar o retorno sobre ativos (ROA).
 
-![Gráfico do impacto da diluição de custos fixos por horas anuais trabalhadas para trator 200 cv e colheitadeira Classe 7](/images/grafico-diluicao-custos-maquinas-agricolas.jpg)
+![Gráfico da diluição de custos fixos por horas anuais em trator 200 cv e colheitadeira Classe 7](/images/grafico-diluicao-custo-fixo-horas-trator-colheitadeira.jpg)
 
 ---
 
@@ -1730,7 +1730,7 @@ A correta precificação da prestação de serviços exige alinhamento com a rea
 
 #### 4. Análise Comparativa: Pulverização Terrestre vs. Drone Agrícola
 
-![Comparativo agronômico entre pulverizador terrestre e pulverização por drone agrícola com amassamento zero na lavoura de soja](/images/pulverizacao-terrestre-vs-drone-agricola.jpg)
+![Comparativo agronômico entre pulverizador autopropelido e pulverização por drone agrícola com amassamento zero na lavoura de soja](/images/comparativo-pulverizacao-terrestre-vs-drone-agricola.jpg)
 
 A crescente adoção de drones agrícolas de grande porte (como os modelos de 40 e 50 litros) transformou a prestação de serviços fitossanitários em uma das atividades mais rentáveis do campo. Enquanto o pulverizador terrestre autopropelido apresenta custos de aplicação menores por hectare, o drone elimina 100% das perdas por amassamento, anula a compactação do solo e permite entrar no talhão imediatamente após chuvas pesadas sem risco de atolamento.
 
@@ -1773,13 +1773,11 @@ A prestação de serviços rurais possui impactos tributários específicos. Os 
 
 #### 6. A Revolução da Negociação Direta: O Papel da Field Machine
 
-![Conexão digital de serviços agrícolas e mecanismo de reputação 4D na lavoura](/images/field-machine-conexao-servicos-agricolas.jpg)
+![Mecanismo de avaliação e reputação em 4 dimensões da plataforma Field Machine para prestação de serviços agrícolas](/images/mecanismo-reputacao-4d-servicos-agricolas-field-machine.jpg)
 
 Historicamente, o mercado de locação e prestação de serviços agrícolas no Brasil enfrentou gargalos crônicos: dependência do "boca a boca" informal em grupos de mensagens, falta de transparência sobre o estado real das máquinas e a presença de intermediários predatórios que retêm até 20% do valor do serviço sem oferecer garantias operacionais.
 
 Para solucionar essas dores estruturais, a plataforma **[Field Machine](https://fieldmachine.com.br)** surge como a infraestrutura digital pioneira no agronegócio nacional para conectar diretamente quem possui capacidade ociosa de maquinário com produtores que demandam serviços agrícolas especializados e transporte de frota.
-
-![Mecanismo de reputação em 4 dimensões da plataforma Field Machine](/images/infografico-mecanismo-reputacao-4d-field-machine.jpg)
 
 ##### Principais Diferenciais do Field Machine:
 
