@@ -9,7 +9,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/**/*.test.mjs",
-    "postbuild": "next-sitemap && cp out/sitemap*.xml public/ 2>/dev/null || true && node scripts/generate-llms-full.mjs"
+    "postbuild": "next-sitemap && cp out/sitemap*.xml public/ 2>/dev/null || true && cp out/robots.txt public/ 2>/dev/null || true && node scripts/generate-llms-full.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

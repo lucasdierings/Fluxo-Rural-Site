@@ -79,7 +79,7 @@ const podcastJsonLd = {
   author: {
     '@type': 'Person',
     name: 'Lucas Dierings',
-    url: 'https://fluxorural.com.br/sobre',
+    url: 'https://fluxorural.com.br/sobre/',
   },
 }
 

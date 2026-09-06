@@ -5,6 +5,12 @@ import type { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import { getPostBySlug, getAllPosts } from '@/lib/mdx'
+import {
+  generateArticleJsonLd,
+  generateBreadcrumbJsonLd,
+  generateFaqJsonLd,
+  ensureTrailingSlash,
+} from '@/lib/seo'
 import { formatDate } from '@/lib/utils'
 import AuthorCard from '@/components/blog/AuthorCard'
 import ShareButtons from '@/components/blog/ShareButtons'
@@ -26,6 +32,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug)
   if (!post) return {}
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fluxorural.com.br'
+  const postUrl = ensureTrailingSlash(`${siteUrl}/blog/${slug}`)
+  const imageUrl = post.coverImage.startsWith('http')
+    ? post.coverImage
+    : `${siteUrl.replace(/\/$/, '')}${post.coverImage.startsWith('/') ? '' : '/'}${post.coverImage}`
+
+  const tags = Array.isArray(post.keywords)
+    ? post.keywords
+    : typeof post.keywords === 'string'
+    ? post.keywords.split(',').map((k) => k.trim())
+    : Array.isArray(post.tags)
+    ? post.tags
+    : undefined
+
   return {
     title: post.title,
     description: post.excerpt,
@@ -34,15 +54,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       type: 'article',
+      url: postUrl,
       publishedTime: post.date,
+      modifiedTime: post.updated || post.date,
+      section: post.category,
+      tags: tags && tags.length > 0 ? tags : undefined,
       authors: ['Lucas Dierings'],
-      images: [{ url: post.coverImage }],
+      images: [{ url: imageUrl }],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: [post.coverImage],
+      images: [imageUrl],
     },
   }
 }
@@ -58,90 +82,18 @@ export default async function BlogPostPage({ params }: Props) {
     .slice(0, 3)
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fluxorural.com.br'
-  const postUrl = `${siteUrl}/blog/${post.slug}`
+  const postUrl = ensureTrailingSlash(`${siteUrl}/blog/${post.slug}`)
 
-  const wordCount = post.content.split(/\s+/).length
-
-  const articleJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.excerpt,
-    image: `${siteUrl}${post.coverImage}`,
-    datePublished: post.date,
-    dateModified: post.updated || post.date,
-    wordCount,
-    articleSection: post.category,
-    inLanguage: 'pt-BR',
-    isAccessibleForFree: true,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': postUrl,
-    },
-    author: {
-      '@type': 'Person',
-      name: 'Lucas Dierings',
-      url: `${siteUrl}/sobre/`,
-      jobTitle: 'Engenheiro Agrônomo e Consultor Estratégico',
-      description: 'Engenheiro Agrônomo, MBA em Agronegócios pela USP/ESALQ, professor de MBA e consultor em gestão financeira rural, inovação e sucessão familiar no agronegócio.',
-      alumniOf: [
-        { '@type': 'CollegeOrUniversity', name: 'USP/ESALQ - MBA em Agronegócios' },
-        { '@type': 'CollegeOrUniversity', name: 'UFPR - Engenharia Agronômica' },
-      ],
-      knowsAbout: ['Gestão financeira rural', 'Agronegócio', 'Sucessão familiar rural', 'Inovação no agro', 'Crédito rural'],
-      sameAs: [
-        'https://www.linkedin.com/in/lucas-dierings/',
-        'https://www.instagram.com/lucasdierings.agro/',
-      ],
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Fluxo Rural Consultoria',
-      url: siteUrl,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${siteUrl}/logo-fluxo-rural.png`,
-      },
-    },
-  }
-
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Início',
-        item: siteUrl,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Blog',
-        item: `${siteUrl}/blog`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: post.title,
-        item: postUrl,
-      },
+  const articleJsonLd = generateArticleJsonLd(post, siteUrl)
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd(
+    [
+      { name: 'Início', url: `${siteUrl}/` },
+      { name: 'Blog', url: `${siteUrl}/blog/` },
+      { name: post.title, url: postUrl },
     ],
-  }
-
-  const faqJsonLd = post.faqs && post.faqs.length > 0 ? {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: post.faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  } : null
+    postUrl
+  )
+  const faqJsonLd = generateFaqJsonLd(post.faqs, postUrl)
 
   return (
     <>

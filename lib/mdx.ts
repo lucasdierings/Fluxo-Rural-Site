@@ -9,6 +9,12 @@ export interface FAQ {
   answer: string
 }
 
+export interface SchemaThing {
+  name: string
+  sameAs?: string
+  description?: string
+}
+
 export interface BlogPost {
   slug: string
   title: string
@@ -21,6 +27,12 @@ export interface BlogPost {
   excerpt: string
   content: string
   faqs?: FAQ[]
+  keywords?: string[] | string
+  tags?: string[]
+  about?: Array<SchemaThing | string>
+  mentions?: Array<SchemaThing | string>
+  citations?: string[]
+  schemaType?: 'Article' | 'TechArticle' | string
 }
 
 export function getAllPosts(): BlogPost[] {
@@ -58,6 +70,16 @@ export function getPostBySlug(slug: string): BlogPost | null {
     excerpt: data.excerpt || content.slice(0, 160).replace(/[#*\n]/g, '') + '...',
     content,
     faqs: data.faqs || undefined,
+    keywords: data.keywords || undefined,
+    tags: Array.isArray(data.tags)
+      ? data.tags
+      : typeof data.tags === 'string'
+      ? data.tags.split(',').map((t: string) => t.trim())
+      : undefined,
+    about: data.about || undefined,
+    mentions: data.mentions || undefined,
+    citations: data.citations || undefined,
+    schemaType: data.schemaType || undefined,
   }
 }
 

@@ -229,6 +229,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <link rel="alternate" type="text/plain" href="https://fluxorural.com.br/llms.txt" title="LLMs.txt" />
+        <link rel="help" type="text/markdown" href="/llms.txt" />
+        <link rel="help" type="text/markdown" href="/llms-full.txt" title="LLMs Full Content" />
       </head>
       <body className="font-body bg-[#0A192F] text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-white">
         {/* GA4 + GTM do site principal, com guard de rota (não carrega em /beweather). */}

@@ -2,12 +2,16 @@
 User-agent: *
 Allow: /
 
-# GPTBot
-User-agent: GPTBot
+# OAI-SearchBot
+User-agent: OAI-SearchBot
 Allow: /
 
-# Google-Extended
-User-agent: Google-Extended
+# ChatGPT-User
+User-agent: ChatGPT-User
+Allow: /
+
+# GPTBot
+User-agent: GPTBot
 Allow: /
 
 # PerplexityBot
@@ -18,12 +22,36 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+# Claude-Web
+User-agent: Claude-Web
+Allow: /
+
+# Google-Extended
+User-agent: Google-Extended
+Allow: /
+
+# GoogleOther
+User-agent: GoogleOther
+Allow: /
+
 # Applebot-Extended
 User-agent: Applebot-Extended
 Allow: /
 
-# ChatGPT-User
-User-agent: ChatGPT-User
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Bytespider
+User-agent: Bytespider
+Allow: /
+
+# Amazonbot
+User-agent: Amazonbot
+Allow: /
+
+# FacebookBot
+User-agent: FacebookBot
 Allow: /
 
 # Host

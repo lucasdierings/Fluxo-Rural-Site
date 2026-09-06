@@ -37,3 +37,20 @@
 /calculadora/*
   Cache-Control: public, max-age=2592000, immutable
 
+# Documentos de Descoberta para LLMs
+/llms.txt
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  X-Robots-Tag: index, follow
+
+/llms-full.txt
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  X-Robots-Tag: index, follow
+
+# Artigos e indexação do blog (GEO / SEO)
+/blog/*
+  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1
+

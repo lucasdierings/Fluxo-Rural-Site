@@ -20,7 +20,7 @@ export default function AuthorCard() {
         <p className="text-carvao/50 text-sm mt-1">
           Engenheiro Agrônomo (CREA-PR 179906/D), pós-graduado em Agronegócios pela USP/ESALQ, professor e fundador da Fluxo Rural Consultoria. Consultor credenciado Senar e Sebrae, especialista em gestão técnica, financeira e sucessão familiar com experiência prática em propriedades rurais em 24 estados.
         </p>
-        <Link href="/sobre" className="text-navy text-sm font-medium hover:text-dourado transition-colors mt-2 inline-block">
+        <Link href="/sobre/" className="text-navy text-sm font-medium hover:text-dourado transition-colors mt-2 inline-block">
           Saiba mais →
         </Link>
       </div>

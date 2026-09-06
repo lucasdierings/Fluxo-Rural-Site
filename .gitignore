@@ -38,6 +38,7 @@ next-env.d.ts
 
 # claude code
 .claude/
+.codex/
 
 # wrangler (D1 local state / cache)
 .wrangler/

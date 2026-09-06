@@ -63,7 +63,7 @@ Usar navy para estrutura e autoridade, verde para ação e progresso, ouro como 
 - Formulários de contato e diagnóstico são destinados à consultoria.
 - Não inventar métricas, depoimentos, clientes, resultados ou prêmios.
 - Não usar alegações como “número 1”, “líder” ou garantias de resultado sem prova.
-- Escrever em português brasileiro direto, com linguagem do campo e sem jargão corporativo.
+- Escrever em português brasileiro direto, com linguagem do campo e sem jargão corporativo ou acadêmico (proibido usar termos pedantes/artificiais de IA como “metodologia canônica”, “dissecar”, etc.; preferir termos naturais como “metodologia oficial da Conab”, “fórmula padrão”, “mostrar na prática”). Não subestimar o leitor explicando conceitos óbvios (usar diretamente “barracão” ou “estrutura coberta” em vez de usar “abrigo” e tentar explicar); reservar explicações didáticas apenas para siglas e termos técnicos genuínos (ex.: TMR, fator de carga, ROA, LCDPR).
 - Manter títulos descritivos, blocos curtos, contraste WCAG AA e alvos de toque de pelo menos 44 px.
 - Respeitar `prefers-reduced-motion` e evitar animações contínuas que disputem atenção com o CTA.
 
