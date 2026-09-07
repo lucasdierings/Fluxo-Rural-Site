@@ -194,7 +194,7 @@ O ecossistema Fluxo Rural está estruturado em rotas canônicas públicas padron
 - **Data de Publicação:** 2026-03-01 | **Atualizado em:** 2026-09-05 | **Categoria:** Gestão
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Gestão Financeira Rural: os 5 Indicadores da Fazenda Lucrativa. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/5-indicadores-financeiros-produtor-rural/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Gestão Financeira Rural: os 5 Indicadores da Fazenda Lucrativa. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/5-indicadores-financeiros-produtor-rural/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_5_indicadores_financeiros_produtor_rural,
@@ -379,7 +379,7 @@ Este artigo técnico fundamenta-se na prática profissional e agronômica de Luc
 - **Data de Publicação:** 2026-03-08 | **Atualizado em:** 2026-09-05 | **Categoria:** Gestão
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Como Calcular a Rentabilidade da Soja por Hectare (Passo a Passo com Exemplo). Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/rentabilidade-safra-soja-como-calcular/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Como Calcular a Rentabilidade da Soja por Hectare (Passo a Passo com Exemplo). Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/rentabilidade-safra-soja-como-calcular/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_rentabilidade_safra_soja_como_calcular,
@@ -540,7 +540,7 @@ Este artigo técnico fundamenta-se nas metodologias e séries estatísticas ofic
 - **Data de Publicação:** 2026-03-15 | **Atualizado em:** 2026-09-05 | **Categoria:** Governança
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Sucessão Familiar Rural: Por que Planejar Antes do Inventário. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/sucessao-familiar-agronegocio-por-que-planejar-agora/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Sucessão Familiar Rural: Por que Planejar Antes do Inventário. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/sucessao-familiar-agronegocio-por-que-planejar-agora/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_sucessao_familiar_agronegocio_por_que_planejar_agora,
@@ -729,7 +729,7 @@ Este artigo técnico foi redigido por Lucas Dierings (CREA-PR 179906/D), pós-gr
 - **Data de Publicação:** 2026-03-22 | **Atualizado em:** 2026-09-05 | **Categoria:** Inovação
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. IA na Agricultura: o que Já É Realidade na Fazenda Brasileira. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/inteligencia-artificial-no-campo-o-que-ja-e-realidade/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. IA na Agricultura: o que Já É Realidade na Fazenda Brasileira. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/inteligencia-artificial-no-campo-o-que-ja-e-realidade/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_inteligencia_artificial_no_campo_o_que_ja_e_realidade,
@@ -918,7 +918,7 @@ Este artigo técnico consolida a visão agronômica de Lucas Dierings (CREA-PR 1
 - **Data de Publicação:** 2026-07-01 | **Categoria:** Gestão
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Plano Safra 2026/2027: Taxas de Juros, Mudanças e Como Proteger sua Margem. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/plano-safra-2026-2027-margem-seguranca/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Plano Safra 2026/2027: Taxas de Juros, Mudanças e Como Proteger sua Margem. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/plano-safra-2026-2027-margem-seguranca/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_plano_safra_2026_2027_margem_seguranca,
@@ -1081,7 +1081,7 @@ Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasa
 - **Data de Publicação:** 2026-07-01 | **Atualizado em:** 2026-09-05 | **Categoria:** Gestão
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Tributação do Produtor Rural 2026: o Guia para Não Cair na Malha Fina. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/tributacao-produtor-rural-guia-malha-fina/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Tributação do Produtor Rural 2026: o Guia para Não Cair na Malha Fina. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/tributacao-produtor-rural-guia-malha-fina/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_tributacao_produtor_rural_guia_malha_fina,
@@ -1275,7 +1275,7 @@ Este guia técnico foi elaborado com base nas legislações federais e parâmetr
 - **Data de Publicação:** 2026-07-09 | **Atualizado em:** 2026-09-05 | **Categoria:** Governança
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Apagão de Liderança no Agro: Por Que Está Tão Difícil Encontrar (e Manter) Gente Boa na Fazenda. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/apagao-de-lideranca-no-agro/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Apagão de Liderança no Agro: Por Que Está Tão Difícil Encontrar (e Manter) Gente Boa na Fazenda. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/apagao-de-lideranca-no-agro/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_apagao_de_lideranca_no_agro,
@@ -1439,7 +1439,7 @@ Este artigo técnico foi elaborado por Lucas Dierings (CREA-PR 179906/D), consul
 - **Data de Publicação:** 2026-07-16 | **Categoria:** Mercado
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. El Niño 2026 no Brasil: o que muda na safra 2026/27 e como se preparar. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/el-nino-2026-safra-brasil/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. El Niño 2026 no Brasil: o que muda na safra 2026/27 e como se preparar. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/el-nino-2026-safra-brasil/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_el_nino_2026_safra_brasil,
@@ -1630,7 +1630,7 @@ Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasa
 - **Data de Publicação:** 2026-08-03 | **Categoria:** Inovação
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Aegro vs eProdutor: Qual o Melhor Software de Gestão Rural para sua Fazenda?. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/eprodutor-vs-aegro-qual-o-melhor-software-de-gestao-rural/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Aegro vs eProdutor: Qual o Melhor Software de Gestão Rural para sua Fazenda?. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/eprodutor-vs-aegro-qual-o-melhor-software-de-gestao-rural/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_eprodutor_vs_aegro_qual_o_melhor_software_de_gestao_rural,
@@ -1818,7 +1818,7 @@ Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasa
 - **Data de Publicação:** 2026-08-28 | **Categoria:** Mercado
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. O Fim da Era do Volume: 5 Transformações que Vão Redefinir a Soja Brasileira até 2030. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/fim-da-era-do-volume-soja-2030/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. O Fim da Era do Volume: 5 Transformações que Vão Redefinir a Soja Brasileira até 2030. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/fim-da-era-do-volume-soja-2030/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_fim_da_era_do_volume_soja_2030,
@@ -2084,7 +2084,7 @@ Este artigo consolida a visão técnica e estratégica de Lucas Dierings, embasa
 - **Data de Publicação:** 2026-08-30 | **Categoria:** Gestão
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Prestação de Serviços com Máquinas Agrícolas: Como Rentabilizar e Reduzir o Custo Fixo da Frota. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/prestacao-servico-maquinas-agricolas-como-rentabilizar/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Prestação de Serviços com Máquinas Agrícolas: Como Rentabilizar e Reduzir o Custo Fixo da Frota. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/prestacao-servico-maquinas-agricolas-como-rentabilizar/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_prestacao_servico_maquinas_agricolas_como_rentabilizar,
@@ -2480,7 +2480,7 @@ Calcular o custo-hora exato da frota, modelar a viabilidade da terceirização e
 - **Data de Publicação:** 2026-09-05 | **Categoria:** Mercado
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. 15º Plano Quinquenal da China (2026-2030): O Que Muda para o Produtor de Soja e Como Proteger sua Margem. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/15-plano-quinquenal-china-soja-agro-brasil/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. 15º Plano Quinquenal da China (2026-2030): O Que Muda para o Produtor de Soja e Como Proteger sua Margem. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/15-plano-quinquenal-china-soja-agro-brasil/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_15_plano_quinquenal_china_soja_agro_brasil,
@@ -2782,7 +2782,7 @@ As análises, dados de produtividade e metodologias econômicas apresentadas nes
 - **Data de Publicação:** 2026-09-06 | **Categoria:** Inovação
 
 #### Citação Recomendada (ABNT / BibTeX / Markdown)
-- **ABNT:** DIERINGS, Lucas. Estação meteorológica na fazenda: pulverização sem perda e clima no desenvolvimento de soja, milho e trigo. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/estacao-meteorologica-fazenda-pulverizacao-soja-milho-trigo/>. Acesso em: 6 set. 2026.
+- **ABNT:** DIERINGS, Lucas. Estação meteorológica na fazenda: pulverização sem perda e clima no desenvolvimento de soja, milho e trigo. Fluxo Rural Consultoria, 2026. Disponível em: <https://fluxorural.com.br/blog/estacao-meteorologica-fazenda-pulverizacao-soja-milho-trigo/>. Acesso em: 7 set. 2026.
 - **BibTeX:**
 ```bibtex
 @article{dierings2026_estacao_meteorologica_fazenda_pulverizacao_soja_milho_trigo,
